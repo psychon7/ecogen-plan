@@ -1,0 +1,965 @@
+
+
+=== PAGE 155 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  148
+   
+ INDOOR ENVIRONMENTAL QUALITY  
+Indoor Environmental  Quality Prerequisite 
+CONSTRUCTION MANAGEMENT  
+EQp1  
+REQUIRED  
+New Construction  
+INTENT  
+To promote the well -being of construction workers and building occupants by minimizing 
+environmental quality problems associated with construction and renovation. 
+REQUIREMENTS  
+Achievement Pathways  Points  
+New Construction  and Core and Shell  N/A 
+Construction Management   
+ 
+Develop and implement construction management practices  for the construction and 
+preoccupancy phases of the building. The practices  must address all of the following:  
+ 
+• No smoking:  Prohibit smoking during construction except in designated smoking areas 
+located at least 25 feet (7.5 meters) from the building. Install signage that prohibits 
+smoking during construction.  
+• Extreme heat protection:  Implement measures that protect construction workers from 
+extreme heat.  
+• HVAC protection:  Keep contaminants out of the HVAC system. Do not run permanently 
+installed equipment,  if possible, but if it must be used, maintain proper filtration. Replace 
+all air filtration media after completion of construction and before occupancy. Confirm 
+that testing and balance work is completed with new filtration. 
+• Source control:  Keep sources of contaminants out of the building and have a plan to 
+eliminate any that are introduced.  
+o Store carpets, acoustic ceiling panels, fabric wall coverings, insulation, upholstery 
+and furnishings , and other absorptive materials in a designated area protected from 
+moisture damage.  
+• Pathway interruption:  Prevent circulation of contaminated air when cutting concrete or 
+wood, sanding drywall, installing volatile-organic -compound-emitting materials, or 
+performing other activities that affect indoor air quality  in other workspaces.  Impact Area Alignment  
+— Decarbonization  
+ Quality of Life 
+— Ecological Conservation 
+and Restoration  
+ 
+
+=== PAGE 156 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  149
+   
+ o Isolate areas of work to prevent contamination of other spaces, whether they are 
+finished or not. Seal doorways  and windows , or tent off areas as needed using 
+temporary barriers.  
+o Use walk -off mats at entryways to reduce introduced dirt and pollutants.  
+o Use dust guards and collectors on saws and other tools.  
+• Housekeeping:  Maintain a clean jobsite. Use vacuum cleaners with high-efficiency 
+particulate filters and use sweeping compounds or wetting agents for dust control when sweeping.  
+• Scheduling:  Sequence construction activities to reduce air quality problems. For 
+renovation projects , coordinate construction activities to minimize or eliminate disruption 
+of operations in occupied areas.  
+  
+
+=== PAGE 157 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  150
+   
+ Indoor Environmental Quality Prerequisite 
+FUNDAMENTAL AIR QUALITY  
+EQp2  
+REQUIRED  
+New Construction  
+INTENT  
+To design for above-average indoor air quality to support occupant health and well -being. 
+REQUIREMENTS  
+Achievement Pathways  Points  
+New Construction  and Core and Shell  N/A 
+Investigate Regional and Local Air Quality   
+AND  
+Ventilation and Filtration Design  
+AND  
+Entryway System  Design  
+ 
+Investigate Regional and Local Air Quality  
+Investigate outdoor air quality in accordance with ASHRAE Standard 62.1-2022, Sections 4.1–
+4.3. 
+AND  
+Ventilation and Filtration Design  
+Meet the requirements of ASHRAE Standard 62.1-2022,  Sections 5 and 6. Use the ventilation 
+rate procedure, the IAQ p rocedure, the natural ventilation procedure, or a combination thereof. 
+Where the ventilation rate procedure or IAQ procedure are used, c omply with the following 
+additional provisions:  
+ 
+• Filtration: Each central HVAC  system that supplies outdoor air and/or recirculated air to 
+regularly  occupied spaces must  meet one of the following:  
+• Minimum efficiency reporting value (MERV) of 13, in accordance with ASHRAE Standard 
+52.2– 2017; OR 
+• Equivalent filtration media class of ePM1 50%, as defined by ISO 16890- 2016, 
+Particulate Air Filters for General Ventilation — Determination of the Filtration 
+Performance; OR 
+• In-room air -cleaning systems ;  Impact Area Alignment  
+— Decarbonization  
+ Quality of Life 
+— Ecological Conservation 
+and Restoration  
+ 
+
+=== PAGE 158 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  151
+   
+ • Systems  tested for effectiveness and safety per ASHRAE Standard 241-2023 , Section 
+7.4 (and Normative Appendix A) . If treating for particles and gases, use systems tested 
+for effectiveness per ASHRAE 62.1 -2022 , Addendum N. If treating for infectious 
+aerosols , use systems tested for effectiveness per ASHRAE Standard 241-2023 , 
+Section 7.  
+• Outdoor air measurement : Provide outdoor airflow measurement device s for all 
+mechanical ventilation systems with outdoor air intake flow greater than 1, 000 cfm (472 L/s).  
+ 
+Healthcare  
+• For healthcare spaces, meet the requirements of Sections 6– 10 of ASHRAE Standard 170-
+2021.  
+ 
+Residential  
+• For residential spaces, follow the additional d welling unit provisions below.  
+ 
+Dwelling Unit Provisions 
+If the project building contains residential units, each dwelling unit must meet all the following 
+requirements: 
+ 
+• Design and install a dwelling-unit mechanical ventilation system that complies with ASHRAE 62.2 -2022, Sections 4, 6.6, and 6.7. Supply and balanced mechanical 
+ventilation systems must be designed and constructed to provide ventilation air directly 
+from the outdoors. Mechanical ventilation systems are not required when the project 
+meets the exception detailed in ASHRAE 62.2 -2022, Section 4.1.1.  
+• Design and install local mechanical exhaust systems in each kitchen and bathroom, 
+including half baths, that comply with ASHRAE 62.2 -2022, Sections 5 and 7. Exhaust air 
+to the outdoors. Do not route exhaust ducts to terminate in attics or interstitial spaces. Recirculating range hoods or recirculating over -the-range microwaves do not satisfy the 
+kitchen exhaust requirements. For exhaust hoo d systems capable of exhausting in 
+excess of 400 cubic feet per minute (188 liters per second), provide makeup air at a rate 
+approximately equal to the exhaust air rate. Makeup air systems must have a means of 
+closure and be automatically controlled to start and operate simultaneously with the 
+exhaust system. Use ENERGY STAR  labeled bathroom exhaust fans in all bathrooms 
+(including half baths) or performance equivalent for projects outside the U.S. A n HRV  or 
+ERV may be used to exhaust single or multiple bathrooms if it has an efficacy level 
+meeting the ENERGY STAR Technical Specifications for Residential Heat-Recovery 
+Ventilators and Energy -Recovery Ventilators  (H/ERVs),  version 2.3 as certified by the 
+Home Ventilating Institute. 
+• Unvented combustion appliances (ovens and ranges excluded) are not allowed. 
+
+=== PAGE 160 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  153
+   
+ Indoor Environmental  Quality Prerequisite 
+NO SMOKING OR VEHICLE IDLING  
+EQp3  
+REQUIRED  
+New Construction  
+Core and Shell  
+INTENT  
+To minimize exposure to tobacco smoke, smoke from tobacco substitutes or cannabis, and 
+vehicle emissions . 
+REQUIREMENTS  
+Achievement Pathways  Points  
+New Construction  and Core and Shell  N/A 
+Prohibit Smoking   
+AND  
+Prohibit Vehicle Idling  
+ 
+Comply with the following requirements:  
+ 
+Prohibit Smoking  
+• Indoor smoking:  Prohibit smoking inside the building with limited exceptions (see 
+below). 
+• Outdoor smoking:  Prohibit smoking outside the building except in designated smoking 
+areas located at least 25 feet (7.5 meters) (or the maximum extent allowable by local 
+codes) from all entries, outdoor air intakes, and operable windows.   
+• School projects:  Prohibit all smoking on-site.  
+AND  
+Prohibit Vehicle Idling  
+• Prohibit vehicle idling on -site.  
+ 
+Communicate the no-smoking and vehicle idling prohibition policy to occupants. Have in place 
+provisions for enforcement or prohibitive signage. 
+ Impact Area Alignment  
+— Decarbonization  
+ Quality of Life 
+ Ecological Conservation 
+and Restoration  
+ 
+
+=== PAGE 161 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  154
+   
+ Residential  
+• Meet the preceding requirements for all areas inside and outside the building except 
+dwelling units and private balconies . 
+ 
+• For residential projects that do not prohibit smoking, each dwelling unit where smoking 
+will be permitted must meet the following compartmentalization requirements:  
+o Perform a blower door test of residential dwelling units, following the procedures in 
+ANSI/RESNET/ICC 380 or equivalent. For each unit tested, demonstrate a maximum 
+leakage of enclosure area that is no more than 1.5 times the thresholds identified in Table 1 ( “enclosure area ” refers to all surfaces enclosing the dwelling unit, including 
+exterior and party walls, floors, and ceilings). Demonstrate a weighted average leakage of enclosure area for the building,  including dwelling units , that complies with 
+the caps in the limits identified in Table 1.  
+ 
+Table 1. Caps on Air Leakage Rates 
+Building 
+Conditioned 
+Floor Area (CFA)   Pressure Test 
+Conditions Across the 
+Building Envelope   Maximum Air Leakage 
+New Construction  Major Renovation  
+≥ 5,000 sq. ft.   
+(465 sq. m. ) 
+ At pressure difference of 
+50 pascal s (0.2 in H 2O) 0.13 cfm/ sq. ft.  
+(0.65 L/s* sq. m. ) 0.20 cfm/ sq. ft.   
+(1.0 L/s* sq. m. ) 
+At pressure difference of 
+75 pascal s (0.3 in H 2O) 0.18 cfm/ sq. ft.   
+(0.90 L/s* sq. m. ) 0.27 cfm/ sq. ft.   
+(1.35 L/s* sq. m. ) 
+< 5,000 sq. ft.  
+(465 sq. m. ) At 50 pascal s  
+(0.2 in H 2O) 1 ACH  1.5 ACH  
+ At 75 pascal s (0.3 in 
+H2O) 1.35 ACH  2 ACH  
+NOTE: cfm = cubic feet per minute; L/s = liters per second; ACH =  air changes per hour; L/s*sq = liters per second per square 
+meter. 
+  
+
+=== PAGE 162 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  155
+   
+ Indoor Environmental  Quality Credit  
+ENHANCED AIR QUALITY  
+EQc1  
+New Construction (1 point)  
+Core and Shell (1 point)  
+INTENT  
+To design for increased indoor air quality (IAQ) to better protect the health of building occupants.  
+REQUIREMENTS  
+Achievement Pathways  Points  
+New Construction  and Core and Shell  1 
+Option 1. Increased Ventilation  1 
+OR  
+Option 2. Enhanced Indoor Air Quality Design  1 
+ 
+Design the building to exceed the requirements of ASHRAE 62.1 -2022, Section 6. If using the 
+VRP to comply with EQp2: Fundamental Air Quality , use Option 1 or Option 2; if using the IAQP , 
+use Option 2. 
+ 
+Option  1. Increased Ventilation (1 point)  
+Increase breathing zone outdoor  air ventilation rates by at least 15% above the minimum rates 
+(for 1 point, or 30% for exemplary performance) as determined in EQp2: Fundamental Air 
+Quality .  
+ 
+Increased outdoor air rates should be provided to 95% of all regularly occupied spaces. 
+OR 
+Option  2. Enhanced Indoor Air Quality Design (1 point)  
+In addition to the design  compounds  and design limits  outlined in ASHRAE 62.1 -2022 , Table s 6-
+5 and 6-6, design and verify enhanced IAQ  using the lower design limits listed below in Table 1.  
+ Impact Area Alignment  
+— Decarbonization  
+ Quality of Life 
+— Ecological Conservation 
+and Restoration  
+ 
+
+=== PAGE 164 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  157
+   
+ Indoor Environmental  Quality Credit  
+OCCUPANT EXPERIENCE  
+EQc2  
+New Construction (1– 7 points)  
+INTENT  
+To move beyond neutral or sufficient spaces toward human-centered design that supports 
+customization, enjoyment, and emotional connections between people and the building, thus 
+increasing the likelihood of consistent satisfaction and ongoing stewardship. 
+REQUIREMENTS : NEW CONSTRUCTION  
+Achievement Pathways  Points  
+New Construction  1–7 
+Option 1. Biophilic Environment  1–4 
+Path 1. Integrated  Biophilic Design  1 
+AND/OR   
+Path 2. Quality Views  2–3 
+AND/OR   
+Option 2. Adaptable Environment  1 
+AND/OR   
+Option 3. Thermal Environment  1 
+AND/OR   
+Option 4. Sound Environment  1–2 
+Path 1. Mapping Acoustic Expectations for Indoor and Outdoor Spaces  1 
+OR  
+Path 2. Acoustic Criteria for Indoor and Outdoor Spaces  2 
+AND/OR   
+Option 5. Lighting Environment  1–6 
+Path 1. Solar Glare  1 
+AND/OR   
+Path 2. Quality Electric Lighting  1 
+AND/OR   
+Path 3. Proximity to Windows for Daylight Access  1 
+AND/OR   
+Path 4. Daylight Simulation  1–4 
+ Impact Area Alignment  
+— Decarbonization  
+ Quality of Life 
+ Ecological Conservation 
+and Restoration  
+ 
+
+=== PAGE 165 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  158
+   
+ Option 1. Biophilic Environment (1– 4 points)  
+PATH 1. INTEGRATED BIOPHILIC DESIGN (1 POINT)  
+Integrate biophilic design that demonstrates each of the following five principles adapted from  
+The Practice of Biophilic Design  by Kellert and Calabrese3:  
+ 
+• Biophilic design requires repeated and sustained engagement with nature. 
+• Biophilic design focuses on human adaptations to the natural world that, over 
+evolutionary time, have advanced people’s health, fitness, and well -being. 
+• Biophilic design encourages an emotional attachment to the building and building 
+location.  
+• Biophilic design promotes positive interactions between people and nature that 
+encourage an expanded sense of relationship and responsibility for the human and 
+natural communities. 
+• Biophilic design encourages mutual reinforcing, interconnected, and integrated architectural solutions.  
+AND/OR  
+PATH 2. QUALITY VIEWS (2 –3 POINTS)  
+Provide occupants in the building with a view to the outdoor natural or urban environment for 
+75% (for 2 points, 90% for 3 points) of all regularly occupied floor area. Auditoriums, conference 
+rooms dedicated to video conferencing, and gymnasiums may be ex cluded. Views into interior 
+atria may be used to meet up to 30% of the required area.  
+ 
+• Views must be through glass with a visible light transmittance above 40%. If the glazing has frits, patterns, or tints , the view must be preserved. Neutral gray, bronze, and blue-
+green tints are acceptable. 
+• Views must include at least one of the following:  
+o Nature, urban landmarks, or art; OR  
+o Objects at least 25 feet (7.5 meters) from the exterior of the glazing.  
+• Occupants must have direct access to the view and be within three times the head 
+height of the glazing.  
+AND/OR  
+Option 2. Adaptable  Environment (1 point)  
+Allow occupants choice and flexibility and/or  the capability to adapt the space to meet their 
+individual needs . Provide variability and/or  optionality for thermal, sound, and lighting 
+ 
+3 Kellert, S. and Calabrese, E. The Practice of Biophilic Design, (2015), https://www.biophilic -design.com . 
+
+=== PAGE 166 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  159
+   
+ environments that invite occupants to either alter their experience and/or move between 
+sensory zones. Include at least one accessible quiet space that allows occupants to retreat from 
+high levels of sensory stimulation. Projects must also demonstrate at least one of the listed 
+additional strategies . 
+ 
+Additional strategies 
+• Provide socializing, meeting, dining, and/or working areas where occupants can sit 
+outside the main action and have permanent architectural features at their backs  that 
+creates  a comfortable, semi -protected space that overlooks the larger area (prospect). 
+Provide alternativ e paths that enable travel around the perimeter of the area so that 
+people are not required to  travel across a large open space.  
+• Provide choice in furniture configuration and a variety of seating to accommodate a wide 
+range of body types , including seating with back rests and without arm rests.  
+• Provide height variety for permanently installed fixtures, like counters and sinks, and/or 
+height-adjustable tables and desks, where appropriate. 
+• Provide outdoor or transitional space that encourages interaction with nature and is 
+flexible or multiuse. Ensure the space is easily accessible for all occupants from within 
+the building or located within 200 feet (60 meters) of a building entrance or acc ess point. 
+AND/OR  
+Option 3. Thermal Environment (1 point)  
+Design indoor occupied spaces to meet the requirements of ASHRAE Standard 55-2023, 
+Thermal Environmental Conditions for Human Occupancy  with errata. I nvestigate thermal 
+conditions in and around the project and explain how the design considers the following: 
+ 
+• Thermal conditions that align and adjust with changing seasons . 
+• Overcooling during nontemperate seasons . 
+o Design solutions for newly arrived occupants or occupants transitioning between 
+different thermal environments to adjust to the space while maintaining an 
+appropriately warm environment for those already in the building.  
+o Design solutions for long -term occupants in transition spaces to customize their 
+working area.  
+o Support for occupants carrying out different tasks that requir e varying levels of 
+movement.  
+o Cooling solutions for those completing high-movement tasks . 
+AND/OR  
+
+=== PAGE 167 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  160
+   
+ Option 4. Sound Environment (1– 2 point s) 
+PATH 1. MAPPING ACOUSTIC EXPECTATIONS FOR INDOOR AND OUTDOOR 
+SPACES (1 POINT)  
+Determine the desired sound environment early in the design process by mapping the a coustic 
+expectations for each primary indoor and outdoor space that is specific to the use of the space 
+and occupant needs. Categories  to consider include noise exposure, acoustic comfort and noise 
+sensitivity, acoustic privacy, communication, and soundscape , with the following possible 
+classifications: 
+ 
+• Noise exposure zones: High risk, medium risk, low risk, or no risk.  
+• Acoustic comfort : Loud zone, quiet zone, mixed zone, circulation, sensitive, and no 
+specific expectations.  
+• Acoustic privacy: High speech security, confidential speech privacy, normal speech 
+privacy, marginal speech privacy, or no privacy.  
+• Communication zones : Excellent, good, marginal, and none or no specific 
+expectations. 
+• Soundscape management : Preserve, improve, restore, mitigate, specialize (e.g., for 
+wellness, therapeutic, or agency in equity), or no specific expectations.  
+ 
+Define acoustic criteria and potential design strategies and solutions to meet the acoustic expectations for each space. Categories to consider include internally generated background 
+noise, externally intrusive background noise, electronically generated masking sound, outdoor 
+acousti c environment, airborne sound reverberation, sound insulation, vibration insulation, and 
+impact noise. 
+OR 
+PATH 2. ACOUSTIC CRITERIA FOR INDOOR AND OUTDOOR SPACES ( 2 POINT S)  
+Through calculations, modeling, and/or measurements, demonstrate that the mapping exercise 
+completed in Path 1 informed design strategies and solutions to meet acoustic criteria for at 
+least 75% of the occupied spaces and all classroom s and other core learning spaces. 
+AND/OR  
+Option 5. Lighting Environment (1– 6 points)  
+PATH 1. SOLAR GLARE (1 POINT)  
+Provide manual or automatic (with manual override) glare-control devices  in all regularly 
+occupied spaces that will receive direct or reflected sun penetration. Spaces designed intentionally for direct sunlight may be excluded.   
+ 
+
+=== PAGE 168 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  161
+   
+ AND/OR  
+PATH 2. QUALITY ELECTRIC LIGHTING (1 POINT)  
+Comply with the following requirements for regularly occupied spaces:  
+ 
+Electric light glare control  
+Each luminaire shall meet one of the following requirements: 
+ 
+• Have calculated luminance of less than 6,000 candela per square meter (cd/sq. m.) 
+between 45 and 90 degrees from nadir. 
+• Achieve a unified glare rating (UGR) of 19 or lower using the UGR tabular method for each space.  
+• Achieve a UGR  rating of 19 or lower using software modeling calculations of the 
+designed lighting. (Modeling must be performed as outlined in the NEMA White Paper on 
+Unified Glare Rating
+4). 
+ 
+Color rendering 
+Use luminaires that have a color rendering index of at least 90 or that meet the color rendering 
+requirements in Table 1, in accordance with Illuminating Engineering Society (IES) TM -30-20.  
+ 
+Table 1. Color R endering Requirements Using IES TM-30-20  
+Measure  Requirement  
+Fidelity index  Rf 78 or higher  
+Gamut index  Rg 95 or higher  
+Red Local Chroma Shift  Rcs,h1 −1% to 15%  
+AND/OR  
+PATH 3. PROXIMITY TO WINDOWS FOR DAYLIGHT ACCESS (1 POINT)  
+Design the interior layout to provide at least 30% of the regularly occupied area to be within a 
+20-foot (6-meter) horizontal distance of envelope glazing. The glazing must have a visible  light 
+transmittance above 40%.  Regularly occupied areas with visual obstructions (incapable of 
+providing a view to envelope glazing) should be excluded from the compliant area.  
+OR 
+ 
+4 NEMA, “White Paper on Unified Glare Rating (UGR),” 2021, accessed March 21, 2025, 
+https://www.nema.org/standards/view/white- paper -on-unified- glare- rating- (ugr).  
+
+=== PAGE 169 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  162
+   
+ PATH 4. DAYLIGHT SIMULATION (1 –4 POINTS)  
+Perform a daylight simulation analysis for the project to understand and optimize access to 
+daylight and visual comfort. Use the calculation protocols in IES LM -83-23  with the following 
+clarifications: 
+ 
+• Calculate spatial daylight autonomy 300/50%  (sDA 300/50% ) and annual sunlight 
+exposure 1000,250  (ASE 1000,250 ) as defined in IES LM -83-23  for each regularly occupied 
+space in the project. sDA 150/50% may be used for areas without visual tasks with design 
+targets of 225 lux.  
+• For any regularly occupied spaces with ASE net(1000,250h)  greater than 20%, identify how 
+the space is designed to address glare. 
+• Calculate the average sDA 300/50% or sDA 150/50%  for the total regularly occupied floor area.   
+Do not exclude spaces based on annual sunlight exposure (ASE). Points are awarded 
+based on this calculation, according to Table 2.  
+ 
+Table 2. Points for D aylight Simulation 
+Average sDA 300/50%  or sDA 150/50%  Value Points  
+≥ 40%   1 
+≥ 55%   2 
+≥ 65%  3 
+≥ 75%   4 
+  
+
+=== PAGE 170 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  163
+   
+ REQUIREMENTS : CORE AND SHELL  
+Achievement Pathways  Points  
+Core and Shell  1–7 
+Option 1. Biophilic Environment  1–4 
+Path 1. Integrated  Biophilic Design  1 
+AND/OR   
+Path 2. Quality Views  2–3 
+AND/OR   
+Path 3. Outdoor Connections  1 
+AND/OR   
+Option 2. Lighting Environment  1–6 
+Path 1. Solar Glare  1 
+AND/OR   
+Path 2. Quality Electric Lighting  1 
+AND/OR   
+Path 3. Proximity to Windows for Daylight Access  1 
+AND/OR   
+Path 4. Daylight Simulation  1–4 
+ 
+Option 1. Biophilic Environment (1– 4 points)  
+PATH 1. INTEGRATED BIOPHILIC DESIGN (1 POINT)  
+Integrate biophilic design that demonstrates each of the following five principles adapted from  
+The Practice of Biophilic Design  by Kellert and Calabrese5: 
+ 
+• Biophilic design requires repeated and sustained engagement with nature. 
+• Biophilic design focuses on human adaptations to the natural world that, over 
+evolutionary time, have advanced people’s health, fitness, and well -being. 
+• Biophilic design encourages an emotional attachment to the building and building location.  
+• Biophilic design promotes positive interactions between people and nature that 
+encourage an expanded sense of relationship and responsibility for the human and 
+natural communities. 
+• Biophilic design encourages mutual reinforcing, interconnected, and integrated 
+architectural solutions.  
+AND/OR  
+PATH 2. QUALITY VIEWS (2 –3 POINTS)  
+Provide occupants in the building with a view to the outdoor natural or urban environment for 75% for 2  points  or 90% for 3  points of all regularly occupied floor area. Auditoriums, conference 
+ 
+5 Kellert and Calabrese, Practice of Biophilic Design. 
+
+=== PAGE 171 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  164
+   
+ rooms dedicated to video conferencing, and gymnasiums may be excluded. Views into interior 
+atria may be used to meet up to 30% of the required area.  
+ 
+• Views must be through glass with a visible light transmittance above 40%. If the glazing has frits, patterns, or tints, the view must be preserved. Neutral gray, bronze, and blue-
+green tints are acceptable. 
+• Views must include at least one of the following:  
+o Nature, urban landmarks, or art; OR  
+o Objects at least 25 feet (7.5 meters) from the exterior of the glazing.  
+• Occupants must have direct access to the view and be within three times the head 
+height of the glazing.  
+AND/OR  
+PATH 3 . OUTDOOR CONNECTIONS (1 POINT)  
+Allow occupants the choice and flexibility to easily transition between indoor and outdoor 
+environments. Provide outdoor or transitional space that encourages interaction with nature. 
+Ensure the space is accessible for all occupants from within the building or located within 2, 000 
+feet (60 meters) of a building entrance or access point.  
+AND/OR  
+Option 2. Lighting Environment  (1–6 points)  
+PATH 1. SOLAR GLARE (1 POINT)  
+Provide manual or automatic (with manual override) glare-control devices in all regularly 
+occupied spaces that will receive direct or reflected sun penetration. Spaces designed 
+intentionally for direct sunlight may be excluded.   
+AND/OR  
+PATH 2. QUALITY ELECTRIC LIGHTING (1 POINT)  
+Comply with the following requirements for regularly occupied spaces:  
+ 
+Electric light glare control 
+Each luminaire shall meet one of the following requirements:  
+• Have calculated luminance of less than 6 ,000 candela per square meter (cd/sq. m.) 
+between 45 and 90 degrees from nadir. 
+• Achieve a UGR  of 19 or lower using the UGR t abular method for each space. 
+
+=== PAGE 172 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  165
+   
+ • Achieve a UGR of 19 or lower  using the software modeling calculations of the designed 
+lighting. Modeling must be performed as outlined in the NEMA White Paper on Unified 
+Glare Rating.6 
+ 
+Color rendering 
+Use luminaires  that have a c olor rendering index of at least 90 or that meet the color rendering 
+requirements in Table 3, in accordance with Illuminating Engineering Society (IES) TM -30-20.  
+ Table 3. Color R endering Requirements Using IES TM -30-20  
+Measure  Requirement  
+Fidelity index  Rf 78 or higher  
+Gamut index  Rg 95 or higher  
+Red Local Chroma Shift  Rcs,h1 −1% to 15%  
+AND/OR  
+PATH 3. PROXIMITY TO WINDOWS FOR DAYLIGHT ACCESS (1 POINT)  
+Design the building floorplates and interior layout to provide at least 30% of the regularly 
+occupied area to be within a 20-foot  (6-meter ) horizontal distance of envelope glazing. The 
+glazing must have a visible light transmittance above 40%. Regularly occupied areas with visual obstructions (incapable of providing a view to envelope glazing) should be excluded from the 
+compliant area. 
+OR 
+PATH 4. DAYLIGHT SIMULATION (1 –4 POINTS)  
+Perform a daylight simulation analysis for the project to understand and optimize access to 
+daylight and visual comfort. Use the calculation protocols in IES LM -83-23  with the following 
+clarifications: 
+ 
+• Calculate spatial daylight autonomy 300/50%  (sDA 300/50% ) and annual sunlight 
+exposure 1000,250  (ASE 1000,250 ) as defined in IES LM -83-23  for each regularly occupied 
+space in the project.  sDA 150/50% may be used for areas without visual tasks with design 
+targets of 225 lux.  
+• For any regularly occupied spaces with ASE net(1000,250h)  greater than 20%, identify how 
+the space is designed to address glare. 
+• Calculate the average sDA 300/50%  or sDA 150/50%  for the total regularly occupied floor area. 
+Do not exclude spaces due to ASE. Points are awarded based on this calculation, 
+according to Table 4. 
+ 
+6 NEMA, “White Paper on Unified Glare Rating.” 2021,  
+
+=== PAGE 174 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  167
+   
+ Indoor Environmental  Quality Credit  
+ACCESSIBILITY AND INCLUSION 
+EQc3  
+New Construction (1 point)  
+Core and Shell (1 point)  
+INTENT  
+To support the diverse needs of occupants and increase widespread usability of the building to 
+foster an individual and collective sense of belonging. 
+REQUIREMENTS  
+Achievement Pathways  Points  
+New Construction  and Core and Shell  1 
+Accessibility and Inclusion Strategies  1 
+ 
+Comply With Local Accessibility Codes  
+All projects must support access for those with physical disabilities through designs meeting all 
+locally applicable accessibility codes identified in IPp2: Human Impact Assessment . If there is 
+no code in place, include the following strategies:  
+ 
+• Accessible routes or regularly used exterior building entrances have ramps to accommodate elevation change.  
+• All doors meant for human passage have a minimum clear width of 32 inches  (0.86 
+meters). 
+• Reception desks, security counters, and service counters all have a front approach, wheelchair  accessible section.  
+AND  
+Include at least 10 of the following accessibility and inclusion strategies most relevant to the 
+project that go beyond the locally applicable accessibility code. 
+ 
+ACCESSIBILITY FOR PHYSICAL DIVERSITY 
+• Provide wave-to-open or vertical hand/foot press door operators at all regularly used 
+building entrances.  
+• Design meeting spaces to accommodate mobility devices for at least 10% of occupants.  Impact Area Alignment  
+— Decarbonization  
+ Quality of Life 
+— Ecological Conservation 
+and Restoration  
+ 
+
+=== PAGE 175 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  168
+   
+ • Incorporate accessible and inclusive equipment and activities in fitness facilities. Ensure 
+an open and accessible route to and around the equipment. 
+• Where inaccessible routes are provided ( e.g., stairs), provide an alternate accessible 
+route that starts and terminates at the same location.  
+ 
+ACCESSIBILITY FOR SAFETY AND AGING  
+• Provide nonslip flooring.  
+• Fix underside of area rugs to floor and provide transition strips at all edges. 
+• Provide visual indication or railing at all full -height glazing, except in private residences. 
+• Provide audible and visual alerts for emergency alerts.  
+• Provide closed risers (visually and physically) in all stair wells. 
+• Use visual contrast between walls and floors, walls and doors, and walls and casework. 
+• Provide visual, tactile, contrasting, or photoluminescent warnings at floor -level changes. 
+ 
+ACCESSIBILITY FOR SOCIAL HEALTH  
+• Provide lactation room pods. 
+• Provide at least one fully accessible,  all-gender , single-use restroom OR one multiuse,  
+all-gender restroom on each floor of the building. 
+• Include at least one adult changing station or table in a designated, accessible restroom 
+or family restroom, or in one men’s and one women’s restroom.  
+• Provide signage in all languages spoken by more than 5% of the local population.  
+• Support neurodivergent users by achieving EQc2: Occupant Experience, Option 1.  
+Biophilic Environments, Path 1.  Integrated Biophilic Design . 
+ 
+ACCESSIBILITY FOR NAVIGATION  
+• Provide wayfinding signage that clearly indicates exits, entrances, and major functions in 
+the project.  
+• Provide nontext diagrams and symbols at signage. 
+• Provide braille, visual and auditory cues, and/or continuous linear indicators on paths of 
+travel.  
+• Use patterns  and color blocking to identify key access spaces. 
+• Provide haptic/tactile maps for wayfinding.  
+  
+
+=== PAGE 176 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  169
+   
+ Indoor Environmental  Quality Credit  
+RESILIENT SPACES  
+EQc4  
+New Construction (1– 2 points)  
+Core and Shell (1– 2 points)  
+INTENT  
+To support design features that increase the capacity for occupants to adapt to changing climate 
+conditions and be protected from events that may compromise the quality of the indoor 
+environment and subsequently occupant health and well -being. 
+REQUIREMENTS  
+Achievement Pathways  Points  
+New Construction  and Core and Shell  1–2 
+Option 1. Management Mode for Episodic Outdoor Ambient Conditions —
+New Construction Only  1 
+AND/OR   
+Option 2. Management Mode for Respiratory Diseases —New 
+Construction Only  1 
+AND/OR   
+Option 3. Design  for Occupant Thermal Safety During  Power Outages  1–2 
+Path 1. Consider Extreme Heat  1 
+AND/OR   
+Path 2. Consider Extreme Cold  1 
+AND/OR   
+Option 4. Operable Windows  1–2 
+ Comply with any of the following options for up to 2  points:  
+ 
+Option 1. Management Mode for Episodic Outdoor Ambient Conditions— New 
+Construction Only (1 point)  
+This option applies to LEED BD+C: New Construction projects only . 
+ 
+Design systems with the capability to operate an episodic outdoor event management mode as 
+described in ASHRAE Guideline 44 . The mode should address varying outdoor conditions or 
+events that could negatively influence IAQ,  such as wildland fire smoke. Include the 
+management mode in the design and commissioning documents. Verify proper implementation 
+of the mode during commissioning.  
+AND/OR  Impact Area Alignment  
+— Decarbonization  
+ Quality of Life 
+— Ecological Conservation 
+and Restoration  
+ 
+
+=== PAGE 177 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  170
+   
+ Option 2. Management Mode for Respiratory Diseases— New Construction 
+Only (1 point)  
+Design occupied spaces with the capability to operate an i nfection risk management mode that 
+provides the minimum equivalent clean airflow rates outlined in ASHRAE  241-2023, Section 5.1. 
+Include the management mode in the design and commissioning documents as outlined in 
+ASHRAE 241-2023, Section B10.2 Design Documentation. Verify proper implementation of the 
+mode during commissioning. 
+AND/OR  
+Option 3. Design for Occupant Thermal Safety During Power Outages 
+(1–2 points)  
+ 
+PATH 1. CONSIDER EXTREME HEAT (1 POINT)  
+Demonstrate through thermal modeling that a building will passively maintain thermally 
+habitable conditions during a power outage that lasts two days during peak summertime 
+conditions of a TMY. Designate specific thermal safety zones where habitable conditions will be 
+maintained during a power outage. 
+AND/OR  
+PATH 2. CONSIDER EXTREME COLD (1 POINT)  
+Demonstrate through thermal modeling or Passive House certification that a building will 
+passively maintain thermally habitable conditions during a power outage that lasts two days 
+during peak wintertime conditions of a TMY. Designate specific thermal safety zones where 
+habitable conditions will be maintained during a power outage. 
+AND/OR  
+Option 4. Operable Windows (1– 2 point s) 
+Design 50% for 1  point or  75% for 2 points  of the regularly occupied spaces to have operable 
+windows  with the capability to provide access to outdoor air during heat waves or localized 
+power outages. The windows must meet the opening size and location requirements of 
+ASHRAE 62.1-2022,  Section 6.4.  
+  
+
+=== PAGE 178 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  171
+   
+ Indoor Environmental  Quality Credit  
+AIR QUALITY TESTING AND MONITORING  
+EQc5  
+New Construction (1– 2 points)  
+INTENT  
+To support better management of indoor air quality  and identify opportunities for health -based 
+approaches  to building operations.  
+REQUIREMENTS  
+Achievement Pathways  Points  
+New Construction  1–2 
+Option 1. Preoccupancy Air Testing  1–2 
+Path 1. Particulate Matter and Inorganic Gases  1 
+AND/OR   
+Path 2. Volatile Organic Compounds  1 
+AND/OR   
+Option 2. Continuous Indoor Air Monitoring  1 
+ 
+Option 1. Preoccupancy Air Testing (1– 2 points)  
+After construction ends and before occupancy, but under ventilation conditions typical for 
+occupancy, conduct baseline IAQ testing. Retail projects may conduct the testing within 14 days 
+of occupancy. The number of measurements should be specified according to Table 1 and taken 
+in representative locations of the building.  
+ 
+Table 1. Number of M easurements Required for Preoccupancy Air Testing 
+Total Occupied Floor Area, sq. ft.  (sq. m. ) Number of Measurements  
+≤ 5,000 (500)  1 
+> 5,000 (500) and ≤  15,000 ( 1,500) 2 
+> 15,000 ( 1,500) and ≤  25,000 ( 2,500) 3 
+> 25,000 ( 2,500) and ≤ 200,000 (20,000)  4 plus 1 additional measurement per each 
+25,000 sq. ft.  (2,500 sq. m. ) above 25,000 sq. ft.  
+> 200,000  10 plus 1 additional measurement per each 
+50,000 sq. ft.  (4,600 sq. m. ) above 200,000 sq. ft.  
+ 
+PATH 1. PARTICULATE MATTER AND INORGANIC GASES (1 POINT)  
+Test for the particulate matter (PM) and inorganic gases listed in Table 2 using an allowed test 
+method and demonstrate that the contaminants do not exceed the concentration limits listed in Impact Area Alignment  
+— Decarbonization  
+ Quality of Life 
+— Ecological Conservation 
+and Restoration  
+ 
+
+=== PAGE 179 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  172
+   
+ the table. Measure for a four -hour period and calculate  peak concentration for carbon monoxide 
+and average concentration for ozone, PM2. 5, and PM10.  
+ 
+Table 2. Limits for PM  and Inorganic Gases  
+Contaminant 
+(CAS#)  Concentration Limit 
+(µg/m3) Allowed Test Methods 
+(Laboratory -based)  Direct Reading 
+Instrument Minimum 
+Specifications  
+Carbon monoxide 
+(CO) 9 ppm; no more than 
+2 ppm above outdoor 
+levels  ISO 4224  
+EPA Compendium Method IP-3 
+GB/T 18883 -2002  for 
+projects in China  Direct calibrated 
+electrochemical instrument with accuracy 
+of ± 3% of reading and 
+resolution of 0.1 ppm  
+NDIR CO sensors with 
+accuracy of 1% of 10 
+ppm full scale and display 
+resolution of less than 0.1 
+ppm 
+Particulates (for 
+projects in attainment areas)  ISO class 8 or lower 
+per ISO 14644-
+1:2015  
+ OR meet  
+ 
+PM 10: 50 μg/m
+3 
+ 
+PM 2.5: 12 μg/m3 n/a Accuracy ( ±): Greater of 
+5 μg/m3 or 20% of 
+reading  
+Resolution ( ±): 5 μg/m3 IP-10A  
+Particulates (for 
+projects in 
+nonattainment areas)  ISO class 8 or lower 
+per ISO 14644-
+1:2015  
+ 
+OR meet  
+ 
+PM 10: 50 μg/m3 
+ 
+PM 2.5: 35 μg/m3 n/a Accuracy ( ±): Greater of 
+5 μg/m3 or 20% of 
+reading  
+Resolution ( ±): 5 μg/m3 IP-10A  
+Ozone  0.07 ppm  
+ 
+OR 0.01 ppm for 
+projects pursuing 
+EQc1: Enhanced Air 
+Quality , Option 1, 
+Path 2  ISO 13964  
+ASTM D5149 -02 
+EPA designated methods 
+for ozone  Monitoring device with 
+accuracy greater of 5 ppb 
+or 20% of reading and 
+resolution (5 min. 
+average data) ± 5 ppb  
+ 
+Note: ppm = parts per million; ppb = parts per billion. 
+ 
+AND/OR  
+Perform a screening test for TVOC . Use ISO 16000-6 , EPA TO -17, or EPA TO -15 to collect and 
+analyze the air sample. Calculate the TVOC value per EN 16516:2017; CDPH Standard Method 
+
+=== PAGE 180 ===
+ 
+U.S. Green Building Council  
+LEED v5 Refer ence Guide for Building Design and Construction, November 2025 Edition  173
+   
+ v1.2 2017 , Section 3.9.4;  or an alternative calculation method if full method description is 
+included in test report.  
+ 
+If the TVOC levels exceed 500 µg/m3, investigate for potential issues by comparing the 
+individual VOC  levels from the gas chromatography -mass spectrometry ( GC/MS ) results to 
+associated cognizant authority health -based limits. Correct any identified issues and retest if 
+necessary.  
+ 
+Test for the individual VOCs listed in Table 3 using an allowed test method and demonstrate that 
+the contaminants do not exceed the concentration limits listed in the table. Laboratories that 
+conduct the tests must be accredited under ISO/IEC 17025 for the test methods they use. 
+ 
+Table 3. Volatile O rganic Compound Limits 
+Contaminant (CAS#)  Concentration Limit 
+(µg/m3) Allowed Test Methods  
+Formaldehyde 50 -00-0 20 µg/m3 (16 ppb)  ISO 16000 -3, 4 
+EPA TO -11a 
+EPA comp. IP-6A 
+ASTM D5197 -16 Acetaldehyde 75- 07-0 140 µg/m3 
+Benzene 71 -43-2 3 µg/m3 ISO 16000 -6 
+EPA IP- 1 
+EPA TO -17 
+EPA TO -15 
+ISO 16017 -1, 2 
+ASTM D6196 -15 Hexane (n -) 110 -54-3 7,000 µg/m3 
+Naphthalene 91 -20-3 9 µg/m3 
+Phenol 108 -95-2 200 µg/m3 
+Styrene 100 -42-5 900 µg/m3 
+Tetrachloroethylene 127 -18-4 35 µg/m3 
+Toluene 108 -88-3 300 µg/m3 
+Vinyl acetate 108- 05-4 200 µg/m3 
+Dichlorobenzene (1,4 -) 106 -46-7 800 µg/m3 
+Xylenes —total 108 -38-3, 95 -47-6, and 
+106-42-3 700 µg/m3 
+AND/OR  
+OPTION 2. CONTINUOUS INDOOR AIR MONITORING (1 POINT) 
+Provide indoor air monitors for all  the following parameters: 
+ 
+• Carbon dioxide (CO2)  
