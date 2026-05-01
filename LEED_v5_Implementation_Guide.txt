@@ -1,0 +1,833 @@
+
+================================================================================
+    LEED V5 AI AUTOMATION PLATFORM - DETAILED IMPLEMENTATION GUIDE
+                    For 100% Automatable Credits (16 Credits)
+================================================================================
+
+This guide provides detailed implementation specifications for each credit
+that can be 100% automated using AI/LLM, Agentic AI, and Multimodal AI.
+
+================================================================================
+                    PREREQUISITES (6 Credits)
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: IPp3 - Carbon Assessment (92.5% Automation Score)                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 0 (Prerequisite)                                                    │
+│ CATEGORY: Integrative Process                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Carbon Modeling Agent                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Understand and reduce long-term direct and indirect carbon emissions        │
+│ including on-site combustion, grid-supplied electricity, refrigerants,      │
+│ and embodied carbon.                                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Project location (address/coordinates)                                    │
+│ • Energy model outputs (EUI, fuel types, annual consumption)                │
+│ • Refrigerant schedules (types, charges, GWP values)                        │
+│ • Material quantities (concrete, steel, wood, etc.)                         │
+│ • Transportation data (material sourcing distances)                         │
+│ • Projected service life (typically 25 years for LEED v5)                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • EPA eGRID Database - Grid emission factors by region                      │
+│   API: https://www.epa.gov/egrid/egrid-mapping-tool                         │
+│ • EC3 Database (Building Transparency) - Embodied carbon data               │
+│   API: https://buildingtransparency.org/api-docs/                           │
+│ • Tally LCA Tool - Material life cycle assessment                           │
+│   Integration: Tally API or export files                                    │
+│ • IPCC Emission Factors - Global warming potentials                         │
+│   Source: IPCC AR6 reports (static data)                                    │
+│ • NREL Cambium - Future grid emission projections                           │
+│   API: https://cambium.nrel.gov/                                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Operational Carbon (25-year projection):                                 │
+│    Annual Energy × Grid EF × 25 years = Total Operational CO2e              │
+│                                                                             │
+│ 2. Refrigerant Emissions:                                                   │
+│    Charge Amount × GWP × Leak Rate × 25 years = Refrig CO2e                 │
+│                                                                             │
+│ 3. Embodied Carbon (A1-A3):                                                 │
+│    Material Quantity × EPD GWP = Material CO2e                              │
+│    Sum all materials for total embodied carbon                              │
+│                                                                             │
+│ 4. Total Carbon Footprint:                                                  │
+│    Operational + Refrigerant + Embodied = Total 25-year CO2e                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • 25-Year Carbon Projection Report (PDF)                                    │
+│ • Emission breakdown by source (pie chart)                                  │
+│ • Decarbonization pathway recommendations                                   │
+│ • Comparison to similar building benchmarks                                 │
+│ • CSV export for USGBC submission                                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AUTOMATION WORKFLOW:                                                        │
+│ 1. User uploads energy model output file (CSV/XML)                          │
+│ 2. User inputs project location and service life                            │
+│ 3. AI extracts material quantities from BIM or user upload                  │
+│ 4. AI queries EPA eGRID for grid emission factors                           │
+│ 5. AI queries EC3 for material GWP values                                   │
+│ 6. AI performs all calculations                                             │
+│ 7. AI generates 25-year projection report                                   │
+│ 8. AI provides decarbonization recommendations                              │
+│ 9. User reviews and approves for submission                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 80%                                                 │
+│ Manual effort: 8-12 hours → Automated: 1-2 hours (review only)              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ IMPLEMENTATION COMPLEXITY: Medium                                           │
+│ Key challenge: Energy model integration and material quantity extraction    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: EAp1 - Operational Carbon Projection (89.4% Automation Score)       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 0 (Prerequisite)                                                    │
+│ CATEGORY: Energy & Atmosphere                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Carbon Projection Agent                                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Enable stakeholders to visualize how design decisions impact long-term      │
+│ operational carbon emissions and ensure planning for low-carbon outcomes.   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Energy simulation results (annual energy use by fuel type)                │
+│ • Grid emission factors (current and projected)                             │
+│ • Fuel types used (electricity, natural gas, district steam, etc.)          │
+│ • Electrification options considered                                        │
+│ • Building type and climate zone                                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • EPA eGRID - Current grid emission factors                                 │
+│ • NREL Cambium - Future grid decarbonization scenarios                      │
+│ • IPCC Emission Factors - Fuel-specific emission factors                    │
+│ • Energy modeling software exports (EnergyPlus, IES, Trace)                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Site Energy to Carbon Conversion:                                        │
+│    Electricity (kWh) × Grid EF (kg CO2e/kWh) = Electricity CO2e             │
+│    Natural Gas (therms) × 0.0053 = Gas CO2e                                 │
+│                                                                             │
+│ 2. 25-Year Projection:                                                      │
+│    Annual CO2e × 25 years = Total Operational CO2e                          │
+│    (with optional grid decarbonization factor)                              │
+│                                                                             │
+│ 3. Decarbonization Pathway Comparison:                                      │
+│    Path 1: Design for Electrification (immediate low carbon)                │
+│    Path 2: Plan for Future Grid Decarbonization (timeline-based)            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Operational Carbon Projection Report                                      │
+│ • 25-Year Emission Trajectory Graph                                         │
+│ • Decarbonization Pathway Comparison                                        │
+│ • Electrification vs. Fuel Timeline Analysis                                │
+│ • Recommendations for carbon reduction strategies                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 65%                                                 │
+│ Manual effort: 6-8 hours → Automated: 2-3 hours                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: WEp2 - Minimum Water Efficiency (89.3% Automation Score)            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 0 (Prerequisite)                                                    │
+│ CATEGORY: Water Efficiency                                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Water Efficiency Calculator                                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Reduce potable water consumption and associated energy/carbon emissions     │
+│ through efficiency-first approach.                                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Fixture schedule (type, quantity, flow rates)                             │
+│ • Appliance specifications (dishwashers, clothes washers)                   │
+│ • Occupancy counts by gender                                                │
+│ • Landscape area and plant types (for irrigation)                           │
+│ • Building type (office, residential, retail, etc.)                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • ENERGY STAR Product Database - Appliance efficiency ratings               │
+│ • EPA WaterSense - Fixture specifications                                   │
+│ • Local water utility rates (for cost calculations)                         │
+│ • ASHRAE 189.1 - Baseline flow rates                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Baseline Water Use:                                                      │
+│    Baseline Flow Rate × Uses per Day × Occupants × Days = Baseline          │
+│                                                                             │
+│ 2. Proposed Water Use:                                                      │
+│    Proposed Flow Rate × Uses per Day × Occupants × Days = Proposed          │
+│                                                                             │
+│ 3. Percentage Reduction:                                                    │
+│    (Baseline - Proposed) / Baseline × 100 = % Reduction                     │
+│                                                                             │
+│ 4. Compliance Check:                                                        │
+│    Verify 20% reduction OR prescriptive flow rates met                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Water Use Baseline and Proposed Calculations (Excel)                      │
+│ • Fixture Compliance Report (PDF)                                           │
+│ • Percentage Reduction Summary                                              │
+│ • Non-compliant fixture identification                                      │
+│ • Alternative compliance pathway recommendations                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 75%                                                 │
+│ Manual effort: 4-6 hours → Automated: 1 hour                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: EAp2 - Minimum Energy Efficiency (85.7% Automation Score)           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 0 (Prerequisite)                                                    │
+│ CATEGORY: Energy & Atmosphere                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Energy Code Compliance Agent                                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Establish minimum energy efficiency of building envelope and systems.       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Building envelope specifications (U-factors, R-values, SHGC)              │
+│ • HVAC system specifications (efficiencies, capacities)                     │
+│ • Lighting design (LPD, fixture types)                                      │
+│ • Energy model output (for performance path)                                │
+│ • Climate zone                                                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • ASHRAE 90.1-2019/2022 Tables - Prescriptive requirements                  │
+│ • Energy modeling software (EnergyPlus, OpenStudio)                         │
+│ • COMNET Modeling Guidelines - Baseline building procedures                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Prescriptive Path:                                                       │
+│    Check each component against ASHRAE 90.1 tables                          │
+│    - Envelope U-factors/R-values                                            │
+│    - HVAC efficiencies (EER, COP, HSPF)                                     │
+│    - Lighting Power Density (W/sf)                                          │
+│                                                                             │
+│ 2. Performance Path:                                                        │
+│    Proposed Building Energy Cost ≤ Baseline Building Energy Cost            │
+│    (using Appendix G modeling procedures)                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Code Compliance Report (PDF)                                              │
+│ • Prescriptive Requirement Checklist                                        │
+│ • Performance Comparison Summary (if applicable)                            │
+│ • Non-compliance Identification with Recommendations                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 60%                                                 │
+│ Manual effort: 6-10 hours → Automated: 2-4 hours                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: EAp5 - Fundamental Refrigerant Management (85.2% Automation Score)  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 0 (Prerequisite)                                                    │
+│ CATEGORY: Energy & Atmosphere                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Refrigerant Compliance Agent                                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Reduce ozone depletion and support early compliance with refrigerant        │
+│ phase-out requirements.                                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • HVAC equipment schedule with refrigerant types                            │
+│ • Existing system inventory (for renovations)                               │
+│ • Equipment manufacturer specifications                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • EPA SNAP Program - Approved refrigerants list                             │
+│ • AHRI Directory - Equipment certification database                         │
+│ • IPCC AR6 - Global Warming Potential values                                │
+│ • Montreal Protocol Schedules - Phase-out timelines                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. CFC Check:                                                               │
+│    Verify NO CFC-based refrigerants in new systems                          │
+│                                                                             │
+│ 2. GWP Check:                                                               │
+│    Verify refrigerants meet GWP limits per Montreal Protocol                │
+│                                                                             │
+│ 3. Phase-out Schedule Check (existing systems):                             │
+│    Verify phase-out plan exists for CFC refrigerants by 2025                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Refrigerant Compliance Report (PDF)                                       │
+│ • GWP Calculation Summary                                                   │
+│ • Phase-out Schedule (if applicable)                                        │
+│ • Compliant Equipment Recommendations                                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 65%                                                 │
+│ Manual effort: 3-4 hours → Automated: 1 hour                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: MRp2 - Quantify and Assess Embodied Carbon (87.0% Automation Score) │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 0 (Prerequisite)                                                    │
+│ CATEGORY: Materials & Resources                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Embodied Carbon Calculator                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Quantify embodied carbon impacts of structure, enclosure, and hardscape.    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Structural drawings (quantities take-off)                                 │
+│ • Material specifications (concrete, steel, masonry, wood, etc.)            │
+│ • EPDs (Environmental Product Declarations) if available                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • EC3 Database (Building Transparency) - Material GWP data                  │
+│ • CLF Material Baselines - Industry average GWP values                      │
+│ • EPD Registry - Product-specific GWP values                                │
+│ • Tally LCA Tool - Life cycle assessment                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Bill of Materials:                                                       │
+│    Extract quantities from drawings or BIM                                  │
+│                                                                             │
+│ 2. GWP Calculation (A1-A3 - cradle to gate):                                │
+│    Material Quantity × GWP per unit = Material CO2e                         │
+│                                                                             │
+│ 3. Total Embodied Carbon:                                                   │
+│    Sum all materials for total CO2e                                         │
+│                                                                             │
+│ 4. Top 3 Hot Spots Identification:                                          │
+│    Sort materials by CO2e contribution                                      │
+│    Identify top 3 sources                                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Bill of Materials with GWP Values (Excel)                                 │
+│ • Total Embodied Carbon Report (PDF)                                        │
+│ • Top 3 Hot Spots Identification                                            │
+│ • Reduction Strategy Recommendations                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 75%                                                 │
+│ Manual effort: 10-15 hours → Automated: 2-3 hours                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+                    CREDITS (10 Credits - 40 Points)
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: SSc6 - Light Pollution Reduction (90.6% Automation Score)           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 1 Point                                                             │
+│ CATEGORY: Sustainable Sites                                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Lighting Compliance Agent                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Increase night sky access, improve nighttime visibility, and reduce         │
+│ consequences of development for wildlife and people.                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Luminaire schedule with BUG (Backlight, Uplight, Glare) ratings           │
+│ • Lighting zone classification (LZ0-LZ4)                                    │
+│ • Signage specifications (if internally illuminated)                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • IES TM-15-11 - BUG rating system                                          │
+│ • Manufacturer cut sheets - Luminaire BUG ratings                           │
+│ • Lighting zone maps - Local zoning data                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Uplight Rating Check:                                                    │
+│    Verify U0-U4 rating meets zone requirements                              │
+│    LZ0: U0, LZ1: U1, LZ2: U2, LZ3: U3, LZ4: U4                              │
+│                                                                             │
+│ 2. Backlight/Glare Rating Check:                                            │
+│    Verify B0-B5 and G0-G5 ratings                                           │
+│                                                                             │
+│ 3. Signage Luminance Check:                                                 │
+│    Verify average/max nits based on zone                                    │
+│    LZ0-1: 200/600 nits, LZ2: 400/800 nits, LZ3: 600/1000 nits, LZ4: 800/1200│
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Lighting Compliance Report (PDF)                                          │
+│ • BUG Rating Verification Table                                             │
+│ • Non-compliant Fixture Identification                                      │
+│ • Signage Luminance Compliance Check                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 80%                                                 │
+│ Manual effort: 4-6 hours → Automated: 1 hour                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: PRc2 - LEED AP (90.1% Automation Score)                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 1 Point                                                             │
+│ CATEGORY: Project Priorities                                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Credential Verification Agent                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Encourage team integration required by a LEED AP and streamline             │
+│ application and certification process.                                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Team roster with names and roles                                          │
+│ • LEED AP credential numbers (optional - can be looked up)                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • GBCI Credential Directory - LEED AP verification                          │
+│   API: https://www.usgbc.org/credentials                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Credential Verification:                                                 │
+│    Query GBCI database for each team member                                 │
+│                                                                             │
+│ 2. Specialty Appropriateness Check:                                         │
+│    Verify LEED AP specialty matches project type                            │
+│    BD+C → LEED AP BD+C, ID+C → LEED AP ID+C, O+M → LEED AP O+M             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • LEED AP Verification Report (PDF)                                         │
+│ • Credential Status Summary                                                 │
+│ • Specialty Appropriateness Confirmation                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 85%                                                 │
+│ Manual effort: 1-2 hours → Automated: 15 minutes                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: EAc7 - Enhanced Refrigerant Management (89.3% Automation Score)     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 2 Points                                                            │
+│ CATEGORY: Energy & Atmosphere                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Refrigerant Optimization Agent                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Further reduce ozone depletion and global warming potential from            │
+│ refrigerants.                                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • HVAC equipment schedule with refrigerant types and charges                │
+│ • Refrigerant GWP values                                                    │
+│ • System types (chillers, DX units, etc.)                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • EPA SNAP Program - Approved refrigerants                                  │
+│ • IPCC AR6 - GWP values for refrigerants                                    │
+│ • AHRI Directory - Equipment certification                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Total GWP Impact:                                                        │
+│    Refrigerant Charge (kg) × GWP = Total GWP Impact                         │
+│    Sum all systems for project total                                        │
+│                                                                             │
+│ 2. Threshold Comparison:                                                    │
+│    Compare to LEED v5 threshold for points                                  │
+│    Option 1: Low-GWP refrigerants below threshold                           │
+│    Option 2: No refrigerants (2 points)                                     │
+│    Option 3: Leak detection for large systems                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Enhanced Refrigerant Management Report (PDF)                              │
+│ • Total GWP Impact Calculation                                              │
+│ • Low-GWP Alternative Recommendations                                       │
+│ • Points Achievable Calculation                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 70%                                                 │
+│ Manual effort: 4-6 hours → Automated: 1-2 hours                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: MRc2 - Reduce Embodied Carbon (88.4% Automation Score)              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 6 Points (NC) / 8 Points (CS)                                       │
+│ CATEGORY: Materials & Resources                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Embodied Carbon Reduction Agent                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Track and reduce embodied carbon of major structural, enclosure, and        │
+│ hardscape materials.                                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Material quantities (from WBLCA or BIM)                                   │
+│ • EPDs for specified materials                                              │
+│ • Baseline project data (for comparison)                                    │
+│ • Construction fuel/energy use (for A5 tracking)                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • EC3 Database - Material GWP data                                          │
+│ • Tally LCA Tool - Whole building LCA                                       │
+│ • One Click LCA - Life cycle assessment                                     │
+│ • EPD Registry - Product-specific data                                      │
+│ • CLF Material Baselines - Industry averages                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. WBLCA Analysis (Option 1):                                               │
+│    Calculate total embodied carbon (A1-A3)                                  │
+│    Compare to baseline project                                              │
+│    % Reduction = (Baseline - Proposed) / Baseline × 100                     │
+│                                                                             │
+│ 2. EPD Analysis (Option 2):                                                 │
+│    Project-average approach OR materials-type approach                      │
+│                                                                             │
+│ 3. Construction Emissions (Option 3):                                       │
+│    Track A5 emissions (construction fuel/energy)                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • WBLCA Results Report (PDF)                                                │
+│ • Reduction Percentage Calculation                                          │
+│ • EPD Analysis Summary                                                      │
+│ • Construction Emission Report (if applicable)                              │
+│ • Points Achievable by Pathway                                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 65%                                                 │
+│ Manual effort: 15-20 hours → Automated: 5-7 hours                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: LTc3 - Compact and Connected Development (88.0% Automation Score)   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 6 Points                                                            │
+│ CATEGORY: Location & Transportation                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Location Efficiency Agent                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Conserve land and ecosystem resources by encouraging development in areas   │
+│ with existing infrastructure. Promote livability, walkability, and          │
+│ transportation efficiency.                                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Project site address                                                      │
+│ • Surrounding parcel data ( dwelling units, building areas)                 │
+│ • Transit routes and schedules (if available)                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • Walk Score API - Walkability score                                        │
+│   API: https://www.walkscore.com/professional/api.php                       │
+│ • GTFS Feeds - Transit data                                                 │
+│   Source: Transit agencies (2000+ agencies worldwide)                       │
+│ • Census Bureau API - Population/density data                               │
+│ • Local assessor data - Parcel information                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Surrounding Density (Option 1):                                          │
+│    DU/acre = Dwelling Units / Site Area                                     │
+│    OR SF/acre = Building Area / Site Area                                   │
+│                                                                             │
+│ 2. Transit Access (Option 2):                                               │
+│    Count weekday/weekend trips within walking distance                      │
+│                                                                             │
+│ 3. Walkable Location (Option 3):                                            │
+│    Walk Score ≥ 70 for pedestrian-oriented                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Location Efficiency Analysis Report (PDF)                                 │
+│ • Density Calculation Summary                                               │
+│ • Transit Accessibility Score                                               │
+│ • Walk Score Integration                                                    │
+│ • Optimal Credit Pathway Recommendation                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 85%                                                 │
+│ Manual effort: 8-12 hours → Automated: 1-2 hours                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: SSc3 - Rainwater Management (88.0% Automation Score)                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 3 Points                                                            │
+│ CATEGORY: Sustainable Sites                                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Stormwater Modeling Agent                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Reduce runoff volume and improve water quality by replicating natural       │
+│ hydrology based on historical conditions.                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Site area and impervious coverage                                         │
+│ • Local rainfall data (NOAA)                                                │
+│ • Soil infiltration rates (NRCS)                                            │
+│ • Proposed LID/GI practices                                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • NOAA Precipitation Data - Rainfall statistics                             │
+│   API: https://www.ncei.noaa.gov/access/services/data/v1                    │
+│ • NRCS Soil Survey - Soil infiltration rates                                │
+│   API: https://sdmdataaccess.nrcs.usda.gov/                                 │
+│ • EPA SWMM - Stormwater modeling (if needed)                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Rainfall Percentile (Option 1):                                          │
+│    80th or 90th percentile rainfall event                                   │
+│    Retention Volume = Rainfall × Site Area × Runoff Coefficient             │
+│                                                                             │
+│ 2. LID/GI Sizing:                                                           │
+│    Size systems to retain required volume                                   │
+│                                                                             │
+│ 3. Natural Conditions Comparison (Option 2):                                │
+│    Compare post-development runoff to pre-development                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Rainwater Management Report (PDF)                                         │
+│ • Rainfall Percentile Calculations                                          │
+│ • Required Retention Volume                                                 │
+│ • LID/GI Sizing Recommendations                                             │
+│ • Points Achievable by Option                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 70%                                                 │
+│ Manual effort: 10-15 hours → Automated: 3-5 hours                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: EAc3 - Enhanced Energy Efficiency (87.7% Automation Score)          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 10 Points (NC) / 7 Points (CS)                                      │
+│ CATEGORY: Energy & Atmosphere                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Energy Optimization Agent                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Reduce environmental and economic harm from excessive energy use by         │
+│ achieving increasing levels of energy efficiency.                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Energy model (proposed building)                                          │
+│ • Baseline model (per ASHRAE 90.1 Appendix G)                               │
+│ • Building specifications (envelope, HVAC, lighting)                        │
+│ • Climate zone                                                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • Energy modeling software (EnergyPlus, IES, Trace)                         │
+│ • ASHRAE 90.1-2019/2022 - Baseline requirements                             │
+│ • COMNET Modeling Guidelines                                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Performance Path:                                                        │
+│    % Improvement = (Baseline Cost - Proposed Cost) / Baseline Cost × 100    │
+│    Points based on improvement percentage (6-50%+ for 1-10 points)          │
+│                                                                             │
+│ 2. Prescriptive Path:                                                       │
+│    Check enhanced requirements for envelope, lighting, HVAC                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Enhanced Energy Efficiency Report (PDF)                                   │
+│ • Percent Improvement Calculation                                           │
+│ • Points Achievable                                                         │
+│ • Optimization Opportunities                                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 50%                                                 │
+│ Manual effort: 20-30 hours → Automated: 10-15 hours                         │
+│ Note: Energy modeling still required, but analysis automated                │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: LTc1 - Sensitive Land Protection (87.6% Automation Score)           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 1 Point                                                             │
+│ CATEGORY: Location & Transportation                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Site Analysis Agent                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Cultivate community resilience by avoiding development of environmentally   │
+│ sensitive lands that provide critical ecosystem services.                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Project site boundaries (GIS coordinates)                                 │
+│ • Parcel data                                                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • FEMA NFHL - Flood hazard data                                             │
+│   API: https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer │
+│ • NWI (National Wetlands Inventory) - Wetland locations                     │
+│ • USFWS Critical Habitat - Protected species habitats                       │
+│ • USDA NRCS - Prime farmland data                                           │
+│ • USGS 3DEP - Elevation data for slope analysis                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Previously Developed Check (Option 1):                                   │
+│    Verify site is previously developed land                                 │
+│                                                                             │
+│ 2. Sensitive Land Analysis (Option 2):                                      │
+│    Check for:                                                               │
+│    - Prime farmland                                                         │
+│    - Floodplains (100-year, 500-year)                                       │
+│    - Habitat for threatened species                                         │
+│    - Water bodies (100ft buffer)                                            │
+│    - Wetlands (50ft buffer)                                                 │
+│    - Steep slopes (40-60% protection required)                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Site Sensitivity Analysis Report (PDF)                                    │
+│ • Constraint Maps (GIS overlays)                                            │
+│ • Compliance Determination                                                  │
+│ • Buffer Zone Calculations                                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 75%                                                 │
+│ Manual effort: 6-10 hours → Automated: 1-2 hours                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: WEc2 - Enhanced Water Efficiency (87.5% Automation Score)           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 8 Points (NC) / 7 Points (CS)                                       │
+│ CATEGORY: Water Efficiency                                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Water Optimization Agent                                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Further reduce potable water consumption and reward use of alternative      │
+│ water sources to preserve resources.                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • All water uses (indoor, outdoor, process)                                 │
+│ • Fixture specifications and quantities                                     │
+│ • Alternative water availability (rainwater, graywater, reclaimed)          │
+│ • Irrigation system details                                                 │
+│ • Cooling tower specifications                                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • Water modeling tools (custom calculators)                                 │
+│ • Irrigation calculators (EPA WaterSense)                                   │
+│ • Process water analysis tools                                              │
+│ • Local water reuse regulations                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Whole-Project Water Model:                                               │
+│    Sum all water uses (indoor + outdoor + process)                          │
+│                                                                             │
+│ 2. Baseline Calculation:                                                    │
+│    Calculate baseline per LEED requirements                                 │
+│                                                                             │
+│ 3. Reduction Percentage:                                                    │
+│    % Reduction = (Baseline - Proposed) / Baseline × 100                     │
+│    30-65% reduction = 1-8 points                                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Whole-Project Water Model (Excel)                                         │
+│ • Reduction Percentage Calculation                                          │
+│ • Alternative Water Integration Analysis                                    │
+│ • Optimal Pathway Recommendation                                            │
+│ • Points Achievable                                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 70%                                                 │
+│ Manual effort: 12-16 hours → Automated: 3-5 hours                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CREDIT: SSc5 - Heat Island Reduction (85.3% Automation Score)               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ POINTS: 2 Points                                                            │
+│ CATEGORY: Sustainable Sites                                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI AGENT: Heat Island Analysis Agent                                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ PURPOSE:                                                                    │
+│ Mitigate disparate impacts on microclimates and habitats caused by heat     │
+│ islands and extreme heat events.                                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ REQUIRED INPUTS:                                                            │
+│ • Site plan with roof and paving areas                                      │
+│ • Material specifications (SRI values)                                      │
+│ • Tree locations and canopy coverage                                        │
+│ • Project location (for Tree Equity Score - US only)                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ DATA SOURCES & APIS:                                                        │
+│ • Material SRI databases (CRRC, manufacturer data)                          │
+│ • American Forests Tree Equity Score API                                    │
+│   API: https://treeequityscore.org/                                         │
+│ • Solar analysis tools (for shade calculations)                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ CALCULATIONS:                                                               │
+│ 1. Weighted Average SRI (Option 1):                                         │
+│    (Area1 × SRI1 + Area2 × SRI2) / Total Area = Weighted SRI                │
+│    Roof: Weighted SRI ≥ 82 (steep) or 33 (low-slope)                        │
+│    Nonroof: Weighted SRI ≥ 33 OR 50% shaded                                 │
+│                                                                             │
+│ 2. Parking Under Cover (Option 2):                                          │
+│    75%+ of parking under roof/structure/open-grid                           │
+│                                                                             │
+│ 3. Tree Equity (Option 3):                                                  │
+│    Tree Equity Score analysis with canopy increase plan                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ AI OUTPUTS / DELIVERABLES:                                                  │
+│ • Heat Island Reduction Report (PDF)                                        │
+│ • Weighted SRI Calculations                                                 │
+│ • Material Compliance Verification                                          │
+│ • Tree Equity Score Analysis (if applicable)                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ ESTIMATED TIME SAVINGS: 75%                                                 │
+│ Manual effort: 6-8 hours → Automated: 1-2 hours                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                          IMPLEMENTATION SUMMARY
+================================================================================
+
+TOTAL 100% AUTOMATABLE CREDITS: 16 Credits (40 Points)
+
+PREREQUISITES (6 credits - 0 points but REQUIRED):
+  1. IPp3 - Carbon Assessment (92.5%)
+  2. EAp1 - Operational Carbon Projection (89.4%)
+  3. WEp2 - Minimum Water Efficiency (89.3%)
+  4. EAp2 - Minimum Energy Efficiency (85.7%)
+  5. EAp5 - Fundamental Refrigerant Management (85.2%)
+  6. MRp2 - Quantify and Assess Embodied Carbon (87.0%)
+
+CREDITS (10 credits - 40 points):
+  1. SSc6  - Light Pollution Reduction (90.6%) - 1 pt
+  2. PRc2  - LEED AP (90.1%) - 1 pt
+  3. EAc7  - Enhanced Refrigerant Management (89.3%) - 2 pts
+  4. MRc2  - Reduce Embodied Carbon (88.4%) - 6 pts
+  5. LTc3  - Compact and Connected Development (88.0%) - 6 pts
+  6. SSc3  - Rainwater Management (88.0%) - 3 pts
+  7. EAc3  - Enhanced Energy Efficiency (87.7%) - 10 pts
+  8. LTc1  - Sensitive Land Protection (87.6%) - 1 pt
+  9. WEc2  - Enhanced Water Efficiency (87.5%) - 8 pts
+  10. SSc5 - Heat Island Reduction (85.3%) - 2 pts
+
+TOTAL POINTS AVAILABLE: 40 Points
+AVERAGE AUTOMATION SCORE: 88.2%
+
+================================================================================
+                              NEXT STEPS
+================================================================================
+
+1. PRIORITIZE by business value:
+   - Start with EAc3 (10 points) - highest point value
+   - Then WEc2 (8 points) and MRc2 (6 points)
+   - Include LTc3 (6 points) for location credits
+
+2. BUILD CORE CAPABILITIES:
+   - API integrations (EPA, NOAA, EC3, GBCI)
+   - Calculation engines (Python-based)
+   - Document templates (Jinja2)
+   - Report generation (PDF/Excel)
+
+3. DEVELOP AI AGENTS:
+   - One agent per credit or credit group
+   - Structured output parsing
+   - Error handling and validation
+   - Human review checkpoints
+
+4. TEST AND VALIDATE:
+   - Pilot with real projects
+   - Compare AI outputs to manual calculations
+   - Get feedback from LEED consultants
+   - Iterate and improve
+
+5. SCALE AND EXPAND:
+   - Add highly automatable credits (Tier 2)
+   - Integrate with BIM software
+   - Connect to USGBC Arc platform
+   - Build user-friendly interface
+
+================================================================================

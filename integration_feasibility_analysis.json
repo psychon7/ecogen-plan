@@ -1,0 +1,1078 @@
+[
+  {
+    "credit_code": "IPp1",
+    "credit_name": "Climate Resilience Assessment",
+    "integration_score": 85,
+    "api_requirements": [
+      "NOAA Climate Data API",
+      "FEMA Flood Map Service Center API",
+      "IPCC Data Portal",
+      "USGS Natural Hazards API",
+      "NCEI Storm Events Database",
+      "Wildfire Risk API (various)",
+      "Sea Level Rise Viewer APIs"
+    ],
+    "software_integration": [
+      "GIS platforms (ArcGIS, QGIS)",
+      "Climate risk assessment tools",
+      "Report generation software",
+      "BIM for site context integration"
+    ],
+    "data_flow": "Project coordinates \u2192 Multi-API hazard data calls \u2192 Data aggregation & risk scoring \u2192 Climate scenario modeling \u2192 Report generation \u2192 USGBC submission",
+    "authentication": "API keys for NOAA/FEMA (free registration), OAuth for commercial climate data providers, secure handling of project location data",
+    "integration_frequency": "Batch - per project during pre-design",
+    "notes": "High feasibility due to well-documented government APIs. NOAA and FEMA provide robust free APIs. Challenge: Integrating multiple hazard types into unified risk assessment. Solution: Create middleware API aggregator."
+  },
+  {
+    "credit_code": "IPp2",
+    "credit_name": "Human Impact Assessment",
+    "integration_score": 90,
+    "api_requirements": [
+      "US Census Bureau API (ACS, Decennial)",
+      "EPA EJScreen API",
+      "HUD APIs (housing data)",
+      "DOT/Transit APIs (GTFS feeds)",
+      "CDC PLACES API",
+      "Local government open data portals"
+    ],
+    "software_integration": [
+      "Demographic analysis tools",
+      "GIS platforms",
+      "Social equity assessment software",
+      "Community mapping tools"
+    ],
+    "data_flow": "Project address \u2192 Geocoding \u2192 Census tract identification \u2192 Multi-source demographic pull \u2192 Equity scoring \u2192 Community context analysis \u2192 Report generation",
+    "authentication": "Census API key (free), EPA EJScreen (public), HUD API key, local portal credentials vary",
+    "integration_frequency": "Batch - per project",
+    "notes": "Excellent API availability. Census Bureau and EPA provide comprehensive free APIs. EJScreen offers pre-calculated environmental justice metrics. Challenge: Normalizing data across different geographic scales."
+  },
+  {
+    "credit_code": "IPp3",
+    "credit_name": "Carbon Assessment",
+    "integration_score": 88,
+    "api_requirements": [
+      "EPA eGRID API",
+      "EC3 API (Embodied Carbon in Construction Calculator)",
+      "Tally API",
+      "One Click LCA API",
+      "IPCC Emission Factor Database",
+      "Utility grid emission factor APIs"
+    ],
+    "software_integration": [
+      "Energy modeling software (EnergyPlus, IES VE, TRACE 700)",
+      "BIM/Revit with Tally plugin",
+      "Carbon calculation tools",
+      "WBLCA platforms"
+    ],
+    "data_flow": "Energy model outputs + Material quantities \u2192 EC3/Tally API calls \u2192 Grid emission factors \u2192 25-year projection modeling \u2192 Decarbonization pathway analysis \u2192 Report generation",
+    "authentication": "EPA eGRID (public), EC3 (free registration), Tally (license key), One Click LCA (API token)",
+    "integration_frequency": "Batch - updated with design iterations",
+    "notes": "Strong integration potential. EC3 and Tally have growing API capabilities. Energy modeling software increasingly offers APIs. Challenge: Real-time sync between energy models and carbon calculations."
+  },
+  {
+    "credit_code": "IPp4",
+    "credit_name": "Tenant Guidelines",
+    "integration_score": 75,
+    "api_requirements": [
+      "USGBC LEED documentation API",
+      "Document generation APIs",
+      "Cloud storage APIs (AWS S3, Azure Blob)"
+    ],
+    "software_integration": [
+      "Document management systems",
+      "BIM for extracting specifications",
+      "Template generation tools",
+      "LEED documentation platforms"
+    ],
+    "data_flow": "Project specifications + LEED credit strategies \u2192 Template population \u2192 Guideline document generation \u2192 Review workflow \u2192 Distribution to tenants",
+    "authentication": "USGBC Arc platform OAuth, cloud storage service credentials",
+    "integration_frequency": "Batch - per project, updated as design evolves",
+    "notes": "Primarily document generation with moderate API needs. Challenge: Keeping guidelines synchronized with evolving design. Solution: Automated document versioning with change tracking."
+  },
+  {
+    "credit_code": "IPc1",
+    "credit_name": "Integrative Design Process",
+    "integration_score": 60,
+    "api_requirements": [
+      "Project management APIs (Asana, Monday, Procore)",
+      "Calendar APIs (Google, Outlook)",
+      "Video conferencing APIs (Zoom, Teams)",
+      "Document collaboration APIs"
+    ],
+    "software_integration": [
+      "Project management platforms",
+      "Charrette facilitation tools",
+      "Goal tracking dashboards",
+      "Collaboration platforms (Miro, Mural)"
+    ],
+    "data_flow": "Team roster + Project goals \u2192 Charrette planning \u2192 Meeting coordination \u2192 Goal tracking \u2192 Documentation \u2192 OPR integration",
+    "authentication": "OAuth 2.0 for project management platforms, API keys for collaboration tools",
+    "integration_frequency": "Real-time during design phases, batch for reporting",
+    "notes": "Lower integration score due to human-centric process. APIs support coordination but core activity is collaborative design. Challenge: Capturing qualitative charrette outcomes. Solution: Structured data collection templates."
+  },
+  {
+    "credit_code": "IPc2",
+    "credit_name": "Green Leases",
+    "integration_score": 70,
+    "api_requirements": [
+      "Green Lease Leaders API",
+      "Document generation APIs",
+      "Legal document management APIs",
+      "LEED prerequisite database API"
+    ],
+    "software_integration": [
+      "Lease management systems",
+      "Document automation platforms",
+      "Legal review workflows",
+      "Compliance tracking tools"
+    ],
+    "data_flow": "Base building specs + LEED requirements \u2192 Lease clause generation \u2192 Green Lease Leaders alignment check \u2192 Legal review \u2192 Final lease document",
+    "authentication": "Green Lease Leaders (registration required), document platform credentials",
+    "integration_frequency": "Batch - per lease template development",
+    "notes": "Moderate feasibility. Green Lease Leaders program provides guidance but limited API access. Challenge: Legal review integration. Solution: Structured clause libraries with automated compliance checking."
+  },
+  {
+    "credit_code": "LTc1",
+    "credit_name": "Sensitive Land Protection",
+    "integration_score": 92,
+    "api_requirements": [
+      "FEMA Flood Map Service Center API",
+      "National Wetlands Inventory API",
+      "USFWS Critical Habitat API",
+      "USDA NASS Cropland Data Layer",
+      "USGS National Elevation Dataset",
+      "EPA NPL (Superfund) API"
+    ],
+    "software_integration": [
+      "GIS platforms (ArcGIS, QGIS)",
+      "Site analysis tools",
+      "Environmental screening software",
+      "BIM for site context"
+    ],
+    "data_flow": "Site boundaries \u2192 Multi-layer GIS analysis \u2192 Sensitivity scoring \u2192 Compliance determination \u2192 Map generation \u2192 Documentation",
+    "authentication": "Most government APIs are public or free registration. Some USGS services require API keys.",
+    "integration_frequency": "Batch - initial site screening",
+    "notes": "Excellent integration potential. Government environmental APIs are mature and well-documented. Automated GIS analysis can quickly identify sensitive land constraints."
+  },
+  {
+    "credit_code": "LTc2",
+    "credit_name": "Equitable Development",
+    "integration_score": 85,
+    "api_requirements": [
+      "EPA Brownfields API",
+      "National Register of Historic Places API",
+      "US Census Bureau API",
+      "DOL Apprenticeship Database API",
+      "HUD APIs",
+      "Local historic registry APIs"
+    ],
+    "software_integration": [
+      "Site classification tools",
+      "Workforce analysis platforms",
+      "GIS for proximity mapping",
+      "Economic development databases"
+    ],
+    "data_flow": "Site location \u2192 Brownfield/historic status check \u2192 Workforce data analysis \u2192 Housing market analysis \u2192 Pathway recommendation \u2192 Points calculation",
+    "authentication": "EPA (free), NPS (public), Census (free key), HUD (varies)",
+    "integration_frequency": "Batch - per project site evaluation",
+    "notes": "Strong API ecosystem for site classification. Brownfields and historic registers have searchable databases. Challenge: Local workforce data may require manual integration."
+  },
+  {
+    "credit_code": "LTc3",
+    "credit_name": "Compact and Connected Development",
+    "integration_score": 88,
+    "api_requirements": [
+      "Walk Score API",
+      "Google Maps/Places API",
+      "GTFS transit feeds",
+      "Census Bureau API",
+      "Local assessor data APIs",
+      "Transit agency APIs"
+    ],
+    "software_integration": [
+      "Walkability analysis tools",
+      "Transit accessibility calculators",
+      "GIS platforms",
+      "Urban planning software"
+    ],
+    "data_flow": "Site address \u2192 Density calculations (Census/assessor) \u2192 Transit trip analysis (GTFS) \u2192 Walk Score API call \u2192 Combined scoring \u2192 Points determination",
+    "authentication": "Walk Score (API key), Google Maps (paid API key), GTFS (public), Census (free key)",
+    "integration_frequency": "Batch - per project site analysis",
+    "notes": "High feasibility with mature location APIs. Walk Score provides single-call walkability metrics. GTFS enables custom transit accessibility calculations. Challenge: GTFS feed availability varies by region."
+  },
+  {
+    "credit_code": "LTc4",
+    "credit_name": "Transportation Demand Management",
+    "integration_score": 82,
+    "api_requirements": [
+      "ITE Trip Generation API/database",
+      "EPA MOVES model API",
+      "Regional VMT data APIs",
+      "Transit APIs",
+      "Parking analysis tools"
+    ],
+    "software_integration": [
+      "Transportation modeling software",
+      "Parking analysis tools",
+      "VMT calculation platforms",
+      "BIM for parking layout"
+    ],
+    "data_flow": "Project type + Occupancy \u2192 Trip generation lookup \u2192 VMT estimation \u2192 Carbon emission calculation \u2192 Parking ratio analysis \u2192 Facility sizing \u2192 TDM plan",
+    "authentication": "ITE (subscription), EPA (public), regional MPOs (varies)",
+    "integration_frequency": "Batch - per project, updated with design changes",
+    "notes": "Good integration potential. ITE provides standardized trip generation data. Challenge: Regional VMT data availability varies. Solution: Use national defaults with local calibration options."
+  },
+  {
+    "credit_code": "LTc5",
+    "credit_name": "Electric Vehicles",
+    "integration_score": 80,
+    "api_requirements": [
+      "ENERGY STAR EVSE Registry API",
+      "Electrical load calculation APIs",
+      "ADA compliance checking APIs",
+      "Utility rate APIs"
+    ],
+    "software_integration": [
+      "Electrical design software",
+      "EVSE specification tools",
+      "Parking layout software",
+      "Load analysis platforms"
+    ],
+    "data_flow": "Parking count + Building type \u2192 EVSE quantity calculation \u2192 Electrical load analysis \u2192 Accessible space requirements \u2192 Equipment specification \u2192 Compliance verification",
+    "authentication": "ENERGY STAR (public API), electrical tools (license-based)",
+    "integration_frequency": "Batch - per parking design iteration",
+    "notes": "Straightforward calculations with good API support. ENERGY STAR EVSE registry helps identify qualified equipment. Challenge: Electrical load integration with building systems."
+  },
+  {
+    "credit_code": "SSp1",
+    "credit_name": "Minimized Site Disturbance",
+    "integration_score": 78,
+    "api_requirements": [
+      "USDA PLANTS Database API",
+      "Invasive species registry APIs",
+      "EPA NPDES API",
+      "Soil survey APIs (NRCS)",
+      "Weather data APIs"
+    ],
+    "software_integration": [
+      "Erosion control design software",
+      "Vegetation mapping tools",
+      "Satellite imagery analysis (Google Earth Engine)",
+      "Site survey tools"
+    ],
+    "data_flow": "Site survey data + Satellite imagery \u2192 Vegetation classification \u2192 Invasive species check \u2192 Erosion control plan generation \u2192 Exclusion zone mapping",
+    "authentication": "USDA (public), EPA (varies), satellite imagery (API keys required)",
+    "integration_frequency": "Batch - per site assessment",
+    "notes": "Good integration with vegetation and soil databases. Satellite imagery APIs enable automated vegetation mapping. Challenge: Accurate invasive species identification may require expert review."
+  },
+  {
+    "credit_code": "SSc1",
+    "credit_name": "Biodiverse Habitat",
+    "integration_score": 75,
+    "api_requirements": [
+      "Native plant database APIs",
+      "Bird collision database APIs",
+      "Soil restoration calculators",
+      "Local ecological databases"
+    ],
+    "software_integration": [
+      "Habitat analysis tools",
+      "Bird collision modeling software",
+      "Facade analysis tools",
+      "Landscape design software"
+    ],
+    "data_flow": "Site plan + Vegetation survey \u2192 Habitat area calculations \u2192 Bird collision risk analysis \u2192 Restoration specifications \u2192 Compliance verification",
+    "authentication": "Varies by database, many ecological resources are public",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Moderate integration potential. Bird collision analysis tools exist but may require manual input. Challenge: Local ecological data may not be API-accessible."
+  },
+  {
+    "credit_code": "SSc2",
+    "credit_name": "Accessible Outdoor Space",
+    "integration_score": 72,
+    "api_requirements": [
+      "ADA compliance checking APIs",
+      "Accessibility route analysis APIs"
+    ],
+    "software_integration": [
+      "BIM/Revit for area calculations",
+      "Accessibility checking tools",
+      "Site planning software"
+    ],
+    "data_flow": "Site plan + Building footprint \u2192 Outdoor space area calculation \u2192 Seating requirements \u2192 Accessibility path check \u2192 Compliance verification",
+    "authentication": "BIM software licenses, accessibility tools",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Primarily calculation-based with BIM integration for area measurements. Lower score due to limited specialized APIs for outdoor accessibility."
+  },
+  {
+    "credit_code": "SSc3",
+    "credit_name": "Rainwater Management",
+    "integration_score": 90,
+    "api_requirements": [
+      "NOAA Precipitation Frequency Data Server",
+      "NRCS Soil Survey API",
+      "Local stormwater manual databases",
+      "EPA SWMM APIs"
+    ],
+    "software_integration": [
+      "Stormwater modeling software (SWMM, HydroCAD)",
+      "LID/GI sizing tools",
+      "GIS platforms",
+      "Hydraulic calculation tools"
+    ],
+    "data_flow": "Site area + Impervious coverage \u2192 Rainfall data (NOAA) \u2192 Soil infiltration rates \u2192 Runoff calculations \u2192 LID/GI sizing \u2192 Compliance verification",
+    "authentication": "NOAA (public), NRCS (public), modeling software (licensed)",
+    "integration_frequency": "Batch - per design iteration, real-time for monitoring",
+    "notes": "Excellent integration. NOAA provides comprehensive rainfall data APIs. Stormwater modeling software increasingly offers APIs. Challenge: Local stormwater requirements vary significantly."
+  },
+  {
+    "credit_code": "SSc4",
+    "credit_name": "Enhanced Resilient Site Design",
+    "integration_score": 82,
+    "api_requirements": [
+      "IPp1 hazard assessment data (internal)",
+      "Material property databases",
+      "SITES rating system API",
+      "Local resilience code databases"
+    ],
+    "software_integration": [
+      "Resilience strategy databases",
+      "Specification writing tools",
+      "Design decision support systems"
+    ],
+    "data_flow": "IPp1 priority hazards \u2192 Strategy matching \u2192 Design specifications \u2192 Compliance verification \u2192 Documentation",
+    "authentication": "Internal project data, material databases",
+    "integration_frequency": "Batch - per project",
+    "notes": "Good integration leveraging IPp1 data. Strategy databases can be pre-populated with hazard-response mappings. Challenge: Local code variations require customization."
+  },
+  {
+    "credit_code": "SSc5",
+    "credit_name": "Heat Island Reduction",
+    "integration_score": 88,
+    "api_requirements": [
+      "American Forests Tree Equity Score API",
+      "Material SRI databases",
+      "Cool Roof Rating Council API",
+      "EPA Heat Island data"
+    ],
+    "software_integration": [
+      "BIM/Revit for area calculations",
+      "Material specification tools",
+      "SRI calculation tools",
+      "Tree canopy analysis (Google Earth Engine)"
+    ],
+    "data_flow": "Site plan + Material specs \u2192 SRI lookups \u2192 Area calculations \u2192 Tree Equity Score lookup \u2192 Weighted compliance calculation \u2192 Points determination",
+    "authentication": "Tree Equity Score (public), CRRC (public), material databases",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Strong integration potential. Tree Equity Score API provides location-based canopy targets. Material databases offer SRI values. Challenge: Real-time tree canopy analysis may require satellite imagery processing."
+  },
+  {
+    "credit_code": "SSc6",
+    "credit_name": "Light Pollution Reduction",
+    "integration_score": 92,
+    "api_requirements": [
+      "IES TM-15-11 BUG rating database",
+      "Luminaire manufacturer APIs",
+      "Lighting zone databases",
+      "Signage luminance databases"
+    ],
+    "software_integration": [
+      "Lighting design software (AGi32, DIALux)",
+      "Luminaire scheduling tools",
+      "Specification checking software"
+    ],
+    "data_flow": "Luminaire schedule \u2192 BUG rating lookup \u2192 Lighting zone determination \u2192 Compliance checking \u2192 Non-compliant fixture identification \u2192 Alternatives recommendation",
+    "authentication": "Manufacturer APIs (varies), lighting software (licensed)",
+    "integration_frequency": "Batch - per lighting design iteration",
+    "notes": "Excellent integration. BUG ratings are standardized and many manufacturers provide API access to product data. Automated compliance checking is straightforward."
+  },
+  {
+    "credit_code": "WEp1",
+    "credit_name": "Water Metering and Reporting",
+    "integration_score": 85,
+    "api_requirements": [
+      "USGBC Arc platform API",
+      "Smart meter APIs (various manufacturers)",
+      "Water utility APIs",
+      "Building management system APIs"
+    ],
+    "software_integration": [
+      "BMS/BAS systems",
+      "Water monitoring platforms",
+      "USGBC Arc platform",
+      "Meter specification tools"
+    ],
+    "data_flow": "Water systems inventory \u2192 Meter specification \u2192 Installation \u2192 Data collection \u2192 Arc platform integration \u2192 5-year reporting commitment",
+    "authentication": "Arc platform OAuth, meter manufacturer APIs, BMS credentials",
+    "integration_frequency": "Real-time for metering, batch for reporting",
+    "notes": "Strong integration potential. USGBC Arc platform has documented API. Smart water meters increasingly offer API access. Challenge: Protocol standardization across meter manufacturers."
+  },
+  {
+    "credit_code": "WEp2",
+    "credit_name": "Minimum Water Efficiency",
+    "integration_score": 90,
+    "api_requirements": [
+      "ENERGY STAR product database API",
+      "Fixtures database APIs",
+      "EPA WaterSense API",
+      "Irrigation requirement calculators"
+    ],
+    "software_integration": [
+      "BIM/Revit for fixture schedules",
+      "Water calculation tools",
+      "Product specification platforms",
+      "Irrigation design software"
+    ],
+    "data_flow": "Fixture schedule + Appliance specs \u2192 Flow rate verification \u2192 Water use calculations \u2192 ENERGY STAR check \u2192 Irrigation analysis \u2192 Compliance report",
+    "authentication": "ENERGY STAR (public), WaterSense (public), manufacturer databases",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Excellent integration. ENERGY STAR and WaterSense provide robust APIs. Fixture compliance checking is straightforward. Challenge: Irrigation calculations require local climate data integration."
+  },
+  {
+    "credit_code": "WEc1",
+    "credit_name": "Water Metering and Leak Detection",
+    "integration_score": 82,
+    "api_requirements": [
+      "Smart water meter APIs",
+      "Leak detection sensor APIs",
+      "BMS integration APIs",
+      "Analytics platform APIs"
+    ],
+    "software_integration": [
+      "Water monitoring systems",
+      "Leak detection platforms",
+      "BMS/BAS",
+      "Analytics dashboards"
+    ],
+    "data_flow": "Building water systems \u2192 Submeter placement planning \u2192 Sensor specification \u2192 Installation \u2192 Data integration \u2192 Leak detection analytics \u2192 Action plan generation",
+    "authentication": "Sensor manufacturer APIs, BMS credentials, analytics platform tokens",
+    "integration_frequency": "Real-time for monitoring, batch for reporting",
+    "notes": "Good integration with IoT sensor ecosystems. Leak detection systems increasingly API-enabled. Challenge: Integration with existing BMS may require custom middleware."
+  },
+  {
+    "credit_code": "WEc2",
+    "credit_name": "Enhanced Water Efficiency",
+    "integration_score": 85,
+    "api_requirements": [
+      "Alternative water source databases",
+      "Rainfall data APIs (NOAA)",
+      "Graywater system calculators",
+      "Water reuse regulation databases"
+    ],
+    "software_integration": [
+      "Whole-building water modeling tools",
+      "Alternative water system design software",
+      "Optimization platforms",
+      "BIM for water system integration"
+    ],
+    "data_flow": "All water uses + Alternative sources \u2192 Water balance modeling \u2192 Reduction percentage calculation \u2192 Alternative source integration \u2192 Optimization \u2192 Points determination",
+    "authentication": "NOAA (public), local regulation databases, modeling software licenses",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Strong integration potential. Water modeling tools offer APIs. Alternative source availability can be automated with rainfall and regulatory data. Challenge: Local water reuse regulations vary significantly."
+  },
+  {
+    "credit_code": "EAp1",
+    "credit_name": "Operational Carbon Projection and Decarbonization Plan",
+    "integration_score": 88,
+    "api_requirements": [
+      "Energy modeling software APIs",
+      "EPA eGRID API",
+      "Grid decarbonization projection APIs",
+      "Utility rate APIs",
+      "Electrification pathway databases"
+    ],
+    "software_integration": [
+      "Energy modeling platforms (EnergyPlus, IES, TRACE)",
+      "Carbon calculation tools",
+      "Decarbonization planning software",
+      "BIM for system integration"
+    ],
+    "data_flow": "Energy model outputs \u2192 Grid emission factors \u2192 25-year projection \u2192 Decarbonization pathway analysis \u2192 Electrification planning \u2192 Documentation",
+    "authentication": "Energy modeling APIs (license-based), EPA (public), utility APIs (varies)",
+    "integration_frequency": "Batch - per energy model iteration",
+    "notes": "Strong integration. Energy modeling software increasingly offers APIs. Grid emission factors available through EPA. Challenge: Long-term grid decarbonization projections require assumptions."
+  },
+  {
+    "credit_code": "EAp2",
+    "credit_name": "Minimum Energy Efficiency",
+    "integration_score": 85,
+    "api_requirements": [
+      "ASHRAE 90.1 database APIs",
+      "Energy modeling software APIs",
+      "Building envelope databases",
+      "Equipment efficiency databases"
+    ],
+    "software_integration": [
+      "Energy modeling software",
+      "Code compliance checking tools",
+      "BIM for envelope/systems",
+      "Baseline generation tools"
+    ],
+    "data_flow": "Building specifications \u2192 Baseline model generation \u2192 Proposed model \u2192 Performance comparison \u2192 Prescriptive checklist \u2192 Compliance verification",
+    "authentication": "ASHRAE (subscription), energy modeling (licensed), equipment databases",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Good integration. Energy modeling APIs enable automated compliance checking. Challenge: ASHRAE 90.1 baseline generation is complex and may require expert oversight."
+  },
+  {
+    "credit_code": "EAp3",
+    "credit_name": "Fundamental Commissioning",
+    "integration_score": 65,
+    "api_requirements": [
+      "Project management APIs",
+      "Document management APIs",
+      "ASHRAE guideline databases"
+    ],
+    "software_integration": [
+      "Commissioning management platforms",
+      "Project management tools",
+      "Document control systems",
+      "Meeting coordination tools"
+    ],
+    "data_flow": "Project schedule + Systems inventory \u2192 Cx plan generation \u2192 Milestone tracking \u2192 Documentation management \u2192 OPR/BOD development",
+    "authentication": "Project management OAuth, document platform credentials",
+    "integration_frequency": "Real-time for tracking, batch for documentation",
+    "notes": "Moderate integration. Process management can be automated but core commissioning is human-driven. Challenge: Capturing Cx Authority expertise and decisions."
+  },
+  {
+    "credit_code": "EAp4",
+    "credit_name": "Energy Metering and Reporting",
+    "integration_score": 88,
+    "api_requirements": [
+      "USGBC Arc platform API",
+      "Smart meter APIs",
+      "BMS/BAS APIs",
+      "Utility data APIs (Green Button)",
+      "Energy monitoring platform APIs"
+    ],
+    "software_integration": [
+      "BMS/BAS systems",
+      "Energy monitoring platforms",
+      "USGBC Arc platform",
+      "Utility data portals"
+    ],
+    "data_flow": "Energy systems \u2192 Metering plan \u2192 Installation \u2192 Data collection \u2192 Arc platform integration \u2192 5-year reporting \u2192 Performance tracking",
+    "authentication": "Arc OAuth, utility Green Button, BMS credentials, meter APIs",
+    "integration_frequency": "Real-time for metering, batch for Arc reporting",
+    "notes": "Strong integration. Arc platform API enables automated reporting. Green Button standard facilitates utility data access. Challenge: BMS protocol standardization."
+  },
+  {
+    "credit_code": "EAp5",
+    "credit_name": "Fundamental Refrigerant Management",
+    "integration_score": 90,
+    "api_requirements": [
+      "EPA refrigerant databases",
+      "Montreal Protocol schedule APIs",
+      "Equipment manufacturer APIs",
+      "ASHRAE refrigerant databases"
+    ],
+    "software_integration": [
+      "HVAC design software",
+      "Equipment selection tools",
+      "Refrigerant tracking systems",
+      "BIM for equipment schedules"
+    ],
+    "data_flow": "HVAC equipment schedule \u2192 Refrigerant type lookup \u2192 GWP checking \u2192 Phase-out schedule verification \u2192 Compliance report \u2192 Alternative recommendations",
+    "authentication": "EPA (public), ASHRAE (subscription), manufacturer APIs",
+    "integration_frequency": "Batch - per equipment selection",
+    "notes": "Excellent integration. Refrigerant databases are well-documented. Equipment manufacturer APIs increasingly available. Automated compliance checking is straightforward."
+  },
+  {
+    "credit_code": "EAc1",
+    "credit_name": "Electrification",
+    "integration_score": 85,
+    "api_requirements": [
+      "Equipment performance databases",
+      "COP calculation APIs",
+      "Climate zone databases",
+      "Electrification pathway tools"
+    ],
+    "software_integration": [
+      "HVAC design software",
+      "Energy modeling tools",
+      "Equipment selection platforms",
+      "Load calculation tools"
+    ],
+    "data_flow": "HVAC equipment + Heating loads \u2192 COP calculations \u2192 Weighted average analysis \u2192 Electrification pathway \u2192 Equipment specifications \u2192 Points determination",
+    "authentication": "Equipment databases, energy modeling licenses",
+    "integration_frequency": "Batch - per HVAC design iteration",
+    "notes": "Strong integration. Equipment performance data available through manufacturer APIs. COP calculations can be automated. Challenge: Climate-specific performance variations."
+  },
+  {
+    "credit_code": "EAc2",
+    "credit_name": "Reduce Peak Thermal Loads",
+    "integration_score": 82,
+    "api_requirements": [
+      "Energy modeling APIs",
+      "Envelope performance databases",
+      "ERV manufacturer APIs",
+      "Thermal bridge analysis tools"
+    ],
+    "software_integration": [
+      "Energy modeling software",
+      "Envelope analysis tools",
+      "Thermal bridge detection software",
+      "BIM for envelope details"
+    ],
+    "data_flow": "Envelope specs + Ventilation design \u2192 Air leakage analysis \u2192 ERV sizing \u2192 Thermal bridge assessment \u2192 Peak load modeling \u2192 Points calculation",
+    "authentication": "Energy modeling APIs, manufacturer databases",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Good integration with energy modeling tools. Thermal bridge detection can be automated with BIM integration. Challenge: Detailed envelope analysis may require specialized software."
+  },
+  {
+    "credit_code": "EAc3",
+    "credit_name": "Enhanced Energy Efficiency",
+    "integration_score": 88,
+    "api_requirements": [
+      "Energy modeling software APIs",
+      "ASHRAE 90.1 Appendix G APIs",
+      "Optimization platform APIs",
+      "Baseline generation tools"
+    ],
+    "software_integration": [
+      "Energy modeling platforms",
+      "Optimization software",
+      "BIM for building data",
+      "Performance comparison tools"
+    ],
+    "data_flow": "Energy model + Baseline \u2192 Performance comparison \u2192 Percent improvement calculation \u2192 Optimization analysis \u2192 Points determination \u2192 Documentation",
+    "authentication": "Energy modeling licenses, ASHRAE databases",
+    "integration_frequency": "Batch - per energy model iteration",
+    "notes": "Strong integration. Energy modeling APIs enable automated performance comparisons. Optimization tools can suggest improvements. Challenge: Baseline model generation complexity."
+  },
+  {
+    "credit_code": "EAc4",
+    "credit_name": "Renewable Energy",
+    "integration_score": 85,
+    "api_requirements": [
+      "NREL PVWatts API",
+      "Green-e Registry API",
+      "Solar resource databases",
+      "REC tracking systems APIs",
+      "Utility interconnection APIs"
+    ],
+    "software_integration": [
+      "Solar design software (PVsyst, Helioscope)",
+      "Renewable energy calculators",
+      "BIM for roof area analysis",
+      "Financial analysis tools"
+    ],
+    "data_flow": "Building energy use + Roof area \u2192 Solar potential (PVWatts) \u2192 Production estimation \u2192 Percent offset calculation \u2192 REC procurement \u2192 Documentation",
+    "authentication": "NREL (free API key), Green-e (registration), solar software (licensed)",
+    "integration_frequency": "Batch - per renewable energy analysis",
+    "notes": "Strong integration. NREL PVWatts provides excellent solar production API. Green-e enables REC verification. Challenge: Off-site renewable verification requires third-party integration."
+  },
+  {
+    "credit_code": "EAc5",
+    "credit_name": "Enhanced Commissioning",
+    "integration_score": 70,
+    "api_requirements": [
+      "BMS/BAS APIs",
+      "Analytics platform APIs",
+      "ASHRAE 202 databases",
+      "MBCx software APIs"
+    ],
+    "software_integration": [
+      "Monitoring-based commissioning platforms",
+      "BMS/BAS systems",
+      "Fault detection software",
+      "Data analytics tools"
+    ],
+    "data_flow": "BMS data streams \u2192 Analytics platform \u2192 Fault detection \u2192 Performance tracking \u2192 Optimization recommendations \u2192 Documentation",
+    "authentication": "BMS credentials, analytics platform tokens, MBCx software licenses",
+    "integration_frequency": "Real-time for MBCx, batch for traditional enhanced Cx",
+    "notes": "Moderate-high integration. MBCx platforms offer strong API integration. Traditional enhanced Cx is more document-driven. Challenge: BMS data standardization across manufacturers."
+  },
+  {
+    "credit_code": "EAc6",
+    "credit_name": "Grid Interactive",
+    "integration_score": 78,
+    "api_requirements": [
+      "Utility demand response APIs",
+      "OpenADR APIs",
+      "Energy storage system APIs",
+      "Smart grid integration APIs"
+    ],
+    "software_integration": [
+      "Demand response management systems",
+      "Energy management platforms",
+      "Building automation systems",
+      "Storage control systems"
+    ],
+    "data_flow": "Building loads + DR programs \u2192 Capability assessment \u2192 Storage sizing \u2192 Grid integration design \u2192 Utility program enrollment \u2192 Documentation",
+    "authentication": "Utility APIs (varies), OpenADR (standard), storage system APIs",
+    "integration_frequency": "Real-time for DR events, batch for design",
+    "notes": "Good integration potential. OpenADR provides standard DR communication protocol. Challenge: Utility program APIs vary significantly by region."
+  },
+  {
+    "credit_code": "EAc7",
+    "credit_name": "Enhanced Refrigerant Management",
+    "integration_score": 90,
+    "api_requirements": [
+      "Refrigerant GWP databases",
+      "Equipment manufacturer APIs",
+      "Leak detection system APIs",
+      "ASHRAE refrigerant standards"
+    ],
+    "software_integration": [
+      "HVAC design software",
+      "Refrigerant tracking systems",
+      "Leak detection platforms",
+      "Equipment selection tools"
+    ],
+    "data_flow": "HVAC equipment \u2192 Refrigerant charge + GWP \u2192 Total impact calculation \u2192 Threshold comparison \u2192 Low-GWP alternatives \u2192 Leak detection specification \u2192 Points",
+    "authentication": "Public GWP databases, manufacturer APIs",
+    "integration_frequency": "Batch - per equipment selection",
+    "notes": "Excellent integration. Refrigerant GWP data is standardized. Calculations are straightforward. Leak detection systems increasingly API-enabled."
+  },
+  {
+    "credit_code": "MRp1",
+    "credit_name": "Planning for Zero Waste Operations",
+    "integration_score": 72,
+    "api_requirements": [
+      "Waste generation rate databases",
+      "Local hauler service APIs",
+      "Recycling facility APIs",
+      "Building code databases"
+    ],
+    "software_integration": [
+      "Waste management planning tools",
+      "BIM for space planning",
+      "Space calculation tools",
+      "Service provider platforms"
+    ],
+    "data_flow": "Building type + Occupancy \u2192 Waste stream projections \u2192 Storage sizing \u2192 Service availability check \u2192 Operations plan \u2192 Documentation",
+    "authentication": "Local service APIs (varies), waste databases",
+    "integration_frequency": "Batch - per project",
+    "notes": "Moderate integration. Waste generation rates are standardized. Local service availability APIs are limited. Challenge: Municipal service integration varies widely."
+  },
+  {
+    "credit_code": "MRp2",
+    "credit_name": "Quantify and Assess Embodied Carbon",
+    "integration_score": 88,
+    "api_requirements": [
+      "EC3 API",
+      "Tally API",
+      "One Click LCA API",
+      "EPD database APIs",
+      "CLF Material Baselines API"
+    ],
+    "software_integration": [
+      "BIM/Revit with Tally plugin",
+      "WBLCA tools",
+      "Quantity take-off software",
+      "Material databases"
+    ],
+    "data_flow": "BIM model \u2192 Quantity take-off \u2192 Material mapping \u2192 EC3/Tally API calls \u2192 GWP calculations \u2192 Hot spot identification \u2192 Reduction strategies",
+    "authentication": "EC3 (free), Tally (license), One Click LCA (API token), EPD databases",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Strong integration. EC3 and Tally offer robust APIs for embodied carbon. BIM integration enables automated quantity extraction. Challenge: Material mapping accuracy requires validation."
+  },
+  {
+    "credit_code": "MRc1",
+    "credit_name": "Building and Materials Reuse",
+    "integration_score": 68,
+    "api_requirements": [
+      "Salvage material databases",
+      "Market value APIs",
+      "Reuse marketplace APIs",
+      "Existing building survey tools"
+    ],
+    "software_integration": [
+      "BIM for existing conditions",
+      "Salvage tracking systems",
+      "Cost estimation tools",
+      "Demolition planning software"
+    ],
+    "data_flow": "Existing building survey \u2192 Area calculations \u2192 Salvage inventory \u2192 Valuation \u2192 Reuse percentage \u2192 Compliance documentation",
+    "authentication": "Marketplace APIs (varies), cost databases",
+    "integration_frequency": "Batch - per project",
+    "notes": "Moderate integration. Existing building data can be extracted from BIM. Salvage market APIs are limited. Challenge: Salvage material valuation requires market data that may not be API-accessible."
+  },
+  {
+    "credit_code": "MRc2",
+    "credit_name": "Reduce Embodied Carbon",
+    "integration_score": 88,
+    "api_requirements": [
+      "WBLCA tool APIs (Tally, One Click LCA)",
+      "EC3 API",
+      "EPD registry APIs",
+      "Baseline project databases",
+      "Construction emission tracking APIs"
+    ],
+    "software_integration": [
+      "WBLCA platforms",
+      "BIM/Revit",
+      "EPD management tools",
+      "Construction management platforms"
+    ],
+    "data_flow": "Material quantities + EPDs \u2192 WBLCA analysis \u2192 Baseline comparison \u2192 Reduction percentage \u2192 Construction emissions tracking \u2192 Points determination",
+    "authentication": "WBLCA licenses, EC3 (free), EPD registry APIs",
+    "integration_frequency": "Batch - per design iteration, real-time for construction tracking",
+    "notes": "Strong integration. WBLCA tools offer comprehensive APIs. EPD registries increasingly accessible. Challenge: Baseline project selection and comparison methodology."
+  },
+  {
+    "credit_code": "MRc3",
+    "credit_name": "Low-Emitting Materials",
+    "integration_score": 85,
+    "api_requirements": [
+      "GREENGUARD certification API",
+      "FloorScore API",
+      "CDPH Standard Method database",
+      "HPD repository API",
+      "Manufacturer certification APIs"
+    ],
+    "software_integration": [
+      "Product specification platforms",
+      "Certification tracking tools",
+      "BIM for product schedules",
+      "Submittal management systems"
+    ],
+    "data_flow": "Product specifications \u2192 Certification lookup \u2192 Compliance verification \u2192 Category percentage calculation \u2192 Points determination \u2192 Documentation",
+    "authentication": "GREENGUARD (public), FloorScore (public), HPD Collaborative (registration)",
+    "integration_frequency": "Batch - per product selection",
+    "notes": "Strong integration. GREENGUARD and FloorScore offer searchable databases. HPD repository provides health declaration data. Challenge: Product schedule integration with certification databases."
+  },
+  {
+    "credit_code": "MRc4",
+    "credit_name": "Building Product Selection and Procurement",
+    "integration_score": 82,
+    "api_requirements": [
+      "EPD registry APIs",
+      "HPD repository API",
+      "FSC certification API",
+      "Cradle to Cradle API",
+      "Manufacturer documentation APIs"
+    ],
+    "software_integration": [
+      "Product data management platforms",
+      "EPD tracking tools",
+      "Procurement systems",
+      "BIM for product data"
+    ],
+    "data_flow": "Product specifications \u2192 EPD/HPD lookup \u2192 Certification validation \u2192 Manufacturer count tracking \u2192 Points calculation \u2192 Documentation",
+    "authentication": "EPD registries (varies), HPD Collaborative, certification bodies",
+    "integration_frequency": "Batch - per procurement phase",
+    "notes": "Good integration. EPD and HPD repositories offer APIs. Certification bodies increasingly provide digital verification. Challenge: Multiple registry integration requires normalization."
+  },
+  {
+    "credit_code": "MRc5",
+    "credit_name": "Construction and Demolition Waste Diversion",
+    "integration_score": 80,
+    "api_requirements": [
+      "Waste hauler APIs",
+      "Recycling facility APIs",
+      "Waste tracking platform APIs",
+      "Digital manifest systems"
+    ],
+    "software_integration": [
+      "Waste tracking platforms",
+      "Construction management systems",
+      "Hauler reporting tools",
+      "Diversion calculators"
+    ],
+    "data_flow": "Waste manifests \u2192 Digital tracking \u2192 Material stream categorization \u2192 Diversion rate calculation \u2192 Reporting \u2192 Compliance documentation",
+    "authentication": "Hauler APIs (varies), tracking platform credentials",
+    "integration_frequency": "Real-time during construction, batch for reporting",
+    "notes": "Good integration. Digital waste tracking platforms increasingly offer APIs. Challenge: Hauler system integration varies by provider and region."
+  },
+  {
+    "credit_code": "EQp1",
+    "credit_name": "Construction Management",
+    "integration_score": 70,
+    "api_requirements": [
+      "Weather data APIs",
+      "OSHA heat index APIs",
+      "Material safety databases",
+      "Construction schedule APIs"
+    ],
+    "software_integration": [
+      "Construction management platforms",
+      "Safety management systems",
+      "Weather monitoring tools",
+      "IAQ monitoring equipment"
+    ],
+    "data_flow": "Construction schedule + Weather data \u2192 Heat index monitoring \u2192 IAQ plan generation \u2192 Safety protocol development \u2192 Documentation",
+    "authentication": "Weather APIs (varies), construction platform credentials",
+    "integration_frequency": "Real-time for monitoring, batch for planning",
+    "notes": "Moderate integration. Weather and safety data available via APIs. Challenge: Construction IAQ monitoring equipment integration may require custom setup."
+  },
+  {
+    "credit_code": "EQp2",
+    "credit_name": "Fundamental Air Quality",
+    "integration_score": 85,
+    "api_requirements": [
+      "EPA AQI API",
+      "ASHRAE 62.1 databases",
+      "Local air quality APIs",
+      "Equipment specification APIs"
+    ],
+    "software_integration": [
+      "HVAC design software",
+      "Ventilation calculation tools",
+      "Air quality monitoring platforms",
+      "BIM for HVAC design"
+    ],
+    "data_flow": "Space types + Occupancy \u2192 Ventilation calculations \u2192 Outdoor air quality check \u2192 Filtration verification \u2192 Entryway design \u2192 Compliance report",
+    "authentication": "EPA (public), ASHRAE (subscription), equipment databases",
+    "integration_frequency": "Batch - per HVAC design iteration",
+    "notes": "Strong integration. EPA AQI API provides outdoor air quality data. ASHRAE 62.1 calculations can be automated. Challenge: Local air quality may require additional data sources."
+  },
+  {
+    "credit_code": "EQp3",
+    "credit_name": "No Smoking or Vehicle Idling",
+    "integration_score": 88,
+    "api_requirements": [
+      "Mapping/geocoding APIs",
+      "Signage specification databases"
+    ],
+    "software_integration": [
+      "BIM/Revit for building locations",
+      "Site planning software",
+      "Signage design tools",
+      "Policy document generators"
+    ],
+    "data_flow": "Building entries + Air intakes \u2192 Zone mapping \u2192 Signage location planning \u2192 Policy document generation \u2192 Compliance verification",
+    "authentication": "Mapping APIs (Google, Mapbox - paid)",
+    "integration_frequency": "Batch - per project",
+    "notes": "High integration potential. Mapping APIs enable automated zone calculations. Signage and policy generation can be templated. Straightforward implementation."
+  },
+  {
+    "credit_code": "EQc1",
+    "credit_name": "Enhanced Air Quality",
+    "integration_score": 85,
+    "api_requirements": [
+      "ASHRAE 62.1 databases",
+      "Enhanced IAQ standard databases",
+      "HVAC design software APIs"
+    ],
+    "software_integration": [
+      "HVAC design platforms",
+      "Ventilation calculation tools",
+      "IAQ modeling software",
+      "BIM for system design"
+    ],
+    "data_flow": "Baseline ventilation \u2192 Enhanced calculations \u2192 IAQ design verification \u2192 Compliance checking \u2192 Points determination",
+    "authentication": "ASHRAE databases, HVAC software licenses",
+    "integration_frequency": "Batch - per HVAC design iteration",
+    "notes": "Strong integration. Ventilation calculations can be automated with HVAC design APIs. Enhanced IAQ limits are standardized. Challenge: IAQ modeling may require specialized software."
+  },
+  {
+    "credit_code": "EQc2",
+    "credit_name": "Occupant Experience",
+    "integration_score": 78,
+    "api_requirements": [
+      "Daylight simulation APIs",
+      "Acoustic modeling APIs",
+      "View analysis APIs",
+      "Thermal comfort calculation APIs"
+    ],
+    "software_integration": [
+      "Daylight simulation (Radiance, DIVA, Ladybug)",
+      "Acoustic modeling software",
+      "BIM/Revit for geometry",
+      "Thermal analysis tools"
+    ],
+    "data_flow": "Building geometry + Site context \u2192 Daylight analysis \u2192 View quality assessment \u2192 Acoustic mapping \u2192 Thermal comfort analysis \u2192 Points aggregation",
+    "authentication": "Simulation software licenses, BIM credentials",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Good integration. Daylight and acoustic simulation tools offer APIs. BIM integration enables geometry extraction. Challenge: Multiple simulation types require coordination."
+  },
+  {
+    "credit_code": "EQc3",
+    "credit_name": "Accessibility and Inclusion",
+    "integration_score": 72,
+    "api_requirements": [
+      "ADA standards databases",
+      "Inclusive design guideline APIs"
+    ],
+    "software_integration": [
+      "Accessibility checking tools",
+      "BIM for design review",
+      "Design guideline platforms"
+    ],
+    "data_flow": "Design specifications \u2192 Accessibility checklist \u2192 Gap analysis \u2192 Enhanced feature tracking \u2192 Compliance documentation",
+    "authentication": "Public standards databases",
+    "integration_frequency": "Batch - per design review",
+    "notes": "Moderate integration. ADA standards are publicly available. Challenge: Inclusive design goes beyond code minimum and requires expert judgment."
+  },
+  {
+    "credit_code": "EQc4",
+    "credit_name": "Resilient Spaces",
+    "integration_score": 75,
+    "api_requirements": [
+      "IPp1 hazard data (internal)",
+      "HVAC system APIs",
+      "Window specification APIs",
+      "Thermal modeling APIs"
+    ],
+    "software_integration": [
+      "HVAC design software",
+      "Thermal modeling tools",
+      "BIM for window analysis",
+      "Resilience planning platforms"
+    ],
+    "data_flow": "IPp1 hazards + Building systems \u2192 Resilience strategy verification \u2192 Operable window analysis \u2192 Thermal safety modeling \u2192 Compliance checking",
+    "authentication": "Internal project data, HVAC software licenses",
+    "integration_frequency": "Batch - per design iteration",
+    "notes": "Good integration leveraging IPp1 data. HVAC and thermal modeling tools provide APIs. Challenge: Resilience strategies require hazard-specific analysis."
+  },
+  {
+    "credit_code": "EQc5",
+    "credit_name": "Air Quality Testing and Monitoring",
+    "integration_score": 82,
+    "api_requirements": [
+      "Air quality sensor APIs",
+      "Testing laboratory APIs",
+      "LEED testing threshold databases",
+      "Monitoring platform APIs"
+    ],
+    "software_integration": [
+      "IAQ monitoring systems",
+      "Testing management platforms",
+      "Sensor networks",
+      "Analytics dashboards"
+    ],
+    "data_flow": "Building area + Space types \u2192 Testing protocol \u2192 Sensor specification \u2192 Installation \u2192 Data collection \u2192 Results analysis \u2192 Compliance verification",
+    "authentication": "Sensor APIs, laboratory systems, monitoring platforms",
+    "integration_frequency": "Real-time for monitoring, batch for testing",
+    "notes": "Good integration. IAQ sensors increasingly offer API access. Testing protocols can be automated. Challenge: Sensor calibration and data quality assurance."
+  },
+  {
+    "credit_code": "PRc1",
+    "credit_name": "Project Priorities",
+    "integration_score": 75,
+    "api_requirements": [
+      "USGBC Regional Priority database API",
+      "Project Priority Library API",
+      "Pilot credit database API",
+      "Innovation credit tracking APIs"
+    ],
+    "software_integration": [
+      "LEED documentation platforms",
+      "Credit tracking systems",
+      "Innovation management tools"
+    ],
+    "data_flow": "Project location + Type + Pursued credits \u2192 Regional priority lookup \u2192 Exemplary performance analysis \u2192 Pilot credit eligibility \u2192 Innovation opportunities \u2192 Points optimization",
+    "authentication": "USGBC APIs (registration required)",
+    "integration_frequency": "Batch - per project, updated as credits are pursued",
+    "notes": "Moderate integration. USGBC provides credit databases. Challenge: Regional priority credits vary and may not be fully API-accessible. Innovation requires human creativity."
+  },
+  {
+    "credit_code": "PRc2",
+    "credit_name": "LEED AP",
+    "integration_score": 92,
+    "api_requirements": [
+      "GBCI Credential Directory API",
+      "Team roster management APIs"
+    ],
+    "software_integration": [
+      "Credential verification systems",
+      "Team management platforms",
+      "Project directory tools"
+    ],
+    "data_flow": "Team roster \u2192 Credential lookup \u2192 Verification \u2192 Status report \u2192 Documentation",
+    "authentication": "GBCI API (registration required)",
+    "integration_frequency": "Batch - per team assembly, real-time for verification",
+    "notes": "Excellent integration. GBCI provides credential verification API. Simple binary check. Challenge: GBCI API access may require partnership agreement."
+  }
+]

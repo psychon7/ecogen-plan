@@ -1,0 +1,907 @@
+[
+  {
+    "credit_code": "IPp1",
+    "credit_name": "Climate Resilience Assessment",
+    "credit_category": "IP",
+    "max_points": 0.0,
+    "document_automation_score": 80,
+    "document_types": [
+      "Climate Resilience Assessment Report",
+      "Hazard Analysis Report",
+      "Risk Matrix",
+      "IPCC Scenario Analysis"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Location-specific hazard data, IPCC scenario projections, risk scores, building-specific vulnerability analysis, adaptive capacity metrics",
+    "format_requirements": "PDF Report (primary), Excel worksheets for calculations, GIS maps",
+    "human_review": "Final verification by resilience consultant, hazard assessment review by licensed professional",
+    "notes": "Highly automatable with GIS data integration and climate databases. Templates can be standardized with location-specific data feeds."
+  },
+  {
+    "credit_code": "IPp2",
+    "credit_name": "Human Impact Assessment",
+    "credit_category": "IP",
+    "max_points": 0.0,
+    "document_automation_score": 77,
+    "document_types": [
+      "Human Impact Assessment Report",
+      "Demographic Profile",
+      "Community Infrastructure Analysis",
+      "Social Equity Assessment"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Census demographic data, local infrastructure mapping, community-specific social equity scores, housing affordability metrics",
+    "format_requirements": "PDF Report, Excel demographic data tables, GIS community maps",
+    "human_review": "Community stakeholder review, demographic data validation by social equity expert",
+    "notes": "Strong automation potential using census APIs and community databases. Social equity scoring can be algorithmic."
+  },
+  {
+    "credit_code": "IPp3",
+    "credit_name": "Carbon Assessment",
+    "credit_category": "IP",
+    "max_points": 0.0,
+    "document_automation_score": 98,
+    "document_types": [
+      "Carbon Assessment Report",
+      "25-Year Emission Projection",
+      "Decarbonization Pathway Analysis",
+      "Embodied Carbon Summary"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Energy model outputs, material quantities, grid emission factors, 25-year projection calculations, refrigerant schedules",
+    "format_requirements": "PDF Report, Excel carbon calculations, USGBC-specific format for submission",
+    "human_review": "Carbon calculation verification by energy modeler, 25-year projection review",
+    "notes": "Very high automation - carbon calculations are formulaic and can be directly linked to energy model outputs."
+  },
+  {
+    "credit_code": "IPp4",
+    "credit_name": "Tenant Guidelines",
+    "credit_category": "IP",
+    "max_points": 0.0,
+    "document_automation_score": 80,
+    "document_types": [
+      "Tenant Guidelines Document",
+      "Sustainable Design Features Summary",
+      "LEED Compliance Pathway Guide"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Project-specific sustainable features, building system specifications, LEED credit strategies pursued, contact information",
+    "format_requirements": "PDF Document, Word template for customization",
+    "human_review": "Legal review of tenant guidelines, property management approval",
+    "notes": "Template-based generation with project-specific customization. Core and Shell specific."
+  },
+  {
+    "credit_code": "IPc1",
+    "credit_name": "Integrative Design Process",
+    "credit_category": "IP",
+    "max_points": 1.0,
+    "document_automation_score": 53,
+    "document_types": [
+      "Integrative Design Process Documentation",
+      "Charrette Materials",
+      "Goal Tracking Matrix",
+      "OPR Integration Checklist"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "Team roster, project schedule, owner requirements, interdisciplinary perspectives, measurable goal definitions",
+    "format_requirements": "PDF Documentation, Excel tracking matrices, Word templates",
+    "human_review": "Charrette facilitation by integrative process consultant, owner approval of goals",
+    "notes": "Process documentation with some automation potential. Charrette materials need human facilitation."
+  },
+  {
+    "credit_code": "IPc2",
+    "credit_name": "Green Leases",
+    "credit_category": "IP",
+    "max_points": 6.0,
+    "document_automation_score": 78,
+    "document_types": [
+      "Green Lease Template",
+      "Tenant Compliance Checklist",
+      "Green Lease Leaders Documentation",
+      "Points Calculation Worksheet"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Base building specifications, pursued LEED credits, tenant space requirements, Green Lease Leaders criteria",
+    "format_requirements": "Word/PDF Lease Template, Excel points worksheet",
+    "human_review": "Legal review of green lease clauses, tenant representative approval",
+    "notes": "Legal document templates with automated clause insertion. Green Lease Leaders alignment check is automatable."
+  },
+  {
+    "credit_code": "LTc1",
+    "credit_name": "Sensitive Land Protection",
+    "credit_category": "LT",
+    "max_points": 1.0,
+    "document_automation_score": 98,
+    "document_types": [
+      "Site Sensitivity Analysis Report",
+      "GIS Mapping Documentation",
+      "Environmental Site Assessment",
+      "Compliance Determination Letter"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Site boundary coordinates, GIS data layers, floodplain mapping, wetland locations, habitat boundaries",
+    "format_requirements": "PDF Report with GIS maps, Excel compliance checklist",
+    "human_review": "Environmental site assessment by qualified professional, GIS data verification",
+    "notes": "GIS-based automation very high. Site screening can be fully automated with proper data feeds."
+  },
+  {
+    "credit_code": "LTc2",
+    "credit_name": "Equitable Development",
+    "credit_category": "LT",
+    "max_points": 2.0,
+    "document_automation_score": 77,
+    "document_types": [
+      "Equitable Development Analysis",
+      "Brownfield Status Verification",
+      "Historic District Confirmation",
+      "Local Workforce Analysis"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Site address, parcel history, local workforce data, housing market data, brownfield status",
+    "format_requirements": "PDF Analysis Report, Excel data tables, verification letters",
+    "human_review": "Brownfield status verification by environmental consultant, historic registry confirmation",
+    "notes": "Multiple pathway options require decision trees. Brownfield and historic verification can be automated."
+  },
+  {
+    "credit_code": "LTc3",
+    "credit_name": "Compact and Connected Development",
+    "credit_category": "LT",
+    "max_points": 6.0,
+    "document_automation_score": 98,
+    "document_types": [
+      "Density Analysis Report",
+      "Transit Accessibility Assessment",
+      "Walkability Analysis",
+      "Walk Score Documentation"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Surrounding parcel data, transit routes and schedules, dwelling unit counts, Walk Score API results",
+    "format_requirements": "PDF Report, Excel calculations, GIS transit maps",
+    "human_review": "Density calculations verification, transit data validation",
+    "notes": "Very high automation potential. Density, transit, and walkability calculations are data-driven."
+  },
+  {
+    "credit_code": "LTc4",
+    "credit_name": "Transportation Demand Management",
+    "credit_category": "LT",
+    "max_points": 4.0,
+    "document_automation_score": 77,
+    "document_types": [
+      "Transportation Demand Assessment",
+      "VMT Calculation Report",
+      "Carbon Emission Analysis",
+      "Parking Reduction Analysis",
+      "Bicycle Facility Requirements"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Project occupancy, parking ratios, local VMT data, transit accessibility, building type parameters",
+    "format_requirements": "PDF Assessment, Excel VMT calculations, parking analysis",
+    "human_review": "Transportation engineer review of VMT calculations, parking analysis verification",
+    "notes": "VMT and carbon calculations can be automated. Parking and bicycle facility sizing is formulaic."
+  },
+  {
+    "credit_code": "LTc5",
+    "credit_name": "Electric Vehicles",
+    "credit_category": "LT",
+    "max_points": 2.0,
+    "document_automation_score": 83,
+    "document_types": [
+      "EVSE Requirements Calculation",
+      "Electrical Load Analysis",
+      "Accessible EV Space Design Requirements"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Total parking spaces, building type, electrical capacity, accessible parking requirements",
+    "format_requirements": "PDF Requirements, Excel calculations, electrical specifications",
+    "human_review": "Electrical engineer review of EVSE specifications, accessibility compliance check",
+    "notes": "Formula-based calculations for EVSE quantities. Electrical load analysis requires engineering input."
+  },
+  {
+    "credit_code": "SSp1",
+    "credit_name": "Minimized Site Disturbance",
+    "credit_category": "SS",
+    "max_points": 0.0,
+    "document_automation_score": 75,
+    "document_types": [
+      "Erosion and Sedimentation Control Plan",
+      "Vegetation Assessment Report",
+      "Construction Exclusion Zone Maps",
+      "Invasive Species Management Plan"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Site survey data, topography, drainage patterns, vegetation inventory, construction schedule",
+    "format_requirements": "PDF Plan, CAD drawings, Excel specifications",
+    "human_review": "Erosion control plan approval by civil engineer, vegetation assessment by ecologist",
+    "notes": "Erosion control plan templates can be standardized. Vegetation mapping benefits from satellite imagery."
+  },
+  {
+    "credit_code": "SSc1",
+    "credit_name": "Biodiverse Habitat",
+    "credit_category": "SS",
+    "max_points": 2.0,
+    "document_automation_score": 77,
+    "document_types": [
+      "Habitat Preservation/Restoration Calculations",
+      "Soil Restoration Specifications",
+      "Bird Collision Threat Factor Analysis",
+      "Glass Treatment Requirements"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Site plan measurements, existing vegetation survey, facade drawings, glass specifications, habitat area calculations",
+    "format_requirements": "PDF Calculations, CAD details, Excel area analysis",
+    "human_review": "Habitat assessment by ecologist, bird collision analysis by facade consultant",
+    "notes": "Habitat calculations are area-based and automatable. Bird-friendly glass analysis requires facade modeling."
+  },
+  {
+    "credit_code": "SSc2",
+    "credit_name": "Accessible Outdoor Space",
+    "credit_category": "SS",
+    "max_points": 1.0,
+    "document_automation_score": 53,
+    "document_types": [
+      "Outdoor Space Percentage Calculation",
+      "Seating Requirements Analysis",
+      "Accessibility Compliance Checklist"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "Site plan, building footprint, outdoor space design, accessibility route measurements",
+    "format_requirements": "PDF Compliance Report, CAD site plans, Excel calculations",
+    "human_review": "Accessibility consultant review, landscape architect approval",
+    "notes": "Area calculations are straightforward. Community/cultural elements require design team input."
+  },
+  {
+    "credit_code": "SSc3",
+    "credit_name": "Rainwater Management",
+    "credit_category": "SS",
+    "max_points": 3.0,
+    "document_automation_score": 95,
+    "document_types": [
+      "Rainfall Percentile Calculations",
+      "LID/GI Sizing Recommendations",
+      "Runoff Comparison Report",
+      "Stormwater Management Plan"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Site area, impervious coverage, local rainfall data, soil infiltration rates, LID/GI sizing",
+    "format_requirements": "PDF Report, Excel stormwater calculations, CAD LID details",
+    "human_review": "Civil engineer review of stormwater calculations, LID design approval",
+    "notes": "Stormwater calculations are highly automatable with rainfall data and site parameters."
+  },
+  {
+    "credit_code": "SSc4",
+    "credit_name": "Enhanced Resilient Site Design",
+    "credit_category": "SS",
+    "max_points": 2.0,
+    "document_automation_score": 75,
+    "document_types": [
+      "Resilience Strategy Matrix",
+      "Design Specifications Document",
+      "Compliance Verification Checklist"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "IPp1 hazard assessment results, site design parameters, local codes, resilience strategy matching",
+    "format_requirements": "PDF Strategy Matrix, Excel compliance tracking",
+    "human_review": "Resilience consultant review, design team coordination",
+    "notes": "Resilience strategy matching can be automated based on IPp1 results. Design implementation requires coordination."
+  },
+  {
+    "credit_code": "SSc5",
+    "credit_name": "Heat Island Reduction",
+    "credit_category": "SS",
+    "max_points": 2.0,
+    "document_automation_score": 98,
+    "document_types": [
+      "Heat Island Compliance Calculations",
+      "Weighted Area Analysis",
+      "Material SRI Requirements",
+      "Tree Equity Recommendations"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Site plan measurements, roof areas, paving areas, material specifications, Tree Equity Score",
+    "format_requirements": "PDF Compliance Report, Excel weighted calculations, material specs",
+    "human_review": "Landscape architect review, material specification verification",
+    "notes": "SRI calculations and weighted compliance are fully automatable. Tree Equity Score API integration available."
+  },
+  {
+    "credit_code": "SSc6",
+    "credit_name": "Light Pollution Reduction",
+    "credit_category": "SS",
+    "max_points": 1.0,
+    "document_automation_score": 98,
+    "document_types": [
+      "Lighting Compliance Report",
+      "BUG Rating Verification",
+      "Signage Luminance Compliance Report"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Luminaire schedules with BUG ratings, lighting zone, signage specifications",
+    "format_requirements": "PDF Compliance Report, Excel luminaire schedule, lighting plans",
+    "human_review": "Lighting designer review of BUG ratings, signage compliance check",
+    "notes": "BUG rating verification is highly automatable with luminaire schedules. Lighting zone determination is straightforward."
+  },
+  {
+    "credit_code": "WEp1",
+    "credit_name": "Water Metering and Reporting",
+    "credit_category": "WE",
+    "max_points": 0.0,
+    "document_automation_score": 78,
+    "document_types": [
+      "Water Metering Plan",
+      "Meter Specifications",
+      "Data Sharing Commitment Documentation",
+      "Reporting Protocol"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Building water systems, alternative water sources, facility management structure",
+    "format_requirements": "PDF Metering Plan, Excel specifications, USGBC commitment forms",
+    "human_review": "Plumbing engineer approval of metering plan, facility manager sign-off",
+    "notes": "Metering specifications can be automated. USGBC data commitment requires standardized forms."
+  },
+  {
+    "credit_code": "WEp2",
+    "credit_name": "Minimum Water Efficiency",
+    "credit_category": "WE",
+    "max_points": 0.0,
+    "document_automation_score": 98,
+    "document_types": [
+      "Fixture Compliance Report",
+      "Water Use Baseline Calculations",
+      "Irrigation Water Requirement Analysis",
+      "Equipment Efficiency Verification"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Fixture schedules, appliance specifications, landscape areas, plant types, flow rates",
+    "format_requirements": "PDF Compliance Report, Excel water calculations, fixture schedules",
+    "human_review": "Plumbing engineer review of fixture compliance, irrigation designer approval",
+    "notes": "Fixture compliance checking is highly automatable. Water calculations follow established methodologies."
+  },
+  {
+    "credit_code": "WEc1",
+    "credit_name": "Water Metering and Leak Detection",
+    "credit_category": "WE",
+    "max_points": 1.0,
+    "document_automation_score": 80,
+    "document_types": [
+      "Submetering Plan",
+      "Leak Detection Sensor Specifications",
+      "Data Integration Requirements",
+      "Leak Response Action Plan"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Building water systems, fixture counts, irrigation system, process water systems, meal counts",
+    "format_requirements": "PDF Submetering Plan, Excel sensor specifications",
+    "human_review": "Plumbing engineer review of submetering plan, controls specialist approval",
+    "notes": "Submeter placement can be automated based on system layouts. Leak detection specifications are template-based."
+  },
+  {
+    "credit_code": "WEc2",
+    "credit_name": "Enhanced Water Efficiency",
+    "credit_category": "WE",
+    "max_points": 8.0,
+    "document_automation_score": 95,
+    "document_types": [
+      "Whole-Project Water Model",
+      "Reduction Percentage Calculations",
+      "Alternative Water Integration Analysis",
+      "Optimization Pathway Report"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "All water uses, alternative water availability, rainwater, graywater, reclaimed water potential",
+    "format_requirements": "PDF Water Model, Excel calculations, optimization analysis",
+    "human_review": "Water engineer review of whole-project model, optimization pathway approval",
+    "notes": "Whole-project water modeling is complex but automatable with proper algorithms. Optimization pathways can be recommended."
+  },
+  {
+    "credit_code": "EAp1",
+    "credit_name": "Operational Carbon Projection and Decarbonization Plan",
+    "credit_category": "EA",
+    "max_points": 0.0,
+    "document_automation_score": 92,
+    "document_types": [
+      "Operational Carbon Projection",
+      "25-Year Emission Trajectory",
+      "Decarbonization Pathway Comparison",
+      "Electrification Timeline"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Energy model outputs, grid emission factors, fuel types, electrification options, decarbonization timeline",
+    "format_requirements": "PDF Carbon Projection, Excel 25-year calculations, USGBC format",
+    "human_review": "Energy modeler verification of carbon projection, decarbonization plan review",
+    "notes": "Carbon projection is highly automatable with energy model integration. Decarbonization pathways can be algorithmically compared."
+  },
+  {
+    "credit_code": "EAp2",
+    "credit_name": "Minimum Energy Efficiency",
+    "credit_category": "EA",
+    "max_points": 0.0,
+    "document_automation_score": 92,
+    "document_types": [
+      "Code Compliance Report",
+      "Prescriptive Requirement Checklist",
+      "Performance Comparison to Baseline"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Building envelope specifications, HVAC systems, lighting design, energy model outputs",
+    "format_requirements": "PDF Compliance Report, Excel energy comparisons, model outputs",
+    "human_review": "Energy modeler/code consultant review of compliance, PE stamp if required",
+    "notes": "Energy code compliance checking can be automated. ASHRAE 90.1 requirements are well-documented."
+  },
+  {
+    "credit_code": "EAp3",
+    "credit_name": "Fundamental Commissioning",
+    "credit_category": "EA",
+    "max_points": 0.0,
+    "document_automation_score": 53,
+    "document_types": [
+      "Commissioning Plan Template",
+      "Milestone Schedule",
+      "OPR Framework",
+      "Documentation Checklist",
+      "Meeting Agendas"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "Project schedule, design milestones, system types, owner requirements, CxP designation",
+    "format_requirements": "PDF Commissioning Plan, Word templates, Excel schedules",
+    "human_review": "Commissioning authority approval of plan, owner sign-off on OPR",
+    "notes": "Commissioning plan templates are standardized. Cx milestone tracking can be automated."
+  },
+  {
+    "credit_code": "EAp4",
+    "credit_name": "Energy Metering and Reporting",
+    "credit_category": "EA",
+    "max_points": 0.0,
+    "document_automation_score": 78,
+    "document_types": [
+      "Metering Plan",
+      "Arc Platform Setup Documentation",
+      "Reporting Schedule",
+      "Data Commitment Forms"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Energy systems, metering points, building type, Arc platform requirements",
+    "format_requirements": "PDF Metering Plan, Arc platform documentation, Excel reporting schedule",
+    "human_review": "Electrical engineer review of metering plan, Arc platform setup verification",
+    "notes": "Metering specifications can be automated. Arc platform integration requires API setup."
+  },
+  {
+    "credit_code": "EAp5",
+    "credit_name": "Fundamental Refrigerant Management",
+    "credit_category": "EA",
+    "max_points": 0.0,
+    "document_automation_score": 80,
+    "document_types": [
+      "Refrigerant Compliance Report",
+      "GWP Calculations",
+      "Phase-Out Schedule",
+      "Compliant Equipment Recommendations"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "HVAC equipment schedules, refrigerant types, existing system inventory, Montreal Protocol schedules",
+    "format_requirements": "PDF Compliance Report, Excel GWP calculations, equipment schedules",
+    "human_review": "Mechanical engineer review of refrigerant compliance, equipment specification approval",
+    "notes": "Refrigerant GWP checking is highly automatable with equipment schedules. Montreal Protocol schedules are fixed."
+  },
+  {
+    "credit_code": "EAc1",
+    "credit_name": "Electrification",
+    "credit_category": "EA",
+    "max_points": 5.0,
+    "document_automation_score": 77,
+    "document_types": [
+      "Weighted Average COP Calculation",
+      "Electrification Pathway Recommendation",
+      "Equipment Specifications"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "HVAC equipment schedules, heating loads, climate zone, hot water systems, COP calculations",
+    "format_requirements": "PDF Calculations, Excel COP analysis, equipment specs",
+    "human_review": "Mechanical engineer verification of COP calculations, electrification pathway approval",
+    "notes": "COP calculations are formulaic and automatable. Electrification pathway analysis can be algorithmic."
+  },
+  {
+    "credit_code": "EAc2",
+    "credit_name": "Reduce Peak Thermal Loads",
+    "credit_category": "EA",
+    "max_points": 5.0,
+    "document_automation_score": 75,
+    "document_types": [
+      "Air Leakage Compliance Analysis",
+      "ERV Sizing Verification",
+      "Thermal Bridge Assessment",
+      "Peak Load Reduction Calculations"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Building envelope specifications, ventilation design, energy model, thermal bridge details",
+    "format_requirements": "PDF Analysis, Excel peak load calculations, ERV specs",
+    "human_review": "Energy modeler review of peak load reductions, envelope consultant approval",
+    "notes": "Peak load modeling requires energy simulation. Envelope and ERV analysis can be automated."
+  },
+  {
+    "credit_code": "EAc3",
+    "credit_name": "Enhanced Energy Efficiency",
+    "credit_category": "EA",
+    "max_points": 10.0,
+    "document_automation_score": 90,
+    "document_types": [
+      "Percent Improvement Calculation",
+      "Points Achievable Analysis",
+      "Optimization Opportunities Report",
+      "Prescriptive Compliance Report"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Energy model, baseline model, building specifications, climate zone, percent improvement",
+    "format_requirements": "PDF Energy Analysis, Excel percent improvement, model comparison",
+    "human_review": "Energy modeler verification of percent improvement, PE stamp if required",
+    "notes": "Energy model comparison to baseline is automatable. Percent improvement calculations are straightforward."
+  },
+  {
+    "credit_code": "EAc4",
+    "credit_name": "Renewable Energy",
+    "credit_category": "EA",
+    "max_points": 5.0,
+    "document_automation_score": 77,
+    "document_types": [
+      "On-Site Renewable Potential Analysis",
+      "Percent of Energy Offset Calculations",
+      "REC Requirements",
+      "Solar-Ready Infrastructure Specifications"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Building energy use, roof area, solar resource data, REC procurement plans, renewable potential",
+    "format_requirements": "PDF Renewable Analysis, Excel production calculations, REC documentation",
+    "human_review": "Electrical engineer review of renewable analysis, solar consultant approval",
+    "notes": "Renewable energy production estimation can be automated with PVWatts integration. REC verification requires registry access."
+  },
+  {
+    "credit_code": "EAc5",
+    "credit_name": "Enhanced Commissioning",
+    "credit_category": "EA",
+    "max_points": 4.0,
+    "document_automation_score": 53,
+    "document_types": [
+      "MBCx Analytics Dashboard Specification",
+      "Fault Detection Alert Framework",
+      "Performance Trend Reports"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "BMS data streams, energy consumption, system performance parameters, MBCx analytics",
+    "format_requirements": "PDF MBCx Plan, Excel analytics specifications, dashboard requirements",
+    "human_review": "Commissioning authority review of MBCx plan, controls specialist approval",
+    "notes": "MBCx analytics can be automated with BMS data integration. Fault detection algorithms are available."
+  },
+  {
+    "credit_code": "EAc6",
+    "credit_name": "Grid Interactive",
+    "credit_category": "EA",
+    "max_points": 2.0,
+    "document_automation_score": 75,
+    "document_types": [
+      "DR Capability Assessment",
+      "Storage Sizing Analysis",
+      "Grid Integration Specifications",
+      "Utility Program Alignment"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Building loads, DR-capable equipment, storage specifications, utility DR programs",
+    "format_requirements": "PDF Grid Integration Specs, Excel DR analysis, utility documentation",
+    "human_review": "Electrical engineer review of DR capability, utility coordination approval",
+    "notes": "DR capability assessment can be automated. Storage sizing requires load analysis."
+  },
+  {
+    "credit_code": "EAc7",
+    "credit_name": "Enhanced Refrigerant Management",
+    "credit_category": "EA",
+    "max_points": 2.0,
+    "document_automation_score": 98,
+    "document_types": [
+      "Total GWP Impact Calculation",
+      "Comparison to Threshold Analysis",
+      "Low-GWP Equipment Alternatives",
+      "Leak Detection Requirements"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "HVAC equipment schedules, refrigerant charges, system types, GWP values",
+    "format_requirements": "PDF GWP Analysis, Excel calculations, equipment alternatives",
+    "human_review": "Mechanical engineer verification of GWP calculations, equipment selection approval",
+    "notes": "GWP impact calculation is highly automatable. Low-GWP equipment recommendations can be database-driven."
+  },
+  {
+    "credit_code": "MRp1",
+    "credit_name": "Planning for Zero Waste Operations",
+    "credit_category": "MR",
+    "max_points": 0.0,
+    "document_automation_score": 53,
+    "document_types": [
+      "Waste Stream Projections",
+      "Recycling Storage Sizing",
+      "Service Availability Report",
+      "Zero Waste Operations Plan"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "Building type, occupancy, local recycling services, floor plans, waste stream projections",
+    "format_requirements": "PDF Zero Waste Plan, Excel storage sizing, service documentation",
+    "human_review": "Waste consultant review of zero waste plan, facility manager approval",
+    "notes": "Waste stream projections can be automated based on building type and occupancy. Zero waste plan templates are standardized."
+  },
+  {
+    "credit_code": "MRp2",
+    "credit_name": "Quantify and Assess Embodied Carbon",
+    "credit_category": "MR",
+    "max_points": 0.0,
+    "document_automation_score": 95,
+    "document_types": [
+      "Bill of Materials with GWP Values",
+      "Total Embodied Carbon Report",
+      "Top 3 Hot Spots Identification",
+      "Reduction Strategy Recommendations"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Structural drawings, material specifications, quantities take-off, EPD data, GWP values",
+    "format_requirements": "PDF Embodied Carbon Report, Excel BOM with GWP, USGBC format",
+    "human_review": "LCA practitioner review of embodied carbon calculations, material specialist approval",
+    "notes": "Bill of materials extraction can be automated with BIM integration. Embodied carbon calculations use standardized databases."
+  },
+  {
+    "credit_code": "MRc1",
+    "credit_name": "Building and Materials Reuse",
+    "credit_category": "MR",
+    "max_points": 3.0,
+    "document_automation_score": 50,
+    "document_types": [
+      "Building Reuse Percentage Calculation",
+      "Salvage Material Valuation",
+      "Compliance Documentation"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "Existing building survey, demolition plans, salvage material inventory, market values",
+    "format_requirements": "PDF Reuse Calculations, Excel area analysis, salvage documentation",
+    "human_review": "Structural engineer review of building reuse, salvage material valuation approval",
+    "notes": "Building reuse calculations require existing building surveys. Salvage material tracking can be automated."
+  },
+  {
+    "credit_code": "MRc2",
+    "credit_name": "Reduce Embodied Carbon",
+    "credit_category": "MR",
+    "max_points": 6.0,
+    "document_automation_score": 92,
+    "document_types": [
+      "WBLCA Results Report",
+      "Reduction Percentage Analysis",
+      "EPD Analysis Summary",
+      "Construction Emission Report"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Material quantities, EPDs, baseline project data, construction fuel/energy use, WBLCA results",
+    "format_requirements": "PDF WBLCA Report, Excel reduction calculations, EPD summaries",
+    "human_review": "LCA practitioner review of WBLCA, embodied carbon specialist verification",
+    "notes": "WBLCA analysis can be automated with tools like Tally or One Click LCA. EPD analysis requires database access."
+  },
+  {
+    "credit_code": "MRc3",
+    "credit_name": "Low-Emitting Materials",
+    "credit_category": "MR",
+    "max_points": 2.0,
+    "document_automation_score": 83,
+    "document_types": [
+      "Product Compliance Matrix",
+      "Compliant/Non-Compliant Product Lists",
+      "Percentage Achievement per Category"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Product specifications, manufacturer certifications, product submittals, emission standards",
+    "format_requirements": "PDF Compliance Matrix, Excel product tracking, certifications",
+    "human_review": "Indoor air quality consultant review of product compliance, specifier approval",
+    "notes": "Product specification verification can be automated with manufacturer certification databases."
+  },
+  {
+    "credit_code": "MRc4",
+    "credit_name": "Building Product Selection and Procurement",
+    "credit_category": "MR",
+    "max_points": 5.0,
+    "document_automation_score": 80,
+    "document_types": [
+      "Product Documentation Matrix",
+      "EPD/HPD Inventory",
+      "Certification Summary",
+      "Points Achievable by Pathway"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Product specifications, manufacturer documentation, certification claims, EPD/HPD inventory",
+    "format_requirements": "PDF Product Documentation, Excel EPD/HPD inventory, certification summary",
+    "human_review": "Sustainability consultant review of product documentation, manufacturer verification",
+    "notes": "EPD/HPD tracking can be automated with registry integration. Certification validation requires database access."
+  },
+  {
+    "credit_code": "MRc5",
+    "credit_name": "Construction and Demolition Waste Diversion",
+    "credit_category": "MR",
+    "max_points": 2.0,
+    "document_automation_score": 80,
+    "document_types": [
+      "Waste Tracking Dashboard",
+      "Diversion Rate Calculations",
+      "Material Stream Summary",
+      "Compliance Documentation"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Waste manifests, hauler reports, material weights, diversion calculations",
+    "format_requirements": "PDF Waste Tracking Report, Excel diversion calculations, manifests",
+    "human_review": "Waste consultant review of diversion calculations, hauler documentation verification",
+    "notes": "Waste tracking and diversion calculations can be automated with hauler data integration."
+  },
+  {
+    "credit_code": "EQp1",
+    "credit_name": "Construction Management",
+    "credit_category": "EQ",
+    "max_points": 0.0,
+    "document_automation_score": 53,
+    "document_types": [
+      "Construction IAQ Management Plan",
+      "Heat Illness Prevention Plan",
+      "Monitoring Schedule",
+      "Documentation Templates"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "Construction schedule, site conditions, weather data, material delivery schedule",
+    "format_requirements": "PDF IAQ Plan, Word templates, Excel monitoring schedule",
+    "human_review": "Construction manager approval of IAQ plan, safety officer review of heat prevention",
+    "notes": "IAQ plan templates are standardized. Heat illness prevention requires OSHA compliance."
+  },
+  {
+    "credit_code": "EQp2",
+    "credit_name": "Fundamental Air Quality",
+    "credit_category": "EQ",
+    "max_points": 0.0,
+    "document_automation_score": 80,
+    "document_types": [
+      "Ventilation Rate Calculations",
+      "Filtration Compliance Verification",
+      "Outdoor Air Quality Report",
+      "Entryway Design Requirements"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Space types, occupancy, outdoor air quality data, HVAC design, ventilation rates",
+    "format_requirements": "PDF Compliance Report, Excel ventilation calculations, air quality data",
+    "human_review": "Mechanical engineer review of ventilation calculations, IAQ consultant approval",
+    "notes": "Ventilation calculations follow ASHRAE 62.1 and can be automated. Filtration verification is straightforward."
+  },
+  {
+    "credit_code": "EQp3",
+    "credit_name": "No Smoking or Vehicle Idling",
+    "credit_category": "EQ",
+    "max_points": 0.0,
+    "document_automation_score": 83,
+    "document_types": [
+      "No-Smoking Zone Map",
+      "Signage Location Plan",
+      "Policy Document Template",
+      "Compliance Verification Checklist"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Building entries, air intake locations, operable windows, site plan, 25-foot zones",
+    "format_requirements": "PDF Policy Document, CAD signage plans, Excel zone mapping",
+    "human_review": "Property manager approval of no-smoking policy, signage placement verification",
+    "notes": "No-smoking zone mapping can be automated from architectural drawings. Policy templates are standardized."
+  },
+  {
+    "credit_code": "EQc1",
+    "credit_name": "Enhanced Air Quality",
+    "credit_category": "EQ",
+    "max_points": 1.0,
+    "document_automation_score": 80,
+    "document_types": [
+      "Enhanced Ventilation Calculations",
+      "IAQ Design Compliance Verification",
+      "Points Achievable Analysis"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Baseline ventilation rates, HVAC design, IAQ design targets, enhanced limits",
+    "format_requirements": "PDF Calculations, Excel ventilation analysis, compliance verification",
+    "human_review": "Mechanical engineer review of enhanced ventilation, IAQ consultant verification",
+    "notes": "Enhanced ventilation calculations are automatable. IAQ design verification requires enhanced limit compliance."
+  },
+  {
+    "credit_code": "EQc2",
+    "credit_name": "Occupant Experience",
+    "credit_category": "EQ",
+    "max_points": 7.0,
+    "document_automation_score": 65,
+    "document_types": [
+      "Daylight Analysis Results",
+      "View Quality Assessment",
+      "Acoustic Zone Mapping",
+      "Thermal Comfort Compliance Report"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Building geometry, glazing specifications, interior layouts, site surroundings, acoustic zones",
+    "format_requirements": "PDF Analysis Reports (daylight, acoustic, thermal), Excel simulations",
+    "human_review": "Daylighting consultant review, acoustic engineer approval, thermal comfort verification",
+    "notes": "Daylight simulation requires specialized software. Acoustic and thermal analysis can be automated."
+  },
+  {
+    "credit_code": "EQc3",
+    "credit_name": "Accessibility and Inclusion",
+    "credit_category": "EQ",
+    "max_points": 1.0,
+    "document_automation_score": 53,
+    "document_types": [
+      "Enhanced Accessibility Checklist",
+      "Inclusive Design Feature Matrix",
+      "Compliance Gap Analysis"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "Floor plans, design specifications, accessibility goals, inclusive design features",
+    "format_requirements": "PDF Accessibility Checklist, Excel feature matrix, gap analysis",
+    "human_review": "Accessibility consultant review, inclusive design expert approval",
+    "notes": "Accessibility checklist generation can be automated. Inclusive design features require design team input."
+  },
+  {
+    "credit_code": "EQc4",
+    "credit_name": "Resilient Spaces",
+    "credit_category": "EQ",
+    "max_points": 2.0,
+    "document_automation_score": 50,
+    "document_types": [
+      "Resilience Strategy Verification",
+      "Operable Window Coverage Calculation",
+      "Thermal Safety Zone Identification"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "HVAC design, building envelope, operable window specifications, IPp1 priority hazards",
+    "format_requirements": "PDF Resilience Verification, Excel window coverage, thermal zones",
+    "human_review": "Resilience consultant review, mechanical engineer approval of thermal safety",
+    "notes": "Resilient space verification can be automated based on IPp1. Operable window analysis is straightforward."
+  },
+  {
+    "credit_code": "EQc5",
+    "credit_name": "Air Quality Testing and Monitoring",
+    "credit_category": "EQ",
+    "max_points": 2.0,
+    "document_automation_score": 78,
+    "document_types": [
+      "Testing Protocol with Measurement Locations",
+      "Monitoring System Specifications",
+      "Compliance Thresholds",
+      "Results Analysis Framework"
+    ],
+    "template_feasibility": "High",
+    "dynamic_content": "Building area, space types, testing requirements, monitoring system options, sensor locations",
+    "format_requirements": "PDF Testing Protocol, Excel sensor specifications, results framework",
+    "human_review": "IAQ testing consultant approval of protocol, monitoring system specialist review",
+    "notes": "Testing protocol generation can be automated. Monitoring system specification requires sensor selection."
+  },
+  {
+    "credit_code": "PRc1",
+    "credit_name": "Project Priorities",
+    "credit_category": "PR",
+    "max_points": 9.0,
+    "document_automation_score": 53,
+    "document_types": [
+      "Regional Priority Credit Recommendations",
+      "Exemplary Performance Opportunities",
+      "Pilot Credit Eligibility",
+      "Innovation Strategy Framework"
+    ],
+    "template_feasibility": "Medium",
+    "dynamic_content": "Project location, pursued credits, project type, innovation ideas, regional priorities",
+    "format_requirements": "PDF Recommendations, Excel credit tracking, innovation framework",
+    "human_review": "LEED consultant review of regional priorities, innovation strategy approval",
+    "notes": "Regional priority identification can be automated with USGBC database access. Innovation strategies require creativity."
+  },
+  {
+    "credit_code": "PRc2",
+    "credit_name": "LEED AP",
+    "credit_category": "PR",
+    "max_points": 1.0,
+    "document_automation_score": 83,
+    "document_types": [
+      "LEED AP Verification",
+      "Credential Status Report"
+    ],
+    "template_feasibility": "Very High",
+    "dynamic_content": "Team roster, credential information, GBCI credential verification",
+    "format_requirements": "PDF Verification, credential documentation",
+    "human_review": "GBCI credential verification, project administrator approval",
+    "notes": "LEED AP verification can be automated with GBCI credential directory access."
+  }
+]

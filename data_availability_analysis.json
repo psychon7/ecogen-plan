@@ -1,0 +1,824 @@
+[
+  {
+    "credit_code": "IPp1",
+    "credit_name": "Climate Resilience Assessment",
+    "data_availability_score": 85,
+    "data_sources": [
+      "NOAA Climate Data API (https://www.ncei.noaa.gov/access/services/data/v1)",
+      "NWS API (https://api.weather.gov)",
+      "FEMA NFHL Web Services (https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer)",
+      "USGS 3DEP Elevation Data (https://apps.nationalmap.gov/epqs/)",
+      "IPCC AR6 Scenario Data",
+      "National Weather Service Severe Weather Data Inventory"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Government sources with established QA/QC",
+    "notes": "Climate data (temperature, precipitation, extreme events) available via NOAA APIs. Flood data via FEMA GIS services. Wildfire data from NIFC. Sea level rise data from NOAA. Most data available in real-time or near real-time. IPCC scenario data requires manual integration."
+  },
+  {
+    "credit_code": "IPp2",
+    "credit_name": "Human Impact Assessment",
+    "data_availability_score": 90,
+    "data_sources": [
+      "US Census Bureau API (ACS 5-Year Data)",
+      "EPA EJScreen (https://www.epa.gov/ejscreen)",
+      "HUD Housing Data",
+      "CDC Social Vulnerability Index",
+      "Local transit authority GTFS feeds",
+      "Walk Score API",
+      "Google Places API (for services proximity)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Census and EPA data are authoritative",
+    "notes": "Demographic data (race, income, age, employment) readily available via Census API at block group level. EJScreen provides pre-calculated environmental justice metrics. Transit data via GTFS. Some local data (crime statistics) may require manual collection."
+  },
+  {
+    "credit_code": "IPp3",
+    "credit_name": "Carbon Assessment",
+    "data_availability_score": 95,
+    "data_sources": [
+      "EPA eGRID (https://www.epa.gov/egrid)",
+      "EC3 Database API (https://www.buildingtransparency.org/)",
+      "Tally LCA Tool",
+      "IPCC Emission Factors",
+      "NREL PVWatts API (https://developer.nrel.gov/docs/solar/pvwatts/)",
+      "ENERGY STAR Portfolio Manager API",
+      "EPA GHG Emission Factors Hub"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - EPA eGRID is the standard for grid emission factors",
+    "notes": "Operational carbon data from energy models. Grid emission factors from EPA eGRID (updated annually). Embodied carbon from EC3 database with API access. Refrigerant GWP values from EPA. Most data can be automated through API integrations."
+  },
+  {
+    "credit_code": "IPp4",
+    "credit_name": "Tenant Guidelines",
+    "data_availability_score": 60,
+    "data_sources": [
+      "Project specifications (internal)",
+      "LEED documentation (internal)",
+      "Architectural drawings (internal)",
+      "USGBC LEED v5 reference guide"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "No - Project-specific",
+    "data_quality": "Medium - Depends on project documentation quality",
+    "notes": "Primarily relies on internal project data. No external APIs required. Template generation can be automated but content is project-specific. LEED prerequisite requirements are static and can be hardcoded."
+  },
+  {
+    "credit_code": "IPc1",
+    "credit_name": "Integrative Design Process",
+    "data_availability_score": 40,
+    "data_sources": [
+      "Project team roster (internal)",
+      "Owner's Project Requirements (internal)",
+      "Energy target databases (NREL BIRDS)",
+      "ASHRAE Advanced Energy Design Guides"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Process-based",
+    "data_quality": "Medium - Highly dependent on project team input",
+    "notes": "Mostly process-based credit requiring human coordination. Some data (energy targets, benchmark data) available from NREL. Goal tracking can be automated but charrette facilitation requires human involvement."
+  },
+  {
+    "credit_code": "IPc2",
+    "credit_name": "Green Leases",
+    "data_availability_score": 65,
+    "data_sources": [
+      "Green Lease Leaders program requirements (https://www.greenleaseleaders.com/)",
+      "LEED prerequisite requirements (static)",
+      "Standard lease templates (industry)",
+      "BOMA green lease resources"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "No - Document generation",
+    "data_quality": "High - Standardized program requirements",
+    "notes": "Green Lease Leaders criteria are published and static. LEED prerequisite requirements are known. Lease clause generation can be templated. Compliance checking can be automated against known requirements."
+  },
+  {
+    "credit_code": "LTc1",
+    "credit_name": "Sensitive Land Protection",
+    "data_availability_score": 95,
+    "data_sources": [
+      "FEMA NFHL Web Services (https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer)",
+      "National Wetlands Inventory (NWI) (https://www.fws.gov/program/national-wetlands-inventory)",
+      "USFWS Critical Habitat Portal (https://ecos.fws.gov/ecp/)",
+      "USDA Prime Farmland Data (https://websoilsurvey.nrcs.usda.gov/)",
+      "USGS 3DEP Elevation Data (https://apps.nationalmap.gov/epqs/)",
+      "EPA NEPAssist (for environmental screening)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Government GIS data with established accuracy",
+    "notes": "All major data layers available via GIS web services. FEMA flood maps, NWI wetlands, USFWS critical habitat, and USDA farmland data all accessible programmatically. Slope analysis from USGS elevation data. Automated site screening is highly feasible."
+  },
+  {
+    "credit_code": "LTc2",
+    "credit_name": "Equitable Development",
+    "data_availability_score": 80,
+    "data_sources": [
+      "EPA Brownfields Database (https://www.epa.gov/brownfields)",
+      "National Register of Historic Places (https://www.nps.gov/subjects/nationalregister/)",
+      "US Census Bureau API (employment data)",
+      "HUD Housing Data (https://www.huduser.gov/portal/datasets/pdrdatas.html)",
+      "Local historic registry databases",
+      "State workforce development databases"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Partial - Some data batch updated",
+    "data_quality": "High - Government databases",
+    "notes": "Brownfield status available from EPA. Historic district data from National Park Service. Employment and housing data from Census/HUD. Local workforce training data may require manual verification. Apprenticeship tracking requires project-specific data."
+  },
+  {
+    "credit_code": "LTc3",
+    "credit_name": "Compact and Connected Development",
+    "data_availability_score": 90,
+    "data_sources": [
+      "Local assessor data (parcel databases)",
+      "GTFS Transit Feeds (https://mobilitydatabase.org/)",
+      "Walk Score API (https://www.walkscore.com/)",
+      "US Census Bureau API (density calculations)",
+      "OpenStreetMap (pedestrian network)",
+      "Google Maps API (transit accessibility)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Multiple corroborating sources",
+    "notes": "Density calculations from assessor data. Transit accessibility from GTFS feeds (2000+ feeds globally). Walk Score has API. All data can be fetched programmatically. Some local assessor APIs may have rate limits."
+  },
+  {
+    "credit_code": "LTc4",
+    "credit_name": "Transportation Demand Management",
+    "data_availability_score": 75,
+    "data_sources": [
+      "ITE Parking Generation Manual (static)",
+      "Regional VMT data (MPO databases)",
+      "EPA emission factors (https://www.epa.gov/egrid)",
+      "Census Journey to Work data",
+      "Local transit authority ridership data",
+      "EPA MOVES model (for emission calculations)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Partial - Some data static",
+    "data_quality": "Medium-High - Mix of static and dynamic sources",
+    "notes": "ITE parking data is static (published manual). Regional VMT data available from MPOs. EPA emission factors from eGRID. Some transportation data requires local coordination. Parking reduction calculations can be automated."
+  },
+  {
+    "credit_code": "LTc5",
+    "credit_name": "Electric Vehicles",
+    "data_availability_score": 85,
+    "data_sources": [
+      "ENERGY STAR EVSE Registry (https://www.energystar.gov/)",
+      "Electrical capacity data (utility APIs)",
+      "ADA accessibility standards (static)",
+      "Parking count data (project design)",
+      "Utility demand response programs"
+    ],
+    "integration_complexity": "Low",
+    "data_quality": "High - Standardized equipment ratings",
+    "notes": "EVSE specifications from ENERGY STAR. Electrical load calculations can be automated. ADA compliance is rule-based. Most calculations are straightforward with project data. No external real-time data required.",
+    "real_time_feasibility": "No - Design-based"
+  },
+  {
+    "credit_code": "SSp1",
+    "credit_name": "Minimized Site Disturbance",
+    "data_availability_score": 70,
+    "data_sources": [
+      "USDA PLANTS Database (https://plants.usda.gov/)",
+      "Invasive species databases (https://www.invasivespeciesinfo.gov/)",
+      "EPA 2022 Construction General Permit (static)",
+      "State natural heritage programs",
+      "Site survey data (project-specific)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Partial - Static reference data",
+    "data_quality": "Medium - Mix of authoritative and project data",
+    "notes": "Native plant and invasive species data available from USDA. EPA CGP requirements are static. Site-specific vegetation surveys require field work. Erosion control plans can be templated but require site-specific adaptation."
+  },
+  {
+    "credit_code": "SSc1",
+    "credit_name": "Biodiverse Habitat",
+    "data_availability_score": 65,
+    "data_sources": [
+      "USDA PLANTS Database",
+      "Native plant databases (Lady Bird Johnson Wildflower Center)",
+      "Bird collision databases (https://www.flap.org/)",
+      "Glass manufacturer data (for threat factors)",
+      "Site survey data (project-specific)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Design-based",
+    "data_quality": "Medium - Some scientific data, some manufacturer data",
+    "notes": "Native plant recommendations available from databases. Bird collision threat factors published in research. Glass specifications from manufacturers. Area calculations can be automated from site plans. Restoration specifications require design input."
+  },
+  {
+    "credit_code": "SSc2",
+    "credit_name": "Accessible Outdoor Space",
+    "data_availability_score": 60,
+    "data_sources": [
+      "Site plan data (project-specific)",
+      "ADA accessibility standards (https://www.ada.gov/)",
+      "Outdoor furniture standards (static)",
+      "Building footprint data (design files)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "No - Design-based",
+    "data_quality": "Medium - Standards-based calculations",
+    "notes": "Primarily design-based calculations from project drawings. ADA standards are static. Area calculations and seating requirements can be automated. Community/cultural elements require qualitative assessment."
+  },
+  {
+    "credit_code": "SSc3",
+    "credit_name": "Rainwater Management",
+    "data_availability_score": 90,
+    "data_sources": [
+      "NOAA Precipitation Frequency Data (https://hdsc.nws.noaa.gov/hdsc/pfds/)",
+      "NOAA Atlas 14 (rainfall depths)",
+      "USDA NRCS Soil Surveys (https://websoilsurvey.nrcs.usda.gov/)",
+      "Local stormwater manuals (municipal)",
+      "SSURGO soil data (https://gdg.sc.egov.usda.gov/)",
+      "TR-55 runoff methodology (static)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - NOAA and USDA data are authoritative",
+    "notes": "Rainfall data from NOAA Atlas 14 available via API. Soil infiltration data from USDA NRCS. Stormwater calculations (TR-55) can be fully automated. LID/GI sizing tools available. Some local requirements may vary."
+  },
+  {
+    "credit_code": "SSc4",
+    "credit_name": "Enhanced Resilient Site Design",
+    "data_availability_score": 75,
+    "data_sources": [
+      "IPp1 hazard assessment results (internal)",
+      "SITES v2 rating system (static)",
+      "Local resilience codes (municipal)",
+      "NOAA climate projections",
+      "Drought-resistant plant databases"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Design response",
+    "data_quality": "Medium - Depends on IPp1 data quality",
+    "notes": "Relies heavily on IPp1 hazard assessment. Resilience strategies can be matched to hazards from a pre-defined database. SITES rating system provides additional guidance. Design implementation requires professional judgment."
+  },
+  {
+    "credit_code": "SSc5",
+    "credit_name": "Heat Island Reduction",
+    "data_availability_score": 85,
+    "data_sources": [
+      "American Forests Tree Equity Score (https://www.treeequityscore.org/)",
+      "Cool Roof Rating Council (CRRC) Database (https://coolroofs.org/)",
+      "Material SRI databases (manufacturer data)",
+      "Site plan data (project-specific)",
+      "EPA Heat Island data (https://www.epa.gov/heatislands)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - CRRC ratings are third-party verified",
+    "notes": "Tree Equity Score available for US locations. CRRC database provides SRI values for roofing materials. Material specifications can be verified against databases. Weighted calculations can be fully automated."
+  },
+  {
+    "credit_code": "SSc6",
+    "credit_name": "Light Pollution Reduction",
+    "data_availability_score": 95,
+    "data_sources": [
+      "IES TM-15-11 BUG Rating System (static)",
+      "Luminaire manufacturer cut sheets",
+      "IDA Dark Sky Places (https://www.darksky.org/)",
+      "Lighting zone maps (local jurisdictions)",
+      "Luminaire photometric databases"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Standardized rating system",
+    "notes": "BUG ratings are standardized. Manufacturer data typically available via product databases. Compliance checking is rule-based and can be fully automated. Lighting zone determination may require local jurisdiction lookup."
+  },
+  {
+    "credit_code": "WEp1",
+    "credit_name": "Water Metering and Reporting",
+    "data_availability_score": 80,
+    "data_sources": [
+      "Water meter specifications (manufacturer)",
+      "USGBC Arc platform (https://www.arcskoru.com/)",
+      "Plumbing design data (project-specific)",
+      "Utility water data APIs"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Meter data is measured",
+    "notes": "Meter specifications from manufacturers. Arc platform has API for data submission. Plumbing system data from design. Real-time metering data available via utility APIs or building management systems."
+  },
+  {
+    "credit_code": "WEp2",
+    "credit_name": "Minimum Water Efficiency",
+    "data_availability_score": 90,
+    "data_sources": [
+      "ENERGY STAR Appliance Database (https://www.energystar.gov/)",
+      "Fixture manufacturer specifications",
+      "EPA WaterSense Product Database (https://www.epa.gov/watersense/)",
+      "EPA TIR (Tool for Irrigation Requirements)",
+      "Local water utility data"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Certified product databases",
+    "notes": "ENERGY STAR and WaterSense databases available. Fixture flow rates from manufacturer data. Irrigation calculations can use EPA TIR methodology. Compliance checking can be fully automated against product specifications."
+  },
+  {
+    "credit_code": "WEc1",
+    "credit_name": "Water Metering and Leak Detection",
+    "data_availability_score": 85,
+    "data_sources": [
+      "Water submeter specifications (manufacturer)",
+      "Leak detection sensor specifications",
+      "Plumbing system design (project-specific)",
+      "Fixture count data (from schedules)",
+      "Building usage data (occupancy, meals, laundry)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Equipment specifications",
+    "notes": "Submeter placement can be automated from plumbing design. Leak detection sensor specifications from manufacturers. Threshold calculations (80%, 100%, etc.) are rule-based. Action plan generation can be templated."
+  },
+  {
+    "credit_code": "WEc2",
+    "credit_name": "Enhanced Water Efficiency",
+    "data_availability_score": 85,
+    "data_sources": [
+      "EPA WaterSense Database",
+      "Local water reuse regulations (municipal)",
+      "Alternative water source data (rainfall, graywater)",
+      "NOAA rainfall data (https://www.ncei.noaa.gov/)",
+      "Water use projections (building type benchmarks)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Partial - Some data static",
+    "data_quality": "High - Multiple authoritative sources",
+    "notes": "Whole-building water modeling can be automated. Alternative water source availability from local data. Rainfall data from NOAA. Water reuse regulations vary by jurisdiction. Optimization pathways can be calculated."
+  },
+  {
+    "credit_code": "EAp1",
+    "credit_name": "Operational Carbon Projection and Decarbonization Plan",
+    "data_availability_score": 90,
+    "data_sources": [
+      "EPA eGRID (https://www.epa.gov/egrid)",
+      "Energy model outputs (project-specific)",
+      "IPCC emission factors",
+      "Grid decarbonization projections (NREL, EIA)",
+      "NREL Electrification Futures Study"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - EPA eGRID is authoritative",
+    "notes": "Grid emission factors from EPA eGRID (updated annually). Energy model integration possible via standardized formats. Decarbonization pathways can be modeled using NREL data. 25-year projections can be automated."
+  },
+  {
+    "credit_code": "EAp2",
+    "credit_name": "Minimum Energy Efficiency",
+    "data_availability_score": 85,
+    "data_sources": [
+      "ASHRAE 90.1-2019/2022 (static standard)",
+      "Energy model outputs (project-specific)",
+      "Building envelope specifications (design data)",
+      "HVAC equipment specifications (manufacturer)",
+      "Lighting design data (project-specific)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Model-based",
+    "data_quality": "High - Standardized code requirements",
+    "notes": "ASHRAE 90.1 requirements are static and can be hardcoded. Energy model comparison to baseline can be automated. Prescriptive compliance checking is rule-based. Performance path requires energy modeling software integration."
+  },
+  {
+    "credit_code": "EAp3",
+    "credit_name": "Fundamental Commissioning",
+    "data_availability_score": 50,
+    "data_sources": [
+      "ASHRAE 90.1 Commissioning Requirements (static)",
+      "ASHRAE Guideline 0-2019 (static)",
+      "ASHRAE Standard 202 (static)",
+      "Project schedule data (internal)",
+      "Cx Provider qualifications (internal)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Process-based",
+    "data_quality": "Medium - Process documentation quality varies",
+    "notes": "ASHRAE standards are static. Templates for OPR, BOD can be generated. Milestone tracking can be automated. However, commissioning is fundamentally a process requiring human execution. Documentation management can be automated."
+  },
+  {
+    "credit_code": "EAp4",
+    "credit_name": "Energy Metering and Reporting",
+    "data_availability_score": 85,
+    "data_sources": [
+      "ASHRAE 90.1 Metering Requirements (static)",
+      "USGBC Arc platform API (https://www.arcskoru.com/)",
+      "Energy monitoring system specifications",
+      "Utility meter data APIs",
+      "Building Management System (BMS) data"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Measured data",
+    "notes": "Metering requirements are standardized. Arc platform has API for automated reporting. Utility data increasingly available via Green Button standard. BMS integration can provide real-time energy data. 5-year reporting can be automated."
+  },
+  {
+    "credit_code": "EAp5",
+    "credit_name": "Fundamental Refrigerant Management",
+    "data_availability_score": 90,
+    "data_sources": [
+      "EPA SNAP Program (https://www.epa.gov/snap)",
+      "Montreal Protocol schedules (UNEP)",
+      "AHRI Directory (https://www.ahrinet.org/)",
+      "HVAC equipment schedules (project-specific)",
+      "Refrigerant GWP values (IPCC, EPA)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Regulatory data",
+    "notes": "Refrigerant regulations from EPA SNAP. GWP values from IPCC/EPA. Equipment data from AHRI directory. Compliance checking is rule-based (no CFCs, phase-out schedules). Can be fully automated with equipment schedules."
+  },
+  {
+    "credit_code": "EAc1",
+    "credit_name": "Electrification",
+    "data_availability_score": 85,
+    "data_sources": [
+      "AHRI Directory (equipment efficiency ratings)",
+      "HVAC equipment specifications (manufacturer)",
+      "Climate zone data (ASHRAE 169)",
+      "Heating load calculations (energy model)",
+      "COP data from equipment databases"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Design-based",
+    "data_quality": "High - Certified equipment ratings",
+    "notes": "Equipment COP data from AHRI directory. Weighted average calculations can be automated. Climate zone determination from location. Electrification pathway analysis can be modeled. Equipment specification requires design input."
+  },
+  {
+    "credit_code": "EAc2",
+    "credit_name": "Reduce Peak Thermal Loads",
+    "data_availability_score": 80,
+    "data_sources": [
+      "Energy model outputs (project-specific)",
+      "Envelope specifications (design data)",
+      "ERV manufacturer data",
+      "Thermal bridge analysis tools",
+      "ASHRAE 90.1 Appendix C (envelope criteria)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Model-based",
+    "data_quality": "High - Energy model data",
+    "notes": "Peak load data from energy models. Envelope analysis can be automated. ERV sizing from manufacturer data. Thermal bridge detection requires detailed analysis. Compliance verification can be automated with model integration."
+  },
+  {
+    "credit_code": "EAc3",
+    "credit_name": "Enhanced Energy Efficiency",
+    "data_availability_score": 85,
+    "data_sources": [
+      "Energy model outputs (project-specific)",
+      "ASHRAE 90.1 Appendix G (baseline)",
+      "ASHRAE 90.1 prescriptive tables (static)",
+      "Climate zone data (ASHRAE 169)",
+      "Building specifications (design data)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Model-based",
+    "data_quality": "High - Standardized modeling protocols",
+    "notes": "Percent improvement calculated from energy model comparison to baseline. ASHRAE 90.1 Appendix G defines baseline requirements. Prescriptive compliance is rule-based. Points calculation can be automated. Optimization recommendations require analysis."
+  },
+  {
+    "credit_code": "EAc4",
+    "credit_name": "Renewable Energy",
+    "data_availability_score": 90,
+    "data_sources": [
+      "NREL PVWatts API (https://developer.nrel.gov/docs/solar/pvwatts/)",
+      "NREL NSRDB Solar Resource Data",
+      "Green-e Registry (https://www.green-e.org/)",
+      "Energy model outputs (building energy use)",
+      "Solar-ready roof specifications (design data)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - NREL data is authoritative",
+    "notes": "Solar production estimates from PVWatts API. Solar resource data from NSRDB. REC verification via Green-e registry. On-site renewable percentage calculations can be automated. Solar-ready requirements are design-based."
+  },
+  {
+    "credit_code": "EAc5",
+    "credit_name": "Enhanced Commissioning",
+    "data_availability_score": 60,
+    "data_sources": [
+      "ASHRAE Standard 202 (static)",
+      "ASTM E2947 (enclosure commissioning)",
+      "BMS data streams (building-specific)",
+      "Energy consumption data (meter data)",
+      "System performance parameters (design data)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Yes - For MBCx",
+    "data_quality": "Medium - Mix of standards and building data",
+    "notes": "Enhanced Cx requirements are standardized. MBCx analytics can use real-time BMS data. Fault detection algorithms can be automated. Performance tracking requires building sensor integration. Enclosure commissioning is process-based."
+  },
+  {
+    "credit_code": "EAc6",
+    "credit_name": "Grid Interactive",
+    "data_availability_score": 80,
+    "data_sources": [
+      "Utility demand response programs (utility APIs)",
+      "Storage system specifications (manufacturer)",
+      "Building load profiles (energy model/BMS)",
+      "Smart grid standards (IEEE 2030)",
+      "OpenADR protocol (automated demand response)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Utility and equipment data",
+    "notes": "DR program availability from utility APIs. Storage sizing from manufacturer data. Load profiles from energy models or BMS. Smart grid integration can be verified against standards. OpenADR enables automated DR."
+  },
+  {
+    "credit_code": "EAc7",
+    "credit_name": "Enhanced Refrigerant Management",
+    "data_availability_score": 90,
+    "data_sources": [
+      "EPA SNAP Program (approved refrigerants)",
+      "AHRI Directory (equipment data)",
+      "Refrigerant GWP database (IPCC AR6)",
+      "HVAC equipment schedules (project-specific)",
+      "Leak detection system specifications"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Regulatory and certified data",
+    "notes": "GWP values from IPCC/EPA. Equipment data from AHRI. Total GWP impact calculations can be fully automated. Low-GWP alternatives can be recommended from databases. Leak detection requirements are rule-based."
+  },
+  {
+    "credit_code": "MRp1",
+    "credit_name": "Planning for Zero Waste Operations",
+    "data_availability_score": 70,
+    "data_sources": [
+      "Waste generation rate databases (EPA)",
+      "Local hauler service information (municipal)",
+      "Building codes (accessibility requirements)",
+      "Floor plans (project-specific)",
+      "Occupancy data (building program)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "No - Planning-based",
+    "data_quality": "Medium - Mix of benchmarks and local data",
+    "notes": "Waste generation rates from EPA benchmarks. Storage area sizing can be calculated. Service availability requires local verification. Zero waste plan templates can be generated. Design details are project-specific."
+  },
+  {
+    "credit_code": "MRp2",
+    "credit_name": "Quantify and Assess Embodied Carbon",
+    "data_availability_score": 95,
+    "data_sources": [
+      "EC3 Database API (https://www.buildingtransparency.org/)",
+      "Carbon Leadership Forum Material Baselines",
+      "EPD Registry (https://www.theepdregistry.com/)",
+      "Tally LCA Tool database",
+      "One Click LCA database",
+      "Material quantities (BIM/take-off data)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Third-party verified EPDs",
+    "notes": "EC3 database has API access with 20,000+ EPDs. Material baselines from CLF. EPDs from multiple registries. BIM integration enables automated quantity take-off. Hot spot identification can be automated. Reduction strategies can be recommended."
+  },
+  {
+    "credit_code": "MRc1",
+    "credit_name": "Building and Materials Reuse",
+    "data_availability_score": 60,
+    "data_sources": [
+      "Existing building survey data",
+      "Salvage material inventories",
+      "Demolition plans (project-specific)",
+      "Market value databases (construction cost data)",
+      "Reuse marketplace platforms"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Project-specific",
+    "data_quality": "Medium - Depends on survey quality",
+    "notes": "Existing building data requires field survey. Salvage material values from market data. Area calculations can be automated. Reuse percentage tracking can be automated. Material sourcing requires project coordination."
+  },
+  {
+    "credit_code": "MRc2",
+    "credit_name": "Reduce Embodied Carbon",
+    "data_availability_score": 95,
+    "data_sources": [
+      "EC3 Database API",
+      "Tally LCA Tool",
+      "One Click LCA",
+      "EPD Registry",
+      "Construction fuel/energy data (project-specific)",
+      "CLF Material Baselines"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Verified LCA data",
+    "notes": "WBLCA tools (Tally, One Click LCA) have extensive databases. EC3 API provides EPD data. EPD analysis can be automated. Construction emission tracking from project data. Percent reduction calculations are straightforward."
+  },
+  {
+    "credit_code": "MRc3",
+    "credit_name": "Low-Emitting Materials",
+    "data_availability_score": 90,
+    "data_sources": [
+      "CDPH Standard Method (static)",
+      "GREENGUARD Certification Database (https://www.greenguard.org/)",
+      "FloorScore Database (https://www.rfci.com/)",
+      "HPD Repository (https://www.hpd-collaborative.org/)",
+      "Product specifications (manufacturer data)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Third-party certifications",
+    "notes": "GREENGUARD and FloorScore databases available online. CDPH standards are static. Product compliance can be verified against certification databases. Percentage calculations by category can be automated. HPDs available via repository API."
+  },
+  {
+    "credit_code": "MRc4",
+    "credit_name": "Building Product Selection and Procurement",
+    "data_availability_score": 90,
+    "data_sources": [
+      "EPD Registry (https://www.theepdregistry.com/)",
+      "HPD Repository API (https://www.hpd-collaborative.org/)",
+      "FSC Certificate Database (https://info.fsc.org/)",
+      "Cradle to Cradle Certified Products",
+      "Mindful Materials Library",
+      "Sustainable Minds Transparency Catalog"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Third-party verified documentation",
+    "notes": "EPD registries have searchable databases. HPD repository has API. FSC certificate database is online. Certification validation can be automated. Product counting by category can be automated. Multiple pathways can be calculated."
+  },
+  {
+    "credit_code": "MRc5",
+    "credit_name": "Construction and Demolition Waste Diversion",
+    "data_availability_score": 75,
+    "data_sources": [
+      "Waste manifests (hauler documentation)",
+      "Hauler reports (recycling facility data)",
+      "Facility recycling rates (certification data)",
+      "LEED waste calculator templates",
+      "Construction waste estimation tools"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Partial - Requires hauler coordination",
+    "data_quality": "Medium - Depends on hauler reporting accuracy",
+    "notes": "Waste tracking requires hauler coordination. Diversion rates from facility certifications. Material stream reporting can be automated. Compliance documentation can be generated. Real-time tracking possible with digitized systems."
+  },
+  {
+    "credit_code": "EQp1",
+    "credit_name": "Construction Management",
+    "data_availability_score": 65,
+    "data_sources": [
+      "OSHA Heat Safety App (https://www.osha.gov/heat)",
+      "Weather data APIs (NOAA, NWS)",
+      "Construction schedule (project-specific)",
+      "Material delivery schedules (project-specific)",
+      "IAQ best practice guidelines (static)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Partial - Weather real-time, schedule static",
+    "data_quality": "Medium - Mix of real-time and project data",
+    "notes": "Heat index monitoring available via OSHA app and weather APIs. Construction IAQ plan templates can be generated. Schedule integration possible. Material delivery tracking requires coordination. Weather data is real-time."
+  },
+  {
+    "credit_code": "EQp2",
+    "credit_name": "Fundamental Air Quality",
+    "data_availability_score": 85,
+    "data_sources": [
+      "ASHRAE 62.1-2019 (static standard)",
+      "EPA Air Quality Index (https://www.airnow.gov/)",
+      "HVAC equipment specifications (manufacturer)",
+      "Space type definitions (ASHRAE 62.1)",
+      "Occupancy data (building program)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Standardized requirements",
+    "notes": "ASHRAE 62.1 requirements are static. Outdoor air quality from EPA AirNow API. Ventilation rate calculations can be automated. Filtration verification (MERV 13+) is rule-based. Entryway design requirements are prescriptive."
+  },
+  {
+    "credit_code": "EQp3",
+    "credit_name": "No Smoking or Vehicle Idling",
+    "data_availability_score": 80,
+    "data_sources": [
+      "Architectural drawings (project-specific)",
+      "Site plans (project-specific)",
+      "ADA accessibility standards (static)",
+      "Building entry locations (design data)",
+      "Air intake locations (MEP design)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "No - Design-based",
+    "data_quality": "High - Standards-based",
+    "notes": "Signage location planning can be automated from drawings. 25-foot buffer zones can be calculated. Policy document templates can be generated. Compliance verification is rule-based. No external data required."
+  },
+  {
+    "credit_code": "EQc1",
+    "credit_name": "Enhanced Air Quality",
+    "data_availability_score": 85,
+    "data_sources": [
+      "ASHRAE 62.1 ventilation rates (static)",
+      "Enhanced IAQ limits (static)",
+      "HVAC design data (project-specific)",
+      "Baseline ventilation calculations (from EQp2)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "No - Design-based",
+    "data_quality": "High - Standardized calculations",
+    "notes": "Ventilation increase calculations (15%+) are straightforward. Enhanced IAQ limits are published. Compliance verification can be automated. Points achievable can be calculated. Requires HVAC design data."
+  },
+  {
+    "credit_code": "EQc2",
+    "credit_name": "Occupant Experience",
+    "data_availability_score": 75,
+    "data_sources": [
+      "Daylight simulation software (IES LM-83)",
+      "View quality analysis tools",
+      "Acoustic modeling software",
+      "ASHRAE 55 Thermal Comfort Tool",
+      "Building geometry (BIM model)",
+      "Glazing specifications (design data)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Simulation-based",
+    "data_quality": "High - Engineering analysis tools",
+    "notes": "Daylight analysis requires simulation (IES LM-83). View analysis can be automated from BIM. Acoustic mapping requires modeling. Thermal comfort analysis via ASHRAE 55. Multiple options with different data requirements."
+  },
+  {
+    "credit_code": "EQc3",
+    "credit_name": "Accessibility and Inclusion",
+    "data_availability_score": 60,
+    "data_sources": [
+      "ADA Standards (https://www.ada.gov/)",
+      "ICC A117.1 (static standard)",
+      "Floor plans (project-specific)",
+      "Inclusive design best practices (research)",
+      "Wayfinding design guidelines"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "No - Design assessment",
+    "data_quality": "Medium - Mix of standards and best practices",
+    "notes": "ADA standards are static. Enhanced accessibility checklist can be generated. Gap analysis can be automated against standards. Inclusive design features require qualitative assessment. Wayfinding requires design review."
+  },
+  {
+    "credit_code": "EQc4",
+    "credit_name": "Resilient Spaces",
+    "data_availability_score": 70,
+    "data_sources": [
+      "IPp1 hazard assessment results",
+      "HVAC design data (project-specific)",
+      "Building envelope specifications",
+      "Window schedules (design data)",
+      "Wildfire smoke guidance (EPA, state agencies)"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "No - Design response",
+    "data_quality": "Medium - Depends on IPp1 quality",
+    "notes": "Relies on IPp1 hazard assessment. Resilient design strategies can be matched to hazards. Operable window coverage can be calculated. Thermal safety modeling requires energy analysis. Management mode requirements are design-based."
+  },
+  {
+    "credit_code": "EQc5",
+    "credit_name": "Air Quality Testing and Monitoring",
+    "data_availability_score": 85,
+    "data_sources": [
+      "LEED testing thresholds (static)",
+      "IAQ sensor specifications (manufacturer)",
+      "Testing laboratory data (project-specific)",
+      "EPA testing methodologies",
+      "Sensor network design tools"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes - For continuous monitoring",
+    "data_quality": "High - Standardized testing protocols",
+    "notes": "Testing protocols can be generated from LEED requirements. Sensor specifications from manufacturers. Measurement locations can be planned. Thresholds are published. Continuous monitoring provides real-time data."
+  },
+  {
+    "credit_code": "PRc1",
+    "credit_name": "Project Priorities",
+    "data_availability_score": 65,
+    "data_sources": [
+      "USGBC Regional Priority credit database",
+      "Project Priority Library (USGBC)",
+      "Pilot Credit Library (USGBC)",
+      "LEED v5 credit checklist",
+      "Project type benchmarks"
+    ],
+    "integration_complexity": "Medium",
+    "real_time_feasibility": "Partial - Database updated periodically",
+    "data_quality": "High - USGBC official resources",
+    "notes": "Regional Priority credits available from USGBC. Project Priority Library is published. Pilot credits cataloged. Exemplary performance calculations can be automated. Innovation strategies require project-specific development."
+  },
+  {
+    "credit_code": "PRc2",
+    "credit_name": "LEED AP",
+    "data_availability_score": 95,
+    "data_sources": [
+      "GBCI Credential Directory (https://www.usgbc.org/credentials)",
+      "LEED AP specialty requirements (static)",
+      "Team roster (project-specific)"
+    ],
+    "integration_complexity": "Low",
+    "real_time_feasibility": "Yes",
+    "data_quality": "High - Official credential database",
+    "notes": "GBCI maintains credential directory. LEED AP status can be verified online. Specialty appropriateness can be checked. Credential status reporting can be automated. Simple API integration possible."
+  }
+]

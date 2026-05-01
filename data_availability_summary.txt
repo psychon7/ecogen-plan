@@ -1,0 +1,337 @@
+
+================================================================================
+LEED V5 CREDITS - DATA AVAILABILITY AUTOMATION ANALYSIS
+================================================================================
+
+EXECUTIVE SUMMARY
+-----------------
+This analysis evaluates the automation potential for data collection across all 
+51 LEED v5 BD+C credits. The assessment identifies specific, real-world data 
+sources including government APIs, commercial databases, and public datasets.
+
+KEY FINDINGS
+------------
+• Total Credits Analyzed: 51
+• Average Data Availability Score: 79.4/100
+• Credits with High Automation Potential (≥80): 33 (65%)
+• Credits with Very High Automation Potential (≥90): 16 (31%)
+• Total Data Sources Identified: 261
+
+INTEGRATION COMPLEXITY
+----------------------
+• Low Complexity: 29 credits (57%) - Straightforward API integrations
+• Medium Complexity: 22 credits (43%) - Requires some coordination
+• High Complexity: 0 credits (0%) - No credits require complex integration
+
+REAL-TIME FEASIBILITY
+---------------------
+• Yes (Real-time available): 25 credits (49%)
+• Partial (Some real-time data): 7 credits (14%)
+• No (Batch/static data only): 19 credits (37%)
+
+================================================================================
+DATA SOURCES BY CATEGORY
+================================================================================
+
+1. GOVERNMENT APIs & DATABASES
+------------------------------
+
+Climate & Weather:
+• NOAA Climate Data API (https://www.ncei.noaa.gov/access/services/data/v1)
+  - Historical and current weather data
+  - Temperature, precipitation, extreme events
+  - Free access with API token
+
+• NWS API (https://api.weather.gov)
+  - Real-time weather forecasts and alerts
+  - JSON-based REST API
+  - Free public access
+
+• NOAA Atlas 14 Precipitation Data (https://hdsc.nws.noaa.gov/hdsc/pfds/)
+  - Rainfall frequency and depth data
+  - Stormwater design calculations
+
+Hazard & Environmental Data:
+• FEMA NFHL Web Services (https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer)
+  - Flood hazard zone maps
+  - GIS web services (WMS, WFS)
+  - Free public access
+
+• USGS 3DEP Elevation Service (https://apps.nationalmap.gov/epqs/)
+  - Digital elevation models
+  - Slope analysis data
+  - Point query service available
+
+• National Wetlands Inventory (https://www.fws.gov/program/national-wetlands-inventory)
+  - Wetland location and classification
+  - GIS data layers
+
+• USFWS Critical Habitat Portal (https://ecos.fws.gov/ecp/)
+  - Endangered species habitat data
+  - GIS-compatible formats
+
+Demographic & Social Data:
+• US Census Bureau API (https://www.census.gov/data/developers.html)
+  - American Community Survey (ACS) data
+  - Block group level demographics
+  - Free API access
+
+• EPA EJScreen (https://www.epa.gov/ejscreen)
+  - Environmental justice screening data
+  - 12 environmental + 6 demographic indicators
+  - Feature service available
+
+Energy & Grid Data:
+• EPA eGRID (https://www.epa.gov/egrid)
+  - Grid emission factors by region
+  - CO2, CH4, N2O emission rates
+  - Annual data releases
+
+• NREL PVWatts API (https://developer.nrel.gov/docs/solar/pvwatts/)
+  - Solar energy production estimates
+  - Location-specific solar resource data
+  - Free API with registration
+
+• NREL National Solar Radiation Database (NSRDB)
+  - Solar resource data
+  - Weather data for solar modeling
+
+Soil & Agriculture:
+• USDA NRCS Soil Surveys (https://websoilsurvey.nrcs.usda.gov/)
+  - Soil properties and infiltration rates
+  - SSURGO database
+
+• USDA PLANTS Database (https://plants.usda.gov/)
+  - Native plant species information
+  - Invasive species data
+
+Air Quality:
+• EPA AirNow API (https://www.airnow.gov/)
+  - Current air quality index
+  - PM2.5, ozone, other pollutants
+
+• EPA SNAP Program (https://www.epa.gov/snap)
+  - Approved refrigerants
+  - GWP values and phase-out schedules
+
+================================================================================
+
+2. COMMERCIAL DATABASES & TOOLS
+-------------------------------
+
+Embodied Carbon & LCA:
+• EC3 Database API (https://www.buildingtransparency.org/)
+  - 20,000+ Environmental Product Declarations
+  - Construction material carbon data
+  - API access available (free for research)
+
+• Tally LCA Tool (https://kierantimberlake.com/work/tally/)
+  - Revit-integrated LCA tool
+  - Material database with GWP values
+  - Commercial license required
+
+• One Click LCA (https://www.oneclicklca.com/)
+  - Building LCA software
+  - Extensive material database
+  - Cloud-based with API
+
+Product Certifications:
+• EPD Registry (https://www.theepdregistry.com/)
+  - Global EPD database
+  - Construction products
+  - Free search, API available
+
+• HPD Repository API (https://www.hpd-collaborative.org/)
+  - Health Product Declarations
+  - Material health data
+  - API for data partners
+
+• GREENGUARD Database (https://www.greenguard.org/)
+  - Low-emitting product certifications
+  - Indoor air quality certified products
+
+• FloorScore Database (https://www.rfci.com/)
+  - Flooring product emissions certifications
+  - CDPH Standard Method compliance
+
+• Cool Roof Rating Council (https://coolroofs.org/)
+  - Solar Reflectance Index (SRI) values
+  - Roofing product ratings
+
+Building Energy:
+• ENERGY STAR Databases (https://www.energystar.gov/)
+  - Product efficiency ratings
+  - Portfolio Manager API
+  - EVSE registry
+
+• AHRI Directory (https://www.ahrinet.org/)
+  - HVAC equipment efficiency ratings
+  - Certified product database
+
+• ASHRAE Standards (90.1, 62.1, 55, 202)
+  - Published technical standards
+  - Static reference data
+
+================================================================================
+
+3. TRANSIT & MOBILITY DATA
+--------------------------
+
+• GTFS Feeds (https://mobilitydatabase.org/)
+  - 2000+ transit agency feeds globally
+  - Schedule and route data
+  - Standardized format
+
+• Mobility Database API
+  - GTFS feed discovery
+  - Feed metadata and status
+  - Free API access
+
+• Walk Score API (https://www.walkscore.com/)
+  - Walkability scores by address
+  - Transit and bike scores
+  - Commercial API
+
+================================================================================
+
+4. GIS & MAPPING SERVICES
+-------------------------
+
+• OpenTopography API (https://portal.opentopography.org/apidocs/)
+  - USGS 3DEP elevation data
+  - Lidar point clouds
+  - Free academic access
+
+• FEMA GeoPlatform
+  - Flood map services
+  - ArcGIS REST services
+
+• EPA Envirofacts
+  - Multi-program environmental data
+  - Facility-level information
+
+================================================================================
+
+CREDITS WITH HIGHEST AUTOMATION POTENTIAL (Score ≥ 90)
+======================================================
+
+IPp3: Carbon Assessment (Score: 95)
+  Sources: EPA eGRID (https://www.epa.gov/egrid), EC3 Database API (https://www.buildingtransparency.org/), Tally LCA Tool...
+  Complexity: Low
+  Real-time: Yes
+
+LTc1: Sensitive Land Protection (Score: 95)
+  Sources: FEMA NFHL Web Services (https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer), National Wetlands Inventory (NWI) (https://www.fws.gov/program/national-wetlands-inventory), USFWS Critical Habitat Portal (https://ecos.fws.gov/ecp/)...
+  Complexity: Low
+  Real-time: Yes
+
+SSc6: Light Pollution Reduction (Score: 95)
+  Sources: IES TM-15-11 BUG Rating System (static), Luminaire manufacturer cut sheets, IDA Dark Sky Places (https://www.darksky.org/)...
+  Complexity: Low
+  Real-time: Yes
+
+MRp2: Quantify and Assess Embodied Carbon (Score: 95)
+  Sources: EC3 Database API (https://www.buildingtransparency.org/), Carbon Leadership Forum Material Baselines, EPD Registry (https://www.theepdregistry.com/)...
+  Complexity: Low
+  Real-time: Yes
+
+MRc2: Reduce Embodied Carbon (Score: 95)
+  Sources: EC3 Database API, Tally LCA Tool, One Click LCA...
+  Complexity: Low
+  Real-time: Yes
+
+PRc2: LEED AP (Score: 95)
+  Sources: GBCI Credential Directory (https://www.usgbc.org/credentials), LEED AP specialty requirements (static), Team roster (project-specific)...
+  Complexity: Low
+  Real-time: Yes
+
+IPp2: Human Impact Assessment (Score: 90)
+  Sources: US Census Bureau API (ACS 5-Year Data), EPA EJScreen (https://www.epa.gov/ejscreen), HUD Housing Data...
+  Complexity: Low
+  Real-time: Yes
+
+LTc3: Compact and Connected Development (Score: 90)
+  Sources: Local assessor data (parcel databases), GTFS Transit Feeds (https://mobilitydatabase.org/), Walk Score API (https://www.walkscore.com/)...
+  Complexity: Low
+  Real-time: Yes
+
+SSc3: Rainwater Management (Score: 90)
+  Sources: NOAA Precipitation Frequency Data (https://hdsc.nws.noaa.gov/hdsc/pfds/), NOAA Atlas 14 (rainfall depths), USDA NRCS Soil Surveys (https://websoilsurvey.nrcs.usda.gov/)...
+  Complexity: Medium
+  Real-time: Yes
+
+WEp2: Minimum Water Efficiency (Score: 90)
+  Sources: ENERGY STAR Appliance Database (https://www.energystar.gov/), Fixture manufacturer specifications, EPA WaterSense Product Database (https://www.epa.gov/watersense/)...
+  Complexity: Low
+  Real-time: Yes
+
+EAp1: Operational Carbon Projection and Decarbonization Plan (Score: 90)
+  Sources: EPA eGRID (https://www.epa.gov/egrid), Energy model outputs (project-specific), IPCC emission factors...
+  Complexity: Low
+  Real-time: Yes
+
+EAp5: Fundamental Refrigerant Management (Score: 90)
+  Sources: EPA SNAP Program (https://www.epa.gov/snap), Montreal Protocol schedules (UNEP), AHRI Directory (https://www.ahrinet.org/)...
+  Complexity: Low
+  Real-time: Yes
+
+EAc4: Renewable Energy (Score: 90)
+  Sources: NREL PVWatts API (https://developer.nrel.gov/docs/solar/pvwatts/), NREL NSRDB Solar Resource Data, Green-e Registry (https://www.green-e.org/)...
+  Complexity: Low
+  Real-time: Yes
+
+EAc7: Enhanced Refrigerant Management (Score: 90)
+  Sources: EPA SNAP Program (approved refrigerants), AHRI Directory (equipment data), Refrigerant GWP database (IPCC AR6)...
+  Complexity: Low
+  Real-time: Yes
+
+MRc3: Low-Emitting Materials (Score: 90)
+  Sources: CDPH Standard Method (static), GREENGUARD Certification Database (https://www.greenguard.org/), FloorScore Database (https://www.rfci.com/)...
+  Complexity: Low
+  Real-time: Yes
+
+MRc4: Building Product Selection and Procurement (Score: 90)
+  Sources: EPD Registry (https://www.theepdregistry.com/), HPD Repository API (https://www.hpd-collaborative.org/), FSC Certificate Database (https://info.fsc.org/)...
+  Complexity: Low
+  Real-time: Yes
+
+================================================================================
+
+CREDITS WITH LOWEST AUTOMATION POTENTIAL (Score < 60)
+=====================================================
+
+IPc1: Integrative Design Process (Score: 40)
+  Challenge: Mostly process-based credit requiring human coordination. Some data (energy targets, benchmark data) available from NREL. Goal tracking can be automat...
+
+EAp3: Fundamental Commissioning (Score: 50)
+  Challenge: ASHRAE standards are static. Templates for OPR, BOD can be generated. Milestone tracking can be automated. However, commissioning is fundamentally a p...
+
+================================================================================
+
+RECOMMENDATIONS FOR IMPLEMENTATION
+===================================
+
+1. PRIORITY INTEGRATIONS (High Impact, Low Complexity)
+   - EPA eGRID: Grid emission factors for all carbon-related credits
+   - NOAA Climate API: Weather data for climate resilience credits
+   - EC3 Database: Embodied carbon data for materials credits
+   - US Census API: Demographic data for equity credits
+   - FEMA NFHL: Flood data for site selection credits
+
+2. API ACCESS REQUIREMENTS
+   - Most government APIs: Free with registration
+   - EC3 API: Free for research, paid for commercial use
+   - NREL APIs: Free with API key registration
+   - Commercial tools: License fees apply
+
+3. DATA QUALITY ASSURANCE
+   - Government sources: High reliability, established QA/QC
+   - Commercial databases: Third-party verified data
+   - Project-specific data: Requires validation workflows
+
+4. REAL-TIME CAPABILITIES
+   - 49% of credits can leverage real-time data
+   - Weather, air quality, and energy data available in real-time
+   - Design-based credits require static analysis
+
+================================================================================

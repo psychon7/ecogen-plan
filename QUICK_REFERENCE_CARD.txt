@@ -1,0 +1,85 @@
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║           LEED V5 AI AUTOMATION - QUICK REFERENCE CARD                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 100% AUTOMATABLE CREDITS (16 Credits - 40 Points)                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  PRIORITY 1: HIGH-POINT CREDITS (30 Points)                                │
+│  ─────────────────────────────────────────                                 │
+│  ★ EAc3 - Enhanced Energy Efficiency (10 pts) - 87.7% automation          │
+│  ★ WEc2 - Enhanced Water Efficiency (8 pts) - 87.5% automation            │
+│  ★ MRc2 - Reduce Embodied Carbon (6 pts) - 88.4% automation               │
+│  ★ LTc3 - Compact & Connected Development (6 pts) - 88.0% automation      │
+│                                                                             │
+│  PRIORITY 2: PREREQUISITES (Required for All Projects)                     │
+│  ─────────────────────────────────────────────────────                     │
+│  ⚙ IPp3 - Carbon Assessment (92.5% automation)                            │
+│  ⚙ EAp1 - Operational Carbon Projection (89.4% automation)                │
+│  ⚙ WEp2 - Minimum Water Efficiency (89.3% automation)                     │
+│  ⚙ EAp2 - Minimum Energy Efficiency (85.7% automation)                    │
+│  ⚙ EAp5 - Refrigerant Management (85.2% automation)                       │
+│  ⚙ MRp2 - Embodied Carbon Assessment (87.0% automation)                   │
+│                                                                             │
+│  PRIORITY 3: TECHNICAL CREDITS (10 Points)                                 │
+│  ─────────────────────────────────────────                                 │
+│  ⚡ SSc3 - Rainwater Management (3 pts) - 88.0% automation                │
+│  ⚡ SSc5 - Heat Island Reduction (2 pts) - 85.3% automation               │
+│  ⚡ EAc7 - Enhanced Refrigerant (2 pts) - 89.3% automation                │
+│  ⚡ SSc6 - Light Pollution Reduction (1 pt) - 90.6% automation             │
+│  ⚡ PRc2 - LEED AP (1 pt) - 90.1% automation                              │
+│  ⚡ LTc1 - Sensitive Land Protection (1 pt) - 87.6% automation            │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ KEY APIs TO INTEGRATE (Top 10)                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  1. EC3 Database (Building Transparency) - Embodied carbon data            │
+│  2. EPA eGRID - Grid emission factors                                      │
+│  3. NOAA Climate Data - Weather and rainfall data                          │
+│  4. USGBC Arc Platform - LEED submission integration                       │
+│  5. GBCI Credential Directory - LEED AP verification                       │
+│  6. Walk Score API - Walkability analysis                                  │
+│  7. FEMA NFHL - Flood hazard data                                          │
+│  8. ENERGY STAR - Product efficiency data                                  │
+│  9. NREL PVWatts - Solar energy estimation                                 │
+│  10. US Census Bureau - Demographic data                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ IMPLEMENTATION TIMELINE                                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  MONTHS 1-3:  Prerequisites (6 credits) - $50-75K                         │
+│  MONTHS 4-6:  High-Value Credits (30 pts) - $75-100K                      │
+│  MONTHS 7-9:  Technical Credits (18 pts) - $50-75K                        │
+│  MONTHS 10-12: Specialized Credits (12 pts) - $50K                        │
+│                                                                             │
+│  TOTAL: 12 months, $225-300K investment                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ BUSINESS IMPACT                                                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  FOR LEED CONSULTANTS:                                                     │
+│  • 60-80% time savings per credit                                          │
+│  • 3x project capacity with same team                                      │
+│  • $15K-30K savings per project                                            │
+│                                                                             │
+│  FOR YOUR PLATFORM:                                                        │
+│  • 35 credits (78 points) addressable market                               │
+│  • $5K-15K per project pricing potential                                   │
+│  • $500K+ Year 1 revenue potential                                         │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  NEXT STEP: Read EXECUTIVE_SUMMARY.txt for complete analysis               ║
+╚══════════════════════════════════════════════════════════════════════════════╝

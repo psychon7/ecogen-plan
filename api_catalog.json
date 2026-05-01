@@ -1,0 +1,609 @@
+{
+  "api_catalog": {
+    "government_apis": {
+      "description": "Free government data APIs for environmental and demographic data",
+      "apis": [
+        {
+          "name": "NOAA Climate Data Online",
+          "provider": "National Oceanic and Atmospheric Administration",
+          "url": "https://www.ncdc.noaa.gov/cdo-web/webservices",
+          "authentication": "API Key (free registration)",
+          "data_types": [
+            "Temperature",
+            "Precipitation",
+            "Storm events",
+            "Climate normals"
+          ],
+          "credits_supported": [
+            "IPp1",
+            "SSc3",
+            "SSp1"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "1000 requests/day (free tier)"
+        },
+        {
+          "name": "NOAA Precipitation Frequency Data Server",
+          "provider": "NOAA",
+          "url": "https://hdsc.nws.noaa.gov/hdsc/pfds/",
+          "authentication": "None (web services)",
+          "data_types": [
+            "Rainfall depth-duration-frequency"
+          ],
+          "credits_supported": [
+            "SSc3"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "No limits"
+        },
+        {
+          "name": "FEMA Flood Map Service Center",
+          "provider": "Federal Emergency Management Agency",
+          "url": "https://msc.fema.gov/portal/advanceSearch",
+          "authentication": "None for basic, API key for advanced",
+          "data_types": [
+            "Flood zones",
+            "FIRM panels",
+            "Base flood elevation"
+          ],
+          "credits_supported": [
+            "IPp1",
+            "LTc1"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "Reasonable use policy"
+        },
+        {
+          "name": "EPA EJScreen",
+          "provider": "Environmental Protection Agency",
+          "url": "https://www.epa.gov/ejscreen",
+          "authentication": "Public access",
+          "data_types": [
+            "Environmental justice metrics",
+            "Demographics",
+            "Environmental indicators"
+          ],
+          "credits_supported": [
+            "IPp2"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "No limits"
+        },
+        {
+          "name": "EPA eGRID",
+          "provider": "EPA",
+          "url": "https://www.epa.gov/egrid",
+          "authentication": "Public access",
+          "data_types": [
+            "Grid emission factors",
+            "Power plant emissions"
+          ],
+          "credits_supported": [
+            "IPp3",
+            "EAp1",
+            "EAc4"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "No limits"
+        },
+        {
+          "name": "EPA AQI API",
+          "provider": "EPA",
+          "url": "https://www.airnowapi.org/aq forecast",
+          "authentication": "API Key (free)",
+          "data_types": [
+            "Air quality index",
+            "Pollutant concentrations"
+          ],
+          "credits_supported": [
+            "EQp2"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "500 requests/day"
+        },
+        {
+          "name": "US Census Bureau API",
+          "provider": "US Census Bureau",
+          "url": "https://www.census.gov/data/developers.html",
+          "authentication": "API Key (free)",
+          "data_types": [
+            "American Community Survey",
+            "Decennial Census",
+            "Economic data"
+          ],
+          "credits_supported": [
+            "IPp2",
+            "LTc2",
+            "LTc3"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "Variable by endpoint"
+        },
+        {
+          "name": "USGS National Map API",
+          "provider": "US Geological Survey",
+          "url": "https://nationalmap.gov/",
+          "authentication": "None",
+          "data_types": [
+            "Elevation",
+            "Topography",
+            "Hydrography"
+          ],
+          "credits_supported": [
+            "LTc1",
+            "SSp1"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "Reasonable use"
+        },
+        {
+          "name": "NREL PVWatts API",
+          "provider": "National Renewable Energy Laboratory",
+          "url": "https://developer.nrel.gov/docs/solar/pvwatts/",
+          "authentication": "API Key (free)",
+          "data_types": [
+            "Solar production estimates",
+            "System performance"
+          ],
+          "credits_supported": [
+            "EAc4"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "1000 requests/day"
+        },
+        {
+          "name": "USFWS Critical Habitat API",
+          "provider": "US Fish & Wildlife Service",
+          "url": "https://ecos.fws.gov/ecp/",
+          "authentication": "None",
+          "data_types": [
+            "Threatened/endangered species habitats"
+          ],
+          "credits_supported": [
+            "LTc1"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "No limits"
+        },
+        {
+          "name": "NRCS Soil Survey API",
+          "provider": "USDA Natural Resources Conservation Service",
+          "url": "https://sdmdataaccess.sc.egov.usda.gov/",
+          "authentication": "None",
+          "data_types": [
+            "Soil properties",
+            "Infiltration rates",
+            "Hydrologic groups"
+          ],
+          "credits_supported": [
+            "SSc3",
+            "SSp1"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "Reasonable use"
+        },
+        {
+          "name": "EPA Brownfields API",
+          "provider": "EPA",
+          "url": "https://www.epa.gov/brownfields",
+          "authentication": "Public access",
+          "data_types": [
+            "Brownfield sites",
+            "Assessment data"
+          ],
+          "credits_supported": [
+            "LTc2"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "No limits"
+        }
+      ]
+    },
+    "industry_apis": {
+      "description": "Industry-specific APIs for LEED-related data",
+      "apis": [
+        {
+          "name": "USGBC Arc Platform API",
+          "provider": "US Green Building Council",
+          "url": "https://www.usgbc.org/articles/arc-platform-api",
+          "authentication": "OAuth 2.0",
+          "data_types": [
+            "Project data",
+            "Performance metrics",
+            "Certification status"
+          ],
+          "credits_supported": [
+            "All credits requiring USGBC reporting"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "Contact USGBC"
+        },
+        {
+          "name": "EC3 API",
+          "provider": "Building Transparency",
+          "url": "https://buildingtransparency.org/ec3/",
+          "authentication": "API Key (free registration)",
+          "data_types": [
+            "Embodied carbon data",
+            "EPDs",
+            "Material benchmarks"
+          ],
+          "credits_supported": [
+            "IPp3",
+            "MRp2",
+            "MRc2"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "Contact provider"
+        },
+        {
+          "name": "Tally API",
+          "provider": "Building Transparency / Autodesk",
+          "url": "https://buildingtransparency.org/tally/",
+          "authentication": "License + API Key",
+          "data_types": [
+            "Embodied carbon calculations",
+            "Revit integration"
+          ],
+          "credits_supported": [
+            "IPp3",
+            "MRp2",
+            "MRc2"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "License-dependent"
+        },
+        {
+          "name": "ENERGY STAR Product API",
+          "provider": "EPA",
+          "url": "https://www.energystar.gov/products",
+          "authentication": "Public access",
+          "data_types": [
+            "Certified products",
+            "Efficiency ratings"
+          ],
+          "credits_supported": [
+            "WEp2",
+            "LTc5"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "No limits"
+        },
+        {
+          "name": "Walk Score API",
+          "provider": "Walk Score / Redfin",
+          "url": "https://www.walkscore.com/professional/api.php",
+          "authentication": "API Key (paid)",
+          "data_types": [
+            "Walk Score",
+            "Transit Score",
+            "Bike Score"
+          ],
+          "credits_supported": [
+            "LTc3"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "By subscription tier"
+        },
+        {
+          "name": "GREENGUARD Certification Database",
+          "provider": "UL Environment",
+          "url": "https://www.ul.com/resources/spot-greenguard-certifications",
+          "authentication": "Public access",
+          "data_types": [
+            "Low-emitting product certifications"
+          ],
+          "credits_supported": [
+            "MRc3"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "No limits"
+        },
+        {
+          "name": "FloorScore Certification Database",
+          "provider": "RFCI",
+          "url": "https://www.floorscore.org/",
+          "authentication": "Public access",
+          "data_types": [
+            "Low-emitting flooring certifications"
+          ],
+          "credits_supported": [
+            "MRc3"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "No limits"
+        },
+        {
+          "name": "HPD Repository API",
+          "provider": "Health Product Declaration Collaborative",
+          "url": "https://www.hpd-collaborative.org/",
+          "authentication": "Registration required",
+          "data_types": [
+            "Health Product Declarations",
+            "Material health data"
+          ],
+          "credits_supported": [
+            "MRc4"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "Contact provider"
+        },
+        {
+          "name": "Green-e Registry",
+          "provider": "Center for Resource Solutions",
+          "url": "https://www.green-e.org/",
+          "authentication": "Public access",
+          "data_types": [
+            "Renewable Energy Certificates",
+            "Carbon offsets"
+          ],
+          "credits_supported": [
+            "EAc4"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "No limits"
+        },
+        {
+          "name": "One Click LCA API",
+          "provider": "One Click LCA Ltd",
+          "url": "https://www.oneclicklca.com/",
+          "authentication": "API Token (license required)",
+          "data_types": [
+            "Life cycle assessment",
+            "Embodied carbon calculations"
+          ],
+          "credits_supported": [
+            "MRp2",
+            "MRc2"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "License-dependent"
+        },
+        {
+          "name": "GBCI Credential Directory",
+          "provider": "Green Business Certification Inc",
+          "url": "https://www.gbci.org/",
+          "authentication": "API access on request",
+          "data_types": [
+            "LEED AP credentials",
+            "Verification status"
+          ],
+          "credits_supported": [
+            "PRc2"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "Contact GBCI"
+        }
+      ]
+    },
+    "software_platform_apis": {
+      "description": "APIs for design and analysis software integration",
+      "apis": [
+        {
+          "name": "Autodesk Forge",
+          "provider": "Autodesk",
+          "url": "https://forge.autodesk.com/",
+          "authentication": "OAuth 2.0",
+          "data_types": [
+            "BIM model data",
+            "Design automation",
+            "Viewer"
+          ],
+          "credits_supported": [
+            "Multiple - BIM extraction"
+          ],
+          "integration_complexity": "High",
+          "rate_limits": "By subscription"
+        },
+        {
+          "name": "Autodesk Revit API",
+          "provider": "Autodesk",
+          "url": "https://www.autodesk.com/developer-network/platform-technologies/revit",
+          "authentication": "License + API access",
+          "data_types": [
+            "Model elements",
+            "Parameters",
+            "Geometry"
+          ],
+          "credits_supported": [
+            "MRp2",
+            "MRc2",
+            "WEp2"
+          ],
+          "integration_complexity": "High",
+          "rate_limits": "License-dependent"
+        },
+        {
+          "name": "EnergyPlus Python (Eppy)",
+          "provider": "NREL / Open Source",
+          "url": "https://pypi.org/project/eppy/",
+          "authentication": "Open source",
+          "data_types": [
+            "Energy model inputs/outputs",
+            "IDF manipulation"
+          ],
+          "credits_supported": [
+            "EAp1",
+            "EAp2",
+            "EAc3"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "None"
+        },
+        {
+          "name": "IES VE API",
+          "provider": "IES Ltd",
+          "url": "https://www.iesve.com/",
+          "authentication": "License required",
+          "data_types": [
+            "Energy model data",
+            "Simulation results"
+          ],
+          "credits_supported": [
+            "EA credits"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "License-dependent"
+        },
+        {
+          "name": "ArcGIS REST API",
+          "provider": "Esri",
+          "url": "https://developers.arcgis.com/rest/",
+          "authentication": "API Key / OAuth",
+          "data_types": [
+            "GIS data",
+            "Spatial analysis",
+            "Mapping"
+          ],
+          "credits_supported": [
+            "LT credits",
+            "SS credits"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "By subscription"
+        },
+        {
+          "name": "Google Maps Platform",
+          "provider": "Google",
+          "url": "https://developers.google.com/maps",
+          "authentication": "API Key (paid)",
+          "data_types": [
+            "Geocoding",
+            "Places",
+            "Distance",
+            "Elevation"
+          ],
+          "credits_supported": [
+            "LTc3",
+            "EQp3"
+          ],
+          "integration_complexity": "Low",
+          "rate_limits": "Pay-per-use"
+        },
+        {
+          "name": "GTFS Realtime",
+          "provider": "Transit agencies",
+          "url": "https://gtfs.org/realtime/",
+          "authentication": "Varies by agency",
+          "data_types": [
+            "Transit schedules",
+            "Real-time updates"
+          ],
+          "credits_supported": [
+            "LTc3",
+            "LTc4"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "Agency-dependent"
+        },
+        {
+          "name": "Procore API",
+          "provider": "Procore Technologies",
+          "url": "https://developers.procore.com/",
+          "authentication": "OAuth 2.0",
+          "data_types": [
+            "Project data",
+            "Documents",
+            "RFIs",
+            "Submittals"
+          ],
+          "credits_supported": [
+            "IPc1",
+            "EAp3"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "By subscription"
+        },
+        {
+          "name": "BAS/BMS Protocols (BACnet)",
+          "provider": "ASHRAE / Various",
+          "url": "http://www.bacnet.org/",
+          "authentication": "Network access",
+          "data_types": [
+            "Building automation data",
+            "Sensor readings",
+            "Setpoints"
+          ],
+          "credits_supported": [
+            "EAc5",
+            "WEc1",
+            "EQc5"
+          ],
+          "integration_complexity": "High",
+          "rate_limits": "None"
+        }
+      ]
+    },
+    "iot_sensor_apis": {
+      "description": "APIs for IoT sensors and smart building devices",
+      "apis": [
+        {
+          "name": "Green Button API",
+          "provider": "Utilities / NIST",
+          "url": "https://www.greenbuttonalliance.org/",
+          "authentication": "OAuth 2.0",
+          "data_types": [
+            "Energy usage data",
+            "Interval readings"
+          ],
+          "credits_supported": [
+            "EAp4",
+            "EAc5"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "Utility-dependent"
+        },
+        {
+          "name": "Smart Water Meter APIs",
+          "provider": "Various manufacturers",
+          "url": "Manufacturer-specific",
+          "authentication": "API Key / Certificate",
+          "data_types": [
+            "Water consumption",
+            "Flow rates",
+            "Leak alerts"
+          ],
+          "credits_supported": [
+            "WEp1",
+            "WEc1"
+          ],
+          "integration_complexity": "High",
+          "rate_limits": "Manufacturer-dependent"
+        },
+        {
+          "name": "IAQ Sensor APIs",
+          "provider": "Various (Awair, Kaiterra, etc.)",
+          "url": "Manufacturer-specific",
+          "authentication": "API Key",
+          "data_types": [
+            "PM2.5",
+            "CO2",
+            "TVOC",
+            "Temperature",
+            "Humidity"
+          ],
+          "credits_supported": [
+            "EQc5"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "Manufacturer-dependent"
+        },
+        {
+          "name": "OpenADR API",
+          "provider": "OpenADR Alliance",
+          "url": "https://www.openadr.org/",
+          "authentication": "Certificate-based",
+          "data_types": [
+            "Demand response signals",
+            "Event notifications"
+          ],
+          "credits_supported": [
+            "EAc6"
+          ],
+          "integration_complexity": "Medium",
+          "rate_limits": "None"
+        }
+      ]
+    }
+  }
+}

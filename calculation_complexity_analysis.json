@@ -1,0 +1,799 @@
+[
+  {
+    "credit_code": "IPp1",
+    "credit_name": "Climate Resilience Assessment",
+    "calculation_score": 75,
+    "calculation_types": [
+      "Risk scoring algorithms",
+      "Exposure analysis calculations",
+      "Sensitivity assessment",
+      "Adaptive capacity scoring",
+      "IPCC scenario probability weighting"
+    ],
+    "formula_complexity": "Medium - Weighted scoring algorithms with multi-factor risk matrices. Risk = Probability \u00d7 Severity \u00d7 Exposure. Requires climate scenario probability distributions.",
+    "input_requirements": "Project location (lat/long), building type, service life (years), climate zone, historical hazard data, IPCC AR6 scenario data, local infrastructure vulnerability data",
+    "tool_integration": "Climate data APIs (NOAA, IPCC), GIS hazard mapping tools (FEMA, USGS), Risk assessment platforms, Historical weather databases",
+    "validation": "Cross-check with FEMA flood maps, USGS landslide data, NOAA storm databases. Validate risk scoring against industry standard methodologies (ISO 31000).",
+    "notes": "Calculations involve weighted scoring of multiple hazard types. Automation can handle data aggregation and initial scoring, but expert review needed for adaptive capacity assessment."
+  },
+  {
+    "credit_code": "IPp2",
+    "credit_name": "Human Impact Assessment",
+    "calculation_score": 80,
+    "calculation_types": [
+      "Demographic analysis",
+      "Social equity scoring",
+      "Infrastructure access metrics",
+      "Health impact indices",
+      "Community vulnerability assessment"
+    ],
+    "formula_complexity": "Medium - Statistical analysis of demographic data, weighted scoring for equity indicators, proximity calculations for infrastructure access.",
+    "input_requirements": "Project address, census tract ID, local zoning data, transit network data, healthcare facility locations, school locations, employment centers",
+    "tool_integration": "US Census API, EPA EJScreen, HUD housing databases, Local GIS data, Transit authority APIs, Walk Score API",
+    "validation": "Verify demographic data against Census Bureau releases. Cross-check EJ Screen indices. Validate infrastructure distances with local planning data.",
+    "notes": "Primarily data aggregation and statistical analysis. Calculations are straightforward but require access to multiple government databases."
+  },
+  {
+    "credit_code": "IPp3",
+    "credit_name": "Carbon Assessment",
+    "calculation_score": 90,
+    "calculation_types": [
+      "25-year operational carbon projection",
+      "Embodied carbon summation",
+      "Refrigerant GWP calculations",
+      "Grid emission factor application",
+      "Decarbonization pathway modeling",
+      "Year-over-year emission trajectories"
+    ],
+    "formula_complexity": "High - Time-series carbon modeling with grid decarbonization curves. Total Carbon = \u03a3(Annual Energy \u00d7 Grid Factor) + Embodied Carbon + Refrigerant GWP. Requires NPV-style calculations over 25 years.",
+    "input_requirements": "Annual energy use by fuel type (from EAp1), material quantities (from MRp2), refrigerant types and charges (from EAp5), grid emission factors (eGRID), grid decarbonization projections",
+    "tool_integration": "EnergyPlus/OpenStudio outputs, EC3/Tally for embodied carbon, EPA eGRID database, IPCC emission factors, Grid decarbonization models",
+    "validation": "Validate energy model against ASHRAE 90.1 Appendix G. Cross-check embodied carbon with CLF Material Baselines. Verify grid factors against EPA eGRID.",
+    "notes": "Highly automatable with clear formulas. Main challenge is integrating data from multiple sources (energy model, WBLCA, refrigerant schedules)."
+  },
+  {
+    "credit_code": "IPp4",
+    "credit_name": "Tenant Guidelines",
+    "calculation_score": 30,
+    "calculation_types": [
+      "Document compilation",
+      "Prerequisite cross-referencing"
+    ],
+    "formula_complexity": "Low - No mathematical calculations. Primarily document organization and template population.",
+    "input_requirements": "Project specifications, LEED credit strategies, base building documentation, prerequisite requirements",
+    "tool_integration": "Document generation tools, Template management systems",
+    "validation": "Review by LEED AP for completeness. Cross-check against LEED prerequisite list.",
+    "notes": "Minimal calculation work. Primarily documentation and template generation."
+  },
+  {
+    "credit_code": "IPc1",
+    "credit_name": "Integrative Design Process",
+    "calculation_score": 25,
+    "calculation_types": [
+      "Goal tracking metrics",
+      "Synergy identification scoring"
+    ],
+    "formula_complexity": "Low - Primarily qualitative process documentation. Limited quantitative metrics for goal tracking.",
+    "input_requirements": "Project team roster, owner requirements, LEED target level, sustainability goals",
+    "tool_integration": "Project management platforms, Goal tracking dashboards",
+    "validation": "Charrette attendance verification. Goal documentation review.",
+    "notes": "Process-based credit with minimal calculation requirements. Focus on documentation and facilitation."
+  },
+  {
+    "credit_code": "IPc2",
+    "credit_name": "Green Leases",
+    "calculation_score": 40,
+    "calculation_types": [
+      "Points calculation worksheet",
+      "Compliance checklist scoring"
+    ],
+    "formula_complexity": "Low - Points summation based on included clauses. Binary compliance checking against Green Lease Leaders criteria.",
+    "input_requirements": "Base building specifications, pursued LEED credits, tenant space requirements, Green Lease Leaders criteria",
+    "tool_integration": "Green Lease Leaders program database, Lease clause libraries",
+    "validation": "Green Lease Leaders program verification. Legal review of lease clauses.",
+    "notes": "Primarily compliance checking and clause inclusion verification. Limited mathematical calculations."
+  },
+  {
+    "credit_code": "LTc1",
+    "credit_name": "Sensitive Land Protection",
+    "calculation_score": 95,
+    "calculation_types": [
+      "Buffer zone calculations (100ft water, 50ft wetlands)",
+      "Slope percentage calculations (40-60% protection)",
+      "Floodplain elevation verification",
+      "Site area percentage calculations"
+    ],
+    "formula_complexity": "Low to Medium - Geometric calculations for buffer zones, slope analysis from DEM data, area percentage calculations.",
+    "input_requirements": "Site boundary coordinates, parcel data, FEMA floodplain maps, NWI wetland data, USGS elevation data (DEM), habitat maps",
+    "tool_integration": "GIS platforms (ArcGIS, QGIS), FEMA flood map API, NWI wetland database, USGS elevation services",
+    "validation": "Cross-check floodplain data with FEMA Map Service Center. Verify wetland locations with NWI. Validate slopes with field surveys.",
+    "notes": "Highly automatable with GIS tools. Buffer calculations and slope analysis are standard GIS operations."
+  },
+  {
+    "credit_code": "LTc2",
+    "credit_name": "Equitable Development",
+    "calculation_score": 70,
+    "calculation_types": [
+      "Brownfield site verification",
+      "Historic district boundary checking",
+      "Local workforce percentage calculations",
+      "Apprenticeship hour tracking"
+    ],
+    "formula_complexity": "Low to Medium - Database lookups for brownfield/historic status, percentage calculations for workforce metrics.",
+    "input_requirements": "Site address, parcel history, local workforce data, construction workforce projections, apprenticeship program details",
+    "tool_integration": "EPA brownfields database, National Register of Historic Places, Census employment data, Local workforce development databases",
+    "validation": "EPA brownfield status confirmation. Historic register verification. Workforce data validation with local authorities.",
+    "notes": "Database integration for site classification. Workforce calculations require local data access."
+  },
+  {
+    "credit_code": "LTc3",
+    "credit_name": "Compact and Connected Development",
+    "calculation_score": 95,
+    "calculation_types": [
+      "Density calculations (DU/acre, SF/acre)",
+      "Transit trip frequency counting",
+      "Walk Score calculation",
+      "Radius-based proximity analysis"
+    ],
+    "formula_complexity": "Low - Basic arithmetic for density, trip counting within time windows, distance-based proximity analysis.",
+    "input_requirements": "Site address, surrounding parcel data (assessor), GTFS transit feeds, street network data, amenity locations",
+    "tool_integration": "Local assessor databases, GTFS transit APIs, Walk Score API, Google Maps/Mapbox for proximity analysis",
+    "validation": "Verify density with local assessor records. Cross-check transit schedules with agency data. Validate Walk Score with field verification.",
+    "notes": "Very straightforward calculations. APIs available for most data sources. High automation potential."
+  },
+  {
+    "credit_code": "LTc4",
+    "credit_name": "Transportation Demand Management",
+    "calculation_score": 85,
+    "calculation_types": [
+      "VMT (Vehicle Miles Traveled) estimation",
+      "Carbon emission calculations (baseline vs proposed)",
+      "Parking ratio reductions",
+      "Bicycle facility sizing calculations"
+    ],
+    "formula_complexity": "Medium - VMT modeling requires trip generation rates, mode split analysis, distance calculations. Carbon = VMT \u00d7 Emission Factor.",
+    "input_requirements": "Project type and size, occupancy, local VMT data, transit accessibility, parking ratios, ITE trip generation rates",
+    "tool_integration": "ITE Parking Generation Manual data, Regional VMT databases, EPA emission factors, Transit accessibility tools",
+    "validation": "Validate VMT estimates against regional travel surveys. Cross-check parking ratios with local codes. Verify emission factors with EPA.",
+    "notes": "VMT calculations can be automated with standard trip generation rates. Regional calibration improves accuracy."
+  },
+  {
+    "credit_code": "LTc5",
+    "credit_name": "Electric Vehicles",
+    "calculation_score": 90,
+    "calculation_types": [
+      "EVSE quantity calculations (5-15% of parking)",
+      "Electrical load calculations for EV charging",
+      "Accessible parking compliance calculations"
+    ],
+    "formula_complexity": "Low - Percentage calculations for EVSE quantities, basic electrical load summation.",
+    "input_requirements": "Total parking space count, building type, electrical service capacity, accessible parking requirements",
+    "tool_integration": "Parking calculation tools, Electrical load analysis software, ADA accessible parking calculators",
+    "validation": "Verify parking counts with site plan. Cross-check electrical load calculations with NEC standards. ADA compliance review.",
+    "notes": "Simple percentage-based calculations. Very high automation potential."
+  },
+  {
+    "credit_code": "SSp1",
+    "credit_name": "Minimized Site Disturbance",
+    "calculation_score": 60,
+    "calculation_types": [
+      "Vegetation area calculations",
+      "Erosion control sizing (sediment basins, silt fences)",
+      "Disturbance boundary delineation"
+    ],
+    "formula_complexity": "Low to Medium - Area calculations, erosion control BMP sizing based on disturbed area.",
+    "input_requirements": "Site survey, topography, drainage patterns, vegetation inventory, soil types, construction phasing",
+    "tool_integration": "GIS for vegetation mapping, Erosion control design tools, Soil survey databases (NRCS)",
+    "validation": "Field verification of vegetation. Review by certified erosion control professional. Compliance with EPA CGP.",
+    "notes": "Area calculations are automatable. Erosion control design requires engineering judgment."
+  },
+  {
+    "credit_code": "SSc1",
+    "credit_name": "Biodiverse Habitat",
+    "calculation_score": 75,
+    "calculation_types": [
+      "Habitat preservation area (40% of greenfield)",
+      "Restoration area calculations (20-40% disturbed)",
+      "Bird collision threat factor calculations",
+      "Facade risk zone analysis"
+    ],
+    "formula_complexity": "Medium - Area percentage calculations, bird threat factor scoring based on glass area and context.",
+    "input_requirements": "Site plan, existing vegetation survey, facade drawings, glass specifications, building context",
+    "tool_integration": "GIS for habitat mapping, Bird collision assessment tools (e.g., Bird-Safe Building Designer), Native plant databases",
+    "validation": "Habitat assessment by ecologist. Bird collision analysis per American Bird Conservancy guidelines.",
+    "notes": "Area calculations straightforward. Bird collision analysis requires specialized tools and expertise."
+  },
+  {
+    "credit_code": "SSc2",
+    "credit_name": "Accessible Outdoor Space",
+    "calculation_score": 70,
+    "calculation_types": [
+      "Outdoor space percentage (\u226530% of site)",
+      "Seating requirements (1 seat/250 SF)",
+      "Accessible path compliance calculations"
+    ],
+    "formula_complexity": "Low - Area percentage calculations, seating count based on area ratios.",
+    "input_requirements": "Site plan, building footprint, outdoor space design, accessibility route plans",
+    "tool_integration": "CAD/GIS for area calculations, ADA compliance checking tools",
+    "validation": "Site plan review. ADA compliance verification by accessibility consultant.",
+    "notes": "Simple area and ratio calculations. High automation potential for calculations, design compliance requires review."
+  },
+  {
+    "credit_code": "SSc3",
+    "credit_name": "Rainwater Management",
+    "calculation_score": 90,
+    "calculation_types": [
+      "Rainfall percentile analysis (80th-90th percentile)",
+      "Runoff volume calculations (SCS CN method)",
+      "LID/GI sizing (rain gardens, permeable pavement)",
+      "Retention volume requirements",
+      "Natural land cover runoff comparison"
+    ],
+    "formula_complexity": "High - Hydrologic modeling with rainfall distributions, SCS Curve Number method, detention/retention sizing. Requires TR-55 or equivalent.",
+    "input_requirements": "Site area, impervious coverage by type, local rainfall data (NOAA), soil infiltration rates (NRCS), slope data",
+    "tool_integration": "NOAA rainfall databases, NRCS soil surveys, Stormwater modeling software (SWMM, HydroCAD), Local stormwater manuals",
+    "validation": "Peer review of hydrologic calculations. Comparison with local stormwater manual requirements. Field verification of soil infiltration.",
+    "notes": "Well-established hydrologic calculations can be fully automated. SWMM integration possible for complex sites."
+  },
+  {
+    "credit_code": "SSc4",
+    "credit_name": "Enhanced Resilient Site Design",
+    "calculation_score": 65,
+    "calculation_types": [
+      "Hazard-strategy matching algorithms",
+      "Resilience performance metrics",
+      "Shade coverage calculations for heat mitigation",
+      "Evaporative cooling area requirements"
+    ],
+    "formula_complexity": "Medium - Strategy selection based on hazard priority scores, performance metrics for resilience strategies.",
+    "input_requirements": "IPp1 hazard assessment results, site design parameters, local climate data, resilience strategy database",
+    "tool_integration": "IPp1 assessment data, SITES rating system tools, Climate adaptation databases",
+    "validation": "Resilience strategy review by climate adaptation specialist. Cross-check with local building codes.",
+    "notes": "Relies heavily on IPp1 outputs. Strategy matching can be automated, but effectiveness requires expert judgment."
+  },
+  {
+    "credit_code": "SSc5",
+    "credit_name": "Heat Island Reduction",
+    "calculation_score": 95,
+    "calculation_types": [
+      "SRI (Solar Reflectance Index) weighted calculations",
+      "Shaded area calculations",
+      "Vegetated roof area calculations",
+      "Parking coverage calculations (75%+ under cover)",
+      "Tree Equity Score analysis"
+    ],
+    "formula_complexity": "Low to Medium - Weighted area calculations based on material SRI values. Simple percentage calculations for coverage.",
+    "input_requirements": "Site plan, roof areas, paving areas, material SRI values, Tree Equity Score (US only)",
+    "tool_integration": "Material SRI databases (CRRC), American Forests Tree Equity Score API, CAD/GIS for area calculations",
+    "validation": "Verify SRI values with CRRC-rated product database. Cross-check area calculations with design drawings.",
+    "notes": "Straightforward weighted calculations. SRI databases readily available. Very high automation potential."
+  },
+  {
+    "credit_code": "SSc6",
+    "credit_name": "Light Pollution Reduction",
+    "calculation_score": 95,
+    "calculation_types": [
+      "BUG (Backlight-Uplight-Glare) rating verification",
+      "Lighting zone determination",
+      "Signage luminance calculations (nits)",
+      "Luminaire classification compliance"
+    ],
+    "formula_complexity": "Low - Lookup table verification against IES TM-15-11, luminance threshold checking.",
+    "input_requirements": "Luminaire schedules with BUG ratings, lighting zone classification, signage specifications",
+    "tool_integration": "IES TM-15-11 standards database, Luminaire manufacturer databases, Lighting zone maps",
+    "validation": "Verify BUG ratings with manufacturer photometric files. Cross-check lighting zone with local ordinances.",
+    "notes": "Primarily database lookup and threshold verification. Very high automation potential."
+  },
+  {
+    "credit_code": "WEp1",
+    "credit_name": "Water Metering and Reporting",
+    "calculation_score": 60,
+    "calculation_types": [
+      "Meter specification sizing",
+      "Data reporting system setup"
+    ],
+    "formula_complexity": "Low - Basic meter sizing based on expected flow rates.",
+    "input_requirements": "Building water systems, alternative water sources, facility management structure",
+    "tool_integration": "Meter manufacturer sizing tools, USGBC Arc platform API",
+    "validation": "Meter specification review by plumbing engineer. Arc platform setup verification.",
+    "notes": "Primarily equipment specification and reporting setup. Limited calculations."
+  },
+  {
+    "credit_code": "WEp2",
+    "credit_name": "Minimum Water Efficiency",
+    "calculation_score": 90,
+    "calculation_types": [
+      "Fixture flow rate compliance checking",
+      "Water use baseline calculations",
+      "Percentage reduction calculations (20% minimum)",
+      "Irrigation water requirement (TIR method)",
+      "Landscape coefficient calculations"
+    ],
+    "formula_complexity": "Medium - Water use calculations per ASHRAE 189.1/EPA WaterSense. Irrigation = ET\u2080 \u00d7 K\u2097 \u00d7 K\u209b \u00d7 Area. Baseline vs proposed comparisons.",
+    "input_requirements": "Fixture schedules with flow rates, occupancy counts, landscape areas by plant type, local ET\u2080 data, appliance specifications",
+    "tool_integration": "EPA WaterSense calculators, Irrigation scheduling software, Fixture manufacturer databases, ENERGY STAR appliance database",
+    "validation": "Verify fixture flow rates with manufacturer documentation. Cross-check irrigation with local water authority methods.",
+    "notes": "Standard water use calculations well-documented. Can be fully automated with proper inputs."
+  },
+  {
+    "credit_code": "WEc1",
+    "credit_name": "Water Metering and Leak Detection",
+    "calculation_score": 75,
+    "calculation_types": [
+      "Submeter coverage percentage (80%+ indoor)",
+      "Leak detection sensor placement optimization",
+      "Action plan threshold calculations"
+    ],
+    "formula_complexity": "Low - Percentage coverage calculations, sensor spacing based on system characteristics.",
+    "input_requirements": "Building water systems, fixture counts, irrigation zones, process water systems, meal counts, laundry projections",
+    "tool_integration": "Plumbing design software, Leak detection system manufacturer tools, BMS integration platforms",
+    "validation": "Submeter plan review by plumbing engineer. Leak detection system specification review.",
+    "notes": "Coverage calculations straightforward. Sensor placement requires system knowledge."
+  },
+  {
+    "credit_code": "WEc2",
+    "credit_name": "Enhanced Water Efficiency",
+    "calculation_score": 90,
+    "calculation_types": [
+      "Whole-project water balance modeling",
+      "Percentage reduction calculations (30-65%)",
+      "Alternative water source availability analysis",
+      "Rainwater/graywater harvesting sizing",
+      "Cooling tower optimization calculations",
+      "Process water efficiency analysis"
+    ],
+    "formula_complexity": "High - Comprehensive water modeling integrating all sources and uses. Optimization algorithms for alternative water integration. Water balance = Supply - Demand - Losses.",
+    "input_requirements": "All indoor water uses, outdoor irrigation, process water, cooling tower makeup, alternative water sources (rainwater, graywater, reclaimed), local rainfall data",
+    "tool_integration": "Water modeling software (e.g., Watergy, WaterSense calculators), Rainwater harvesting calculators, Graywater system design tools",
+    "validation": "Water model validation against utility bills (for existing buildings). Peer review of alternative water calculations.",
+    "notes": "Complex integrated modeling but well-established methodologies. High automation potential with comprehensive inputs."
+  },
+  {
+    "credit_code": "EAp1",
+    "credit_name": "Operational Carbon Projection and Decarbonization Plan",
+    "calculation_score": 90,
+    "calculation_types": [
+      "Annual operational carbon calculations",
+      "25-year carbon trajectory projections",
+      "Grid decarbonization factor application",
+      "Electrification pathway analysis",
+      "Fuel switching cost-benefit analysis",
+      "Decarbonization timeline optimization"
+    ],
+    "formula_complexity": "High - Time-series carbon modeling with changing grid factors. Annual Carbon = \u03a3(Energy\u1d62 \u00d7 GridFactor\u1d62). Requires NPV-style analysis over building life.",
+    "input_requirements": "Energy model outputs by fuel type, grid emission factors (eGRID), grid decarbonization projections, fuel costs, electrification options",
+    "tool_integration": "EnergyPlus/OpenStudio, EPA eGRID database, Grid decarbonization models (NREL), Building life-cycle cost tools",
+    "validation": "Energy model calibration against similar buildings. Grid factor validation with EPA eGRID. Peer review of decarbonization pathway.",
+    "notes": "Complex but well-defined calculations. Integration with energy models enables high automation."
+  },
+  {
+    "credit_code": "EAp2",
+    "credit_name": "Minimum Energy Efficiency",
+    "calculation_score": 85,
+    "calculation_types": [
+      "ASHRAE 90.1 prescriptive compliance checking",
+      "Performance path baseline building modeling",
+      "Envelope UA calculations",
+      "HVAC system efficiency comparisons",
+      "Lighting power density calculations"
+    ],
+    "formula_complexity": "High - Full building energy simulation per ASHRAE 90.1 Appendix G. Baseline vs proposed modeling with complex rulesets.",
+    "input_requirements": "Building envelope specifications, HVAC systems, lighting design, service water heating, climate zone, building type",
+    "tool_integration": "EnergyPlus, OpenStudio, eQUEST, Trane TRACE, Carrier HAP, ASHRAE 90.1 compliance tools",
+    "validation": "Energy model quality assurance per ASHRAE Standard 90.1. Third-party model review. Calibration if utility data available.",
+    "notes": "Complex energy modeling but standardized methodologies. Tools like EnergyPlus/OpenStudio automate most calculations."
+  },
+  {
+    "credit_code": "EAp3",
+    "credit_name": "Fundamental Commissioning",
+    "calculation_score": 30,
+    "calculation_types": [
+      "Cx milestone scheduling",
+      "System coverage verification"
+    ],
+    "formula_complexity": "Low - Primarily process documentation and scheduling. Limited quantitative analysis.",
+    "input_requirements": "Project schedule, design milestones, system types, owner requirements",
+    "tool_integration": "Project management software, Cx management platforms",
+    "validation": "Cx plan review by qualified CxP. ASHRAE 202 compliance verification.",
+    "notes": "Process-based prerequisite with minimal calculation requirements."
+  },
+  {
+    "credit_code": "EAp4",
+    "credit_name": "Energy Metering and Reporting",
+    "calculation_score": 70,
+    "calculation_types": [
+      "Meter specification per ASHRAE 90.1",
+      "Arc platform data mapping",
+      "End-use categorization calculations"
+    ],
+    "formula_complexity": "Low - Meter sizing and placement per code requirements. Data categorization.",
+    "input_requirements": "Energy systems, metering points, building type, Arc platform requirements",
+    "tool_integration": "ASHRAE 90.1 metering tables, USGBC Arc platform API, BMS integration tools",
+    "validation": "Metering plan review by electrical engineer. Arc platform setup verification.",
+    "notes": "Primarily equipment specification and reporting setup. Limited calculations."
+  },
+  {
+    "credit_code": "EAp5",
+    "credit_name": "Fundamental Refrigerant Management",
+    "calculation_score": 85,
+    "calculation_types": [
+      "Refrigerant GWP verification",
+      "Phase-out schedule compliance checking",
+      "Montreal Protocol category classification"
+    ],
+    "formula_complexity": "Low - Database lookup for refrigerant types, schedule compliance checking.",
+    "input_requirements": "HVAC equipment schedules, refrigerant types, existing system inventory",
+    "tool_integration": "EPA refrigerant databases, Montreal Protocol schedules, Equipment manufacturer databases",
+    "validation": "Refrigerant type verification with equipment manufacturer. EPA regulation compliance check.",
+    "notes": "Primarily database verification. GWP values and phase-out schedules are standardized."
+  },
+  {
+    "credit_code": "EAc1",
+    "credit_name": "Electrification",
+    "calculation_score": 90,
+    "calculation_types": [
+      "Weighted average COP calculations",
+      "Heating system electrification analysis",
+      "DHW system electrification analysis",
+      "Electrification readiness assessment"
+    ],
+    "formula_complexity": "Medium - Weighted average calculations: COP_avg = \u03a3(COP\u1d62 \u00d7 Load\u1d62) / \u03a3(Load\u1d62). System-by-system electrification pathway analysis.",
+    "input_requirements": "HVAC equipment schedules with COPs, heating loads by system, DHW loads, climate zone, electrical capacity",
+    "tool_integration": "Energy model outputs, Equipment manufacturer databases (AHRI), Electrical load analysis tools",
+    "validation": "COP verification with AHRI certificates. Load calculations per ASHRAE standards. Electrical capacity verification.",
+    "notes": "Straightforward weighted calculations. Equipment databases provide COP data. High automation potential."
+  },
+  {
+    "credit_code": "EAc2",
+    "credit_name": "Reduce Peak Thermal Loads",
+    "calculation_score": 80,
+    "calculation_types": [
+      "Air leakage rate calculations (CFM/sf)",
+      "Energy recovery effectiveness calculations",
+      "Thermal bridge linear transmittance (psi values)",
+      "Peak load reduction percentage calculations"
+    ],
+    "formula_complexity": "Medium - Envelope thermal analysis, ERV effectiveness calculations, thermal bridge modeling. Peak load comparison baseline vs proposed.",
+    "input_requirements": "Building envelope specifications, air leakage targets, ventilation design, energy model, thermal bridge details",
+    "tool_integration": "Energy modeling software, Thermal bridge calculation tools (THERM, PsiTherm), Blower door test protocols",
+    "validation": "Air leakage testing per ASTM E779. Thermal bridge analysis validation. Energy model QA.",
+    "notes": "Mix of calculations and testing. Thermal bridge analysis requires specialized tools."
+  },
+  {
+    "credit_code": "EAc3",
+    "credit_name": "Enhanced Energy Efficiency",
+    "calculation_score": 90,
+    "calculation_types": [
+      "Percent improvement calculations (6-50%+)",
+      "Energy cost budget calculations",
+      "Prescriptive path compliance checking",
+      "Points optimization algorithms"
+    ],
+    "formula_complexity": "High - Full energy modeling per ASHRAE 90.1 Appendix G. Percent improvement = (Baseline - Proposed) / Baseline \u00d7 100.",
+    "input_requirements": "Complete energy model (baseline and proposed), building specifications, utility rates, climate zone",
+    "tool_integration": "EnergyPlus, OpenStudio, eQUEST, ASHRAE 90.1 Appendix G tools, Utility rate databases",
+    "validation": "Energy model quality assurance per ASHRAE Standard 90.1. Third-party model review.",
+    "notes": "Complex energy modeling but standardized. Energy modeling software automates most calculations."
+  },
+  {
+    "credit_code": "EAc4",
+    "credit_name": "Renewable Energy",
+    "calculation_score": 85,
+    "calculation_types": [
+      "On-site renewable energy production estimation",
+      "Percent of annual energy use calculations",
+      "Solar-ready roof area calculations",
+      "REC quantity calculations",
+      "Financial feasibility analysis"
+    ],
+    "formula_complexity": "Medium - Renewable production modeling (PVWatts for solar), percentage calculations, REC matching.",
+    "input_requirements": "Building energy use, roof area and orientation, solar resource data, REC procurement plans, financial parameters",
+    "tool_integration": "NREL PVWatts, SAM for renewable modeling, Green-e registry, Solar feasibility tools",
+    "validation": "PV production estimates validated against actual systems. REC verification through Green-e registry.",
+    "notes": "PVWatts provides standardized solar calculations. REC tracking systems enable verification."
+  },
+  {
+    "credit_code": "EAc5",
+    "credit_name": "Enhanced Commissioning",
+    "calculation_score": 50,
+    "calculation_types": [
+      "MBCx analytics threshold setting",
+      "Performance baseline establishment",
+      "Fault detection algorithm configuration"
+    ],
+    "formula_complexity": "Medium - Statistical analysis for fault detection, performance baseline calculations.",
+    "input_requirements": "BMS data streams, energy consumption data, system performance parameters, equipment specifications",
+    "tool_integration": "MBCx platforms (SkySpark, KGS Clockworks, CopperTree), BMS integration, Analytics software",
+    "validation": "MBCx system validation through manual fault verification. Performance baseline calibration.",
+    "notes": "MBCx involves both automated analytics and manual verification. Analytics can be highly automated."
+  },
+  {
+    "credit_code": "EAc6",
+    "credit_name": "Grid Interactive",
+    "calculation_score": 75,
+    "calculation_types": [
+      "Demand response load shed calculations",
+      "Energy storage sizing analysis",
+      "Smart grid integration load management algorithms"
+    ],
+    "formula_complexity": "Medium - Load flexibility analysis, storage dispatch optimization, demand response capability assessment.",
+    "input_requirements": "Building loads by end-use, DR-capable equipment, storage specifications, utility DR programs, tariff structures",
+    "tool_integration": "Demand response management systems, Energy storage sizing tools, Utility program databases",
+    "validation": "DR capability testing. Storage system performance verification. Utility program compliance check.",
+    "notes": "Calculations require understanding of building loads and utility programs. Some optimization possible."
+  },
+  {
+    "credit_code": "EAc7",
+    "credit_name": "Enhanced Refrigerant Management",
+    "calculation_score": 90,
+    "calculation_types": [
+      "Total GWP impact calculations",
+      "Refrigerant charge \u00d7 GWP summation",
+      "Threshold comparison calculations",
+      "Leak detection system sizing"
+    ],
+    "formula_complexity": "Low - Total GWP = \u03a3(Refrigerant Charge \u00d7 GWP per kg). Simple threshold comparisons.",
+    "input_requirements": "HVAC equipment schedules, refrigerant charges by system, refrigerant GWP values, system types",
+    "tool_integration": "Refrigerant GWP databases (IPCC, EPA), Equipment manufacturer databases, Leak detection system tools",
+    "validation": "Refrigerant charge verification with equipment specs. GWP values from IPCC/EPA. Leak detection code compliance.",
+    "notes": "Straightforward calculations with standardized GWP values. Very high automation potential."
+  },
+  {
+    "credit_code": "MRp1",
+    "credit_name": "Planning for Zero Waste Operations",
+    "calculation_score": 50,
+    "calculation_types": [
+      "Waste stream generation estimates",
+      "Recycling storage area sizing",
+      "Service frequency calculations"
+    ],
+    "formula_complexity": "Low - Waste generation rates by building type, area-based storage sizing.",
+    "input_requirements": "Building type, occupancy, floor plans, local recycling services, waste generation rates",
+    "tool_integration": "Waste generation rate databases, Recycling service directories, Storage sizing tools",
+    "validation": "Waste generation estimates compared to similar buildings. Storage area code compliance.",
+    "notes": "Primarily planning and documentation. Limited calculations required."
+  },
+  {
+    "credit_code": "MRp2",
+    "credit_name": "Quantify and Assess Embodied Carbon",
+    "calculation_score": 85,
+    "calculation_types": [
+      "Bill of materials extraction",
+      "Quantity take-offs by material type",
+      "GWP multiplication (Quantity \u00d7 EPD GWP)",
+      "Cradle-to-gate (A1-A3) carbon summation",
+      "Hot spot identification (top 3 sources)"
+    ],
+    "formula_complexity": "Medium - Material quantity \u00d7 GWP factor calculations. Total Embodied Carbon = \u03a3(Material\u1d62 \u00d7 Quantity\u1d62 \u00d7 GWP\u1d62).",
+    "input_requirements": "Structural drawings, material specifications, quantity take-offs, EPDs or industry average GWP values",
+    "tool_integration": "WBLCA tools (Tally, One Click LCA, EC3), BIM quantity extraction, EPD databases",
+    "validation": "Quantity take-off validation. EPD verification through program operators. Cross-check with CLF Material Baselines.",
+    "notes": "Well-established WBLCA methodologies. Tools like Tally and EC3 automate most calculations."
+  },
+  {
+    "credit_code": "MRc1",
+    "credit_name": "Building and Materials Reuse",
+    "calculation_score": 70,
+    "calculation_types": [
+      "Existing building area calculations",
+      "Reuse percentage calculations (20-50%+)",
+      "Salvage material valuation"
+    ],
+    "formula_complexity": "Low - Area percentage calculations, material value summation.",
+    "input_requirements": "Existing building survey, demolition plans, salvage material inventory, market values",
+    "tool_integration": "CAD for area calculations, Salvage material databases, Cost estimation tools",
+    "validation": "Existing building survey verification. Salvage material value documentation.",
+    "notes": "Simple percentage calculations. Material valuation requires market research."
+  },
+  {
+    "credit_code": "MRc2",
+    "credit_name": "Reduce Embodied Carbon",
+    "calculation_score": 90,
+    "calculation_types": [
+      "WBLCA reduction percentage calculations (5-40%+)",
+      "EPD comparison analysis",
+      "Project-average GWP calculations",
+      "Materials-type GWP calculations",
+      "Construction emissions (A5) tracking"
+    ],
+    "formula_complexity": "High - Comprehensive WBLCA with baseline comparison. Reduction % = (Baseline - Proposed) / Baseline \u00d7 100. Construction emissions tracking.",
+    "input_requirements": "Material quantities, EPDs, baseline project data, construction fuel/energy use, equipment hours",
+    "tool_integration": "WBLCA tools (Tally, One Click LCA), EC3 database, EPD registries, Construction emission tracking tools",
+    "validation": "WBLCA review by LCA practitioner. EPD verification. Baseline appropriateness review.",
+    "notes": "Complex LCA calculations but well-established tools exist. High automation potential with proper data."
+  },
+  {
+    "credit_code": "MRc3",
+    "credit_name": "Low-Emitting Materials",
+    "calculation_score": 85,
+    "calculation_types": [
+      "Product category percentage calculations (90%+, 80%+)",
+      "Compliance matrix by category",
+      "Emission standard verification"
+    ],
+    "formula_complexity": "Low - Percentage calculations for compliant products by category.",
+    "input_requirements": "Product specifications, manufacturer certifications, product submittals, emission standards (CDPH, GREENGUARD)",
+    "tool_integration": "CDPH Standard Method database, GREENGUARD registry, FloorScore database, HPD databases",
+    "validation": "Certification verification with program operators. Product specification review.",
+    "notes": "Primarily database verification and percentage calculations. High automation potential."
+  },
+  {
+    "credit_code": "MRc4",
+    "credit_name": "Building Product Selection and Procurement",
+    "calculation_score": 80,
+    "calculation_types": [
+      "Manufacturer count verification (5+)",
+      "EPD/HPD/certification tracking by product",
+      "Points summation by pathway"
+    ],
+    "formula_complexity": "Low - Counting and categorization of products with documentation. Points summation.",
+    "input_requirements": "Product specifications, manufacturer documentation, EPDs, HPDs, certification claims",
+    "tool_integration": "EPD registries (ECO Platform, UL), HPD Collaborative database, FSC registry, Cradle to Cradle registry",
+    "validation": "EPD/HPD verification with program operators. Certification validation with issuing bodies.",
+    "notes": "Primarily documentation tracking and verification. Limited calculations."
+  },
+  {
+    "credit_code": "MRc5",
+    "credit_name": "Construction and Demolition Waste Diversion",
+    "calculation_score": 85,
+    "calculation_types": [
+      "Diversion rate calculations (50%+, 75%+)",
+      "Waste quantity tracking by material stream",
+      "Facility recycling rate verification"
+    ],
+    "formula_complexity": "Low - Diversion % = (Recycled + Reused) / Total Waste \u00d7 100. Material stream categorization.",
+    "input_requirements": "Waste manifests, hauler reports, material weights, facility recycling rates",
+    "tool_integration": "Waste tracking platforms, Hauler reporting systems, Facility certification databases",
+    "validation": "Waste manifest verification. Hauler report cross-check. Facility recycling rate confirmation.",
+    "notes": "Straightforward percentage calculations. Tracking systems can automate data collection."
+  },
+  {
+    "credit_code": "EQp1",
+    "credit_name": "Construction Management",
+    "calculation_score": 40,
+    "calculation_types": [
+      "Heat index monitoring",
+      "IAQ plan implementation tracking"
+    ],
+    "formula_complexity": "Low - Heat index calculations from temperature and humidity. Primarily process documentation.",
+    "input_requirements": "Construction schedule, site conditions, weather data, material delivery schedule",
+    "tool_integration": "Weather data APIs, Heat index calculators, Project management platforms",
+    "validation": "IAQ plan review. Heat illness prevention compliance with OSHA guidelines.",
+    "notes": "Process-based prerequisite. Limited calculation requirements."
+  },
+  {
+    "credit_code": "EQp2",
+    "credit_name": "Fundamental Air Quality",
+    "calculation_score": 85,
+    "calculation_types": [
+      "ASHRAE 62.1 ventilation rate calculations",
+      "Outdoor air intake requirements by space",
+      "MERV 13+ filtration verification",
+      "Entryway walk-off mat sizing"
+    ],
+    "formula_complexity": "Medium - Ventilation calculations per ASHRAE 62.1: Vbz = Rp \u00d7 Pz + Ra \u00d7 Az. Multiple space system calculations.",
+    "input_requirements": "Space types, occupancy, floor areas, outdoor air quality data, HVAC design",
+    "tool_integration": "ASHRAE 62.1 calculation tools, EPA AQI data, HVAC design software",
+    "validation": "Ventilation calculations per ASHRAE 62.1. Filtration specification verification. Design review.",
+    "notes": "Standardized ventilation calculations. HVAC design software automates most of this."
+  },
+  {
+    "credit_code": "EQp3",
+    "credit_name": "No Smoking or Vehicle Idling",
+    "calculation_score": 80,
+    "calculation_types": [
+      "25-foot buffer zone calculations",
+      "Signage placement optimization",
+      "Policy coverage verification"
+    ],
+    "formula_complexity": "Low - Distance calculations for buffer zones. Signage placement.",
+    "input_requirements": "Building entries, air intake locations, operable windows, site plan",
+    "tool_integration": "CAD/GIS for distance calculations, Signage placement tools",
+    "validation": "Site plan review. Policy document verification.",
+    "notes": "Simple geometric calculations. High automation potential."
+  },
+  {
+    "credit_code": "EQc1",
+    "credit_name": "Enhanced Air Quality",
+    "calculation_score": 85,
+    "calculation_types": [
+      "15% ventilation increase calculations",
+      "Enhanced IAQ design verification (PM2.5, formaldehyde, ozone limits)"
+    ],
+    "formula_complexity": "Medium - Enhanced ventilation: Vbz_enhanced = 1.15 \u00d7 Vbz_baseline. IAQ design verification against enhanced limits.",
+    "input_requirements": "Baseline ventilation rates, HVAC design, IAQ design targets, enhanced limits",
+    "tool_integration": "ASHRAE 62.1 tools, IAQ modeling software, HVAC design software",
+    "validation": "Ventilation calculations verification. IAQ design review against enhanced criteria.",
+    "notes": "Straightforward enhancement calculations. HVAC software automates ventilation calculations."
+  },
+  {
+    "credit_code": "EQc2",
+    "credit_name": "Occupant Experience",
+    "calculation_score": 70,
+    "calculation_types": [
+      "Daylight simulation (sDA, ASE)",
+      "View quality analysis (quality views percentage)",
+      "Acoustic performance calculations (NC/RC levels)",
+      "Thermal comfort analysis (ASHRAE 55 PMV/PPD)",
+      "Lighting glare analysis (UGR, DGP)",
+      "Electric lighting power density"
+    ],
+    "formula_complexity": "High - Daylight simulation requires radiance calculations. Thermal comfort: PMV/PPD calculations. Acoustic: NC/RC curves. Lighting: UGR/DGP glare metrics.",
+    "input_requirements": "Building geometry, glazing specifications, interior layouts, site surroundings, HVAC parameters, lighting design, acoustic criteria",
+    "tool_integration": "Daylight simulation (Radiance, DIVA, ClimateStudio), Thermal comfort tools (CBE Thermal Comfort Tool), Acoustic modeling (EASE, ODEON), Lighting analysis (DIALux, Relux)",
+    "validation": "Daylight model validation. Thermal comfort verification. Acoustic testing. Lighting measurements.",
+    "notes": "Complex simulations required but specialized tools exist. Integration of multiple analysis types."
+  },
+  {
+    "credit_code": "EQc3",
+    "credit_name": "Accessibility and Inclusion",
+    "calculation_score": 35,
+    "calculation_types": [
+      "Accessibility feature checklist scoring"
+    ],
+    "formula_complexity": "Low - Primarily qualitative assessment and checklist completion.",
+    "input_requirements": "Floor plans, design specifications, accessibility goals",
+    "tool_integration": "ADA compliance checking tools, Accessibility assessment checklists",
+    "validation": "Accessibility consultant review. ADA compliance verification.",
+    "notes": "Primarily qualitative assessment. Limited calculations."
+  },
+  {
+    "credit_code": "EQc4",
+    "credit_name": "Resilient Spaces",
+    "calculation_score": 60,
+    "calculation_types": [
+      "Operable window coverage (50-75% of spaces)",
+      "Thermal safety zone calculations (passive survivability)",
+      "Filtration upgrade specifications"
+    ],
+    "formula_complexity": "Medium - Percentage coverage calculations, thermal modeling for passive survivability.",
+    "input_requirements": "HVAC design, building envelope, operable window specifications, priority hazards from IPp1",
+    "tool_integration": "Energy modeling for passive survivability, Window schedule analysis",
+    "validation": "Operable window coverage verification. Thermal safety modeling review.",
+    "notes": "Mix of simple calculations and thermal modeling. Passive survivability requires energy modeling."
+  },
+  {
+    "credit_code": "EQc5",
+    "credit_name": "Air Quality Testing and Monitoring",
+    "calculation_score": 75,
+    "calculation_types": [
+      "Testing location optimization (per area requirements)",
+      "Sensor density calculations",
+      "Compliance threshold checking"
+    ],
+    "formula_complexity": "Low - Area-based testing location calculations, sensor spacing, threshold comparisons.",
+    "input_requirements": "Building area, space types, testing requirements, monitoring system options",
+    "tool_integration": "LEED testing protocols, Sensor specification tools, Testing laboratory coordination",
+    "validation": "Testing protocol review. Sensor specification verification. Laboratory certification check.",
+    "notes": "Primarily planning and specification. Limited complex calculations."
+  },
+  {
+    "credit_code": "PRc1",
+    "credit_name": "Project Priorities",
+    "calculation_score": 45,
+    "calculation_types": [
+      "Regional priority credit identification",
+      "Exemplary performance threshold checking",
+      "Points optimization by pathway"
+    ],
+    "formula_complexity": "Low - Database lookups for regional priorities, threshold comparisons, points summation.",
+    "input_requirements": "Project location, pursued credits, project type, innovation ideas",
+    "tool_integration": "USGBC Regional Priority credit database, Project Priority Library, Pilot credit library",
+    "validation": "Regional priority verification with USGBC. Exemplary performance review.",
+    "notes": "Primarily database lookups and points tracking. Limited calculations."
+  },
+  {
+    "credit_code": "PRc2",
+    "credit_name": "LEED AP",
+    "calculation_score": 90,
+    "calculation_types": [
+      "Credential verification",
+      "Team roster matching"
+    ],
+    "formula_complexity": "Low - Database lookup for credential status. Binary verification.",
+    "input_requirements": "Team roster, credential information",
+    "tool_integration": "GBCI credential directory API",
+    "validation": "GBCI credential verification.",
+    "notes": "Simple database verification. Very high automation potential."
+  }
+]

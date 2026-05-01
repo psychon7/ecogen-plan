@@ -1,0 +1,147 @@
+
+================================================================================
+LEED V5 CREDITS - CALCULATION AUTOMATION POTENTIAL ANALYSIS
+================================================================================
+
+EXECUTIVE SUMMARY
+-----------------
+Total Credits Analyzed: 51
+Average Automation Score: 73.9/100
+
+Automation Potential Distribution:
+- High Automation (80-100): 28 credits (54.9%)
+- Medium Automation (50-79): 16 credits (31.4%)
+- Low Automation (0-49): 7 credits (13.7%)
+
+CATEGORY BREAKDOWN
+------------------
+Category                          Credits  Avg Score  High Auto %
+----------------------------------------------------------------
+LT - Location & Transportation        5      87.0       80.0%
+WE - Water Efficiency                 4      78.8       50.0%
+SS - Sustainable Sites                7      78.6       42.9%
+MR - Materials & Resources            7      77.9       71.4%
+EA - Energy & Atmosphere             12      76.7       66.7%
+PR - Project Priorities               2      67.5       50.0%
+EQ - Indoor Environmental Quality     8      66.2       37.5%
+IP - Integrative Process              6      56.7       33.3%
+
+FORMULA COMPLEXITY DISTRIBUTION
+--------------------------------
+- Low Complexity: 24 credits (47.1%)
+- Medium Complexity: 15 credits (29.4%)
+- High Complexity: 8 credits (15.7%)
+- Low-Medium Complexity: 4 credits (7.8%)
+
+KEY CALCULATION TYPES
+---------------------
+1. Carbon/GWP Calculations (19 occurrences)
+   - Embodied carbon summation
+   - Operational carbon projections
+   - Refrigerant GWP calculations
+   - 25-year emission trajectories
+
+2. Database/Verification (18 occurrences)
+   - Product certification checking
+   - Compliance verification
+   - EPD/HPD validation
+
+3. Area/Volume/Quantity Calculations (17 occurrences)
+   - Site area percentages
+   - Material quantity take-offs
+   - Space coverage calculations
+
+4. Percentage/Reduction Calculations (16 occurrences)
+   - Energy/water/carbon reduction %
+   - Diversion rates
+   - Coverage percentages
+
+5. Water Calculations (7 occurrences)
+   - Fixture flow rate compliance
+   - Irrigation requirements
+   - Runoff volume modeling
+
+6. Ventilation/IAQ Calculations (7 occurrences)
+   - ASHRAE 62.1 ventilation rates
+   - Filtration verification
+   - Air quality threshold checking
+
+7. Daylight/Lighting Calculations (5 occurrences)
+   - sDA/ASE simulations
+   - Glare analysis (UGR/DGP)
+   - Lighting power density
+
+TOP AUTOMATION OPPORTUNITIES
+-----------------------------
+1. LTc1 - Sensitive Land Protection (95/100)
+   GIS-based buffer calculations, slope analysis
+
+2. LTc3 - Compact and Connected Development (95/100)
+   Density calculations, transit trip counting
+
+3. SSc5 - Heat Island Reduction (95/100)
+   SRI weighted calculations, Tree Equity Score
+
+4. SSc6 - Light Pollution Reduction (95/100)
+   BUG rating verification, luminance checking
+
+5. IPp3 - Carbon Assessment (90/100)
+   25-year carbon projections, decarbonization modeling
+
+TOOL INTEGRATION RECOMMENDATIONS
+---------------------------------
+ENERGY MODELING:
+- EnergyPlus / OpenStudio (EAp2, EAc3, EAp1)
+- eQUEST, Trane TRACE, Carrier HAP
+
+CARBON CALCULATIONS:
+- EC3 (Embodied Carbon in Construction Calculator)
+- Tally (WBLCA tool)
+- One Click LCA
+- EPA eGRID database
+
+WATER CALCULATIONS:
+- EPA WaterSense calculators
+- SWMM (Storm Water Management Model)
+- Local stormwater manual tools
+
+DAYLIGHTING:
+- Radiance/DIVA/ClimateStudio
+- DIALux, Relux
+
+GIS & MAPPING:
+- ArcGIS / QGIS
+- FEMA flood map API
+- NWI wetland database
+- American Forests Tree Equity Score
+
+VENTILATION:
+- ASHRAE 62.1 calculation tools
+- CBE Thermal Comfort Tool
+
+RENEWABLE ENERGY:
+- NREL PVWatts
+- SAM (System Advisor Model)
+
+MATERIALS:
+- EPD registries (ECO Platform, UL)
+- HPD Collaborative database
+
+VALIDATION APPROACHES
+---------------------
+1. Cross-check with industry standards (ASHRAE, IPCC, EPA)
+2. Third-party model review for energy simulations
+3. Field verification for critical measurements
+4. Database verification for certifications
+5. Peer review for complex LCA calculations
+6. Calibration against actual building performance data
+
+CHALLENGES FOR AUTOMATION
+--------------------------
+1. Process-based credits (IPc1, EAp3) - require facilitation
+2. Qualitative assessments (EQc3) - require expert judgment
+3. Complex thermal modeling (EQc2) - requires specialized expertise
+4. Legal/contractual credits (IPc2) - require legal review
+5. Innovation credits (PRc1) - require creative solutions
+
+================================================================================
