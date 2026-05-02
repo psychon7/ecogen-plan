@@ -1,0 +1,105 @@
+services:
+  # ---------- PostgreSQL 15 with PostGIS ----------
+  postgres:
+    image: postgis/postgis:15-3.4
+    environment:
+      POSTGRES_USER: leed
+      POSTGRES_PASSWORD: leed_secret
+      POSTGRES_DB: leed_platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U leed"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ---------- MinIO (S3-compatible) ----------
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - miniodata:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ---------- Restate Server ----------
+  restate-server:
+    image: docker.io/restatedev/restate:1.1
+    ports:
+      - "8080:8080"   # Ingress
+      - "9070:9070"   # Admin / Meta
+    volumes:
+      - restatedata:/target
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ---------- Restate Service Worker (Python) ----------
+  restate-worker:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.restate
+    environment:
+      DATABASE_URL: postgresql+asyncpg://leed:leed_secret@postgres:5432/leed_platform
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-sk-placeholder}
+      S3_ENDPOINT_URL: http://minio:9000
+      S3_ACCESS_KEY: minioadmin
+      S3_SECRET_KEY: minioadmin
+    ports:
+      - "9080:9080"
+    depends_on:
+      restate-server:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+
+  # ---------- FastAPI Backend ----------
+  fastapi:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.backend
+    environment:
+      DATABASE_URL: postgresql+asyncpg://leed:leed_secret@postgres:5432/leed_platform
+      RESTATE_INGRESS_URL: http://restate-server:8080
+      RESTATE_ADMIN_URL: http://restate-server:9070
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-sk-placeholder}
+      S3_ENDPOINT_URL: http://minio:9000
+      S3_ACCESS_KEY: minioadmin
+      S3_SECRET_KEY: minioadmin
+      CORS_ORIGINS: http://localhost:3000
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      restate-server:
+        condition: service_started
+
+  # ---------- Redis (optional cache) ----------
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  pgdata:
+  miniodata:
+  restatedata:

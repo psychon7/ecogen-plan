@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MRc3 Low-Emitting Materials — Input Schema",
+  "type": "object",
+  "required": ["product_datasheets", "voc_certificates", "material_schedule", "floor_area_by_space_type"],
+  "properties": {
+    "product_datasheets": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "S3 keys of uploaded product datasheets"
+    },
+    "voc_certificates": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "S3 keys of uploaded VOC emission test reports"
+    },
+    "material_schedule": {
+      "type": "string",
+      "description": "S3 key of the master material schedule"
+    },
+    "floor_area_by_space_type": {
+      "type": "object",
+      "properties": {
+        "regularly_occupied_sqft": { "type": "number", "minimum": 0 },
+        "non_regularly_occupied_sqft": { "type": "number", "minimum": 0 }
+      },
+      "required": ["regularly_occupied_sqft"]
+    },
+    "product_category_mapping": {
+      "type": "object",
+      "description": "Optional pre-mapping of product names to LEED material categories",
+      "additionalProperties": {
+        "type": "string",
+        "enum": [
+          "adhesive_sealant",
+          "paint_coating",
+          "flooring",
+          "composite_wood",
+          "ceiling_wall",
+          "insulation",
+          "furniture"
+        ]
+      }
+    }
+  }
+}

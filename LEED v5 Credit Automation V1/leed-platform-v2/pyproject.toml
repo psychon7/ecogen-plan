@@ -1,0 +1,62 @@
+[project]
+name = "leed-platform-v2"
+version = "0.1.0"
+description = "LEED v5 Credit Automation Platform — Restate + OpenAI Agents SDK"
+requires-python = ">=3.12"
+
+dependencies = [
+    # Web framework
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    # Database
+    "sqlalchemy[asyncio]>=2.0.30",
+    "asyncpg>=0.30.0",
+    "alembic>=1.14.0",
+    # Durable runtime
+    "restate-sdk>=0.5.0",
+    # Agent execution
+    "openai-agents>=0.1.0",
+    "openai>=1.60.0",
+    # Storage
+    "boto3>=1.35.0",
+    # Models & validation
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+    # Document generation
+    "jinja2>=3.1.4",
+    "openpyxl>=3.1.5",
+    "python-docx>=1.1.2",
+    "weasyprint>=62.0",
+    # Auth
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "python-multipart>=0.0.12",
+    # Utilities
+    "httpx>=0.27.0",
+    "tenacity>=9.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.8.0",
+    "mypy>=1.13.0",
+    "httpx>=0.27.0",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true

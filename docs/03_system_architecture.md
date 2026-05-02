@@ -47,8 +47,22 @@ All external integrations should use a shared client pattern:
 - Per-source timeout, retry, backoff, and circuit breaker settings.
 - Redis-backed token buckets for rate limits.
 - Versioned cache keys that include source name, endpoint, query, region, and source data vintage.
-- Three-level fallback: primary API, secondary/cache/static dataset, then HITL/manual entry.
+- Four-level fallback: primary API, secondary/cache/static dataset, guided manual data entry, then HITL/expert escalation.
 - Source health events for latency, error rate, stale data, auth failure, and rate-limit proximity.
+- Region-aware source routing: on project creation, the source router selects the correct API client or manual workflow per credit and region.
+
+## Manual Data Acquisition
+
+When API sources are unavailable for a project's region, the platform activates structured manual data entry workflows. This is a first-class data acquisition mode with:
+
+- Guided entry forms with region-specific instructions and source links.
+- Evidence upload and verification (PDF, screenshots, URLs).
+- Confidence scoring based on data provenance (API > government pub > industry standard > manufacturer > estimate).
+- Validation gates with range checks, unit consistency, and completeness verification.
+- Full audit trail: every manual entry is timestamped, attributed, and immutable.
+- Data reuse across credits within a project.
+
+See [04b_manual_data_input_framework.md](04b_manual_data_input_framework.md) for the complete specification.
 
 ## Agent Model
 
@@ -77,15 +91,17 @@ The canonical platform data model includes:
 ## Runtime Flow
 
 1. Project intake creates the regional and project context.
-2. Credit selector filters skills by data availability and dependencies.
+2. Credit selector filters skills by data availability, region, and dependencies.
 3. User starts a credit workflow and uploads inputs.
 4. Extraction normalizes data and records confidence.
-5. APIs fetch external sources with cache and fallback metadata.
-6. Calculation nodes run deterministic formulas.
-7. QA checks completeness, ranges, source coverage, and confidence.
-8. Evidence pack drafts are generated.
-9. HITL review pauses the workflow.
-10. Approval finalizes export; rejection rewinds to a defined step.
+5. Source router determines API availability for project region.
+6. APIs fetch external sources with cache and fallback metadata.
+7. For unavailable sources, manual data collection workflow activates with guided forms and source guidance.
+8. Calculation nodes run deterministic formulas (same pipeline for API and manual data).
+9. QA checks completeness, ranges, source coverage, and confidence.
+10. Evidence pack drafts are generated.
+11. HITL review pauses the workflow.
+12. Approval finalizes export; rejection rewinds to a defined step.
 
 ## Workflow Node Contract
 

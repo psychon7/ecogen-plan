@@ -43,10 +43,22 @@ Each source definition should store:
 | Region | Notes |
 |--------|-------|
 | United States | Strongest coverage for FEMA, EPA, NOAA, USGS, Census, eGRID, WaterSense, many product databases |
+| **Singapore** | Strong transit (LTA DataMall), weather/AQ (NEA APIs), GIS (OneMap), demographics (SingStat). Gaps in flood maps (PUB has no API), soil data, product certs (SGBC web-only). ~65% API / ~35% manual. See [04a_singapore_data_sources.md](04a_singapore_data_sources.md) |
 | Canada | Good professional ecosystem; some US data not applicable; provincial and federal substitutions required |
 | UK/EU | Strong material and energy data in places; replace Census/EJ/FEMA/eGRID with Eurostat, EEA, Copernicus, ENTSO-E, national datasets |
 | Australia/NZ | Use BOM, AEMO/NZEI, WELS/WaterMark, EPD Australasia where applicable |
 | Other regions | Expect manual data collection, static factors, local consultant validation, and lower automation |
+
+## Manual Data Entry
+
+When API sources are unavailable for a region, the platform uses structured manual data entry workflows. This is a first-class data acquisition mode, not a degraded fallback. See [04b_manual_data_input_framework.md](04b_manual_data_input_framework.md) for the complete specification including:
+
+- Four entry modes: structured form, document upload with AI extraction, checklist with evidence, reference table lookup
+- Confidence scoring by provenance (API > government publication > industry standard > manufacturer > consultant estimate)
+- Evidence attachment and verification workflow
+- Region-specific source guidance for every manual field
+- Database schema for manual data entries
+- UI components: data entry panel, source guidance sidebar, evidence manager, completeness dashboard
 
 ## Integration Quality Gates
 
@@ -68,7 +80,7 @@ Every production API client must define:
 | Rate limiting | Redis token bucket per source and credential |
 | Caching | Source-specific TTL plus versioned keys and stale-data warnings |
 | Circuit breaker | Closed, open, half-open states with source health events |
-| Fallback hierarchy | Primary API, verified cache/static source, then HITL/manual data entry |
+| Fallback hierarchy | Primary API, verified cache/static source, manual data entry (guided), then HITL/expert escalation |
 | Observability | Latency, error rate, retry count, cache hit rate, stale data, auth failure |
 | Evidence | Raw response hash or locator attached to each derived data point |
 
