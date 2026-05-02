@@ -2,552 +2,226 @@
 
 ## Overview
 
-The LEED AI Platform uses a multi-agent system built on Deer-Flow for orchestrating credit automation workflows.
+The LEED AI Platform uses Deer-Flow as the agent foundation and LangGraph as the durable workflow engine for credit automation. The architecture is skill-based: one independently testable skill per LEED v5 credit or prerequisite, with explicit contracts for inputs, calculations, evidence, regional availability, and human review.
+
+Core stance:
+
+- AI assists; humans decide.
+- Numeric calculations run in deterministic Python/tool code, not in the LLM.
+- Every compliance-critical output requires at least one HITL checkpoint before it is marked approved.
+- Regional data gaps and low-confidence results must be visible to users and preserved in the audit trail.
+- V1 produces downloadable submission packages; direct USGBC Arc submission is a feature-flagged V2 capability.
 
 ## Agent Hierarchy
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                      LEAD AGENT                                  │
-│              (Orchestrates project-level tasks)                  │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-          ┌───────────────────┼───────────────────┐
-          │                   │                   │
-          ▼                   ▼                   ▼
-┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-│  CREDIT AGENT 1 │ │  CREDIT AGENT 2 │ │  CREDIT AGENT N │
-│   (IPp3 Carbon) │ │   (WEp2 Water)  │ │    (etc.)       │
-└─────────────────┘ └─────────────────┘ └─────────────────┘
-          │                   │                   │
-          ▼                   ▼                   ▼
-┌─────────────────────────────────────────────────────────────┐
-│                     SUB-AGENTS                               │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐       │
-│  │ Data     │ │ Calc     │ │ Report   │ │ Review   │       │
-│  │ Extractor│ │ Engine   │ │ Generator│ │ Checker  │       │
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘       │
-└─────────────────────────────────────────────────────────────┘
+Lead Agent
+  - Project intake and credit selection
+  - Regional skill filtering
+  - Dependency-aware scheduling
+  - Result aggregation and user notifications
+
+Credit Skill Agents
+  - One skill per LEED credit/prerequisite
+  - LangGraph workflow per skill
+  - Own input schema, output schema, tests, templates, HITL checkpoints
+
+Shared Service Agents
+  - Document Extraction Agent
+  - Calculation Engine Agent
+  - Evidence Mapper Agent
+  - Report Generator Agent
+  - Review Checker Agent
+  - Package Assembly Agent
 ```
 
-## Agent Types
+## Kimi-Aligned Production Suites
 
-### 1. Lead Agent
+Automation levels are intentionally conservative and should stay aligned with `EXECUTIVE_SUMMARY_REALISTIC.md`. The production MVP is suite-based; the older generated 16-skill set remains an assisted catalog and implementation inventory.
 
-**Purpose:** Project-level orchestration and coordination.
+| Suite | Credit Agents | Review Pattern |
+|-------|---------------|----------------|
+| Water Efficiency | WEp2, WEc2 | LEED consultant review of fixture inputs, occupancy assumptions, formulas, and point optimization |
+| Refrigerant Management | EAp5, EAc7 | LEED consultant or MEP reviewer verifies equipment schedule, refrigerant types, charges, and GWP assumptions |
+| Quality Plans | EQp1, EQp2 | Contractor/MEP/LEED review of plan commitments, ventilation calculations, and filtration assumptions |
+| Integrative Process Assessment | IPp1, IPp2 | LEED AP/project lead review of hazard/demographic sources and local context |
+| Low-Emitting Materials | MRc3 | LEED/materials reviewer handles category assignment, certification validity, and exceptions |
 
-**Responsibilities:**
-- Initialize credit agents in parallel
-- Aggregate results
-- Handle project-level decisions
-- Manage user communication
+Assisted catalog agents: PRc2, IPp3, EAp1, EAp2, EAc3, MRp2, MRc2, SSc3, SSc5, SSc6, LTc1, and LTc3. These agents may be useful before or after the production MVP, but their UI label should reflect review depth and regional/source caveats.
 
-**Tools:**
-- `spawn_credit_agent` - Start a credit-specific agent
-- `aggregate_results` - Combine multiple credit results
-- `notify_user` - Send notifications
+## LangGraph Workflow Pattern
 
-### 2. Credit Agents (16 total)
+Each skill is compiled as a LangGraph `StateGraph` and checkpointed after every node. The workflow state is keyed by `thread_id = {project_id}:{credit_code}:{workflow_id}` and persists to PostgreSQL so workflows survive restarts, API failures, and multi-day HITL pauses.
 
-One agent per LEED credit. Each implements the complete workflow for that credit.
+Standard nodes:
 
-**Structure:**
-```python
-class CreditAgent:
-    """Base class for all credit agents"""
-    
-    credit_code: str
-    credit_name: str
-    automation_level: int
-    
-    async def execute(self, inputs: dict) -> dict:
-        """Execute the complete credit workflow"""
-        pass
-    
-    async def validate_inputs(self, inputs: dict) -> ValidationResult:
-        """Validate required inputs"""
-        pass
-    
-    async def fetch_data(self, inputs: dict) -> dict:
-        """Fetch data from external APIs"""
-        pass
-    
-    async def calculate(self, data: dict) -> dict:
-        """Perform calculations"""
-        pass
-    
-    async def generate_documents(self, results: dict) -> dict:
-        """Generate PDF/Excel documents"""
-        pass
-```
+| Node | Purpose | HITL/Traceability Requirement |
+|------|---------|-------------------------------|
+| `validate_inputs` | Schema validation, type coercion, required-file checks | Store validation report and input file checksums |
+| `extract_project_data` | Parse PDFs, spreadsheets, schedules, model outputs | Store extracted fields with confidence scores |
+| `fetch_api_data` | Fetch external data through resilient API tools | Store source snapshot, query params, retrieval timestamp |
+| `normalize_data` | Unit conversion, schema mapping, regional source substitution | Store mapping confidence and fallback flags |
+| `calculate` | Deterministic credit calculation | Store calculation record, formula hash, inputs hash |
+| `hitl_preliminary` | Methodology/data review for complex credits | Pause until approve/request changes/reject |
+| `generate_documents` | Render PDF/XLSX/DOCX/JSON artifacts | Store document manifest and checksums |
+| `quality_assurance` | Completeness, citation, consistency, confidence gates | Block low-confidence outputs from final approval |
+| `hitl_final` | Final professional review | Required before credit status becomes approved |
+| `package_export` | Build downloadable V1 submission package | Include manifest, evidence index, audit log |
 
-### 3. Sub-Agents
-
-Specialized agents for specific tasks.
-
-#### Data Extractor Agent
-**Purpose:** Parse uploaded files and extract structured data.
-
-**Tools:**
-- `parse_energy_model` - Extract from EnergyPlus, IES, Trace
-- `parse_excel` - Read Excel tables
-- `parse_pdf` - Extract text and tables from PDFs
-- `parse_cad` - Interface with AutoCAD API
-
-#### Calculation Engine Agent
-**Purpose:** Perform mathematical calculations.
-
-**Tools:**
-- `calculate_carbon` - Carbon emission formulas
-- `calculate_water` - Water efficiency formulas
-- `calculate_energy` - Energy performance formulas
-- `unit_convert` - Convert between units
-
-#### Report Generator Agent
-**Purpose:** Generate documents from templates.
-
-**Tools:**
-- `render_template` - Fill Jinja2 templates
-- `generate_pdf` - Convert HTML to PDF
-- `generate_excel` - Create Excel workbooks
-- `generate_charts` - Create data visualizations
-
-#### Review Checker Agent
-**Purpose:** Validate outputs before HITL.
-
-**Tools:**
-- `check_completeness` - Verify all required sections
-- `check_calculations` - Validate math
-- `check_formatting` - Ensure USGBC compliance
-
-## Workflow Orchestration
-
-### Durable Workflow Pattern
+Example routing:
 
 ```python
-from deerflow import Agent, step, hitl_checkpoint
+from langgraph.graph import StateGraph, END
+from langgraph.checkpoint.postgres import PostgresSaver
 
-class IPp3CarbonAgent(Agent):
-    """Carbon Assessment credit agent"""
-    
-    credit_code = "IPp3"
-    credit_name = "Carbon Assessment"
-    
-    @step(name="validate", retry=1)
-    async def validate_inputs(self, context):
-        """Step 1: Validate all required inputs"""
-        validation = self.validate_schema(context.inputs)
-        if not validation.valid:
-            raise ValueError(f"Invalid inputs: {validation.errors}")
-        return validation
-    
-    @step(name="fetch_grid", retry=3, timeout=30)
-    async def fetch_grid_factors(self, context):
-        """Step 2: Fetch grid emission factors"""
-        location = context.inputs['project_location']
-        
-        if is_us_location(location):
-            data = await self.tools.epa_egrid.get_factors(location)
-        else:
-            data = await self.tools.national_grid.get_factors(location)
-        
-        return {'grid_factors': data}
-    
-    @step(name="fetch_ec3", retry=3, timeout=60)
-    async def fetch_embodied_carbon(self, context):
-        """Step 3: Fetch embodied carbon from EC3"""
-        materials = context.inputs['material_quantities']
-        
-        results = []
-        for material in materials:
-            ec3_data = await self.tools.ec3_database.search(material['name'])
-            results.append({
-                'material': material,
-                'gwp_per_unit': ec3_data['gwp'],
-                'total_gwp': material['quantity'] * ec3_data['gwp']
-            })
-        
-        return {'embodied_carbon': results}
-    
-    @step(name="calculate_operational", retry=1)
-    async def calculate_operational(self, context):
-        """Step 4: Calculate operational carbon"""
-        energy = context.inputs['energy_model_output']
-        grid = context.step_results['fetch_grid']['grid_factors']
-        
-        annual_co2 = (
-            energy['electricity_kwh'] * grid['co2_factor'] +
-            energy['natural_gas_therms'] * 0.0053 +
-            energy['steam_mmbtu'] * 66.3
-        )
-        
-        return {
-            'annual_operational_co2': annual_co2,
-            '25yr_operational_co2': annual_co2 * 25
-        }
-    
-    @step(name="calculate_embodied", retry=1)
-    async def calculate_embodied(self, context):
-        """Step 5: Calculate embodied carbon"""
-        materials = context.step_results['fetch_ec3']['embodied_carbon']
-        
-        total = sum(item['total_gwp'] for item in materials)
-        top_3 = sorted(materials, key=lambda x: x['total_gwp'], reverse=True)[:3]
-        
-        return {
-            'embodied_co2': total,
-            'top_3_hotspots': top_3
-        }
-    
-    @step(name="generate_projection", retry=1)
-    async def generate_projection(self, context):
-        """Step 6: Generate 25-year projection"""
-        operational = context.step_results['calculate_operational']
-        embodied = context.step_results['calculate_embodied']
-        
-        total = (
-            operational['25yr_operational_co2'] +
-            embodied['embodied_co2']
-        )
-        
-        return {
-            'operational': operational['25yr_operational_co2'],
-            'embodied': embodied['embodied_co2'],
-            'total_25yr_co2': total
-        }
-    
-    @step(name="generate_report", retry=2)
-    async def generate_report(self, context):
-        """Step 7: Generate documents"""
-        projection = context.step_results['generate_projection']
-        
-        # Generate PDF report
-        pdf = await self.tools.report_generator.render_pdf(
-            template='ip-p3-carbon-report.html',
-            data=projection
-        )
-        
-        # Generate Excel workbook
-        excel = await self.tools.report_generator.render_excel(
-            template='ip-p3-carbon-workbook.xlsx',
-            data=projection
-        )
-        
-        return {
-            'pdf_url': pdf.url,
-            'excel_url': excel.url,
-            'projection': projection
-        }
-    
-    @hitl_checkpoint(
-        name="human_review",
-        assignee_role="leed_consultant",
-        sla_hours=24,
-        instructions="""
-        Review the carbon assessment report and verify:
-        1. Energy model inputs match project
-        2. Material quantities are accurate
-        3. Grid emission factors are appropriate
-        4. Calculations are reasonable
-        5. Top 3 hotspots are correctly identified
-        """
-    )
-    async def human_review(self, context):
-        """Step 8: Human review checkpoint"""
-        report = context.step_results['generate_report']
-        
-        # Create HITL task
-        task = await self.hitl.create_task(
-            document_url=report['pdf_url'],
-            checklist=[
-                "Energy model inputs verified",
-                "Material quantities accurate",
-                "Grid factors appropriate",
-                "Calculations reasonable",
-                "Hotspots identified correctly"
-            ]
-        )
-        
-        # Workflow pauses here, resumes when human responds
-        result = await self.hitl.wait_for_response(task.id)
-        
-        if result['action'] == 'approve':
-            return {'status': 'approved', 'reviewer': result['reviewer']}
-        else:
-            return {
-                'status': 'rejected',
-                'comments': result['comments'],
-                'return_to_step': result['return_to_step']
-            }
-    
-    @step(name="finalize", retry=1)
-    async def finalize(self, context):
-        """Step 9: Finalize output"""
-        review = context.step_results['human_review']
-        report = context.step_results['generate_report']
-        
-        if review['status'] != 'approved':
-            raise ValueError("Review not approved")
-        
-        # Generate final USGBC submission form
-        usgbc_form = await self.tools.report_generator.render_pdf(
-            template='ip-p3-usgbc-form.html',
-            data=report['projection']
-        )
-        
-        return {
-            'status': 'completed',
-            'documents': {
-                'pdf_report': report['pdf_url'],
-                'excel_workbook': report['excel_url'],
-                'usgbc_form': usgbc_form.url
-            },
-            'calculations': report['projection'],
-            'review_record': review
-        }
+builder = StateGraph(LEEDState)
+builder.add_node("validate_inputs", validate_inputs)
+builder.add_node("extract_project_data", extract_project_data)
+builder.add_node("fetch_api_data", fetch_api_data)
+builder.add_node("normalize_data", normalize_data)
+builder.add_node("calculate", calculate_credit)
+builder.add_node("hitl_preliminary", create_hitl_checkpoint)
+builder.add_node("generate_documents", generate_documents)
+builder.add_node("quality_assurance", run_quality_gates)
+builder.add_node("hitl_final", create_hitl_checkpoint)
+builder.add_node("package_export", package_downloadable_artifacts)
+builder.add_node("manual_preparation", manual_preparation)
+
+builder.set_entry_point("validate_inputs")
+builder.add_edge("validate_inputs", "extract_project_data")
+builder.add_edge("extract_project_data", "fetch_api_data")
+builder.add_edge("fetch_api_data", "normalize_data")
+builder.add_edge("normalize_data", "calculate")
+builder.add_edge("calculate", "hitl_preliminary")
+builder.add_edge("generate_documents", "quality_assurance")
+builder.add_edge("quality_assurance", "hitl_final")
+builder.add_edge("hitl_final", "package_export")
+builder.add_edge("package_export", END)
+builder.add_edge("manual_preparation", END)
+
+def route_hitl(state: LEEDState) -> str:
+    action = state["hitl_result"]["action"]
+    if action == "approve":
+        return "generate_documents"
+    if action == "request_changes":
+        return state["hitl_result"].get("return_to_step", "calculate")
+    return "manual_preparation"
+
+builder.add_conditional_edges(
+    "hitl_preliminary",
+    route_hitl,
+    {
+        "generate_documents": "generate_documents",
+        "calculate": "calculate",
+        "fetch_api_data": "fetch_api_data",
+        "manual_preparation": "manual_preparation",
+    },
+)
+
+with PostgresSaver.from_conn_string(settings.DATABASE_URL) as checkpointer:
+    workflow = builder.compile(checkpointer=checkpointer)
 ```
 
-## Tool Registry
+## HITL Policy
 
-### External API Tools
+Every skill has at least one HITL checkpoint. Credits below 85% automation or involving licensed professional judgment have two checkpoints: preliminary methodology/data review and final document review.
 
-```python
-# agents/tools/external_apis.py
+HITL actions:
 
-class EPAeGRIDTool(Tool):
-    """Fetch grid emission factors from EPA eGRID"""
-    name = "epa_egrid"
-    
-    async def run(self, location: dict) -> dict:
-        """Get CO2 emission factors by region"""
-        response = await self.http.get(
-            "https://www.epa.gov/egrid/api/factors",
-            params={"lat": location["lat"], "lng": location["lng"]}
-        )
-        return response.json()
+| Action | Workflow Effect | Audit Requirement |
+|--------|-----------------|-------------------|
+| `approve` | Resume to next node | Reviewer identity, timestamp, checklist, document hash |
+| `request_changes` | Rewind to a specified node | Comments, affected fields, prior/new value if known |
+| `reject` | Move to manual preparation | Reason, issues, archived AI attempt |
+| `escalate` | Reassign review and reset/extend SLA | Old/new assignee, reason, SLA history |
 
-class EC3DatabaseTool(Tool):
-    """Query Building Transparency EC3 Database"""
-    name = "ec3_database"
-    
-    async def search(self, material_name: str) -> dict:
-        """Search for material GWP data"""
-        response = await self.http.get(
-            "https://buildingtransparency.org/api/v2/materials",
-            params={"query": material_name}
-        )
-        return response.json()
+Default SLA guidance:
 
-class USGBCArcTool(Tool):
-    """Submit documents to USGBC Arc platform"""
-    name = "usgbc_arc"
-    
-    async def submit(self, project_id: str, credit_code: str, documents: list) -> dict:
-        """Submit credit documentation"""
-        response = await self.http.post(
-            f"https://www.usgbc.org/arc/api/projects/{project_id}/credits/{credit_code}/submit",
-            json={"documents": documents}
-        )
-        return response.json()
-```
+| Review Type | SLA | Reviewer |
+|-------------|-----|----------|
+| Simple final review | 24 hours | LEED AP or consultant |
+| Standard calculation review | 48 hours | LEED AP with discipline knowledge |
+| Complex energy/LCA/GIS review | 72 hours | Energy modeler, LCA expert, GIS/site expert |
 
-### Document Generation Tools
+## Skill Dependencies
 
-```python
-# agents/tools/document_generation.py
+The Lead Agent schedules skills with dependency awareness. Shared outputs are written to project state and referenced by downstream skills instead of being re-parsed.
 
-class ReportGeneratorTool(Tool):
-    """Generate PDF and Excel documents"""
-    name = "report_generator"
-    
-    async def render_pdf(self, template: str, data: dict) -> Document:
-        """Render HTML template to PDF"""
-        # Load template
-        template_content = await self.load_template(template)
-        
-        # Render with Jinja2
-        html = self.jinja2.render(template_content, data)
-        
-        # Convert to PDF
-        pdf = await self.pdf_engine.render(html)
-        
-        # Upload to storage
-        url = await self.storage.upload(pdf, f"reports/{uuid()}.pdf")
-        
-        return Document(url=url, format="pdf")
-    
-    async def render_excel(self, template: str, data: dict) -> Document:
-        """Render Excel workbook from template"""
-        # Load template
-        workbook = await self.load_excel_template(template)
-        
-        # Fill data
-        for sheet_name, sheet_data in data.items():
-            workbook[sheet_name].fill(sheet_data)
-        
-        # Save and upload
-        url = await self.storage.upload(workbook, f"workbooks/{uuid()}.xlsx")
-        
-        return Document(url=url, format="excel")
-```
+| Skill | Consumes | Enables |
+|-------|----------|---------|
+| IPp3 | EAp1, EAp5, MRp2 | Final carbon assessment package |
+| EAc3 | EAp2 | Enhanced energy documentation |
+| EAc7 | EAp5 | Enhanced refrigerant documentation |
+| WEc2 | WEp2 | Enhanced water calculations |
+| MRc2 | MRp2 | Embodied carbon reduction credit |
 
-### Data Extraction Tools
+Independent demo skills can include PRc2, WEp2, EAp5, and a small assisted workflow. Production scheduling should prioritize suite dependencies: WEp2 before WEc2, EAp5 before EAc7, EQp1 before EQp2, and IPp1 before IPp2/SSc4-style resilience extensions.
 
-```python
-# agents/tools/data_extraction.py
+## Evidence And Audit Trail Contract
 
-class EnergyModelParserTool(Tool):
-    """Parse energy model outputs"""
-    name = "energy_model_parser"
-    
-    async def parse(self, file_path: str, format: str) -> dict:
-        """Parse energy model based on format"""
-        parsers = {
-            "energyplus": self._parse_energyplus,
-            "ies": self._parse_ies,
-            "trace": self._parse_trace,
-            "equest": self._parse_equest
-        }
-        
-        parser = parsers.get(format)
-        if not parser:
-            raise ValueError(f"Unsupported format: {format}")
-        
-        return await parser(file_path)
-    
-    async def _parse_energyplus(self, file_path: str) -> dict:
-        """Parse EnergyPlus HTML output"""
-        html = await self.files.read(file_path)
-        tables = self.html_parser.extract_tables(html)
-        
-        return {
-            "electricity_kwh": self._extract_value(tables, "Electricity", "Total"),
-            "natural_gas_therms": self._extract_value(tables, "Natural Gas", "Total"),
-            "steam_mmbtu": self._extract_value(tables, "Steam", "Total")
-        }
-```
+Every factual claim, extraction, calculation, generated document, and reviewer decision must be traceable.
 
-## Memory System
+Required records:
 
-### Project Memory
+| Record | Contents |
+|--------|----------|
+| Source snapshot | API/provider name, version, query params, retrieval timestamp, response checksum, data freshness |
+| Evidence item | Source reference, extracted value/text, page/table/field locator, confidence, extractor version |
+| Calculation record | Skill version, formula hash, input hash, parameters, source IDs, output, sandbox/runtime ID |
+| Document manifest | File paths, formats, checksums, template version, source/evidence IDs used |
+| HITL record | Reviewer, credential/role, action, checklist, comments, document hash, timestamps |
+| Audit export | Manifest zip containing calculations, raw/redacted source snapshots, documents, workflow trace, signatures |
 
-```python
-# agents/memory/project_memory.py
+Confidence scoring applies at four levels:
 
-class ProjectMemory:
-    """Persistent memory for project context"""
-    
-    async def save(self, project_id: str, facts: list):
-        """Save project facts to memory"""
-        await self.db.execute("""
-            INSERT INTO project_memories (project_id, facts)
-            VALUES ($1, $2)
-            ON CONFLICT (project_id) DO UPDATE
-            SET facts = $2, updated_at = NOW()
-        """, project_id, json.dumps(facts))
-    
-    async def load(self, project_id: str) -> list:
-        """Load project facts from memory"""
-        result = await self.db.fetchrow("""
-            SELECT facts FROM project_memories
-            WHERE project_id = $1
-        """, project_id)
-        
-        return json.loads(result["facts"]) if result else []
-    
-    async def add_fact(self, project_id: str, fact: str):
-        """Add a single fact to project memory"""
-        facts = await self.load(project_id)
-        facts.append(fact)
-        await self.save(project_id, facts)
-```
+- Extracted field confidence from OCR/parser certainty.
+- Source quality and data freshness confidence.
+- Calculation confidence from validation and formula checks.
+- Generated narrative/document confidence from citation coverage and requirement alignment.
 
-### Usage in Agents
+Outputs below the configured confidence threshold must route to HITL before final package export.
 
-```python
-@step(name="initialize")
-async def initialize(self, context):
-    """Load project memory at start"""
-    project_id = context.inputs['project_id']
-    
-    # Load existing facts
-    facts = await self.memory.load(project_id)
-    
-    # Add to context for all subsequent steps
-    context.project_facts = facts
-    
-    return {'initialized': True}
-```
+## API Tools And Fallbacks
 
-## Error Handling
+External APIs are accessed through a shared `LEEDAPITool` base class that provides auth injection, timeout handling, token-bucket rate limits, Redis caching, circuit breakers, fallback chains, and source snapshot logging.
 
-### Retry Strategy
+Fallback hierarchy:
 
-```python
-@step(name="fetch_data", retry=3, timeout=30)
-async def fetch_data(self, context):
-    """Step with retry logic"""
-    try:
-        return await self.tools.api.call()
-    except APITimeout:
-        # Will retry automatically
-        raise
-    except APIError as e:
-        # Log and raise
-        self.logger.error(f"API error: {e}")
-        raise
-```
+1. Primary live API.
+2. Valid cached response, clearly marked with retrieval time and staleness.
+3. Static reference dataset bundled with a versioned platform release.
+4. Manual data entry/HITL escalation when coverage or confidence is insufficient.
 
-### Fallback Strategy
+Regional routing must happen before execution. A credit can be:
 
-```python
-@step(name="fetch_grid", retry=3)
-async def fetch_grid_factors(self, context):
-    """Step with fallback"""
-    location = context.inputs['project_location']
-    
-    try:
-        # Try primary API
-        data = await self.tools.epa_egrid.get_factors(location)
-        return {'grid_factors': data, 'source': 'EPA eGRID'}
-    except APIError:
-        # Fallback to national source
-        data = await self.tools.national_grid.get_factors(location)
-        return {'grid_factors': data, 'source': 'National Grid'}
-```
+| Status | Behavior |
+|--------|----------|
+| `available` | All required data sources supported for the project region |
+| `limited` | Skill can run with fallbacks/manual inputs and visible warnings |
+| `unavailable` | Skill is hidden or disabled unless a manual override is approved |
 
-## Monitoring & Observability
+## USGBC Integration Boundary
 
-### Agent Metrics
+V1 does not auto-submit to USGBC or Arc. The final workflow step generates a downloadable evidence package with PDF/XLSX/DOCX/JSON artifacts, a manifest, and upload guidance for the consultant.
 
-```python
-# Track agent performance
-agent_metrics = {
-    "credit_code": "IPp3",
-    "workflow_id": "wf-123",
-    "steps_completed": 7,
-    "steps_total": 9,
-    "api_calls": 12,
-    "api_errors": 0,
-    "duration_seconds": 45.2,
-    "hitl_wait_seconds": 3600
-}
-```
+Direct USGBC Arc integration is a V2 tool behind `ENABLE_USGBC_INTEGRATION=true`. Even in V2, Arc submission must occur only after final HITL approval and must retain manual download/upload as a fallback.
 
-### Logging
+## Monitoring And Observability
 
-```python
-# Structured logging for each step
-logger.info("Step completed", extra={
-    "workflow_id": context.workflow_id,
-    "step_name": "fetch_grid",
-    "duration_ms": 1250,
-    "api_calls": 1,
-    "success": True
-})
-```
+Minimum metrics:
+
+| Metric | Dimensions |
+|--------|------------|
+| Skill success rate | credit code, skill version, region |
+| Workflow duration | automated time, HITL wait time, retry time |
+| API health | provider, endpoint, error rate, latency, cache hit rate, circuit state |
+| Confidence distribution | skill, source, extracted field, document section |
+| HITL throughput | reviewer, SLA, action, revision count |
+| Document quality | completeness, calculation verification, citation coverage, formatting |
+
+Structured logs must include `workflow_id`, `thread_id`, `project_id`, `credit_code`, `skill_version`, `step_name`, `source_ids`, and any fallback/degradation flags.
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+*Version: 1.1*
+*Last Updated: 2026-05-02*

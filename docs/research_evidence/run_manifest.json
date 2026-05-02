@@ -1,0 +1,32 @@
+{
+  "query": "Consolidate old Ecogen LEED v5 plans with Kimi Agent LEED v5 Credit Automation plan",
+  "mode": "standard-local-consolidation",
+  "date": "2026-05-02",
+  "workspace": "C:/Users/Vandana/OneDrive/Desktop/Ecogen2030/ecogen-plan",
+  "assumptions": [
+    "The existing realistic root documents have higher priority than optimistic generated analyses.",
+    "The Kimi directory is imported research and design material, not canonical source structure.",
+    "V1 should not assume direct Arc submission without verified API access.",
+    "Official USGBC LEED v5 pages and addenda must be checked before implementing credit rules."
+  ],
+  "subagent_audits": [
+    "old-root-and-leed-platform audit",
+    "Kimi plan audit",
+    "skills and workflow audit",
+    "documentation architecture audit"
+  ],
+  "outputs": [
+    "README.md",
+    "docs/00_platform_brief.md",
+    "docs/01_realistic_automation_model.md",
+    "docs/02_product_requirements.md",
+    "docs/03_system_architecture.md",
+    "docs/04_data_integrations_and_regionality.md",
+    "docs/05_skill_contracts_and_credit_catalog.md",
+    "docs/06_hitl_and_durable_workflows.md",
+    "docs/07_delivery_roadmap.md",
+    "docs/08_decisions_and_open_questions.md",
+    "docs/source_map.md"
+  ]
+}
+

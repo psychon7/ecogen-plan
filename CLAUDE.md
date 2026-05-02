@@ -7,9 +7,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Ecogen is a LEED v5 credit automation platform for LEED consultants. It automates 70-85% of documentation work through a skill-based, multi-agent system with mandatory Human-in-the-Loop (HITL) checkpoints. The platform is **not** a replacement for consultants — AI assists, humans decide.
 
 Key constraints from `EXECUTIVE_SUMMARY_REALISTIC.md`:
-- US projects get 85%+ automation; Canada/UK/EU/AU get 70-80%; other regions 50-60%
-- AI cannot reliably interpret CAD drawings — use specialized tools (AutoCAD API) + human verification
-- Regulatory compliance decisions always require human sign-off
+- The production MVP is suite-based: WEp2+WEc2, EAp5+EAc7, EQp1+EQp2, IPp1+IPp2, and MRc3.
+- The generated 16-skill set is an assisted catalog and implementation inventory, not the commercial MVP promise.
+- Regional support is credit-specific; show warnings, manual mode, or hide workflows where source data is weak.
+- AI cannot reliably interpret CAD drawings - use specialized tools (AutoCAD API) + human verification.
+- Regulatory compliance decisions always require human sign-off.
 
 ## Tech Stack
 
@@ -61,9 +63,9 @@ ecogen-plan/
 │   ├── 06_hitl_and_durable_workflows.md
 │   ├── 07_delivery_roadmap.md
 │   ├── 08_decisions_and_open_questions.md
-│   ├── 09_consolidated_credit_catalog.md  # All 16 Tier-1 skills with normalized %
+│   ├── 09_consolidated_credit_catalog.md  # Assisted catalog plus normalized credit metadata
 │   └── 10_technical_stack_reference.md    # Full tech stack, algorithms, APIs
-├── skills/                        # 16 credit automation skills (one per LEED credit)
+├── skills/                        # Generated credit automation skills (one per LEED credit)
 │   ├── ip_p3_carbon/             # Each skill: SKILL.md (+ agent.py, calcs, templates, tests)
 │   ├── ea_c3_energy_enhanced/
 │   ├── ea_c7_refrigerant/
@@ -130,13 +132,17 @@ Every skill must follow `skills/SKILL_TEMPLATE.md`, which defines:
 - **Output documents table**
 - **Test command** and **example usage**
 
-### Automation Level Tiers
+### Production Suite Priority
 
-| Level | Credits | Pattern |
-|-------|---------|---------|
-| 95%+ | PRc2, SSc6, EAp5, EAc7 | Single API + template; one HITL for final review |
-| 80-90% | IPp3, WEp2, WEc2, MRp2, SSc5 | Multiple APIs + calculations + one HITL |
-| 60-75% | EAc3, LTc1, MRc2, LTc3 | Complex calculations, multiple HITLs, expert required |
+| Priority | Suite | Credits |
+|----------|-------|---------|
+| 1 | Water Efficiency | WEp2, WEc2 |
+| 2 | Refrigerant Management | EAp5, EAc7 |
+| 3 | Quality Plans | EQp1, EQp2 |
+| 4 | Integrative Process Assessment | IPp1, IPp2 |
+| 5 | Low-Emitting Materials | MRc3 |
+
+Existing generated skills such as PRc2, IPp3, MRp2, MRc2, EAp1, EAp2, EAc3, SSc3, SSc5, SSc6, LTc1, and LTc3 should be treated as assisted catalog workflows until source access, tests, regional fallbacks, and HITL checklists are verified.
 
 ### HITL Design Rules
 
@@ -154,7 +160,7 @@ Use `get_available_credits(region)` to filter credits by data availability befor
 | File | Why |
 |------|-----|
 | `MASTER_PLAN.md` | **Start here** — single consolidated source of truth for the entire platform |
-| `docs/09_consolidated_credit_catalog.md` | All 16 Tier-1 skills with normalized automation %, APIs, HITL specs |
+| `docs/09_consolidated_credit_catalog.md` | Assisted catalog metadata, APIs, and HITL specs |
 | `docs/10_technical_stack_reference.md` | Full tech stack, data models, algorithms, infrastructure |
 | `EXECUTIVE_SUMMARY_REALISTIC.md` | Authoritative automation levels + what AI can/cannot do |
 | `.instructions.md` | Agent operating principles (realism-first, HITL-first, modular) |

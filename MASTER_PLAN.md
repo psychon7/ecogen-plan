@@ -16,13 +16,13 @@ Ecogen automates 70–85% of LEED v5 BD+C documentation work for professional co
 | Automation coverage (US projects) | 85%+ |
 | Automation coverage (CA/UK/EU/AU) | 70–80% |
 | Automation coverage (other regions) | 50–60% |
-| Credits automated (Tier 1 MVP) | 16 |
-| Total automatable credits (of 51) | 26 |
-| Consultant hours saved per project | 60–120 hours |
-| Commercial value per project | $3,000–$8,000 |
+| Production MVP scope | 5 Kimi-aligned credit suites |
+| Research-screened automation candidates (of 51) | 31 automate/assist candidates pending verification |
+| Consultant hours saved per project | 94-152 hours for full verified MVP suite scope |
+| Commercial value per project | $14,100-$22,800 at $150/hr for verified suite scope |
 | Infrastructure cost (monthly) | $2,805–$4,505 |
-| MVP delivery timeline | 10 weeks (3.25 FTE) |
-| 14-day demo scope | 8 credits end-to-end |
+| Production MVP delivery timeline | Multi-phase build; demo is not production readiness |
+| 14-day demo scope | Workflow proof with a small credit set |
 
 **What the platform does:**
 - Fetches data from 36 APIs (EPA, NOAA, EC3, GBCI, FEMA, NREL, etc.)
@@ -69,10 +69,10 @@ This distinction is critical for professional liability and consultant trust.
 
 | Tier | Automation | Pattern | Credits |
 |------|-----------|---------|---------|
-| **1 — Full Auto** | 90–95% | Single API + template + one HITL final review | PRc2, SSc6, EAp5, EAc7 |
-| **2 — AI-Assisted** | 80–90% | Multiple APIs + calculations + one HITL | WEp2, WEc2, MRp2, SSc5, IPp3, EAp1, EAp5, SSc3 |
-| **3 — Expert-Assisted** | 60–75% | Complex calc, multiple HITLs, specialist required | EAc3, LTc1, MRc2, LTc3, EAp2 |
-| **Not MVP (<60%)** | <60% | Energy modelling, physical verification, complex MEP | EAc1, EQp1-c9, etc. |
+| **1 - Production suites** | 70-90% draft automation | Shared data pipelines + deterministic calculations/templates + HITL | WEp2/WEc2, EAp5/EAc7, EQp1/EQp2, IPp1/IPp2, MRc3 |
+| **2 - Assisted catalog** | 50-85% | Useful generated skills with explicit review, source, and regional caveats | PRc2, IPp3, MRp2, MRc2, EAp1, SSc3, SSc5, SSc6, LTc1, LTc3 |
+| **3 - Output-parser only** | Assist-only | Parse completed specialist outputs; do not automate core professional work | EAp2, EAc2, EAc3, WBLCA-heavy paths |
+| **Not MVP** | Variable | Physical testing, field verification, complex commissioning execution | EQc5, SSp1, commissioning execution, highly project-specific credits |
 
 ### 3.2 Regional Availability
 
@@ -90,7 +90,7 @@ Use `get_available_credits(region)` to filter credits before display. Never clai
 
 | Tier | Score | HITL Requirement |
 |------|-------|-----------------|
-| A — High | ≥ 0.90 | Standard review; auto-approve available for simple credits |
+| A — High | ≥ 0.90 | Lightweight named review; no auto-approval for compliance-critical packages |
 | B — Standard | 0.75–0.89 | Required HITL, expedited SLA |
 | C — Comprehensive | < 0.75 | Required HITL, senior reviewer, extended SLA |
 
@@ -301,30 +301,30 @@ Every credit produces a 12-section evidence pack:
 
 | Horizon | Duration | Scope | Team |
 |---------|----------|-------|------|
-| Demo | 14 days | 8 credits, mocked APIs, end-to-end proof | 2 FTE |
-| MVP | 10 weeks | 16 credits, real APIs, production hardened | 3.25 FTE avg |
-| V2+ | Post-MVP | Arc direct submission, regional expansion, 26 credits | TBD |
+| Demo | 14 days | Workflow engine, HITL, evidence export, WEp2 wedge proof, mocked/sandbox APIs | 2 FTE |
+| MVP | Multi-phase | Five Kimi-aligned suites, source verification, regional gating, production evidence packs | 4-6 engineers + LEED review |
+| V2+ | Post-MVP | Arc direct submission, regional expansion, additional 51-credit matrix candidates | TBD |
 
 ### 9.2 Phase 0 — Consolidation (1 week, NOW)
 
 - [x] Normalize all SKILL.md files from Kimi to canonical snake_case format
 - [x] Apply realistic automation % corrections
 - [ ] Verify API access: Arc, GBCI, EC3, Walk Score, LEED v5 reference licensing
-- [ ] Confirm 8 demo credit selection (recommended: PRc2, WEp2, EAp5, EAc7, SSc5, SSc6, MRp2, IPp3)
+- [ ] Confirm demo credit selection (recommended: PRc2 pipeline proof, WEp2 wedge, EAp5/EAc7 shared-input workflow, one assisted workflow)
 - [ ] Finalize evidence pack format (render sample for WEp2 or PRc2)
 
 ### 9.3 Phase 1 — 14-Day Demo
 
-**Milestone:** 8 credits running end-to-end with mocked APIs and full HITL flow
+**Milestone:** a small credit set running end-to-end with mocked/sandboxed APIs and full HITL flow
 
 | Week | Deliverables |
 |------|-------------|
-| 1 | Platform foundation (FastAPI, PostgreSQL, Redis, Deer-Flow), PRc2 + WEp2 complete |
-| 2 | EAp5, EAc7, SSc5, SSc6, MRp2, IPp3; HITL Slack flow; evidence pack export |
+| 1 | Platform foundation (FastAPI, PostgreSQL, Redis, Deer-Flow), PRc2 pipeline proof + WEp2 wedge |
+| 2 | EAp5/EAc7 shared workflow, one assisted workflow, HITL flow, evidence pack export |
 
 Exit criteria: schema tests pass, artifact contract satisfied, region-gating functional.
 
-### 9.4 Phase 2–3 — 10-Week MVP
+### 9.4 Phase 2-3 - Production MVP Suites
 
 | Weeks | Focus |
 |-------|-------|
@@ -374,7 +374,7 @@ Exit criteria: schema tests pass, artifact contract satisfied, region-gating fun
 | 008 | S3/MinIO for document storage, 7-year retention |
 | 009 | Celery + RabbitMQ for async task queue |
 | 010 | Freemium pricing model (per-credit + project bundles + enterprise) |
-| 011 | 14-day demo scope = 8 credits, mocked APIs |
+| 011 | 14-day prototype validates workflow mechanics; commercial MVP uses Kimi's five-suite scope |
 | 012 | No USGBC Arc submission in V1 — manual export only |
 
 ### 10.2 Open Questions (Prioritized)
@@ -385,7 +385,7 @@ Exit criteria: schema tests pass, artifact contract satisfied, region-gating fun
 | P0 | GBCI credential lookup API — public access? | Partnerships | PRc2 automation |
 | P0 | EC3 API terms for automated bulk queries? | Legal | MRp2, IPp3 |
 | P1 | LEED v5 reference guide — RAG licensing? | Legal | All skills |
-| P1 | Which 8 credits for the 14-day demo? | Product | Phase 1 |
+| P1 | Which small prototype set proves the workflow fastest? | Product | Phase 1 |
 | P1 | Kimi 51-credit score mapping to v5 requirements verified? | Engineering | V2 expansion |
 | P2 | Regional market priority (CA/UK/EU)? | Product | V2 roadmap |
 | P2 | Pricing model finalized? | Business | GTM |
@@ -405,5 +405,5 @@ Exit criteria: schema tests pass, artifact contract satisfied, region-gating fun
 | HITL design & state machine | `docs/06_hitl_and_durable_workflows.md`, `skills/hitl_system.py` |
 | Delivery roadmap & ADRs | `docs/07_delivery_roadmap.md`, `docs/08_decisions_and_open_questions.md` |
 | Technical stack (Deer-Flow, LangGraph, APIs) | `Kimi_Agent_LEED v5 Credit Automation/tech_impl_sec01-04.md` |
-| 16-credit skill contracts | `Kimi_Agent_LEED v5 Credit Automation/skills/*/SKILL.md` |
-| Strategic analysis (26 automatable, $3K–8K value) | `Kimi_Agent_LEED v5 Credit Automation/leed_automation.agent.outline.md` |
+| Generated skill contract drafts | `Kimi_Agent_LEED v5 Credit Automation/skills/*/SKILL.md` |
+| Strategic analysis and suite prioritization | `Kimi_Agent_LEED v5 Credit Automation/leed_automation.agent.outline.md`, `Kimi_Agent_LEED v5 Credit Automation/leed_automation_sec00.md` |

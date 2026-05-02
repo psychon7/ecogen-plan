@@ -48,7 +48,7 @@
 │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐             │
 │  │  GOVERNMENT     │  │    INDUSTRY     │  │   SOFTWARE      │             │
 │  │    APIs         │  │     APIs        │  │   Platforms     │             │
-│  │ • NOAA          │  │ • USGBC Arc     │  │ • Autodesk Forge│             │
+│  │ • NOAA          │  │ • USGBC (V2)    │  │ • Autodesk Forge│             │
 │  │ • EPA           │  │ • EC3           │  │ • EnergyPlus    │             │
 │  │ • Census        │  │ • ENERGY STAR   │  │ • GIS Platforms │             │
 │  │ • FEMA          │  │ • Walk Score    │  │ • Revit API     │             │
@@ -66,6 +66,40 @@
 │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘        │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Submission, Evidence, and Review Boundary
+
+V1 data flows end in a downloadable evidence package, not direct USGBC submission. The package includes generated PDFs, calculation workbooks, source citations, source snapshots, document manifests, checksums, and HITL review records. A consultant manually uploads the approved package to LEED Online/USGBC systems.
+
+Direct USGBC Arc submission is a V2 integration behind `ENABLE_USGBC_INTEGRATION=true`. Even when enabled, the submission node can only run after final HITL approval and must preserve manual download/upload as a fallback.
+
+Every credit data flow follows this traceability loop:
+
+```
+Input / API Source
+        |
+        v
+Source Snapshot + Checksum
+        |
+        v
+Extraction / Normalization + Confidence Score
+        |
+        v
+Deterministic Calculation + Formula/Input Hashes
+        |
+        v
+Generated Documents + Evidence Index
+        |
+        v
+HITL Review + Checklist + Comments
+        |
+        v
+V1 Downloadable Submission Package
+```
+
+Fallbacks must be explicit. A live API fallback to cache, static data, or manual entry must set a degradation flag, lower confidence when appropriate, and appear in the final evidence package.
 
 ---
 
@@ -108,13 +142,15 @@ Project Coordinates (Lat/Long)
          │
          ▼
 ┌─────────────────┐
-│  USGBC Arc API  │ ──► Submit documentation
+│ V1 Evidence Pkg │ ──► Manual LEED Online upload
 └─────────────────┘
 ```
 
 **APIs Required:** NOAA, FEMA, USGS, IPCC data portal
 **Frequency:** Batch - per project during pre-design
 **Data Volume:** ~10-50 MB per project (includes GIS data)
+
+**Submission Note:** Any diagram reference to USGBC Arc in this V1 flow should be read as a V2 optional integration. V1 produces an evidence package for consultant review and manual LEED Online upload.
 
 ---
 
@@ -438,6 +474,27 @@ IoT Sensors ──Stream──► Kafka ──► Stream Processor ──► Rea
 
 ---
 
+## Regional Fallback Data Flow
+
+Regional availability is evaluated before a skill starts. Each required source is classified as `available`, `limited`, or `unavailable` for the project region.
+
+```
+Project Location
+      |
+      v
+Regional Source Router
+      |
+      +--> Available: use primary API
+      |
+      +--> Limited: use regional substitute or static dataset, then flag for HITL
+      |
+      +--> Unavailable: disable skill or require manual override
+```
+
+Manual override requires a reviewer to provide source identity, retrieval date, value provenance, and rationale. The override becomes an evidence item and is included in the audit export.
+
+---
+
 ## Security Considerations
 
 ### Data Classification
@@ -456,6 +513,10 @@ IoT Sensors ──Stream──► Kafka ──► Stream Processor ──► Rea
 - [ ] Request/response logging for audit
 - [ ] Input validation and sanitization
 - [ ] Circuit breaker for external API failures
+- [ ] Source snapshots store retrieval timestamp, query params, and checksum
+- [ ] Calculation records store formula hash, input hash, and source IDs
+- [ ] Low-confidence extraction/calculation results route to HITL
+- [ ] Direct USGBC submission remains disabled unless V2 feature flag is explicitly enabled
 
 ---
 

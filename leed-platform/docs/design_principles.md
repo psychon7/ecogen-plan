@@ -2,165 +2,137 @@
 
 ## 1. Clarity First
 
-**Principle:** Every element must have a clear purpose. Remove anything that doesn't serve the user.
+**Principle:** Every element must have a clear purpose and make the next responsible action obvious.
 
 **Application:**
-- Dashboard shows only relevant projects and actions
-- Credit cards display status at a glance
-- No decorative elements without function
+- Dashboards show projects, blockers, review tasks, confidence tiers, and package readiness.
+- Credit cards distinguish pursued, internally approved, submitted, and awarded status.
+- Avoid labels that imply USGBC has accepted a credit before it has been submitted and awarded.
 
-**Example:**
-```
-❌ Bad: Dashboard with decorative charts that don't help decision-making
-✅ Good: Dashboard with clear project cards showing status, progress, and next actions
-```
+## 2. AI Assists, Humans Decide
 
-## 2. Progressive Disclosure
-
-**Principle:** Show only what's needed at each step. Reveal complexity gradually.
+**Principle:** Ecogen prepares evidence and drafts; qualified humans approve compliance-critical outputs.
 
 **Application:**
-- Credit overview shows summary first
-- Detailed calculations available on expand
-- Advanced options hidden by default
+- Every evidence pack has a named human approval gate before it becomes submission-ready.
+- Automation percentage changes review depth, not whether review exists.
+- UI copy uses "Prepare Evidence Pack," "Run Assistant," or "Generate Draft Package" instead of implying unattended completion.
+- Energy modeling workflows say "upload completed model outputs"; they do not imply Ecogen creates or validates the model.
 
-**Example:**
-```
-Step 1: Upload files (simple)
-Step 2: Review extracted data (more detail)
-Step 3: See full calculations (full detail)
-```
+## 3. Progressive Disclosure
 
-## 3. Confidence Through Feedback
-
-**Principle:** Users must always know what's happening and what to expect.
+**Principle:** Show the summary first, then reveal source evidence, calculations, assumptions, and audit history as needed.
 
 **Application:**
-- Progress indicators for long operations
-- Success/error states clearly communicated
-- Time estimates provided
+- Credit overview shows scope, inputs, region support, required reviewers, and confidence tier.
+- Evidence pack detail expands into input registry, source index, extracted data, calculations, narratives, compliance matrix, review notes, and exception report.
+- Advanced formulas and source records are available without overwhelming first-time users.
 
-**Example:**
-```
-Uploading... 45% (about 10 seconds remaining)
-✓ Upload complete
-⚠️ Some data had low confidence - please review
-```
+## 4. Confidence Must Explain Itself
 
-## 4. Forgiveness
-
-**Principle:** Allow users to recover from mistakes easily.
+**Principle:** Confidence is useful only when users can see why it changed and what to do next.
 
 **Application:**
-- Auto-save on all inputs
-- Cancel/undo on actions
-- Clear error messages with recovery paths
+- Display evidence pack tiers A/B/C with component scores.
+- Show degradation factors such as stale API data, OCR uncertainty, manual entry, unit conversion, missing source coverage, or cross-credit inconsistency.
+- Provide specific fixes: upload a cut sheet, verify an occupancy count, refresh an API source, assign specialist review, or move to manual preparation.
 
-**Example:**
-```
-❌ Bad: "Error occurred"
-✅ Good: "Upload failed. [Retry] or [Upload different file]"
-```
+## 5. Evidence First
 
-## 5. Consistency
-
-**Principle:** Same patterns, same behaviors, same language throughout.
+**Principle:** No factual claim, calculation, or generated narrative should stand without evidence.
 
 **Application:**
-- All buttons follow same interaction model
-- Same color means same thing everywhere
-- Navigation pattern consistent across screens
+- Every extracted value links to source document, page/row/location, confidence, and extraction method.
+- Every calculation shows formulas, units, intermediate values, and source references.
+- Every generated narrative carries requirement version, template version, source citations, and reviewer edits.
 
-**Example:**
-```
-- Primary action: Green button, right side
-- Secondary action: Gray button, left side
-- Destructive: Red button
-```
+## 6. Manual Fallback Is First-Class
 
-## 6. Efficiency for Experts
-
-**Principle:** Power users should be able to work quickly.
+**Principle:** Manual entry, regional substitution, and manual preparation are expected workflow paths, not product failures.
 
 **Application:**
-- Keyboard shortcuts
-- Bulk actions
-- Quick filters
-- Remember preferences
-
-**Example:**
-```
-- Cmd+K: Quick command palette
-- Bulk select credits for automation
-- Remember last used reviewer
-```
+- Region support appears before users start a credit.
+- Limited data regions show required manual inputs and likely review effort.
+- API failures route to fallback data, cached/static sources, manual entry, or manual-prep handoff with audit trail entries.
 
 ## 7. Trust Through Transparency
 
-**Principle:** Show how AI works. Don't hide the process.
+**Principle:** Show what the system did, what it did not do, and who approved the result.
 
 **Application:**
-- Show confidence scores
-- Explain data sources
-- Display calculation steps
-- Allow inspection of AI outputs
+- Show source provenance, workflow steps, retries, fallbacks, and changed data.
+- Preserve reviewer identity, credential/scope, comments, approval decision, and timestamp.
+- Block export of unresolved critical exceptions unless a reviewer explicitly overrides with justification.
 
-**Example:**
-```
-Carbon calculation:
-- Grid factor: 0.0005 kg CO2e/kWh (from EPA eGRID, 95% confidence)
-- Annual electricity: 500,000 kWh (from EnergyPlus model)
-- Operational CO2: 250 tonnes/year
-```
+## 8. Forgiveness
 
-## 8. Mobile-Responsive, Desktop-First
-
-**Principle:** Design for desktop (primary use case), but ensure mobile works.
+**Principle:** Users must recover from mistakes, bad uploads, and review feedback without losing work.
 
 **Application:**
-- Full features on desktop
-- Review and approve on mobile
-- View-only dashboard on mobile
+- Auto-save all inputs and reviewer comments.
+- Allow correction of extracted fields with source notes.
+- Support request-changes workflows that rewind to the right step while preserving previous versions.
+- Provide retry and manual fallback paths for upload, parsing, API, and calculation errors.
 
-**Breakpoints:**
-- Desktop: 1280px+ (full features)
-- Tablet: 768px-1279px (adapted layout)
-- Mobile: <768px (essential features only)
+## 9. Consistency
 
-## 9. Accessibility
+**Principle:** Same terms, statuses, and controls must mean the same thing everywhere.
 
-**Principle:** Everyone should be able to use the product.
+**Canonical Status Language:**
+
+| Use | Preferred Copy |
+|-----|----------------|
+| Start work | Prepare Evidence Pack |
+| AI draft ready | Draft Package Ready |
+| Awaiting human | In Review |
+| Human approved internally | Internally Approved |
+| Ready for manual upload | Submission-Ready |
+| Sent to USGBC | Submitted |
+| Accepted by reviewer | Awarded |
+| AI cannot continue safely | Manual Preparation Required |
+
+## 10. Efficiency For Experts
+
+**Principle:** Power users should move quickly while staying inside review and evidence controls.
+
+**Application:**
+- Bulk assign reviewers and due dates.
+- Filter by confidence tier, blocker count, region support, reviewer role, and SLA risk.
+- Remember reviewer preferences and common project defaults.
+- Support keyboard navigation through evidence, comments, and checklist items.
+
+## 11. Mobile-Responsive, Desktop-First
+
+**Principle:** Full preparation and evidence review are desktop workflows; mobile supports triage and lightweight approval only when evidence is readable.
+
+**Application:**
+- Desktop: full upload, extraction, calculations, evidence pack review, and comments.
+- Tablet: review queue, document preview, comments, and status.
+- Mobile: task triage, reassignment, SLA checks, and simple approvals with access to evidence.
+
+## 12. Accessibility
+
+**Principle:** Everyone on the project team should be able to use the product.
 
 **Requirements:**
-- WCAG 2.1 AA compliance
-- Keyboard navigation
-- Screen reader support
-- Color contrast minimum 4.5:1
-- Focus indicators visible
+- WCAG 2.1 AA compliance.
+- Keyboard navigation.
+- Screen reader support.
+- Color contrast minimum 4.5:1.
+- Visible focus indicators.
+- Confidence and status never communicated by color alone.
 
-**Implementation:**
-- Semantic HTML
-- ARIA labels
-- Alt text for images
-- Skip links
+## 13. Performance Perception
 
-## 10. Performance Perception
+**Principle:** Long-running uploads, parsing, calculations, and review-state changes should feel understandable and controlled.
 
-**Principle:** Make it feel fast, even when it's not.
-
-**Techniques:**
-- Skeleton screens during loading
-- Optimistic UI updates
-- Progressive loading
-- Cache aggressively
-
-**Example:**
-```
-❌ Bad: Blank screen while loading
-✅ Good: Skeleton layout that fills in as data arrives
-```
+**Application:**
+- Show progress by workflow step.
+- Preserve navigation while background tasks run where safe.
+- Use skeletons for dashboards and evidence pack sections.
+- Show durable resume state after cancellation, retry, or worker failure.
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+*Version: 1.1*
+*Last Updated: 2026-05-02*

@@ -5,83 +5,55 @@
 **Status:** Accepted
 
 **Context:**
-We need a workflow orchestration system for credit automation. Options:
-1. Build from scratch (LangGraph + custom code)
-2. Use Deer-Flow (ByteDance's open-source agent framework)
-3. Use Temporal (workflow engine)
+We need a workflow orchestration system for credit automation. Options considered: build from scratch, use Deer-Flow, or use a general workflow engine such as Temporal.
 
 **Decision:**
-Use Deer-Flow as the foundation.
+Use Deer-Flow as the foundation for agent and workflow patterns.
 
 **Rationale:**
-- Provides 70-80% of needed infrastructure (skills, HITL, durable workflows)
-- Aligns with our skill-based architecture design
-- Active community (60.2k stars)
-- Built on LangGraph (industry standard)
-- Saves 10+ weeks of development
+- Provides much of the needed skill, HITL, and durable workflow scaffolding.
+- Aligns with the skill-based architecture.
+- Built on LangGraph patterns.
+- Reduces early implementation time.
 
 **Tradeoffs:**
-- ✅ Faster time to market
-- ✅ Proven patterns
-- ⚠️ Less control over internals
-- ⚠️ Need to learn Deer-Flow conventions
-
-**Consequences:**
-- Must follow Deer-Flow's SKILL.md format
-- Customization limited to what's exposed
-- May need to fork for deep changes
+- Faster time to market and reusable patterns.
+- Less control over internals.
+- May require forking or extension for production-grade review workflow.
 
 ---
 
-## ADR-002: PostgreSQL with PostGIS
+## ADR-002: PostgreSQL With PostGIS
 
 **Status:** Accepted
 
 **Context:**
-Need a database for structured data with geographic queries for location-based credits.
+Need structured data storage plus geographic queries for location-based credits.
 
 **Decision:**
-Use PostgreSQL 15+ with PostGIS extension.
+Use PostgreSQL 15+ with the PostGIS extension.
 
 **Rationale:**
-- PostGIS required for location-based queries (LTc3, LTc1)
-- JSONB support for flexible credit data
-- Full ACID compliance
-- Excellent Django/FastAPI support
-- Proven at scale
-
-**Tradeoffs:**
-- ✅ Full SQL + GIS capabilities
-- ✅ JSONB for flexible schemas
-- ⚠️ More complex than NoSQL for simple use cases
+- PostGIS supports location-based credits and regional checks.
+- JSONB supports flexible credit and evidence payloads.
+- ACID behavior is useful for audit records and workflow state.
 
 ---
 
-## ADR-003: FastAPI for Backend
+## ADR-003: FastAPI For Backend
 
 **Status:** Accepted
 
 **Context:**
-Need a Python web framework for API. Options:
-1. Django + DRF
-2. FastAPI
-3. Flask
+Need a Python API layer for credit workflows, uploads, calculations, review tasks, and exports.
 
 **Decision:**
 Use FastAPI.
 
 **Rationale:**
-- Native async support (critical for API calls)
-- Automatic OpenAPI documentation
-- Type hints throughout
-- Better performance than Django
-- Easy integration with Deer-Flow (Python)
-
-**Tradeoffs:**
-- ✅ Fast, modern, async
-- ✅ Auto-generated docs
-- ⚠️ Less mature ecosystem than Django
-- ⚠️ Need to build more from scratch
+- Native async support for external APIs and workflow polling.
+- Strong typing and OpenAPI generation.
+- Fits the Python skill and calculation ecosystem.
 
 ---
 
@@ -90,49 +62,38 @@ Use FastAPI.
 **Status:** Accepted
 
 **Context:**
-Need a frontend framework. Options:
-1. React
-2. Vue
-3. Svelte
+Need a frontend framework for consultant dashboards, evidence pack review, and HITL queues.
 
 **Decision:**
 Use React with TypeScript.
 
 **Rationale:**
-- Largest ecosystem
-- Excellent TypeScript support
-- Many component libraries
-- Easy hiring
-- Deer-Flow UI uses React (can reuse patterns)
-
-**Tradeoffs:**
-- ✅ Largest talent pool
-- ✅ Rich ecosystem
-- ⚠️ More boilerplate than Vue/Svelte
+- Large ecosystem for document viewers, grid components, forms, and data visualization.
+- Strong typing for review task and evidence pack contracts.
+- Hiring and component-library advantages.
 
 ---
 
-## ADR-005: HITL Required for Complex Credits
+## ADR-005: HITL Required For Evidence Packs
 
 **Status:** Accepted
 
 **Context:**
-Some credits (EAc3 Energy, MRc2 Embodied Carbon) require expert judgment.
+Compliance-critical LEED outputs require professional accountability. Automation level can reduce review effort, but it must not remove human sign-off. Credits such as energy efficiency, embodied carbon, GIS/site analysis, and legal/process documents also require specialist review.
 
 **Decision:**
-Require human review for credits with automation level < 85%.
+Require at least one named human approval gate before any evidence pack is marked submission-ready. Automation percentage determines review depth and reviewer specialty, not whether review exists.
 
 **Rationale:**
-- Energy modeling requires expert verification
-- Compliance decisions need human accountability
-- Builds trust with users
-- Reduces liability
+- Energy modeling requires expert verification.
+- Compliance decisions need human accountability.
+- Source, calculation, and narrative quality must be traceable.
+- Named review builds trust and reduces liability.
 
 **Tradeoffs:**
-- ✅ Higher accuracy
-- ✅ Expert accountability
-- ⚠️ Slower than full automation
-- ⚠️ Requires reviewer availability
+- Higher accuracy and accountability.
+- Slower than unattended automation.
+- Requires reviewer availability, escalation, and reassignment handling.
 
 ---
 
@@ -141,173 +102,185 @@ Require human review for credits with automation level < 85%.
 **Status:** Accepted
 
 **Context:**
-Some credits (LTc1 Land Protection) only work in US due to GIS data availability.
+Credit feasibility depends on data availability by region. US coverage is strongest; other regions often require source substitution, static datasets, manual entry, or manual-preparation handoff.
 
 **Decision:**
-Filter credits by regional data availability.
-
-**Rationale:**
-- Don't promise what we can't deliver
-- Clear expectations for users
-- Can expand regions over time
-- Better UX than failing silently
+Filter and label credits by regional data availability.
 
 **Implementation:**
-- Detect region from project location
-- Show only credits with available APIs
-- Mark limited credits with warning
+- Detect region from project location.
+- Show full, limited/manual-input, unavailable, or manual-prep status by credit.
+- Mark data substitutions, stale sources, and manual assumptions in the evidence pack.
 
 ---
 
-## ADR-007: JWT for API Authentication
+## ADR-007: JWT For API Authentication
 
 **Status:** Accepted
 
 **Context:**
-Need authentication for API. Options:
-1. Session cookies
-2. JWT tokens
-3. API keys
+Need authentication for API access.
 
 **Decision:**
-Use JWT access tokens (24h) + refresh tokens (30d).
+Use JWT access tokens with refresh tokens.
 
 **Rationale:**
-- Stateless (no server-side session storage)
-- Works across domains
-- Industry standard
-- Easy to implement
-
-**Tradeoffs:**
-- ✅ Stateless, scalable
-- ✅ Cross-domain support
-- ⚠️ Can't revoke instantly (need revocation list)
+- Stateless and compatible with API clients.
+- Common pattern for FastAPI applications.
 
 ---
 
-## ADR-008: S3 for Document Storage
+## ADR-008: Object Storage For Documents
 
 **Status:** Accepted
 
 **Context:**
-Need to store generated PDFs, Excel files, uploads.
+Need to store uploads, generated PDFs, spreadsheets, document previews, and evidence pack exports.
 
 **Decision:**
-Use S3 (or GCS/Azure equivalent) with CDN.
+Use S3 or cloud-equivalent object storage with versioning.
 
 **Rationale:**
-- Infinite scalability
-- CDN integration for fast downloads
-- Versioning support
-- Lifecycle policies for cost optimization
-
-**Tradeoffs:**
-- ✅ Scalable, durable
-- ✅ CDN integration
-- ⚠️ Ongoing cost
-- ⚠️ Need to manage permissions
+- Scalable, durable artifact storage.
+- Supports immutable file hashes and audit references.
+- Lifecycle policies can control cost.
 
 ---
 
-## ADR-009: Celery + RabbitMQ for Workers
+## ADR-009: Celery + RabbitMQ For Workers
 
 **Status:** Accepted
 
 **Context:**
-Need background job processing for credit automation.
+Need background processing for uploads, parsing, external API calls, calculations, and document generation.
 
 **Decision:**
-Use Celery with RabbitMQ.
+Use Celery with RabbitMQ for worker orchestration unless Deer-Flow provides an equivalent production queue.
 
 **Rationale:**
-- Celery: Mature, feature-rich, Python-native
-- RabbitMQ: Reliable, supports priority queues
-- Works well with FastAPI
-- Can scale workers independently
-
-**Tradeoffs:**
-- ✅ Proven, reliable
-- ✅ Priority queues
-- ⚠️ More complex than simple queues
+- Mature Python worker ecosystem.
+- Supports retries and priority queues.
+- Workers can scale independently.
 
 ---
 
-## ADR-010: Freemium Pricing Model
+## ADR-010: Suite-Based Pricing Hypothesis
 
 **Status:** Proposed
 
 **Context:**
-Need a business model for monetization.
+Need a business model for monetization. Kimi research points to value clustering around credit suites, not isolated free credits.
 
 **Decision:**
-Freemium: 2 credits free/month, then $299/user/month.
+Use suite-based packaging as the current hypothesis. Starter includes one suite for boutique consultancies; Professional includes the five commercial MVP suites; Enterprise adds integrations, firm templates, API access, and volume pricing. Treat the old free-tier idea as an unvalidated growth experiment, not the default plan.
 
 **Rationale:**
-- Free tier for trial and small users
-- Pro tier for serious consultants
-- Per-user pricing aligns with value
-- Simple to understand
-
-**Tradeoffs:**
-- ✅ Easy to understand
-- ✅ Trial without commitment
-- ⚠️ Need to prevent abuse of free tier
-- ⚠️ May need enterprise tier later
+- Credit suites map to consultant workflows and data dependencies.
+- Pricing can track review-ready evidence pack value and time saved.
+- Enterprise buyers are likely to value review workflow, audit trail, and integrations.
+- Avoids implying low-risk self-serve automation before review controls are proven.
 
 ---
 
-## ADR-011: 14-Day MVP Timeline
+## ADR-011: Prototype Timeline Vs Commercial MVP Scope
 
 **Status:** Accepted
 
 **Context:**
-Need to ship quickly to validate market.
+Need to ship quickly to validate market while avoiding a public promise that the generated 16-skill catalog is production-ready.
 
 **Decision:**
-Build MVP with 8 credits in 14 days using Deer-Flow.
+Use a 14-day effort as a technical prototype target for the workflow engine, HITL, evidence pack export, and a small set of skills. Define the commercial MVP around Kimi's five-suite scope once confidence, review, and regional fallback UX are in place.
 
-**Rationale:**
-- Deer-Flow provides 70-80% of infrastructure
-- Focus on high-automation credits first
-- Get user feedback early
-- Iterate based on real usage
+**Prototype Credits:**
+1. PRc2 - LEED AP pipeline validation.
+2. WEp2 - Water Efficiency wedge.
+3. EAp5/EAc7 - Refrigerant Management.
 
-**MVP Credits:**
-1. PRc2 - LEED AP (95% automation)
-2. SSc6 - Light Pollution (95% automation)
-3. EAp5 - Refrigerant (90% automation)
-4. WEp2 - Water Min (90% automation)
-5. SSc5 - Heat Island (85% automation)
-6. EAc7 - Refrigerant Enhanced (90% automation)
-7. IPp3 - Carbon (85% automation)
-8. MRp2 - Embodied Carbon (85% automation)
+**Commercial MVP Suites:**
+1. WEp2 + WEc2 - Water Efficiency.
+2. EAp5 + EAc7 - Refrigerant Management.
+3. EQp1 + EQp2 - Quality Plans.
+4. IPp1 + IPp2 - Integrative Process Assessments.
+5. MRc3 - Low-Emitting Materials.
+
+**Assisted/Deferred Boundaries:**
+- EAp2, EAc2, and EAc3 parse completed model outputs only; Ecogen does not create or validate energy models autonomously.
+- IPp3, MRp2, MRc2, LTc1, LTc3, SSc3, and SSc5 require explicit source verification, regional gating, and specialist review before production sale.
 
 ---
 
-## ADR-012: No USGBC Integration in V1
+## ADR-012: No USGBC Integration In V1
 
 **Status:** Accepted
 
 **Context:**
-USGBC Arc integration would allow direct submission.
+USGBC Arc or LEED Online integration could allow direct submission, but V1 should focus on evidence pack quality and review controls.
 
 **Decision:**
-Defer USGBC integration to V2.
-
-**Rationale:**
-- Manual download/upload works for MVP
-- USGBC API is complex and rate-limited
-- Focus on core automation first
-- Can add later without breaking changes
+Defer direct USGBC integration to V2.
 
 **V1 Output:**
-- Download PDF/Excel/USGBC form
-- User uploads manually to LEED Online
+- Download evidence pack with PDF/DOCX/XLSX artifacts, source index, confidence scorecard, audit trail, and human review record.
+- User uploads manually to LEED Online.
 
 **V2 Enhancement:**
-- Direct USGBC Arc submission
+- Direct USGBC Arc/LEED Online submission only after verified API access and explicit final approval.
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+## ADR-013: Evidence Pack Standard
+
+**Status:** Accepted
+
+**Context:**
+Kimi research standardizes output around audit-ready evidence packs rather than isolated generated reports.
+
+**Decision:**
+Every supported credit must produce a standard evidence pack with credit summary, requirement version, input inventory, source index, extracted data, calculation workbook/report, generated narrative, compliance matrix, confidence assessment, audit trail, human review annotations, and exception report.
+
+**Rationale:**
+- Makes review predictable across credits.
+- Prevents unsupported claims from entering submission packages.
+- Supports reviewer comments, rework, and audit defense.
+- Keeps manual and regional fallback items visible.
+
+---
+
+## ADR-014: Confidence Tiering
+
+**Status:** Accepted
+
+**Context:**
+Field-level confidence alone does not tell users whether a package is ready for review or what must be fixed.
+
+**Decision:**
+Use package-level confidence tiers A/B/C with visible component scores and degradation factors. Tier C packages require comprehensive review and correction; Tier B requires section review; Tier A still requires standard named human approval.
+
+**Rationale:**
+- Turns confidence into actionable UX.
+- Gives reviewers a risk-based work queue.
+- Makes OCR, stale data, source gaps, unit conversions, and regional substitutions visible.
+
+---
+
+## ADR-015: Manual And Regional Fallback UX
+
+**Status:** Accepted
+
+**Context:**
+Regional data coverage varies substantially. Manual entry and manual preparation are normal workflow paths, not errors.
+
+**Decision:**
+Show each credit as fully supported, limited/manual input required, or unavailable for the project region. If automated data coverage is insufficient, route to source substitution, static dataset use, manual data entry, specialist review, or manual-preparation handoff.
+
+**Rationale:**
+- Avoids implying unattended global support.
+- Protects users from silent API/data gaps.
+- Lets enterprise users procure third-party data where justified.
+- Preserves auditability of manual assumptions.
+
+---
+
+*Version: 1.1*
+*Last Updated: 2026-05-02*

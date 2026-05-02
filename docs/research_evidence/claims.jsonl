@@ -1,0 +1,14 @@
+{"claim_id":"C001","claim":"The canonical platform stance is assistant-first, not fully autonomous.","support":["E001","E002"],"status":"supported"}
+{"claim_id":"C002","claim":"V1 should export manual-upload evidence packs instead of direct Arc submission.","support":["E005","E009"],"status":"supported"}
+{"claim_id":"C003","claim":"The Kimi directory should be treated as imported research, not canonical repo structure.","support":["E007","E008"],"status":"supported"}
+{"claim_id":"C004","claim":"Regional filtering is a first-class product requirement.","support":["E003"],"status":"supported"}
+{"claim_id":"C005","claim":"The skill system should keep one independently testable skill per credit.","support":["E004"],"status":"supported"}
+{"claim_id":"C006","claim":"Official LEED v5 source/addenda verification is required before implementing formulas and requirement checks.","support":["E010"],"status":"supported"}
+{"claim_id":"C007","claim":"The accepted 14-day effort is a technical prototype, not the commercial MVP; current prototype assumptions are PRc2, WEp2, and EAp5/EAc7.","support":["E006"],"status":"supported"}
+{"claim_id":"C008","claim":"The generated 16-skill catalog is assisted implementation inventory; commercial MVP scope should follow Kimi's five production suites with realistic automation and HITL guardrails.","support":["E001","E013"],"status":"supported"}
+{"claim_id":"C009","claim":"The canonical architecture stack is React/TypeScript, FastAPI/Python, PostgreSQL/PostGIS, Redis, Celery/RabbitMQ, object storage, and Deer-Flow-compatible durable orchestration.","support":["E014","E015"],"status":"supported"}
+{"claim_id":"C010","claim":"Deer-Flow should be treated as the accepted foundation behind an internal abstraction, not as an unverifiable lock-in to every claimed feature.","support":["E014","E016"],"status":"supported"}
+{"claim_id":"C011","claim":"Kimi's evidence-pack, confidence-scoring, API-resilience, HITL-routing, and LangGraph patterns should be imported as normalized design material.","support":["E017","E018"],"status":"supported"}
+{"claim_id":"C012","claim":"Success metrics in product requirements are hypotheses and operating targets until validated in pilots.","support":["E019"],"status":"hypothesis"}
+{"claim_id":"C013","claim":"The extended skill contract should require schemas, evidence records, fixtures, HITL action semantics, and artifact auditability.","support":["E020","E021"],"status":"supported"}
+{"claim_id":"C014","claim":"LEED v5 BD+C is an official planning anchor, but exact credit requirements and addenda must be verified before implementation.","support":["E011","E012","E010"],"status":"supported"}

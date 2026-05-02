@@ -1,210 +1,208 @@
-# User Flow: Credit Automation
+# User Flow: Credit Evidence Pack Preparation
 
 ## Flow Overview
 
-User automates a single LEED credit from data input to document generation.
+User prepares a single LEED credit evidence pack from inputs to draft package and submits it for human review. The flow never bypasses required professional approval for compliance-critical outputs.
 
 ## Entry Points
-- Project dashboard credit card
-- Deep link from notification
-- "Continue" from previous session
+
+- Project credit card "Prepare Evidence Pack."
+- Dashboard exception or review request.
+- Deep link from notification.
+- "Continue Draft" from a saved workflow.
 
 ## Flow Steps
 
 ### Step 1: Select Credit
-**Screen:** Project Dashboard
+
+**Screen:** Project Detail
 
 **User Actions:**
-- Click on credit card (e.g., "IPp3 - Carbon Assessment")
+
+- Click "Prepare Evidence Pack" on a credit card.
 
 **System Response:**
-- Navigate to credit detail page
-- Load credit configuration
-- Show automation wizard
+
+- Load credit configuration.
+- Load regional support and required reviewer roles.
+- Open Credit Evidence Pack screen.
 
 ### Step 2: Review Credit Overview
-**Screen:** Credit Overview
 
 **Display:**
-- Credit name and description
-- Points available
-- Automation level (e.g., "85% automated")
-- Required inputs list
-- Expected outputs
-- Regional availability status
+
+- Credit name, description, points/prerequisite status.
+- Product mode: AI-generated draft, AI-assisted, documentation-only, or manual-prep.
+- Required inputs and expected evidence pack sections.
+- Regional availability and fallback status.
+- Required reviewer roles.
+- Explicit boundaries, such as "Ecogen parses completed energy model outputs; it does not create the model."
 
 **User Actions:**
-- Review requirements
-- Click "Start Automation"
-- Or click "Learn More" for documentation
 
-### Step 3: Input Data
-**Screen:** Data Input Form
+- Review scope and boundaries.
+- Click "Prepare Evidence Pack."
+- Or open manual-prep path if automation is unsuitable.
 
-**Dynamic Fields based on credit:**
+### Step 3: Input Evidence
 
-For IPp3 (Carbon Assessment):
-| Field | Type | Source |
+**Screen:** Inputs
+
+**Inputs may include:**
+
+| Input | Type | Source |
 |-------|------|--------|
-| Energy Model Output | File upload | EnergyPlus, IES, Trace |
-| Material Quantities | File upload or manual | Excel, BIM export |
-| Service Life | Number input | Default: 25 years |
-| Refrigerant Schedule | File upload | HVAC schedule |
-
-**Upload Interface:**
-- Drag-and-drop zone
-- File type validation
-- Progress indicator
-- Preview for valid files
-
-**User Actions:**
-- Upload required files
-- Fill manual fields
-- Click "Continue"
+| Fixture schedule | Upload/manual | Excel, CSV, PDF, manual table |
+| Equipment schedule | Upload/manual | MEP schedule, Revit export |
+| Energy model output | Upload | Completed model output from qualified modeler |
+| Product certifications | Upload/API | Cut sheets, certification databases |
+| Regional data | API/manual | Public API, static source, manual analyst input |
+| Assumptions | Manual | User-entered with source note |
 
 **System Response:**
-- Validate file formats
-- Parse uploaded files
-- Extract structured data
-- Show data preview
 
-**Error States:**
-- Invalid file format → Show accepted formats
-- Missing required data → Highlight missing fields
-- Parse error → Show preview, allow manual correction
+- Validate file formats and schemas.
+- Parse available data.
+- Surface missing fields and manual entry prompts.
+- Log regional substitutions and fallbacks.
 
 ### Step 4: Review Extracted Data
-**Screen:** Data Preview
 
 **Display:**
-- Structured data extracted from files
-- Tables with editable values
-- Validation indicators (green check / yellow warning)
-- Confidence scores per field
+
+- Editable extracted data tables.
+- Source locators and extraction method.
+- Field confidence.
+- Required/optional status.
+- Manual override reason fields.
 
 **User Actions:**
-- Review extracted data
-- Edit incorrect values
-- Add missing data
-- Click "Confirm & Calculate"
+
+- Confirm extracted data.
+- Correct values.
+- Add missing source or assumption notes.
+- Continue to calculations.
 
 **System Response:**
-- Save confirmed data
-- Trigger calculation workflow
-- Show progress indicator
 
-### Step 5: Calculation Progress
-**Screen:** Calculation Progress
+- Save confirmed data.
+- Update confidence tier and degradation factors.
+
+### Step 5: Run Calculations And QA
 
 **Display:**
-- Progress bar with step names
-- Real-time status updates
-- Estimated time remaining
-- Cancel button
 
-**Steps shown:**
-1. Validating inputs ✓
-2. Fetching grid emission factors... ⏳
-3. Calculating operational carbon (pending)
-4. Calculating embodied carbon (pending)
-5. Generating report (pending)
+- Workflow step progress.
+- Formula names, units, intermediate values, and result preview.
+- Automated QA checks and red flags.
 
 **System Actions:**
-- Execute durable workflow
-- Call external APIs
-- Run calculations
-- Handle retries on failure
 
-**User Actions:**
-- Wait for completion
-- Or cancel (saves progress)
+- Execute deterministic calculation engines.
+- Apply rules-based validation.
+- Detect stale sources, unit inconsistencies, outliers, or missing evidence.
+- Pause or route to manual input if required.
 
-### Step 6: Review Results
-**Screen:** Calculation Results
+### Step 6: Evidence Pack Preview
 
 **Display:**
-- Summary metrics (e.g., "Total 25-year CO2: 2,100 tonnes")
-- Breakdown charts (pie chart by source)
-- Key findings
-- Confidence score
-- Generated documents preview
+
+- 12-section evidence pack preview.
+- Confidence tier A/B/C.
+- Component scorecard.
+- Exception report.
+- Compliance matrix.
+- Generated narrative and calculation workbook.
 
 **User Actions:**
-- Review results
-- Click "View Full Report" to see document
-- Click "Looks Good, Submit for Review"
-- Or click "Make Changes" to adjust inputs
 
-### Step 7: HITL Submission
-**Screen:** Submit for Review
+- Resolve open exceptions.
+- Regenerate sections after data changes.
+- Submit to review.
+
+### Step 7: Submit To HITL Review
 
 **Display:**
-- Reviewer selection dropdown
-- Priority level (Normal/Urgent)
-- Notes field
-- Document attachments
+
+- Required reviewer role(s).
+- Suggested reviewers and credentials.
+- SLA and priority.
+- Reviewer notes field.
+- Open blocker warning.
 
 **User Actions:**
-- Select reviewer
-- Add notes
-- Click "Submit"
+
+- Select reviewer.
+- Add notes.
+- Click "Submit To Review."
 
 **System Response:**
-- Create HITL task
-- Send notification to reviewer
-- Update credit status to "In Review"
-- Show confirmation
 
-### Step 8: Confirmation
-**Screen:** Submission Confirmation
+- Create HITL task.
+- Notify reviewer.
+- Update credit status to "In Review."
+- Preserve workflow state.
 
-**Display:**
-- Success message
-- Expected review time (e.g., "Within 24 hours")
-- Link to track status
-- Option to start another credit
+### Step 8: Review Outcome
 
-**User Actions:**
-- Return to project dashboard
-- Or start another credit
+**Approve:**
 
-## Alternative Flow: Direct Approval (Low-Risk Credits)
+- Package moves to the next review gate or "Internally Approved."
+- If all required reviews are complete and blockers are resolved, package can become "Submission-Ready."
 
-For credits with >90% automation and no HITL requirement:
-- Skip Step 7
-- Generate final documents immediately
-- Mark credit as "Complete"
-- Allow download of submission package
+**Request Changes:**
+
+- Workflow rewinds to the named step.
+- Reviewer comments remain attached to affected fields/sections.
+
+**Reject To Manual Preparation:**
+
+- Credit status becomes "Manual Preparation Required."
+- AI attempt is archived with reason.
+
+## Alternative Flow: Reduced Review For Tier A
+
+Tier A packages may use a shorter checklist or spot-check review, but still require named human approval before submission-ready status.
 
 ## Edge Cases
 
-### EC-1: API timeout
-- Retry 3x with exponential backoff
-- If still failing, pause and notify user
-- Allow manual data entry as fallback
+### EC-1: API Timeout
 
-### EC-2: Calculation error
-- Show error details
-- Log for debugging
-- Allow retry or manual correction
+- Retry with backoff.
+- Use cached/static fallback if allowed.
+- Request manual entry when coverage is insufficient.
+- Record fallback in audit trail and confidence degradation.
 
-### EC-3: Reviewer rejects
-- Return to Step 3 with comments
-- Highlight areas needing correction
-- Preserve previous data
+### EC-2: Calculation Error
 
-### EC-4: User cancels mid-calculation
-- Save workflow state
-- Allow resume from last completed step
-- Show "Continue" option on dashboard
+- Show formula/input that failed.
+- Preserve data.
+- Allow correction and rerun.
+
+### EC-3: Low Confidence Or Missing Source
+
+- Block final review if critical.
+- Show required fix.
+- Allow reviewer override only with justification where policy permits.
+
+### EC-4: Unsupported Region
+
+- Offer manual-prep path or limited/manual workflow.
+- Do not show the credit as fully supported.
+
+### EC-5: User Cancels Mid-Calculation
+
+- Save workflow state.
+- Allow resume from last completed durable step.
 
 ## Success Criteria
-- Credit completed in < 10 minutes (simple) or < 30 minutes (complex)
-- All calculations validated
-- Documents generated successfully
-- HITL task created (if required)
+
+- User understands automation boundary before starting.
+- Every critical value has a source or explicit manual assumption.
+- Confidence and exceptions are visible before review.
+- HITL task is created for every compliance-critical package.
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+*Version: 1.1*
+*Last Updated: 2026-05-02*

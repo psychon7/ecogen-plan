@@ -2,149 +2,152 @@
 
 ## Flow Overview
 
-User creates a new LEED project, specifying basic information that enables credit automation.
+User creates a LEED project and establishes the metadata needed for regional support, credit eligibility, evidence pack preparation, and reviewer routing.
 
 ## Entry Points
-- Dashboard "New Project" button
-- Sidebar navigation
-- Deep link from email invitation
+
+- Dashboard "New Project."
+- Sidebar "Projects."
+- Email invitation.
 
 ## Flow Steps
 
 ### Step 1: Start Project Creation
-**Screen:** Project Creation Modal
 
-**User Actions:**
-- Click "New Project" button
-- Or accept email invitation
+**Screen:** Project Creation
 
 **System Response:**
-- Open modal with form
-- Pre-fill if from invitation
+
+- Open project form.
+- Pre-fill organization and team data when available.
 
 ### Step 2: Enter Project Details
-**Screen:** Project Details Form
 
-**Fields:**
-| Field | Type | Required | Validation |
-|-------|------|----------|------------|
-| Project Name | Text | Yes | Max 100 chars |
-| Project Code | Text | No | Auto-generated if blank |
-| Building Type | Select | Yes | Office, Retail, Healthcare, etc. |
-| LEED Version | Select | Yes | v4, v4.1, v5 |
-| Rating System | Select | Yes | BD+C, ID+C, O+M |
-| Target Level | Select | Yes | Certified, Silver, Gold, Platinum |
-| Street Address | Text | Yes | For location detection |
-| City | Text | Yes | - |
-| State/Province | Text | Yes | - |
-| Country | Select | Yes | For regional filtering |
-| Postal Code | Text | Yes | - |
-
-**User Actions:**
-- Fill all required fields
-- Click "Continue"
+| Field | Type | Required | Purpose |
+|-------|------|----------|---------|
+| Project Name | Text | Yes | Display and audit records |
+| Project Code | Text | No | Firm/project tracking |
+| Building Type | Select | Yes | Credit applicability |
+| LEED Version | Select | Yes | Requirement version |
+| Rating System | Select | Yes | Reviewer and credit rules |
+| Target Level | Select | Yes | Progress reporting |
+| Project Phase | Select | Yes | Evidence availability and workflow guidance |
+| Street Address | Text | Yes | Geocoding and regional data |
+| City | Text | Yes | Location |
+| State/Province | Text | Yes | Region |
+| Country | Select | Yes | Regional filtering |
+| Postal Code | Text | Yes | Geocoding |
 
 **System Response:**
-- Validate fields
-- Geocode address to lat/lng
-- Detect region for credit availability
-- Show loading state
 
-**Error States:**
-- Missing required fields → Highlight fields, show message
-- Invalid address → Suggest corrections
-- Unsupported region → Show limited credit availability
+- Validate required fields.
+- Geocode address to latitude/longitude.
+- Resolve region support category.
+- Detect climate zone and relevant jurisdiction fields when available.
 
-### Step 3: Confirm Location
-**Screen:** Location Confirmation
+### Step 3: Confirm Location And Region Support
 
 **Display:**
-- Map pin at detected location
-- "Is this correct?" confirmation
-- Option to adjust pin
+
+- Map pin and editable coordinates.
+- Region support summary.
+- Credits likely full, limited/manual, unavailable, or manual-prep.
 
 **User Actions:**
-- Confirm location
-- Or drag pin to correct location
-- Click "Continue"
 
-**System Response:**
-- Save lat/lng
-- Query available credits for region
-- Proceed to team setup
+- Confirm location.
+- Adjust pin or enter manual latitude/longitude.
+- Continue.
 
-### Step 4: Add Team Members
-**Screen:** Team Setup
+**Edge Behavior:**
 
-**Fields:**
+- Unsupported or limited regions show manual data requirements before the user sees credit cards.
+- Manual location entry reduces confidence and appears in the evidence pack audit trail.
+
+### Step 4: Add Team Members And Reviewer Roles
+
 | Field | Type | Required |
 |-------|------|----------|
 | Name | Text | Yes |
 | Email | Email | Yes |
-| Role | Select | Yes |
-| LEED AP Number | Text | No |
+| Project Role | Select | Yes |
+| Credential/Specialty | Text/Select | No |
+| Review Eligibility | Checkbox/Role | No |
 
 **Roles:**
-- Project Manager
-- LEED Consultant
-- Energy Modeler
-- Architect
-- MEP Engineer
-- Contractor
-- Owner
 
-**User Actions:**
-- Add team members
-- Or skip and add later
-- Click "Create Project"
+- Project Manager.
+- LEED Consultant.
+- Senior LEED AP / Principal Approver.
+- Junior Consultant.
+- Energy Modeler.
+- MEP/PE Reviewer.
+- LCA/Embodied Carbon Reviewer.
+- GIS/Landscape Reviewer.
+- Legal Reviewer.
+- Architect.
+- Contractor.
+- Owner/Viewer.
 
-**System Response:**
-- Send email invitations
-- Create project in database
-- Initialize project workspace
-- Redirect to project dashboard
-
-### Step 5: Project Dashboard
-**Screen:** Project Dashboard
+### Step 5: Select Initial Credit Scope
 
 **Display:**
-- Project header with name, location, target
-- Credit grid showing available credits
-- Progress summary (0/N credits started)
-- Team member list
+
+- Recommended Kimi-aligned suites where applicable.
+- Technical demo/assisted catalog credits clearly labeled.
+- Region support and required reviewer role per credit.
 
 **User Actions:**
-- Browse available credits
-- Click credit to start automation
-- Invite more team members
-- Edit project settings
+
+- Select pursued credits.
+- Assign default reviewers.
+- Continue.
+
+### Step 6: Project Dashboard
+
+**Display:**
+
+- Project header with region support.
+- Credit board with pursued/draft/in-review/submission-ready/submitted/awarded statuses.
+- Review roles and outstanding setup gaps.
+
+**User Actions:**
+
+- Prepare an evidence pack.
+- Invite more team members.
+- Resolve region/manual input gaps.
 
 ## Edge Cases
 
-### EC-1: User doesn't know building type
-- Show descriptions for each type
-- Allow "Other" with text field
+### EC-1: User Does Not Know Building Type
 
-### EC-2: Address not found
-- Allow manual lat/lng entry
-- Show warning about limited automation
+- Show brief descriptions.
+- Allow "Other" with reduced automation confidence until corrected.
 
-### EC-3: Region has limited credit availability
-- Show available credits
-- Explain limitations
-- Offer manual entry option
+### EC-2: Address Not Found
 
-### EC-4: Team member already has account
-- Auto-link to existing user
-- Send notification instead of invitation
+- Allow manual location entry.
+- Show warning about regional data confidence and source-routing impact.
+
+### EC-3: Limited Regional Coverage
+
+- Show available credits.
+- Show limited/manual credits with required manual inputs.
+- Hide or mark unavailable credits when required data cannot be sourced.
+
+### EC-4: Reviewer Role Missing
+
+- Allow project creation.
+- Flag credits requiring reviewer assignment before submission to review.
 
 ## Success Criteria
-- Project created in < 5 minutes
-- All required fields validated
-- Team members notified
-- Dashboard loads with correct credits
+
+- Project created in under 5 minutes.
+- Region support is visible before credit work begins.
+- Reviewer roles are captured early enough to avoid blocked packages.
+- Dashboard loads with honest credit availability and status labels.
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+*Version: 1.1*
+*Last Updated: 2026-05-02*

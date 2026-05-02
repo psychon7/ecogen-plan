@@ -1,309 +1,168 @@
 # Screen: HITL Review
 
 ## Purpose
-Interface for LEED consultants to review AI-generated credit documentation and approve or request changes.
+
+Interface for qualified reviewers to inspect an AI-prepared evidence pack, verify sources/calculations/narratives, leave comments, and approve, request changes, reject to manual preparation, reassign, or escalate.
 
 ## Layout Structure
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ TOP BAR                                                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ SIDEBAR │ MAIN CONTENT                                                      │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────────────────────────────┐ │
-│         │ │ REVIEW HEADER                                               │ │
-│         │ │ [← Back to Reviews]                                         │ │
-│         │ │                                                             │ │
-│         │ │ Review: IPp3 - Carbon Assessment                            │ │
-│         │ │ Project: Acme HQ | Submitted by: Jennifer Lee | 2h ago      │ │
-│         │ │ Due: 22 hours remaining                                     │ │
-│         │ └─────────────────────────────────────────────────────────────┘ │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────┬───────────────────────┐ │
-│         │ │                                     │                       │ │
-│         │ │  DOCUMENT PREVIEW                   │  REVIEW CHECKLIST     │ │
-│         │ │  ┌─────────────────────────────┐    │                       │ │
-│         │ │  │                             │    │  ☑ Energy model       │ │
-│         │ │  │    PDF Viewer               │    │     inputs verified   │ │
-│         │ │  │                             │    │                       │ │
-│         │ │  │                             │    │  ☐ Material           │ │
-│         │ │  │                             │    │     quantities        │ │
-│         │ │  │                             │    │     accurate          │ │
-│         │ │  │                             │    │                       │ │
-│         │ │  │                             │    │  ☐ Grid factors       │ │
-│         │ │  │                             │    │     appropriate       │ │
-│         │ │  │                             │    │                       │ │
-│         │ │  │                             │    │  ☐ Calculations       │ │
-│         │ │  │                             │    │     reasonable        │ │
-│         │ │  │                             │    │                       │ │
-│         │ │  │                             │    │  ☐ Hotspots           │ │
-│         │ │  │                             │    │     identified        │ │
-│         │ │  └─────────────────────────────┘    │                       │ │
-│         │ │                                     │                       │ │
-│         │ │  [Download PDF] [Download Excel]    │  Comments             │ │
-│         │ │                                     │  ┌─────────────────┐  │ │
-│         │ │                                     │  │                 │  │ │
-│         │ │                                     │  │                 │  │ │
-│         │ │                                     │  └─────────────────┘  │ │
-│         │ │                                     │                       │ │
-│         │ │                                     │  [Approve]            │ │
-│         │ │                                     │  [Request Changes]    │ │
-│         │ │                                     │                       │ │
-│         │ └─────────────────────────────────────┴───────────────────────┘ │
-│         │                                                                   │
-└─────────┴───────────────────────────────────────────────────────────────────┘
+```text
+ReviewHeader
+  credit, project, package version, reviewer role, SLA, confidence tier
+TaskQueue
+  optional list of assigned review tasks
+EvidenceViewer
+  PDF/report, spreadsheet, source document, image, map, or extracted-data view
+ReviewPanel
+  checklist, confidence, exceptions, comments, actions
+AuditPanel
+  workflow history, reviewer decisions, source changes
 ```
 
-## Component Tree
+## Review Header
 
-```
-HITLReview
-├── TopBar
-├── Sidebar
-└── MainContent
-    ├── ReviewHeader
-    │   ├── BackButton
-    │   ├── ReviewTitle
-    │   ├── MetaInfo
-    │   │   ├── Project Name
-    │   │   ├── Submitter
-    │   │   └── Time Ago
-    │   └── SLABadge
-    ├── ReviewContent (2-column)
-    │   ├── LeftColumn (60%)
-    │   │   ├── DocumentViewer
-    │   │   │   └── PDFViewer
-    │   │   └── DownloadButtons
-    │   └── RightColumn (40%)
-    │       ├── ChecklistPanel
-    │       │   └── ChecklistItem (×N)
-    │       ├── CommentsPanel
-    │       │   └── TextArea
-    │       └── ActionButtons
-    │           ├── ApproveButton
-    │           └── RejectButton
-```
+Shows:
 
-## Document Viewer
+- Credit and evidence pack version.
+- Project and rating system.
+- Submitted by and submitted timestamp.
+- Required reviewer role and assigned reviewer.
+- Credential/scope requirement.
+- SLA countdown and escalation state.
+- Confidence tier and open blocker count.
 
-### Features
-- PDF rendering with pagination
-- Zoom in/out (50% - 200%)
-- Page navigation (prev/next, jump to page)
-- Full-screen mode
-- Text selection
-- Print button
+## Evidence Viewer
 
-### Toolbar
-```
-┌─────────────────────────────────────────────────────────┐
-│ [←] [→] Page 3 of 12 [Zoom: 100%] [⊕] [⊖] [⛶] [🖨️]    │
-└─────────────────────────────────────────────────────────┘
-```
+The viewer supports:
 
-## Checklist Panel
+- Generated PDF/DOCX narrative preview.
+- Calculation workbook/table preview.
+- Source document preview with page/row/locator.
+- Extracted field table.
+- Image or map overlays where applicable.
+- Side-by-side source vs generated claim comparison.
 
-### Structure
-- Section title: "Review Checklist"
-- Checkboxes with labels
-- All unchecked by default
-- Required: All must be checked to approve
+Toolbar:
 
-### Credit-Specific Checklists
+- Search.
+- Page/sheet navigation.
+- Zoom.
+- Source locator.
+- Open in new panel.
+- Download artifact.
 
-**IPp3 - Carbon Assessment:**
-- [ ] Energy model inputs verified
-- [ ] Material quantities accurate
-- [ ] Grid emission factors appropriate
-- [ ] Calculations reasonable
-- [ ] Top 3 hotspots identified
+## Review Checklist
 
-**WEp2 - Water Efficiency:**
-- [ ] Fixture schedule complete
-- [ ] Flow rates verified
-- [ ] Occupancy counts accurate
-- [ ] Calculations correct
-- [ ] Percentage reduction calculated
+Checklist items are credit-specific and categorized:
 
-**EAc3 - Energy Efficiency:**
-- [ ] Proposed model accuracy verified
-- [ ] Baseline model compliance confirmed
-- [ ] Modeling assumptions reviewed
-- [ ] Energy rates validated
-- [ ] Percent improvement calculated
+| Category | Examples |
+|----------|----------|
+| Data verification | Inputs match source documents, manual assumptions labeled |
+| Calculation | Formula, units, thresholds, intermediate values reviewed |
+| Documentation | Required narratives, tables, and forms present |
+| Compliance | Requirement-to-evidence matrix complete |
+| Regional/manual fallback | Substitutions and manual entries acceptable |
 
-## Comments Panel
+Items may be required or optional. Required blockers prevent approval unless resolved or overridden with justification.
 
-### Structure
-- Label: "Comments (required for rejection)"
-- Textarea: 4 rows
-- Placeholder: "Add notes or feedback..."
+## Confidence And Exceptions
 
-### Characteristics
-- Optional for approval
-- Required for rejection
-- Max 2000 characters
-- Supports newlines
+The review panel displays:
 
-## Action Buttons
+- Tier A/B/C.
+- Component scores.
+- Degradation factors.
+- Open exceptions.
+- Suggested fixes.
+- Whether final export is blocked.
 
-### Approve Button
-- Variant: Primary
-- Size: Large
-- Icon: Checkmark
-- Text: "Approve"
-- State: Disabled until all checklist items checked
+Tier C requires comprehensive review and correction before submission-ready status.
 
-### Request Changes Button
-- Variant: Secondary
-- Size: Large
-- Icon: Arrow-left
-- Text: "Request Changes"
-- Opens rejection modal
+## Comments
 
-## Rejection Modal
+Reviewers can comment on:
 
-### Structure
-```
-┌─────────────────────────────────────────┐
-│ Request Changes                    [X]  │
-├─────────────────────────────────────────┤
-│                                         │
-│ Return to step:                         │
-│ ┌─────────────────────────────────────┐ │
-│ │ Data Input                          │ │
-│ └─────────────────────────────────────┘ │
-│                                         │
-│ Reason for rejection:                   │
-│ ┌─────────────────────────────────────┐ │
-│ │                                     │ │
-│ │                                     │ │
-│ │                                     │ │
-│ └─────────────────────────────────────┘ │
-│                                         │
-│ Specific issues:                        │
-│ ☐ Energy model needs correction         │
-│ ☐ Material quantities incorrect         │
-│ ☐ Calculations need revision            │
-│                                         │
-│          [Cancel]  [Submit Request]     │
-│                                         │
-└─────────────────────────────────────────┘
-```
+- Evidence pack section.
+- Calculation cell or row.
+- Extracted field.
+- Source document locator.
+- Narrative paragraph.
+- Overall package.
 
-## Spacing & Layout
+Each comment has:
 
-### Review Header
-- Padding: 24px 32px
-- Border-bottom: 1px solid `color.neutral.200`
+- Severity: info, warning, blocker.
+- Status: open, resolved, overridden.
+- Owner.
+- Timestamp.
 
-### Main Content (2-column)
-- Display: grid
-- Grid: 60% / 40%
-- Gap: 32px
-- Padding: 32px
-- Height: calc(100vh - 200px)
-- Overflow: auto
+## Actions
 
-### Document Viewer
-- Height: 500px
-- Border: 1px solid `color.neutral.200`
-- Radius: `borderRadius.lg`
+### Approve
 
-### Right Panel
-- Position: sticky
-- Top: 32px
-- Background: `color.base.white`
-- Padding: 24px
-- Border: 1px solid `color.neutral.200`
-- Radius: `borderRadius.lg`
+Available only when required checklist items and blockers are resolved or explicitly overridden with justification.
 
-## Typography
+Effect:
 
-| Element | Font Size | Weight | Color |
-|---------|-----------|--------|-------|
-| Review Title | 24px | 700 | `color.neutral.900` |
-| Meta Info | 14px | 400 | `color.neutral.500` |
-| SLA Badge | 12px | 600 | `color.semantic.warning.dark` |
-| Panel Title | 16px | 600 | `color.neutral.900` |
-| Checklist Item | 14px | 400 | `color.neutral.700` |
-| Button Text | 16px | 600 | varies |
+- Records reviewer identity, credential/scope, timestamp, package version, checklist state, and comments.
+- Moves workflow to the next gate or "Internally Approved."
 
-## Colors
+### Request Changes
 
-| Element | Token |
-|---------|-------|
-| Page background | `color.neutral.50` |
-| Panel background | `color.base.white` |
-| Panel border | `color.neutral.200` |
-| SLA warning | `color.semantic.warning.light` |
-| Approve button | `color.semantic.success` |
-| Reject button | `color.semantic.error` |
+Returns workflow to a named step with comments attached.
+
+Return options:
+
+- Inputs.
+- Extracted Data.
+- Calculations.
+- Evidence Pack Generation.
+- Reviewer Recheck.
+
+### Reject To Manual Preparation
+
+Used when the AI-assisted path should not continue safely.
+
+Effect:
+
+- Marks credit as "Manual Preparation Required."
+- Archives AI attempt and reason.
+- Notifies project lead.
+
+### Reassign
+
+Moves task to another qualified reviewer and records reason.
+
+### Escalate
+
+Routes to senior reviewer, project director, or specialist role.
 
 ## States
 
-### Loading
-- Show skeleton for document viewer
-- Checklist disabled
-- Buttons disabled
-
-### Document Load Error
-- Show error message
-- Provide download link as fallback
-- Log error for investigation
-
-### Incomplete Checklist
-- Approve button disabled
-- Tooltip: "Complete all checklist items to approve"
-
-### SLA Approaching
-- Badge changes to red
-- Show warning banner
-- Offer reassign option
-
-### Approved
-- Show success toast
-- Redirect to reviews list
-- Update credit status
-
-### Rejected
-- Show confirmation
-- Notify submitter
-- Return to reviews list
+| State | Behavior |
+|-------|----------|
+| Loading | Skeleton viewer and disabled checklist |
+| Document load error | Show download fallback and preserve review task |
+| Incomplete checklist | Approve disabled; tooltip explains missing items |
+| Blockers open | Approve disabled unless override policy allows |
+| SLA approaching | Warning badge and escalation action |
+| Approved | Success message and return to queue |
+| Changes requested | Confirmation and workflow return step |
+| Manual preparation | Confirmation and manual workflow link |
 
 ## User Actions
 
 | Action | Trigger | Result |
 |--------|---------|--------|
-| Check Item | Click checkbox | Mark item complete |
-| Uncheck Item | Click checkbox | Mark item incomplete |
-| Add Comment | Type in textarea | Save comment |
-| Approve | Click button (all items checked) | Approve credit, notify submitter |
-| Request Changes | Click button | Open rejection modal |
-| Download PDF | Click button | Download document |
-| Download Excel | Click button | Download workbook |
-| Reassign | Click reassign | Open reassign modal |
-
-## Micro-interactions
-
-### Checkbox Check
-- Scale up briefly (1.1)
-- Duration: 150ms
-- Easing: `motion.easing.bounce`
-
-### Approve Button Enable
-- Fade from disabled to enabled
-- Duration: `motion.duration.fast`
-
-### Document Page Change
-- Fade transition
-- Duration: `motion.duration.normal`
-
-### Modal Open
-- Fade in + scale up (0.95 → 1)
-- Duration: `motion.duration.normal`
-- Easing: `motion.easing.out`
+| Check Item | Click checkbox | Mark checklist item complete |
+| Add Comment | Select target and type | Save threaded comment |
+| Mark Blocker | Set severity | Prevent approval until resolved/overridden |
+| Approve | Click Approve | Record approval and resume workflow |
+| Request Changes | Click action | Open return-step modal |
+| Reject To Manual Prep | Click action | Archive attempt and hand off |
+| Reassign | Click action | Select new qualified reviewer |
+| Escalate | Click action | Notify escalation target |
+| Download Artifact | Click download | Download evidence artifact |
 
 ## API Dependencies
 
@@ -311,35 +170,47 @@ HITLReview
 GET /api/reviews/{id}:
   response:
     id: string
+    evidence_pack_id: string
     credit_code: string
     credit_name: string
     project_name: string
+    package_version: string
     submitter_name: string
+    reviewer_role: string
+    reviewer_credential_required: string
     submitted_at: string
     due_at: string
-    document_url: string
-    excel_url: string
+    confidence: object
+    exceptions: array
+    artifacts: array
     checklist: array
-      - id: string
-        label: string
-        checked: boolean
+    comments: array
+    audit_events: array
 
 POST /api/reviews/{id}/approve:
   request:
     checklist: array
     comments: string
+    overrides: array
+    signature: object
   response:
     status: string
-    credit_id: string
+    evidence_pack_id: string
 
-POST /api/reviews/{id}/reject:
+POST /api/reviews/{id}/request-changes:
   request:
     return_to_step: string
     reason: string
     specific_issues: array
   response:
     status: string
-    credit_id: string
+
+POST /api/reviews/{id}/reject-manual:
+  request:
+    reason: string
+    manual_owner_id: string
+  response:
+    status: string
 
 POST /api/reviews/{id}/reassign:
   request:
@@ -351,5 +222,5 @@ POST /api/reviews/{id}/reassign:
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+*Version: 1.1*
+*Last Updated: 2026-05-02*

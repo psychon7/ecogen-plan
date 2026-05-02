@@ -1,160 +1,198 @@
 # User Personas
 
-## Persona 1: Sarah — Senior LEED Consultant
+## Persona 1: Sarah - Senior LEED Consultant
 
 ### Demographics
-- Age: 34
+
 - Role: Senior Sustainability Consultant
-- Company: Mid-size consulting firm (20 people)
+- Company: Mid-size consulting firm
 - Experience: 8 years in LEED, 50+ certified projects
 
 ### Goals
-- Complete projects faster without sacrificing quality
-- Take on more projects to increase revenue
-- Maintain work-life balance (stop weekend crunch)
+
+- Prepare evidence packs faster without losing control of compliance decisions.
+- Reduce reviewer comments and rework.
+- Standardize how her firm documents repeatable credits.
+- Stop weekend crunch caused by formatting, lookup, and spreadsheet work.
 
 ### Pain Points
-1. "I spend 3 days on documentation for every 1 day of actual analysis"
-2. "Copy-pasting between Excel, Word, and USGBC forms is soul-crushing"
-3. "I never know if I caught every calculation error"
-4. "Clients ask for status updates and I have to dig through files"
 
-### Behaviors
-- Works in bursts: intense focus periods, then waiting for reviews
-- Uses 5+ tools: Excel, Word, Tally, EnergyPlus, USGBC Arc
-- Checks email constantly for project updates
-- Keeps detailed notes but they're scattered
+1. "I spend too much time moving data between Excel, Word, PDFs, and LEED Online."
+2. "I need to know which numbers came from which source before I sign off."
+3. "I cannot let AI quietly invent a compliance claim."
+4. "Clients ask for progress, but points are not final until review."
 
 ### Success Criteria
-- Can complete a credit in < 2 hours vs. current 8 hours
-- Feels confident in accuracy (no more 3am anxiety)
-- Can see all project status at a glance
 
-### Quote
-> "If I could automate the paperwork, I could take on 3x more projects and actually have weekends."
+- Can prepare a draft evidence pack in hours, not days.
+- Can inspect confidence, sources, formulas, and exceptions before approval.
+- Can assign specialist review and track blockers without email archaeology.
 
 ---
 
-## Persona 2: Marcus — Project Manager
+## Persona 2: Marcus - Sustainability Project Manager
 
 ### Demographics
-- Age: 41
+
 - Role: Sustainability Project Manager
-- Company: Large architecture firm
-- Experience: 15 years, manages 12 concurrent projects
+- Company: Large architecture or consulting firm
+- Experience: 15 years, manages many concurrent projects
 
 ### Goals
-- Deliver projects on time and on budget
-- Keep stakeholders informed
-- Ensure nothing falls through cracks
+
+- Deliver projects on time and on budget.
+- Keep stakeholders informed without overstating certification progress.
+- Coordinate reviews across consultants, modelers, engineers, and owners.
 
 ### Pain Points
-1. "I have 12 projects and no visibility into which credits are done"
-2. "Consultants give me updates in emails I can't find"
-3. "Owners ask 'when will we be certified?' and I guess"
-4. "Every project uses different file naming conventions"
 
-### Behaviors
-- Lives in meetings and email
-- Needs quick status updates, not deep dives
-- Shares progress with executives and clients
-- Manages budgets and timelines
+1. "I need to know what is draft, in review, submission-ready, submitted, or awarded."
+2. "Review tasks get buried in emails."
+3. "Owners ask when we will be certified, and I need risk-based status."
+4. "Regional data gaps show up too late."
 
 ### Success Criteria
-- Dashboard shows all projects, credits, points, status
-- Can generate client-ready progress report in 1 click
-- Gets alerts when credits are ready for review
 
-### Quote
-> "I need to know where we stand without chasing people down."
+- Dashboard shows evidence pack status, reviewer SLA, blocker count, and manual-prep items.
+- Can generate client-ready progress reports that distinguish pursued and awarded points.
+- Gets escalations when review or regional data gaps threaten schedule.
 
 ---
 
-## Persona 3: Jennifer — Junior Consultant
+## Persona 3: Jennifer - Junior Consultant
 
 ### Demographics
-- Age: 26
+
 - Role: Junior Sustainability Consultant
-- Company: Same as Sarah
 - Experience: 2 years, LEED Green Associate
 
 ### Goals
-- Learn LEED deeply and pass LEED AP exam
-- Contribute meaningfully to projects
-- Get promoted to Senior Consultant
+
+- Learn the right documentation process.
+- Prepare high-quality drafts for senior review.
+- Understand why the platform flags data, assumptions, or sources.
 
 ### Pain Points
-1. "I don't know if I'm doing calculations correctly"
-2. "Senior consultants are too busy to review my work"
-3. "I spend hours searching for the right USGBC form"
-4. "I make the same mistakes repeatedly"
 
-### Behaviors
-- Follows checklists religiously
-- Asks lots of questions (but feels bad about it)
-- Takes detailed notes for future reference
-- Wants to understand the "why" not just the "what"
+1. "I do not always know which evidence satisfies which requirement."
+2. "I need examples, but I also need to see why they are correct."
+3. "Senior consultants are too busy to review every early mistake."
+4. "I make repeated errors in calculations and forms."
 
 ### Success Criteria
-- Platform guides her through each step
-- Built-in validation catches errors early
-- Can see examples of completed credits
 
-### Quote
-> "I want to learn the right way, not just get it done."
+- Guided intake explains required inputs and missing evidence.
+- Validation catches calculation and unit issues early.
+- Review comments are linked to exact fields, sources, and evidence pack sections.
 
 ---
 
-## Persona 4: David — Building Owner
+## Persona 4: David - Building Owner
 
 ### Demographics
-- Age: 52
+
 - Role: Director of Real Estate
-- Company: Fortune 500 corporation
-- Experience: Manages $2B real estate portfolio
+- Company: Large portfolio owner
 
 ### Goals
-- Achieve sustainability targets (net-zero by 2030)
-- Reduce certification costs
-- Report progress to board and investors
+
+- Track sustainability commitments and certification progress.
+- Understand cost, timeline, risk, and evidence readiness.
+- Report progress to executives and investors.
 
 ### Pain Points
-1. "LEED certification takes 12-18 months — too slow"
-2. "I don't know if the money I'm spending is worth it"
-3. "My team can't track progress across 40 buildings"
-4. "Consultants bill by the hour with no visibility"
 
-### Behaviors
-- Reviews high-level dashboards
-- Asks for ROI on sustainability investments
-- Needs board-ready reports
-- Delegates details to team
+1. "I need progress I can trust, not optimistic point totals."
+2. "I cannot see why certification work is delayed."
+3. "Consultant invoices are hard to connect to deliverables."
+4. "Portfolio reporting hides project-level blockers."
 
 ### Success Criteria
-- Can see portfolio-wide LEED progress
-- Understands cost per credit and per certification
-- Receives automated progress updates
 
-### Quote
-> "I need to show the board we're making progress, not just spending money."
+- Sees portfolio progress by pursued, submission-ready, submitted, and awarded points.
+- Understands open risks, manual work, and review bottlenecks.
+- Receives clean summaries without being exposed to every technical artifact.
 
 ---
 
-## Jobs-to-be-Done
+## Persona 5: Priya - Specialist Reviewer
 
-### JTBD-1: Complete LEED Documentation
-*When I'm working on a LEED project, I want to generate credit documentation quickly, so I can move to the next project.*
+### Demographics
 
-### JTBD-2: Ensure Accuracy
-*When I submit to USGBC, I want confidence my calculations are correct, so I avoid rejections and rework.*
+- Role: LEED AP reviewer, energy modeler, PE/MEP reviewer, LCA expert, GIS/landscape reviewer, or legal reviewer
+- Experience: Deep domain expertise, limited time
 
-### JTBD-3: Track Progress
-*When managing multiple projects, I want visibility into status, so I can report to stakeholders and hit deadlines.*
+### Goals
 
-### JTBD-4: Learn and Improve
-*When I'm new to LEED, I want guidance and examples, so I can contribute effectively and advance my career.*
+- Review only the content that requires her expertise.
+- Verify source evidence, formulas, assumptions, and generated narratives efficiently.
+- Leave actionable comments without breaking workflow state.
+
+### Pain Points
+
+1. "I do not want a generic approve button for specialist work."
+2. "I need source documents next to extracted values and calculations."
+3. "Low-confidence data should be obvious before I sign off."
+4. "A rejection should route the workflow to the right repair step."
+
+### Success Criteria
+
+- Review task shows credential requirement, package confidence, evidence sources, comments, and SLA.
+- Can approve, request changes, reject to manual preparation, reassign, or escalate.
+- Digital approval records scope, credential, timestamp, and package version.
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+## Persona 6: Alex - Energy Modeler
+
+### Demographics
+
+- Role: Energy modeler or mechanical engineer
+- Tools: EnergyPlus, eQuest, IES-VE, TRACE, OpenStudio, WUFI, PHPP
+
+### Goals
+
+- Keep ownership of model creation and engineering judgment.
+- Let Ecogen parse outputs, format summaries, and catch obvious documentation issues.
+- Avoid any product copy implying the model was created or validated by AI.
+
+### Pain Points
+
+1. "Model assumptions are context-heavy and cannot be blindly automated."
+2. "Output summaries are tedious but must match the submitted model."
+3. "I need to review the comparison before a consultant uses it."
+
+### Success Criteria
+
+- Ecogen clearly asks for completed model outputs.
+- Review checklist focuses on output consistency, assumptions, end-use totals, and exported reports.
+- Evidence pack says model responsibility remains with the qualified modeler.
+
+---
+
+## Jobs To Be Done
+
+### JTBD-1: Prepare LEED Evidence
+
+When I am documenting a LEED credit, I want to prepare a traceable evidence pack quickly so I can spend my time on judgment and coordination.
+
+### JTBD-2: Review With Confidence
+
+When I approve a package, I want to see sources, formulas, confidence, exceptions, and reviewer notes so I can sign off responsibly.
+
+### JTBD-3: Track Real Progress
+
+When I manage projects, I want to distinguish draft, in review, submission-ready, submitted, and awarded status so stakeholders understand actual risk.
+
+### JTBD-4: Handle Data Gaps
+
+When regional data or APIs are missing, I want a clear manual fallback path so the project can continue without hidden assumptions.
+
+### JTBD-5: Learn And Improve
+
+When I am new to LEED documentation, I want guided workflows and review feedback so I can produce better drafts over time.
+
+---
+
+*Version: 1.1*
+*Last Updated: 2026-05-02*

@@ -1,306 +1,149 @@
-# Screen: Credit Automation
+# Screen: Credit Evidence Pack
 
 ## Purpose
-Wizard interface for automating a single LEED credit. Guides user through data input, validation, calculation, and submission.
+
+Guided interface for preparing one LEED credit evidence pack. The screen supports uploads, manual inputs, extraction review, calculations, narrative drafting, confidence assessment, exception handling, and submission to human review.
+
+## Product Language
+
+Use "Prepare Evidence Pack," "Run Assistant," and "Generate Draft Package." Do not imply unattended completion or reviewless approval. For energy-model credits, state clearly that the user must upload completed model outputs from a qualified modeler.
 
 ## Layout Structure
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ TOP BAR                                                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ SIDEBAR │ MAIN CONTENT                                                      │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────────────────────────────┐ │
-│         │ │ WIZARD HEADER                                               │ │
-│         │ │ [← Back] IPp3 - Carbon Assessment              [Save & Exit]│ │
-│         │ │ 0 pts | 85% automated | Project: Acme HQ                    │ │
-│         │ └─────────────────────────────────────────────────────────────┘ │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────────────────────────────┐ │
-│         │ │ PROGRESS STEPS                                              │ │
-│         │ │ ●────●────○────○────○                                       │ │
-│         │ │ Input  Data  Calc  Review Submit                            │ │
-│         │ └─────────────────────────────────────────────────────────────┘ │ │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────────────────────────────┐ │
-│         │ │ STEP CONTENT                                                │ │
-│         │ │                                                             │ │
-│         │ │ Upload Required Files                                       │ │
-│         │ │                                                             │ │
-│         │ │ ┌───────────────────────────────────────────────────────┐   │ │
-│         │ │ │ 📄 Energy Model Output                                  │   │ │
-│         │ │ │ Drag & drop or click to browse                          │   │ │
-│         │ │ │ Accepted: .html, .csv, .xml                            │   │ │
-│         │ │ └───────────────────────────────────────────────────────┘   │ │
-│         │ │                                                             │ │
-│         │ │ ┌───────────────────────────────────────────────────────┐   │ │
-│         │ │ │ 📄 Material Quantities                                  │   │ │
-│         │ │ │ Drag & drop or click to browse                          │   │ │
-│         │ │ │ Accepted: .xlsx, .csv                                   │   │ │
-│         │ │ └───────────────────────────────────────────────────────┘   │ │
-│         │ │                                                             │ │
-│         │ │ Service Life (years)                                        │ │
-│         │ │ ┌───────────────────────────────────────────────────────┐   │ │
-│         │ │ │ 25                                                      │   │ │
-│         │ │ └───────────────────────────────────────────────────────┘   │ │
-│         │ │                                                             │ │
-│         │ │ [Continue →]                                                │ │
-│         │ │                                                             │ │
-│         │ └─────────────────────────────────────────────────────────────┘ │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────────────────────────────┐ │
-│         │ │ HELP PANEL (collapsible)                                    │ │
-│         │ │ ℹ️ About this credit                                        │ │
-│         │ │ This credit calculates 25-year carbon...                    │ │
-│         │ └─────────────────────────────────────────────────────────────┘ │
-│         │                                                                   │
-└─────────┴───────────────────────────────────────────────────────────────────┘
+```text
+EvidencePackHeader
+  credit, project, product mode, region support, required reviewers
+StepIndicator
+  Overview -> Inputs -> Extracted Data -> Calculations -> Evidence Pack -> Review
+MainPanel
+  dynamic step content
+RightPanel
+  confidence tier, exceptions, source coverage, reviewer requirements
+HelpPanel
+  credit-specific guidance and boundaries
 ```
 
-## Wizard Steps
+## Steps
 
 ### Step 1: Overview
-- Credit description
-- Required inputs list
-- Expected outputs preview
-- "Start Automation" button
 
-### Step 2: Data Input
-- File upload zones
-- Manual input fields
-- Validation in real-time
-- "Continue" button
+Display:
 
-### Step 3: Data Review
-- Extracted data preview
-- Editable tables
-- Confidence indicators
-- "Confirm & Calculate" button
+- Credit description and applicable rating system/version.
+- Points pursued or prerequisite status.
+- Product mode: AI-generated draft, AI-assisted, documentation-only, manual-prep.
+- Required inputs and optional inputs.
+- Regional support and likely fallback needs.
+- Required reviewer roles.
+- Expected evidence pack sections.
 
-### Step 4: Calculation
-- Progress indicator
-- Real-time status updates
-- Cancel option
-- Results preview on complete
+Primary action: "Prepare Evidence Pack."
 
-### Step 5: Review & Submit
-- Generated documents preview
-- Summary metrics
-- Submit for review button
-- Or download directly (if no HITL)
+### Step 2: Inputs
 
-## Component Tree
+Display:
 
-```
-CreditAutomation
-├── TopBar
-├── Sidebar
-└── MainContent
-    ├── WizardHeader
-    │   ├── BackButton
-    │   ├── CreditInfo
-    │   │   ├── Code & Name
-    │   │   └── Meta (points, automation, project)
-    │   └── SaveExitButton
-    ├── StepIndicator
-    │   └── Step (×5)
-    ├── StepContent (dynamic)
-    │   ├── OverviewStep
-    │   ├── DataInputStep
-    │   │   ├── FileUpload (×N)
-    │   │   └── InputFields
-    │   ├── DataReviewStep
-    │   │   └── DataTable
-    │   ├── CalculationStep
-    │   │   └── ProgressIndicator
-    │   └── SubmitStep
-    │       ├── DocumentPreview
-    │       └── SubmitButton
-    └── HelpPanel
-```
+- File upload zones for schedules, reports, model outputs, cut sheets, specifications, or source documents.
+- Manual fields with units, defaults, and source/assumption labels.
+- Regional source substitutions and manual data entry prompts.
 
-## File Upload Component
+Validation:
 
-### Default State
-- Border: 2px dashed `color.neutral.300`
-- Background: `color.neutral.50`
-- Icon: Upload cloud
-- Text: "Drag and drop or click to browse"
-- Subtext: "Accepted formats: .html, .csv, .xml"
+- File type and schema checks.
+- Required fields.
+- Unit/range checks.
+- Explicit warning for unsupported data regions.
 
-### Drag Over State
-- Border: 2px dashed `color.primary.500`
-- Background: `color.primary.50`
+### Step 3: Extracted Data
 
-### Uploading State
-- Progress bar
-- File name
-- Cancel button
+Display editable extracted data tables with:
 
-### Success State
-- Checkmark icon
-- File name
-- File size
-- Remove button
+- Field value, unit, source document, locator, extraction method, confidence.
+- Required/optional indicator.
+- Human override controls and override reason.
+- Cross-credit links where data is reused.
 
-### Error State
-- Error icon
-- Error message
-- Retry button
+Confidence indicators:
 
-## Data Table Component
+- High: >=0.90
+- Moderate: 0.75-0.89
+- Low: <0.75 or critical source gap
 
-### Structure
-```
-┌─────────────────────────────────────────────────────────┐
-│ Material Name          │ Quantity │ Unit │ GWP/kg │ CO2 │
-├─────────────────────────────────────────────────────────┤
-│ Concrete - 30 MPa      │ 1,000    │ m3   │ 250    │ ✓   │
-│ Steel - Rebar          │ 50,000   │ kg   │ 1.2    │ ⚠️  │
-│ [+ Add Material]                                        │
-└─────────────────────────────────────────────────────────┘
-```
+### Step 4: Calculations
 
-### Validation Indicators
-- ✓ Green: High confidence (>90%)
-- ⚠️ Yellow: Medium confidence (70-90%)
-- ❌ Red: Low confidence (<70%) or error
+Display:
 
-### Inline Editing
-- Click cell to edit
-- Save on blur or Enter
-- Cancel on Escape
+- Formula names and versions.
+- Inputs, units, intermediate values, results, and thresholds.
+- Calculation workbook preview.
+- Warnings for narrow thresholds, unit conversion, stale sources, or cross-credit inconsistency.
 
-## Progress Indicator
+For energy-model-dependent credits, this step parses and summarizes completed model outputs only.
 
-### Structure
-```
-┌─────────────────────────────────────────────────────────┐
-│ Calculating Carbon Projection...                        │
-│                                                         │
-│ ████████████░░░░░░░░  60%                               │
-│                                                         │
-│ ✓ Validating inputs                                     │
-│ ✓ Fetching grid emission factors                        │
-│ ⏳ Calculating operational carbon...                    │
-│ ○ Calculating embodied carbon                           │
-│ ○ Generating report                                     │
-│                                                         │
-│ [Cancel]                                                │
-└─────────────────────────────────────────────────────────┘
-```
+### Step 5: Evidence Pack Preview
 
-### Animation
-- Progress bar: smooth width transition
-- Step icons: fade in on complete
-- Current step: pulsing indicator
+Show the 12 evidence pack sections:
 
-## Spacing & Layout
+1. Cover and credit summary.
+2. Requirement summary.
+3. Input inventory.
+4. Source document index.
+5. Extracted data.
+6. Calculation workbook/report.
+7. Generated narrative.
+8. Compliance matrix.
+9. Confidence assessment.
+10. Audit trail.
+11. Human review annotations.
+12. Exception report.
 
-### Wizard Header
-- Padding: 20px 32px
-- Border-bottom: 1px solid `color.neutral.200`
+### Step 6: Submit To Review
 
-### Step Indicator
-- Padding: 24px 32px
-- Centered
-- Max-width: 600px
+Display:
 
-### Step Content
-- Padding: 32px
-- Max-width: 800px
-- Centered
+- Required reviewer role(s).
+- Suggested assignee(s) based on credential and workload.
+- SLA and priority.
+- Open blockers and exceptions.
+- Confidence tier and degradation reasons.
+- Notes to reviewer.
 
-### Help Panel
-- Position: sticky bottom
-- Padding: 16px 32px
-- Background: `color.semantic.info.light`
-- Border-top: 1px solid `color.semantic.info.DEFAULT`
+Primary action: "Submit To Review." This creates a HITL task and moves the package to "In Review."
 
-## Typography
+## Confidence Panel
 
-| Element | Font Size | Weight | Color |
-|---------|-----------|--------|-------|
-| Credit Code | 14px | 600 | `color.primary.600` |
-| Credit Name | 24px | 700 | `color.neutral.900` |
-| Step Label | 12px | 500 | `color.neutral.500` |
-| Step Label Active | 12px | 600 | `color.primary.600` |
-| Section Title | 18px | 600 | `color.neutral.900` |
-| Upload Text | 16px | 500 | `color.neutral.700` |
-| Upload Subtext | 14px | 400 | `color.neutral.500` |
+The right panel always shows:
 
-## Colors
+- Overall tier A/B/C.
+- Component scores: calculation accuracy, evidence provenance, narrative quality, source coverage, cross-credit consistency.
+- Degradation factors.
+- Required fixes to improve the tier.
+- Whether package export is blocked.
 
-| Element | Token |
-|---------|-------|
-| Active step | `color.primary.600` |
-| Completed step | `color.semantic.success.DEFAULT` |
-| Pending step | `color.neutral.300` |
-| Upload zone default | `color.neutral.50` |
-| Upload zone drag | `color.primary.50` |
-| Help panel bg | `color.semantic.info.light` |
+## Exception Handling
 
-## States
-
-### Loading (Initial)
-- Show skeleton for step content
-- Step indicator visible
-
-### Validation Error
-- Highlight invalid fields
-- Show error message below field
-- Disable continue button
-
-### Calculation Running
-- Show progress indicator
-- Disable navigation
-- Allow cancel
-
-### Calculation Complete
-- Show results summary
-- Enable document preview
-- Show submit button
-
-### API Error
-- Show error toast
-- Allow retry
-- Preserve user data
+| Exception | UX Response |
+|-----------|-------------|
+| API timeout | Retry, cached/static fallback, or manual entry |
+| Region unsupported | Show limited/unavailable state and manual workflow |
+| Low-confidence extraction | Require human correction or reviewer verification |
+| Missing critical source | Block submission to final review until source or override is provided |
+| Calculation error | Show failed formula/input, allow correction and rerun |
+| Reviewer requests changes | Rewind to named step with reviewer comments preserved |
+| Reviewer rejects automation path | Move to manual preparation |
 
 ## User Actions
 
 | Action | Trigger | Result |
 |--------|---------|--------|
-| Upload File | Drop or click | Validate, parse, show preview |
-| Remove File | Click remove | Clear file, reset field |
-| Edit Data | Click cell | Inline edit mode |
-| Continue | Click button | Validate, proceed to next step |
-| Go Back | Click back | Save progress, previous step |
-| Cancel Calculation | Click cancel | Stop workflow, save state |
-| Submit | Click submit | Create HITL task |
-| Save & Exit | Click button | Save progress, exit to dashboard |
-
-## Micro-interactions
-
-### File Upload Success
-- Checkmark animates in
-- Duration: 300ms
-- Easing: `motion.easing.bounce`
-
-### Step Transition
-- Content fades out/in
-- Duration: `motion.duration.normal`
-- Easing: `motion.easing.DEFAULT`
-
-### Progress Bar
-- Smooth width animation
-- Duration: 300ms per update
-- Easing: `motion.easing.out`
-
-### Validation Error
-- Field shakes (translateX ±4px)
-- Duration: 300ms
-- Error message fades in
+| Upload File | Drop or browse | Validate, parse, preview extracted fields |
+| Enter Manual Data | Fill field | Store with assumption/source note |
+| Edit Extracted Data | Inline edit | Save override, require reason for critical fields |
+| Run Calculation | Click action | Execute tested calculation workflow |
+| View Source | Click source link | Open document/page/row locator |
+| Resolve Exception | Click exception | Navigate to field, source, or review item |
+| Submit To Review | Click action | Create HITL task |
+| Save And Exit | Click action | Persist workflow state |
 
 ## API Dependencies
 
@@ -310,16 +153,19 @@ GET /api/credits/{code}:
     code: string
     name: string
     points: number
-    automation_level: number
+    product_mode: string
     description: string
     required_inputs: array
     expected_outputs: array
+    required_reviewers: array
+    regional_support: object
 
 POST /api/credits/{code}/upload:
   request:
     file: binary
     input_type: string
   response:
+    source_document: object
     extracted_data: object
     confidence_scores: object
     validation_errors: array
@@ -334,14 +180,16 @@ POST /api/credits/{code}/calculate:
 GET /api/workflows/{id}/status:
   response:
     status: string
-    progress: number
     current_step: string
     results: object
+    confidence: object
+    exceptions: array
 
-POST /api/credits/{code}/submit:
+POST /api/evidence-packs/{id}/submit-review:
   request:
-    workflow_id: string
     reviewer_id: string
+    priority: string
+    notes: string
   response:
     hitl_task_id: string
     status: string
@@ -349,5 +197,5 @@ POST /api/credits/{code}/submit:
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+*Version: 1.1*
+*Last Updated: 2026-05-02*

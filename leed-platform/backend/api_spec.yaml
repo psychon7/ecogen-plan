@@ -163,7 +163,7 @@ paths:
           in: query
           schema:
             type: string
-            enum: [not_started, in_progress, in_review, approved, changes_requested]
+            enum: [not_started, in_progress, awaiting_review, approved, changes_requested, manual_required]
         - name: category
           in: query
           schema:
@@ -313,7 +313,8 @@ paths:
 
   /credits/{creditCode}/submit:
     post:
-      summary: Submit credit for review
+      summary: Submit generated credit package for HITL review
+      description: V1 creates a human review task only. It does not submit documents to USGBC Arc or LEED Online.
       tags: [Credits]
       parameters:
         - name: creditCode
@@ -378,7 +379,7 @@ paths:
           in: query
           schema:
             type: string
-            enum: [pending, approved, rejected]
+            enum: [pending, assigned, in_review, approved, rejected, changes_requested, escalated, expired]
         - name: project_id
           in: query
           schema:
@@ -428,6 +429,10 @@ paths:
       responses:
         200:
           description: Review approved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewActionResponse'
 
   /reviews/{reviewId}/reject:
     post:
@@ -448,6 +453,102 @@ paths:
       responses:
         200:
           description: Review rejected
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewActionResponse'
+
+  /reviews/{reviewId}/request-changes:
+    post:
+      summary: Request changes and rewind workflow
+      tags: [Reviews]
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestChangesReviewRequest'
+      responses:
+        200:
+          description: Changes requested
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewActionResponse'
+
+  /reviews/{reviewId}/escalate:
+    post:
+      summary: Escalate review to another reviewer or role
+      tags: [Reviews]
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EscalateReviewRequest'
+      responses:
+        200:
+          description: Review escalated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewActionResponse'
+
+  /reviews/{reviewId}/comments:
+    post:
+      summary: Add review comment
+      tags: [Reviews]
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddReviewCommentRequest'
+      responses:
+        201:
+          description: Comment added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewComment'
+
+  # Audit
+  /audit/export:
+    post:
+      summary: Generate credit audit export package
+      description: Creates a downloadable audit package containing evidence, calculations, source snapshots, HITL records, document manifests, and workflow trace.
+      tags: [Audit]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditExportRequest'
+      responses:
+        202:
+          description: Audit export queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditExportResponse'
 
   # Users
   /users/me:
@@ -670,8 +771,15 @@ components:
           type: integer
         automation_level:
           type: integer
+          description: Conservative realistic automation percentage, not a claim of hands-off compliance.
         category:
           type: string
+        hitl_required:
+          type: boolean
+        hitl_checkpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/HITLCheckpoint'
         required_inputs:
           type: array
           items:
@@ -680,10 +788,16 @@ components:
           type: array
           items:
             type: string
-        regional_availability:
+        required_apis:
+          type: array
+          items:
+            $ref: '#/components/schemas/APIDependency'
+        skill_dependencies:
           type: array
           items:
             type: string
+        regional_availability:
+          $ref: '#/components/schemas/RegionalAvailabilityMap'
 
     CreditDefinitionList:
       type: object
@@ -708,11 +822,18 @@ components:
           type: integer
         status:
           type: string
-          enum: [not_started, in_progress, in_review, approved, changes_requested]
+          enum: [not_started, in_progress, awaiting_review, approved, changes_requested, manual_required]
         progress:
           type: number
         project_id:
           type: string
+        confidence_score:
+          type: number
+          minimum: 0
+          maximum: 1
+        regional_status:
+          type: string
+          enum: [available, limited, unavailable]
 
     CreditList:
       type: object
@@ -728,11 +849,17 @@ components:
         extracted_data:
           type: object
         confidence_scores:
-          type: object
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfidenceScore'
         validation_errors:
           type: array
           items:
             type: string
+        evidence_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvidenceItem'
 
     CalculateRequest:
       type: object
@@ -747,6 +874,8 @@ components:
       properties:
         workflow_id:
           type: string
+        thread_id:
+          type: string
         status:
           type: string
 
@@ -755,12 +884,29 @@ components:
       properties:
         workflow_id:
           type: string
+        thread_id:
+          type: string
         status:
           type: string
+          enum: [pending, running, paused, awaiting_review, completed, failed, cancelled, manual_required]
         progress:
           type: number
         current_step:
           type: string
+        current_step_index:
+          type: integer
+        confidence_score:
+          type: number
+          minimum: 0
+          maximum: 1
+        quality_gates:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityGate'
+        degraded_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceDegradation'
         results:
           type: object
         error:
@@ -786,10 +932,37 @@ components:
           type: string
         workflow_id:
           type: string
+        project_id:
+          type: string
+        credit_code:
+          type: string
+        checkpoint_name:
+          type: string
         status:
           type: string
+          enum: [pending, assigned, in_review, approved, rejected, changes_requested, escalated, expired]
         assignee_id:
           type: string
+        assignee_role:
+          type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentArtifact'
+        checklist:
+          type: array
+          items:
+            type: object
+        confidence_scores:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfidenceScore'
+        quality_gates:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityGate'
+        sla:
+          $ref: '#/components/schemas/ReviewSLA'
         created_at:
           type: string
 
@@ -812,6 +985,11 @@ components:
           type: string
         status:
           type: string
+          enum: [pending, assigned, in_review, approved, rejected, changes_requested, escalated, expired]
+        confidence_score:
+          type: number
+          minimum: 0
+          maximum: 1
 
     ReviewList:
       type: object
@@ -842,10 +1020,28 @@ components:
           type: string
         excel_url:
           type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentArtifact'
         checklist:
           type: array
           items:
             type: object
+        confidence_scores:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfidenceScore'
+        quality_gates:
+          type: array
+          items:
+            $ref: '#/components/schemas/QualityGate'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReviewComment'
+        sla:
+          $ref: '#/components/schemas/ReviewSLA'
 
     ApproveReviewRequest:
       type: object
@@ -856,6 +1052,9 @@ components:
             type: object
         comments:
           type: string
+        document_hash:
+          type: string
+          description: Hash of the document version reviewed and approved.
 
     RejectReviewRequest:
       type: object
@@ -869,3 +1068,278 @@ components:
           type: array
           items:
             type: string
+        document_hash:
+          type: string
+
+    RequestChangesReviewRequest:
+      type: object
+      required: [comments]
+      properties:
+        comments:
+          type: string
+        return_to_step:
+          type: string
+          description: Workflow node to resume from, such as calculate or fetch_api_data.
+        checklist_feedback:
+          type: object
+        affected_fields:
+          type: array
+          items:
+            type: string
+        document_hash:
+          type: string
+
+    EscalateReviewRequest:
+      type: object
+      required: [reason]
+      properties:
+        reason:
+          type: string
+        target_reviewer_id:
+          type: string
+        target_role:
+          type: string
+        extend_sla_hours:
+          type: integer
+
+    AddReviewCommentRequest:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+        reply_to:
+          type: string
+        attachments:
+          type: array
+          items:
+            type: string
+
+    ReviewActionResponse:
+      type: object
+      properties:
+        review_id:
+          type: string
+        status:
+          type: string
+        workflow_id:
+          type: string
+        workflow_resumed:
+          type: boolean
+        workflow_rewound_to:
+          type: string
+        audit_event_id:
+          type: string
+
+    ReviewComment:
+      type: object
+      properties:
+        id:
+          type: string
+        author_id:
+          type: string
+        author_role:
+          type: string
+        text:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        reply_to:
+          type: string
+
+    ReviewSLA:
+      type: object
+      properties:
+        assigned_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        hours_total:
+          type: integer
+        hours_remaining:
+          type: number
+        escalation_level:
+          type: integer
+
+    HITLCheckpoint:
+      type: object
+      properties:
+        name:
+          type: string
+        reviewer_role:
+          type: string
+        sla_hours:
+          type: integer
+        required:
+          type: boolean
+        instructions:
+          type: string
+        trigger:
+          type: string
+
+    APIDependency:
+      type: object
+      properties:
+        api_name:
+          type: string
+        purpose:
+          type: string
+        regions:
+          type: array
+          items:
+            type: string
+        fallback_chain:
+          type: array
+          items:
+            type: string
+        data_freshness_hours:
+          type: integer
+
+    RegionalAvailabilityMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/RegionalAvailability'
+      example:
+        US:
+          status: available
+          notes: All required APIs available.
+        EU:
+          status: limited
+          notes: Requires regional grid factors and manual source confirmation.
+
+    RegionalAvailability:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [available, limited, unavailable]
+        required_manual_inputs:
+          type: array
+          items:
+            type: string
+        fallback_sources:
+          type: array
+          items:
+            type: string
+        notes:
+          type: string
+
+    ConfidenceScore:
+      type: object
+      properties:
+        scope:
+          type: string
+          enum: [field, source, calculation, document_section, document, workflow]
+        key:
+          type: string
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+        factors:
+          type: object
+        threshold:
+          type: number
+        requires_human_review:
+          type: boolean
+
+    QualityGate:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+          enum: [pass, warn, fail, blocked]
+        severity:
+          type: string
+          enum: [low, medium, high, critical]
+        message:
+          type: string
+        evidence_ids:
+          type: array
+          items:
+            type: string
+
+    EvidenceItem:
+      type: object
+      properties:
+        id:
+          type: string
+        source_id:
+          type: string
+        locator:
+          type: string
+        extracted_value:
+          type: object
+        confidence_score:
+          type: number
+        checksum:
+          type: string
+
+    SourceDegradation:
+      type: object
+      properties:
+        api_name:
+          type: string
+        degradation_type:
+          type: string
+          enum: [cached, stale, static_fallback, manual_required, unavailable]
+        source_id:
+          type: string
+        message:
+          type: string
+
+    DocumentArtifact:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        format:
+          type: string
+        url:
+          type: string
+        checksum:
+          type: string
+        template_version:
+          type: string
+        evidence_ids:
+          type: array
+          items:
+            type: string
+
+    AuditExportRequest:
+      type: object
+      required: [project_id]
+      properties:
+        project_id:
+          type: string
+        credit_code:
+          type: string
+        workflow_id:
+          type: string
+        include_raw_api_responses:
+          type: boolean
+          default: false
+        redaction_level:
+          type: string
+          enum: [none, standard, strict]
+          default: standard
+
+    AuditExportResponse:
+      type: object
+      properties:
+        export_id:
+          type: string
+        status:
+          type: string
+          enum: [queued, running, completed, failed]
+        download_url:
+          type: string
+        manifest_checksum:
+          type: string

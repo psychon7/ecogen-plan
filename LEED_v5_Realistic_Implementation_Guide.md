@@ -2,7 +2,7 @@
 
 ## Executive Summary: The Honest Assessment
 
-This document provides a **realistic, executable plan** for building a LEED v5 automation platform based on **current AI capabilities** (March 2026). It includes agentic workflow patterns, HITL (Human-in-the-Loop) design, durable workflows, and a skill-based architecture.
+This document provides a **realistic, executable plan** for building a LEED v5 automation platform based on **current AI capabilities** (May 2026). It includes agentic workflow patterns, HITL (Human-in-the-Loop) design, durable workflows, and a skill-based architecture.
 
 ### The Reality Check
 
@@ -21,9 +21,10 @@ This document provides a **realistic, executable plan** for building a LEED v5 a
 - Work autonomously without oversight
 
 **The Honest Automation Potential:**
-- **70% automation** for straightforward credits (calculations, API data)
-- **50% automation** for complex credits (requires human review)
-- **30% automation** for credits requiring site-specific interpretation
+- **90%+ draft automation** only for narrow, deterministic workflows with verified data sources and final review.
+- **50-85% automation** for most commercially useful LEED workflows after project teams provide source inputs.
+- **Assist-only** for energy modeling, physical testing, field verification, WBLCA execution, and final compliance judgment.
+- **Kimi-aligned MVP:** launch suites before broad catalog breadth: WEp2+WEc2, EAp5+EAc7, EQp1+EQp2, IPp1+IPp2, and MRc3.
 
 ---
 
@@ -201,17 +202,22 @@ Following the skill.md standard, each LEED credit becomes a modular skill:
 
 ```
 skills/
-├── ip_p3_carbon_assessment/
-│   ├── SKILL.md          # Instructions, inputs, outputs
-│   ├── agent.py          # Credit-specific agent
-│   ├── templates/        # Document templates
-│   ├── validations.py    # Validation rules
-│   └── tests/            # Unit tests
-├── ea_p1_operational_carbon/
-│   ├── SKILL.md
-│   ├── agent.py
-│   └── ...
-└── ... (16 skills total)
+├── we_p2_water_min/
+│   ├── SKILL.md          # Credit contract
+│   ├── agent.py          # Durable workflow implementation
+│   ├── calculations.py   # Baseline/design water formulas
+│   ├── templates/        # Evidence pack templates
+│   └── tests/            # Unit, HITL, regional fallback tests
+├── we_c2_water_enhanced/
+│   └── ...               # Consumes WEp2 normalized fixture data
+├── ea_p5_refrigerant/
+├── ea_c7_refrigerant/
+├── eq_p1_construction_management/      # to create
+├── eq_p2_fundamental_air_quality/      # to create
+├── ip_p1_climate_resilience/           # to create
+├── ip_p2_human_impact/                 # to create
+├── mr_c3_low_emitting_materials/       # to create
+└── assisted_catalog/                   # existing generated skill drafts
 ```
 
 ### 2.2 Skill Structure
@@ -220,63 +226,63 @@ Each skill has:
 
 **SKILL.md** - The Contract:
 ```markdown
-# Skill: IPp3 Carbon Assessment
+# Skill: WEp2 Minimum Water Efficiency
 
 ## Purpose
-Calculate 25-year carbon projection from operational, refrigerant, and embodied sources.
+Calculate baseline versus design indoor water use, verify the prerequisite reduction, and produce a reviewer-ready evidence pack that can feed WEc2.
 
 ## Automation Level
-- Calculation: 95% automated
+- Calculation: 95% automated once fixture and occupancy data are normalized
 - Document Generation: 90% automated
-- Data Retrieval: 85% automated
-- **Overall: 90% (requires human review)**
+- Data Retrieval/Product Matching: 70-85% depending on WaterSense/ENERGY STAR coverage and fixture schedule quality
+- **Overall: 85-90% draft automation with human review**
 
 ## Inputs (Required)
 | Field | Type | Source | Validation |
 |-------|------|--------|------------|
-| project_location | coordinates | User input | Valid lat/lon |
-| energy_model_output | file | Upload | Valid format |
-| material_quantities | JSON | Upload or manual | Required fields |
-| service_life | integer | User input | 25-100 years |
+| fixture_schedule | file/table | Upload or manual entry | Fixture type, quantity, flow/flush rate |
+| occupancy_counts | object | Project team | FTE, visitors, gender ratio assumptions |
+| operating_days | integer | Project team | Positive annual value |
+| building_type | string | Project intake | Supported default usage pattern |
 
 ## Inputs (Optional)
 | Field | Type | Default |
 |-------|------|---------|
-| grid_region | string | Auto-detect from location |
-| refrigerant_schedule | file | None |
+| product_cut_sheets | files | None |
+| watersense_lookup | boolean | true |
+| reviewer_email | string | Project LEED reviewer |
 
 ## Workflow (Durable - Resumable)
 1. **validate_inputs** - Check all required data present
-2. **fetch_grid_emission_factors** - API call to EPA eGRID (US) or national source
-3. **fetch_embodied_carbon_data** - API call to EC3 Database
-4. **calculate_operational_carbon** - Python calculation
-5. **calculate_refrigerant_emissions** - Python calculation
-6. **calculate_embodied_carbon** - Python calculation
-7. **generate_projection** - Sum all sources for 25-year projection
-8. **generate_report** - Fill template with calculated data
-9. **HITL_REVIEW** - Human reviews and approves
-10. **finalize_output** - Generate final PDF/Excel
+2. **parse_fixture_schedule** - Normalize structured upload or manual table
+3. **verify_product_data** - Optional WaterSense/ENERGY STAR lookup with fallback flags
+4. **calculate_baseline** - Apply versioned LEED v5 baseline rates
+5. **calculate_design** - Apply proposed fixture rates and usage assumptions
+6. **calculate_reduction** - Compare to prerequisite threshold
+7. **generate_evidence_pack** - PDF, XLSX, source index, formula trail
+8. **HITL_REVIEW** - Human confirms fixture schedule, occupancy, and results
+9. **finalize_output** - Generate approved package and WEc2 handoff data
 
 ## HITL Checkpoints
 | Step | Who | Action | SLA |
 |------|-----|--------|-----|
-| After report generation | LEED Consultant | Review calculations and approve | 24 hours |
-| If API data missing | Data Steward | Provide manual data entry | 48 hours |
-| Final submission | Project Manager | Approve for USGBC submission | 24 hours |
+| After calculation package | LEED Consultant | Verify fixture schedule, occupancy assumptions, and reduction result | 24 hours |
+| If product lookup fails | Project team | Upload cut sheet or manually confirm flow/flush rate | 48 hours |
 
 ## Outputs
 | Document | Format | Description |
 |----------|--------|-------------|
-| carbon_projection_report | PDF | 25-year projection with charts |
-| calculation_workbook | Excel | Detailed calculations |
-| usgbc_submission_form | PDF | Pre-filled USGBC form |
+| water_efficiency_report | PDF | Methodology, inputs, baseline/design summary, pass/fail status |
+| calculation_workbook | XLSX | Transparent formulas and intermediate values |
+| source_index | JSON/PDF | Uploads, API lookups, assumptions, reviewer changes |
+| wec2_handoff | JSON | Normalized fixture/occupancy data for enhanced water workflow |
 
 ## API Dependencies
 | API | Purpose | Regional Availability | Fallback |
 |-----|---------|----------------------|----------|
-| EPA eGRID | Grid emission factors | US only | Use national grid data |
-| EC3 Database | Embodied carbon | Global | Manual EPD entry |
-| NREL Cambium | Future grid scenarios | US only | Skip future projections |
+| EPA WaterSense | Fixture certification support | US-centric/global product access varies | Manual cut sheet verification |
+| ENERGY STAR | Appliance verification | US-centric | Manufacturer documentation |
+| Project uploads | Primary fixture source | Global | Manual table entry |
 
 ## Error Handling
 | Error | Action | Retry |
@@ -289,10 +295,10 @@ Calculate 25-year carbon projection from operational, refrigerant, and embodied 
 ## Testing
 ```bash
 # Run skill tests
-python -m pytest skills/ip_p3_carbon_assessment/tests/
+python -m pytest skills/we_p2_water_min/tests/
 
 # Run integration test
-python skills/ip_p3_carbon_assessment/agent.py --test-mode
+python skills/we_p2_water_min/agent.py --test-mode
 ```
 ```
 
@@ -720,50 +726,50 @@ const ReviewInterface: React.FC<{ task: ReviewTask }> = ({ task }) => {
 
 ## Part 5: Reality-Based Credit Assessment
 
-### 5.1 Honest Automation Levels
+### 5.1 Kimi-Aligned Production Suites
 
-| Credit | Claimed | **Realistic** | Why |
-|--------|---------|---------------|-----|
-| IPp3 Carbon Assessment | 92.5% | **85%** | EC3 API reliable, but material matching needs human |
-| EAp1 Op Carbon | 89.4% | **80%** | Grid data varies by country, future projections US-only |
-| WEp2 Water Efficiency | 89.3% | **90%** | Calculations straightforward, fixture data available |
-| EAp2 Energy Code | 85.7% | **75%** | Energy model interpretation needs expertise |
-| EAp5 Refrigerant | 85.2% | **90%** | Database lookup, clear compliance rules |
-| MRp2 Embodied Carbon | 87.0% | **85%** | EC3 reliable, but quantity verification needed |
-| EAc3 Energy Efficiency | 87.7% | **70%** | Energy modeling is complex, requires expert review |
-| WEc2 Water Efficiency | 87.5% | **85%** | Calculations clear, alternative water sources vary |
-| MRc2 Reduce Embodied | 88.4% | **80%** | WBLCA comparison needs expert judgment |
-| LTc3 Location | 88.0% | **75%** | Walk Score limited to certain countries |
-| SSc3 Rainwater | 88.0% | **80%** | Rainfall data varies by country |
-| EAc7 Refrigerant | 89.3% | **90%** | Clear calculations, good databases |
-| SSc5 Heat Island | 85.3% | **85%** | SRI calculations straightforward |
-| SSc6 Light Pollution | 90.6% | **95%** | BUG ratings are standardized |
-| PRc2 LEED AP | 90.1% | **95%** | Simple API verification |
-| LTc1 Land Protection | 87.6% | **60%** | **GIS data very limited outside US** |
+The production MVP should be organized around credit suites rather than the older 16-credit list. Suite packaging reflects how consultants work and how data flows across credits.
 
-**Average Realistic Automation: 82%** (not 88%)
+| Suite | Credits | Product Posture | Why |
+|-------|---------|-----------------|-----|
+| Water Efficiency | WEp2 + WEc2 | First commercial wedge | Universal prerequisite, deterministic formulas, transparent point optimization |
+| Refrigerant Management | EAp5 + EAc7 | Early production suite | One equipment schedule feeds both prerequisite and credit |
+| Quality Plans | EQp1 + EQp2 | Early production suite with review | Repeatable plans plus ventilation/filtration calculations |
+| Integrative Process Assessment | IPp1 + IPp2 | Research/narrative assistant | Public data retrieval and source-grounded assessment drafting |
+| Low-Emitting Materials | MRc3 | High-value product database workflow | Large manual certification lookup burden across many products |
 
-### 5.2 Credits Requiring Significant Human Input
+### 5.2 Assisted Catalog And Deferrals
 
-**LTc1 - Sensitive Land Protection (60% realistic)**
-- FEMA flood maps: US only
-- Wetlands data: US only
-- Protected species: US only
-- **Outside US: Requires manual GIS analysis**
+The existing generated 16 skills remain useful, but they should be described as assisted workflows until their sources, tests, review checklists, and regional fallbacks are verified.
 
-**EAc3 - Enhanced Energy Efficiency (70% realistic)**
-- Energy modeling is expert work
-- Baseline modeling requires judgment
-- Optimization recommendations need expertise
-- **AI assists, but cannot replace energy modeler**
+| Workflow | Treatment |
+|----------|-----------|
+| IPp3 Carbon Assessment | Cross-credit compilation after EAp1, EAp5, and MRp2 source data is ready |
+| MRp2 Quantify Embodied Carbon | EPD parsing/matching/reporting with LCA scope and quantity review |
+| MRc2 Reduce Embodied Carbon | Automate EPD/threshold documentation; WBLCA remains external expert-tool work |
+| EAp2/EAc2/EAc3 | Parse completed energy model outputs; do not automate model creation/calibration |
+| LTc1/LTc3/SSc3/SSc5/SSc6 | Useful workflows with regional data checks, site/GIS review, and manual fallback |
+| PRc2 LEED AP | Good pipeline proof, low standalone commercial value |
 
-**MRc2 - Reduce Embodied Carbon (80% realistic)**
-- WBLCA requires expert judgment
-- Baseline selection is project-specific
-- Material substitution recommendations need expertise
-- **AI calculates, but expert interprets**
+### 5.3 Credits Requiring Significant Human Input
 
-### 5.3 Breaking Down Complex Problems
+**Energy modeling credits**
+- Energy models must be created and validated by qualified modelers.
+- Ecogen parses outputs, checks consistency, maps points, and drafts documentation.
+
+**WBLCA and embodied carbon reduction**
+- Whole-building LCA must be performed in expert tools such as Tally or One Click LCA.
+- Ecogen can import outputs, validate consistency, parse EPDs, and prepare evidence packs.
+
+**GIS/site credits**
+- GIS APIs can accelerate US projects, but local datasets and site interpretation remain human-reviewed.
+- LTc1 is especially US-centric because primary sensitive-land datasets are US federal sources.
+
+**Integrative process and human impact**
+- AI can retrieve data and draft assessments.
+- Consultants still own local context, priority selection, owner engagement, and final narrative approval.
+
+### 5.4 Breaking Down Complex Problems
 
 **Example: Site Plan Analysis**
 
@@ -819,61 +825,48 @@ def analyze_site_plan_correct(file_path, file_type):
 
 ---
 
-## Part 6: Realistic 14-Day Implementation Plan
+## Part 6: Realistic Delivery Plan
 
-### Week 1: Foundation + Simple Credits
+### 6.1 Fourteen-Day Demo
 
-**Day 1-2: Setup**
-- Initialize project (React + FastAPI + PostgreSQL)
-- Set up durable workflow engine
-- Create HITL notification system
-- Deploy to staging
+The 14-day path is a demo/proof, not a production MVP. It should prove intake, workflow state, document generation, HITL, and manual export.
 
-**Day 3-4: Build 3 Simple Skills**
-- PRc2 (LEED AP) - 95% automated, API verification
-- SSc6 (Light Pollution) - 95% automated, BUG rating lookup
-- EAp5 (Refrigerant) - 90% automated, database lookup
+Recommended demo scope:
 
-**Day 5-7: Build 3 More Skills**
-- WEp2 (Water Efficiency) - 90% automated, calculations
-- SSc5 (Heat Island) - 85% automated, SRI calculations
-- EAc7 (Refrigerant) - 90% automated, GWP calculations
+- PRc2 to validate the simplest end-to-end pipeline.
+- WEp2 to validate the first commercial wedge.
+- EAp5/EAc7 to prove shared-input reuse.
+- One assisted workflow such as MRp2 or IPp3 to prove expert review and source confidence handling.
 
-### Week 2: Complex Credits + Integration
+Do not include direct Arc submission, broad regional claims, or autonomous energy modeling in this demo.
 
-**Day 8-10: Medium Complexity**
-- IPp3 (Carbon Assessment) - 85% automated
-- WEc2 (Water Efficiency) - 85% automated
-- MRp2 (Embodied Carbon) - 85% automated
+### 6.2 Production MVP Suites
 
-**Day 11-12: High Complexity (with HITL)**
-- EAc3 (Energy Efficiency) - 70% automated, requires energy modeler review
-- MRc2 (Reduce Embodied) - 80% automated, requires WBLCA expert
-- LTc3 (Location) - 75% automated, limited by Walk Score regions
+| Phase | Focus | Exit Criteria |
+|-------|-------|---------------|
+| Phase 1 | WEp2/WEc2, EAp5/EAc7, EQp1 first pass | Shared parser/runtime, calculation tests, evidence pack format, HITL dashboard |
+| Phase 2 | EQp2, IPp1/IPp2, MRc3 | ASHRAE table handling, public-data research agents, product database lookup and exception review |
+| Phase 3 | Cross-suite integration and beta hardening | Confidence tiers, regional source routers, source health dashboard, customer pilots |
 
-**Day 13-14: Integration & Polish**
-- USGBC Arc integration
-- Regional filtering UI
-- Admin dashboard
-- Documentation
-- Deploy to production
+### 6.3 Parallel Development Tracks
 
-### Parallel Development Tracks
+**Track 1: Frontend**
+- Project setup with regional availability.
+- Suite workflows and manual fallback forms.
+- HITL review dashboard and evidence preview.
 
-**Track 1: Frontend (1 developer)**
-- Credit selection with regional filtering
-- Document upload interfaces
-- Review dashboard for HITL
+**Track 2: Backend + APIs**
+- FastAPI endpoints, workflow state, source metadata, cache/rate limit/fallback.
+- Evidence pack manifest and audit ledger.
 
-**Track 2: Backend + APIs (1 developer)**
-- FastAPI endpoints
-- Database models
-- API integrations (36 services)
+**Track 3: Skill Runtime**
+- Durable workflow execution.
+- HITL pause/resume and rejection loops.
+- Artifact generation and tests.
 
-**Track 3: Credit Agents (2 developers)**
-- 8 skills each
-- Durable workflows
-- HITL integration
+**Track 4: Credit Suites**
+- Water, refrigerant, EQ, IP, and MRc3 implementations.
+- Assisted catalog normalization only after source and test verification.
 
 ---
 
@@ -886,17 +879,17 @@ def analyze_site_plan_correct(file_path, file_type):
 - **Workflow completion rate:** 90% (10% need human intervention)
 
 ### Business Metrics
-- **Time savings:** 60-70% (not 80%)
-- **Credits automated:** 12 of 16 (75%) fully automated
-- **Credits with HITL:** 4 of 16 (25%) require human review
-- **Projects per month:** 50 (with 5 consultants reviewing)
+- **Water Efficiency time savings:** 60-80% of documentation effort after source data is available
+- **Production suite coverage:** five Kimi-aligned suites before broad catalog expansion
+- **Assisted catalog:** existing generated skill drafts exposed only with review, regional gating, and source caveats
+- **Reviewer confidence:** fewer missing evidence items and clearer audit trails
 
 ---
 
 ## Conclusion: The Executable Plan
 
 **What We're Building:**
-A platform that automates **70-85%** of LEED documentation, with clear HITL checkpoints for the remaining 15-30%.
+A platform that prepares source-grounded, calculation-backed, review-ready LEED v5 evidence packs, with clear HITL checkpoints before submission.
 
 **What We're NOT Building:**
 A fully autonomous system that replaces LEED consultants. AI assists, humans decide.
@@ -908,13 +901,14 @@ A fully autonomous system that replaces LEED consultants. AI assists, humans dec
 - Enable consultants to handle **2-3x more projects**
 
 **Investment Required:**
-- **$150K-200K** (not $225-300K) - 14 days with 4 developers
+- 14-day demo budget is separate from production MVP funding
+- Production suite MVP requires a multi-phase build with engineering plus LEED review support
 - **$10K/month** ongoing (API costs, infrastructure)
 
 **Realistic Timeline:**
-- **MVP with 12 credits:** 14 days
-- **All 16 credits polished:** 30 days
-- **Production ready:** 45 days
+- **Demo proof:** 14 days
+- **Production suite MVP:** multi-month phased delivery
+- **Assisted catalog expansion:** after source verification, test fixtures, and regional fallback checks
 
 ---
 

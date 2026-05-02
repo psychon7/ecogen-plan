@@ -1,200 +1,187 @@
-# User Flow: HITL (Human-in-the-Loop) Review
+# User Flow: HITL Review
 
 ## Flow Overview
 
-LEED consultant reviews AI-generated credit documentation and approves or requests changes.
+Qualified reviewer inspects an evidence pack and approves, requests changes, rejects to manual preparation, reassigns, or escalates. HITL is mandatory for compliance-critical packages; confidence tier only changes review depth.
 
 ## Entry Points
-- Slack notification
-- Email notification
-- Dashboard "Pending Reviews" badge
-- Direct link from notification
+
+- In-app review queue.
+- Email or chat notification.
+- Dashboard "In Review" task.
+- Direct review link.
 
 ## Flow Steps
 
 ### Step 1: Receive Notification
-**Channel:** Slack / Email / In-app
 
 **Notification Content:**
-- Project name
-- Credit name
-- Submitted by
-- SLA: "Review needed within 24 hours"
-- Direct link to review
 
-**User Actions:**
-- Click notification link
-- Or open dashboard and find review
+- Project name.
+- Credit name.
+- Evidence pack version.
+- Required reviewer role.
+- Confidence tier.
+- Blocker count.
+- SLA.
+- Direct review link.
 
-### Step 2: Review Dashboard
-**Screen:** Reviews Dashboard
+**System Rule:**
+
+Notification failure must not change package state. The in-app task remains the source of truth.
+
+### Step 2: Review Queue
 
 **Display:**
-- List of pending reviews
-- Filter by: Project, Credit, Submitter, Due Date
-- Sort by: Due date (default), Project, Priority
+
+- Pending tasks assigned to the user.
+- Filters: project, credit, reviewer role, due date, confidence tier, blocker count, priority.
+- Sort: due soon, Tier C first, blocker count, project.
 
 **Review Card:**
+
 | Field | Display |
 |-------|---------|
-| Project | "Acme HQ - NYC" |
-| Credit | "IPp3 - Carbon Assessment" |
-| Submitter | "Jennifer Lee" |
-| Submitted | "2 hours ago" |
-| Due | "22 hours remaining" |
-| Priority | Normal / Urgent |
-| Actions | Review / Reassign / Snooze |
+| Project | Project name and location |
+| Credit | Code and name |
+| Package | Version and status |
+| Confidence | A/B/C tier |
+| Blockers | Open blocker count |
+| Required Role | LEED AP, PE, LCA, GIS, legal, etc. |
+| SLA | Time remaining or overdue |
+| Actions | Review, reassign, escalate |
+
+### Step 3: Review Evidence Pack
+
+**Screen:** HITL Review
+
+**Reviewer Sees:**
+
+- Evidence pack sections.
+- Source documents and extracted fields.
+- Calculation workbook or report.
+- Generated narrative.
+- Compliance matrix.
+- Confidence scorecard and degradation factors.
+- Exception report.
+- Audit trail.
+- Credit-specific checklist.
+- Comment thread.
 
 **User Actions:**
-- Click "Review" on a card
-- Or filter/sort to find specific review
 
-### Step 3: Review Interface
-**Screen:** Credit Review
-
-**Layout:**
-```
-┌─────────────────────────────────────────────────────┐
-│ HEADER                                              │
-│ Project: Acme HQ | Credit: IPp3 Carbon Assessment   │
-│ Submitted by: Jennifer Lee | 2 hours ago            │
-├─────────────────────────────────────────────────────┤
-│                                                     │
-│  DOCUMENT PREVIEW (70% width)    │ CHECKLIST      │
-│  ┌─────────────────────────┐     │ [ ] Item 1    │
-│  │                         │     │ [ ] Item 2    │
-│  │   PDF Report Viewer     │     │ [ ] Item 3    │
-│  │                         │     │ [ ] Item 4    │
-│  │                         │     │               │
-│  └─────────────────────────┘     │ COMMENTS      │
-│                                  │ [textarea]    │
-│  DOWNLOAD: PDF | Excel           │               │
-│                                  │ ACTIONS       │
-│                                  │ [Approve]     │
-│                                  │ [Reject]      │
-│                                  │               │
-└─────────────────────────────────────────────────────┘
-```
-
-**Document Preview:**
-- Embedded PDF viewer
-- Page navigation
-- Zoom controls
-- Download button
-
-**Checklist (Credit-specific):**
-For IPp3:
-- [ ] Energy model inputs verified
-- [ ] Material quantities accurate
-- [ ] Grid emission factors appropriate
-- [ ] Calculations reasonable
-- [ ] Top 3 hotspots identified
-
-**User Actions:**
-- Review document
-- Check off checklist items
-- Add comments
-- Click "Approve" or "Reject"
+- Inspect artifacts and source locators.
+- Check required checklist items.
+- Add comments to fields, calculations, sections, or overall package.
+- Mark issues as info, warning, or blocker.
+- Choose approve, request changes, reject to manual preparation, reassign, or escalate.
 
 ### Step 4a: Approve
-**Action:** Click "Approve"
 
-**Confirmation Modal:**
-- "Are you sure you want to approve?"
-- Shows checklist completion status
-- Requires all items checked
+**Requirements:**
 
-**User Actions:**
-- Confirm approval
-- Or cancel and continue review
+- Required checklist items complete.
+- Blockers resolved or explicitly overridden with justification.
+- Reviewer credential/scope matches task.
 
 **System Response:**
-- Mark credit as "Approved"
-- Generate final documents
-- Notify submitter
-- Update project dashboard
-- Resume workflow for finalization
 
-### Step 4b: Reject
-**Action:** Click "Reject"
+- Records reviewer identity, credential/scope, timestamp, package version, checklist state, comments, and signature metadata.
+- Moves package to next gate, "Internally Approved," or "Submission-Ready" if all required reviews are complete.
+- Notifies submitter and project manager.
 
-**Rejection Form:**
-| Field | Type | Required |
-|-------|------|----------|
-| Reason | Textarea | Yes |
-| Return to Step | Select | Yes |
-| Specific Issues | Checklist | No |
+### Step 4b: Request Changes
+
+**Form Fields:**
+
+| Field | Required |
+|-------|----------|
+| Return to Step | Yes |
+| Reason | Yes |
+| Specific Issues | Optional but recommended |
+| Severity | Yes |
 
 **Return Options:**
-- Data Input (Step 3)
-- Calculation Review (Step 5)
-- Full Restart (Step 1)
 
-**User Actions:**
-- Select return step
-- Describe issues
-- Click "Submit Rejection"
+- Inputs.
+- Extracted Data.
+- Calculations.
+- Evidence Pack Generation.
+- Reviewer Recheck.
 
 **System Response:**
-- Mark credit as "Changes Requested"
-- Return workflow to specified step
-- Notify submitter with comments
-- Preserve previous data for reference
 
-### Step 5: Confirmation
-**Screen:** Action Confirmation
+- Marks package "Changes Requested."
+- Rewinds workflow to selected step.
+- Preserves previous version and comments.
+- Notifies submitter.
 
-**Approve Confirmation:**
-- "Credit approved successfully"
-- Final documents available for download
-- Option to submit to USGBC
+### Step 4c: Reject To Manual Preparation
 
-**Reject Confirmation:**
-- "Changes requested"
-- Submitter notified
-- Link to track status
+**Trigger:**
 
-## Alternative Flow: Reassign Review
-
-**Trigger:** Reviewer unavailable
-
-**User Actions:**
-- Click "Reassign"
-- Select new reviewer from team
-- Add note explaining reason
-- Click "Reassign"
+- AI-assisted path is unsuitable.
+- Critical data cannot be verified.
+- Region/source coverage is insufficient.
+- Professional reviewer determines manual handling is required.
 
 **System Response:**
-- Update task assignee
-- Notify new reviewer
-- Update SLA timer
+
+- Marks credit "Manual Preparation Required."
+- Archives AI attempt and reason.
+- Creates manual-prep task for project lead.
+- Keeps evidence and comments available for reuse.
+
+### Step 4d: Reassign Or Escalate
+
+**Reassign:**
+
+- Select another qualified reviewer.
+- Add reason.
+- SLA updates according to policy.
+
+**Escalate:**
+
+- Route to senior reviewer, principal, project director, or specialist.
+- Preserve prior comments and checklist progress.
 
 ## Edge Cases
 
-### EC-1: SLA approaching
-- Send reminder notification at 4 hours remaining
-- Escalate to project manager at 1 hour
-- Mark as overdue if missed
+### EC-1: SLA Approaching Or Overdue
 
-### EC-2: Reviewer on vacation
-- Auto-reassign based on backup rules
-- Or pause and notify project manager
+- Send reminders.
+- Escalate or reassign.
+- Never auto-approve.
 
-### EC-3: Document won't load
-- Show download link as fallback
-- Log error for investigation
+### EC-2: Reviewer Lacks Credential
 
-### EC-4: Checklist incomplete on approve
-- Block approval with warning
-- Require explicit override with reason
+- Block approval.
+- Offer reassignment to qualified reviewer.
+
+### EC-3: Document Will Not Load
+
+- Provide download fallback.
+- Keep review task open.
+- Log viewer error.
+
+### EC-4: Checklist Incomplete
+
+- Disable approval.
+- Highlight missing required items.
+
+### EC-5: Unresolved Blockers
+
+- Block approval unless override is permitted and justified.
 
 ## Success Criteria
-- Review completed within SLA
-- Clear approve/reject decision
-- Actionable feedback on rejection
-- All parties notified
+
+- Review decision is explicit and auditable.
+- Reviewer comments are actionable and linked to evidence.
+- Request changes returns workflow to the correct step.
+- Rejection creates a clear manual-prep path.
+- Submission-ready status always has named human approval.
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+*Version: 1.1*
+*Last Updated: 2026-05-02*

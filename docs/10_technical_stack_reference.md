@@ -190,7 +190,7 @@ Circuit breaker: 5 failures in 60s → open state. Auto-recovery after timeout. 
 | Carbon/GWP | IPp3, EAp5, EAc7, MRp2, MRc2 | Medium-High | Cross-check IPCC AR6 Table 7.15 |
 | Database verification | PRc2, SSc6, SSc5 | Low | Certification expiry within project period |
 | Area/volume | MRp2, SSc5, SSc3 | Low-Medium | BIM-to-spec reconciliation ±5% tolerance |
-| % reduction / improvement | WEp2, WEc2, EAc3, EAp2 | Low | Baseline must match ASHRAE 90.1-2022 |
+| % reduction / improvement | WEp2, WEc2, EAc3, EAp2 | Mixed | WE calculations are deterministic; EAp2/EAc3 parse completed model outputs and require energy modeler review |
 | Water / fixture flow | WEp2, WEc2 | Medium | Fixture flow rates ≤ WaterSense limits |
 | Energy / EUI | EAp1, EAp2, EAc3 | High | ±10% of measured for existing buildings |
 | GIS / spatial overlap | LTc1, LTc3, SSc3 | Medium-High | Boundary must use project site polygon |
@@ -348,7 +348,7 @@ Audit manifest JSON (filename, checksum, generated_at, skill_version, inputs_has
    - LEED v5 addenda trigger regression tests
 
 3. **Confidence Scoring** (0.0–1.0 per document section)
-   - Green ≥ 0.95: Optional HITL, auto-approve available
+   - Green ≥ 0.95: Lightweight named review; no auto-approval for compliance-critical packages
    - Yellow 0.85–0.94: Required HITL (expedited SLA)
    - Orange 0.70–0.84: Required HITL (extended SLA, senior reviewer)
    - Red < 0.70: Mandatory HITL, blocking

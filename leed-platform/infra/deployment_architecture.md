@@ -4,6 +4,10 @@
 
 Production-ready deployment using Docker containers on a cloud provider (AWS/GCP/Azure).
 
+This deployment uses FastAPI for the public API, LangGraph for durable credit workflows, sandboxed skill containers for parsing/calculation/document generation, PostgreSQL for project state and checkpoints, Redis/RabbitMQ for queues and cache, object storage for evidence packages, and Vault for secrets. Celery workers may remain for background jobs such as document rendering and audit export assembly, but credit workflow state is owned by LangGraph checkpoints.
+
+V1 boundary: the platform generates downloadable LEED submission packages after HITL approval. Direct USGBC Arc submission is disabled by default and controlled by `ENABLE_USGBC_INTEGRATION=false`.
+
 ## Architecture Diagram
 
 ```
@@ -115,6 +119,31 @@ COPY . .
 CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]
 ```
 
+### LangGraph Workflow Container
+```dockerfile
+# Dockerfile.langgraph
+FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+EXPOSE 8123
+CMD ["python", "-m", "langgraph_api.server", "--host", "0.0.0.0", "--port", "8123"]
+```
+
+### Skill Sandbox Container
+```dockerfile
+# Dockerfile.skill-sandbox
+FROM python:3.12-slim
+WORKDIR /sandbox
+RUN useradd -m sandbox
+USER sandbox
+ENV PYTHONUNBUFFERED=1
+CMD ["python", "-m", "sandbox_runner"]
+```
+
+Skill sandboxes run with read-only root filesystems, CPU/memory limits, no host filesystem mounts except scoped project working directories, and network egress restricted to allowlisted APIs.
+
 ## Docker Compose (Development)
 
 ```yaml
@@ -158,6 +187,34 @@ services:
       - db
       - redis
       - rabbitmq
+
+  langgraph:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.langgraph
+    ports:
+      - "8123:8123"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/leed
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+      - LANGGRAPH_CHECKPOINT_TABLE=langgraph_checkpoints
+    depends_on:
+      - db
+      - redis
+      - rabbitmq
+
+  sandbox:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.skill-sandbox
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - SANDBOX_OUTPUT_DIR=/mnt/user-data/outputs
 
   db:
     image: postgis/postgis:15-alpine
@@ -265,6 +322,11 @@ REDIS_URL=redis://host:6379
 # Message Queue
 RABBITMQ_URL=amqp://user:pass@host:5672
 
+# Durable workflows
+LANGGRAPH_URL=http://langgraph:8123
+LANGGRAPH_CHECKPOINT_TABLE=langgraph_checkpoints
+WORKFLOW_RETENTION_YEARS=7
+
 # Object Storage
 S3_BUCKET=leedai-documents
 S3_REGION=us-east-1
@@ -274,6 +336,10 @@ AWS_SECRET_ACCESS_KEY=xxx
 # Auth
 JWT_SECRET=xxx
 JWT_ALGORITHM=HS256
+
+# Secrets
+VAULT_ADDR=https://vault.internal
+VAULT_ROLE=leed-platform
 
 # External APIs
 OPENAI_API_KEY=xxx
@@ -290,6 +356,8 @@ DATADOG_API_KEY=xxx
 # Feature Flags
 ENABLE_BETA_CREDITS=false
 ENABLE_USGBC_INTEGRATION=false
+ENABLE_DIRECT_ARC_SUBMISSION=false
+ENABLE_REGIONAL_MANUAL_OVERRIDE=true
 ```
 
 ## Scaling Strategy
@@ -300,7 +368,9 @@ ENABLE_USGBC_INTEGRATION=false
 |---------|-----|-----|--------|
 | Frontend | 2 | 10 | CPU > 70% |
 | Backend API | 3 | 20 | CPU > 70%, Latency > 500ms |
+| LangGraph workflow | 2 | 12 | Workflow queue depth, checkpoint latency |
 | Workers | 5 | 50 | Queue depth > 100 |
+| Skill sandboxes | 0 | 100 | Active skill executions |
 
 ### Database Scaling
 
@@ -317,10 +387,11 @@ ENABLE_USGBC_INTEGRATION=false
 | Data | TTL | Strategy |
 |------|-----|----------|
 | User sessions | 24h | Redis |
-| API responses | 5m | Redis |
+| API responses | API-specific | Redis with source snapshot persisted to PostgreSQL/S3 |
 | Credit definitions | 1h | In-memory |
 | Static assets | 1y | CDN |
 | Documents | 1h | CDN signed URLs |
+| Source snapshots | 7y | PostgreSQL metadata + S3 payload |
 
 ## Monitoring & Observability
 
@@ -334,6 +405,8 @@ async def health_check():
         "database": await check_database(),
         "redis": await check_redis(),
         "rabbitmq": await check_rabbitmq(),
+        "langgraph": await check_langgraph(),
+        "vault": await check_vault(),
     }
     
     all_healthy = all(checks.values())
@@ -354,6 +427,11 @@ async def health_check():
 | Queue depth | Gauge | > 1000 |
 | Worker utilization | Gauge | > 80% |
 | Database connections | Gauge | > 80% |
+| LangGraph checkpoint latency | Histogram | p95 > 500ms |
+| Skill failure rate | Counter | > 5% for 10 min |
+| HITL SLA breach rate | Gauge | > 10% |
+| API circuit open count | Gauge | > 0 critical APIs |
+| Low-confidence output rate | Gauge | > 20% per skill |
 
 ### Logging
 
@@ -370,14 +448,16 @@ logger.info("Credit automation started", extra={
 ## Backup Strategy
 
 ### Database
-- **Frequency:** Daily at 2 AM UTC
-- **Retention:** 30 days
+- **Frequency:** Daily at 2 AM UTC, with point-in-time recovery where supported
+- **Operational backup retention:** 30 days
+- **Audit metadata retention:** 7 years for workflow checkpoints, source snapshots, calculation records, and HITL records
 - **Storage:** S3 Glacier
 - **Encryption:** AES-256
 
 ### Documents
 - **Storage:** S3 with versioning
-- **Lifecycle:** Move to Glacier after 90 days
+- **Lifecycle:** Move audit packages and generated evidence documents to Glacier after 90 days
+- **Retention:** 7 years unless a customer contract requires longer retention
 - **Cross-region:** Replicate to secondary region
 
 ## Disaster Recovery

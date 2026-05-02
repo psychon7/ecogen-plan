@@ -1,195 +1,110 @@
 # Screen: Project Detail
 
 ## Purpose
-Central hub for a single LEED project. Shows all credits, progress, and team information.
+
+Central workspace for one LEED project. Shows credit pursuit, evidence pack status, confidence, regional support, required reviewers, team roles, and manual fallback needs.
 
 ## Layout Structure
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ TOP BAR                                                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ SIDEBAR │ MAIN CONTENT                                                      │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────────────────────────────┐ │
-│         │ │ PROJECT HEADER                                              │ │
-│         │ │ [Back] Acme HQ - New York                    [Edit] [Share]│ │
-│         │ │ 123 Main St, New York, NY 10001                            │ │
-│         │ └─────────────────────────────────────────────────────────────┘ │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────────────────────────────┐ │
-│         │ │ PROGRESS OVERVIEW                                           │ │
-│         │ │ ┌────────────┐ ┌────────────┐ ┌────────────┐               │ │
-│         │ │ │ 12/40      │ │ 28%        │ │ Gold       │               │ │
-│         │ │ │ Credits    │ │ Complete   │ │ Target     │               │ │
-│         │ │ └────────────┘ └────────────┘ └────────────┘               │ │
-│         │ └─────────────────────────────────────────────────────────────┘ │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────────────────────────────┐ │
-│         │ │ CREDITS GRID                                                │ │
-│         │ │                                                             │ │
-│         │ │ Filter: [All ▼] [Status ▼] [Category ▼]        [Search...] │ │
-│         │ │                                                             │ │
-│         │ │ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐         │ │
-│         │ │ │ IPp3         │ │ WEp2         │ │ EAp5         │         │ │
-│         │ │ │ Carbon       │ │ Water        │ │ Refrigerant  │         │ │
-│         │ │ │ [Approved ✓] │ │ [In Review]  │ │ [Not Started]│         │ │
-│         │ │ └──────────────┘ └──────────────┘ └──────────────┘         │ │
-│         │ │                                                             │ │
-│         │ │ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐         │ │
-│         │ │ │ SSc6         │ │ PRc2         │ │ EAc7         │         │ │
-│         │ │ │ Light        │ │ LEED AP      │ │ Enhanced     │         │ │
-│         │ │ │ [Approved ✓] │ │ [Approved ✓] │ │ [In Progress]│         │ │
-│         │ │ └──────────────┘ └──────────────┘ └──────────────┘         │ │
-│         │ │                                                             │ │
-│         │ └─────────────────────────────────────────────────────────────┘ │
-│         │                                                                   │
-│         │ ┌─────────────────────────────────────────────────────────────┐ │
-│         │ │ TEAM MEMBERS                                                │ │
-│         │ │ Sarah (LEED Consultant)                                     │ │
-│         │ │ Mike (Energy Modeler)                                       │ │
-│         │ │ [+ Invite Member]                                           │ │
-│         │ └─────────────────────────────────────────────────────────────┘ │
-│         │                                                                   │
-└─────────┴───────────────────────────────────────────────────────────────────┘
+```text
+ProjectHeader
+  name, address, rating system, target level, phase, region support
+ProgressOverview
+  pursued points, submission-ready points, submitted points, awarded points
+CreditBoard
+  filters, search, credit cards
+TeamAndReviewers
+  team members, credentials, assigned reviewer roles
+ExceptionsPanel
+  blockers, regional gaps, stale data, manual-prep items
 ```
 
-## Component Tree
+## Progress Overview
 
-```
-ProjectDetail
-├── TopBar
-├── Sidebar
-└── MainContent
-    ├── ProjectHeader
-    │   ├── BackButton
-    │   ├── ProjectInfo
-    │   │   ├── Name
-    │   │   └── Address
-    │   └── Actions
-    │       ├── EditButton
-    │       └── ShareButton
-    ├── ProgressOverview
-    │   └── StatCard (×3)
-    ├── CreditsSection
-    │   ├── FilterBar
-    │   │   ├── FilterDropdown (Category)
-    │   │   ├── FilterDropdown (Status)
-    │   │   └── SearchInput
-    │   └── CreditGrid
-    │       └── CreditCard (×N)
-    └── TeamSection
-        ├── SectionHeader
-        ├── TeamMemberList
-        │   └── TeamMemberItem (×N)
-        └── InviteButton
-```
+Show separate status buckets:
 
-## Spacing & Layout
+| Bucket | Meaning |
+|--------|---------|
+| Pursued | Credit is targeted by the project team |
+| Draft | Evidence pack is being prepared |
+| In Review | Awaiting named human review |
+| Internally Approved | Approved by required reviewer(s) |
+| Submission-Ready | Export package ready for manual upload |
+| Submitted | Uploaded to LEED Online/Arc by user |
+| Awarded | Accepted by USGBC/GBCI review |
 
-### Project Header
-- Padding: 24px 32px
-- Background: `color.base.white`
-- Border-bottom: 1px solid `color.neutral.200`
+Never label internally approved points as awarded points.
 
-### Progress Overview
-- Padding: 24px 32px
-- Display: flex, gap 24px
-- Background: `color.neutral.50`
+## Credit Card Fields
 
-### Credits Section
-- Padding: 32px
-- Filter bar margin-bottom: 24px
-- Grid: 3 columns, gap 16px
+Each credit card displays:
 
-### Credit Card
-- Width: 100%
-- Height: 200px
-- Padding: 20px
-- Border: 1px solid `color.neutral.200`
-- Radius: `borderRadius.lg`
+- Credit code and name.
+- Point value or prerequisite flag.
+- Product mode: `AI-generated draft`, `AI-assisted`, `documentation-only`, `manual-prep`.
+- Regional support: full, limited, manual input required, unavailable.
+- Confidence tier: A/B/C or "not assessed."
+- Status bucket.
+- Required reviewer role(s).
+- Open blocker count.
+- Evidence gap count.
+- Dependencies, such as WEp2 before WEc2 or EAp5 before EAc7.
 
 ## Credit Card States
 
 ### Not Started
-- Badge: gray "Not Started"
-- Button: "Start Automation" (primary)
-- Progress: hidden
 
-### In Progress
-- Badge: blue "In Progress"
-- Button: "Continue" (primary)
-- Progress bar: partial fill
+- Badge: "Not Started."
+- Primary action: "Prepare Evidence Pack."
+
+### Draft
+
+- Badge: "Draft."
+- Primary action: "Continue Draft."
+- Shows missing input count.
 
 ### In Review
-- Badge: yellow "In Review"
-- Button: "View Status" (secondary)
-- Progress bar: 100%, yellow
 
-### Approved
-- Badge: green "Approved"
-- Button: "View Documents" (secondary)
-- Progress bar: 100%, green
-- Checkmark icon
+- Badge: "In Review."
+- Secondary action: "View Review."
+- Shows reviewer, SLA, confidence tier, and blocker count.
 
 ### Changes Requested
-- Badge: red "Changes Requested"
-- Button: "Revise" (primary)
-- Progress bar: partial, red
 
-## Typography
+- Badge: "Changes Requested."
+- Primary action: "Revise Evidence."
+- Shows return step and reviewer comment summary.
 
-| Element | Font Size | Weight | Color |
-|---------|-----------|--------|-------|
-| Project Name | 28px | 700 | `color.neutral.900` |
-| Address | 14px | 400 | `color.neutral.500` |
-| Stat Value | 36px | 700 | `color.primary.600` |
-| Stat Label | 14px | 400 | `color.neutral.500` |
-| Credit Code | 12px | 600 | `color.primary.600` |
-| Credit Name | 16px | 600 | `color.neutral.900` |
-| Points | 14px | 400 | `color.neutral.500` |
+### Internally Approved
 
-## Colors
+- Badge: "Internally Approved."
+- Secondary action: "View Approval Record."
+- Not equivalent to submitted or awarded.
 
-| Element | Token |
-|---------|-------|
-| Page background | `color.neutral.50` |
-| Header background | `color.base.white` |
-| Card background | `color.base.white` |
-| Card hover border | `color.primary.300` |
-| Approved badge | `color.semantic.success` |
-| In review badge | `color.semantic.warning` |
-| Changes requested | `color.semantic.error` |
+### Submission-Ready
+
+- Badge: "Submission-Ready."
+- Primary action: "Export Package."
+- Requires all required approvals and no unresolved blockers.
+
+### Manual Preparation Required
+
+- Badge: "Manual Preparation Required."
+- Primary action: "Open Manual Workflow."
+- Shows reason: unsupported region, insufficient source coverage, rejected automation path, or specialist decision.
 
 ## User Actions
 
 | Action | Trigger | Result |
 |--------|---------|--------|
-| Start Credit | Click "Start Automation" | Navigate to credit automation |
-| Continue Credit | Click "Continue" | Resume credit automation |
-| View Documents | Click "View Documents" | Open document viewer |
-| Revise Credit | Click "Revise" | Return to credit input |
-| Filter Credits | Select filter | Update grid |
-| Search Credits | Type in search | Filter grid |
-| Edit Project | Click "Edit" | Open project edit modal |
-| Invite Member | Click "+ Invite" | Open invite modal |
-
-## Micro-interactions
-
-### Credit Card Hover
-- Border: `color.primary.300`
-- Shadow: `shadow.md`
-- Transform: `translateY(-2px)`
-- Duration: `motion.duration.fast`
-
-### Progress Bar Animation
-- Width animates on load
-- Duration: 600ms
-- Easing: `motion.easing.out`
-
-### Filter Change
-- Grid fades out/in
-- Duration: `motion.duration.normal`
+| Prepare Evidence Pack | Click credit action | Open credit evidence pack workflow |
+| Continue Draft | Click action | Resume saved workflow |
+| View Review | Click review status | Open HITL review task |
+| Export Package | Click action | Generate/download manual-upload package |
+| Open Manual Workflow | Click action | Open manual-prep checklist and evidence tracker |
+| Filter Credits | Select filters | Filter by status, confidence, category, region support, reviewer |
+| Assign Reviewer | Click reviewer control | Assign or change required reviewer |
+| Invite Member | Click invite | Add user and role/credential metadata |
 
 ## API Dependencies
 
@@ -199,40 +114,44 @@ GET /api/projects/{id}:
     id: string
     name: string
     address: string
-    city: string
-    state: string
-    zip: string
-    country: string
-    building_type: string
-    leed_version: string
     rating_system: string
     target_level: string
-    credits_completed: number
-    credits_total: number
-    progress_percentage: number
+    region_support_summary: string
+    status_counts: object
+    point_summary:
+      pursued: number
+      internally_approved: number
+      submission_ready: number
+      submitted: number
+      awarded: number
 
 GET /api/projects/{id}/credits:
   response:
-    credits: array
+    credits:
       - id: string
         code: string
         name: string
         points: number
-        automation_level: number
+        product_mode: string
         status: string
-        progress: number
+        confidence_tier: string
+        region_support: string
+        required_reviewers: array
+        blocker_count: number
+        evidence_gap_count: number
+        dependencies: array
 
 GET /api/projects/{id}/team:
   response:
-    members: array
+    members:
       - id: string
         name: string
         email: string
         role: string
-        avatar_url: string
+        credentials: array
 ```
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-03-21*
+*Version: 1.1*
+*Last Updated: 2026-05-02*
