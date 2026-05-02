@@ -196,9 +196,9 @@ python -m pytest skills/leed-lt-c3-compact/tests/test_gtfs.py
 python -m pytest skills/leed-lt-c3-compact/tests/test_calculations.py
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import CompactConnectedSkill
+from leed_platform.skills import CompactConnectedSkill
 
 skill = CompactConnectedSkill(
     project_id="leed-2025-0042",
@@ -232,11 +232,11 @@ result = await skill.execute()
 # }
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.skills.leed_lt_c3.state import LTc3State
-from deerflow.skills.leed_lt_c3.nodes import (
+from leed_platform.skills.leed_lt_c3.state import LTc3State
+from leed_platform.skills.leed_lt_c3.nodes import (
     geocode_address,
     resolve_gtfs_feed,
     fetch_walk_score,
@@ -252,7 +252,7 @@ from deerflow.skills.leed_lt_c3.nodes import (
     hitl_review_checkpoint,
     finalize_documents,
 )
-from deerflow.human_in_the_loop import create_hitl_node
+from leed_platform.human_in_the_loop import create_hitl_node
 
 workflow = StateGraph(LTc3State)
 
@@ -394,7 +394,7 @@ total_points = min(
 ```
 
 ## Data Retention and Compliance
-- All API responses cached in `~/.deerflow/cache/leed-lt-c3/{project_id}/` for 90 days
+- All API responses cached in `~/.leed-platform/cache/leed-lt-c3/{project_id}/` for 90 days
 - HITL reviewer decisions logged with timestamp, reviewer ID, and override details
 - Final documents retained per project document retention policy (minimum 7 years for LEED)
 - No PII stored in API cache (addresses hashed with SHA-256 for cache keys)

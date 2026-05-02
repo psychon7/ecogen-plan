@@ -183,9 +183,9 @@ Automate the calculation, compliance verification, and documentation of heat isl
 python -m pytest skills/leed-ss-c5-heat-island/tests/
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import HeatIslandReductionSkill
+from leed_platform.skills import HeatIslandReductionSkill
 
 skill = HeatIslandReductionSkill(
     project_id="LEED-2024-8842",
@@ -214,10 +214,10 @@ print(result.points_achieved)  # 2
 print(result.documents)        # ["sri_compliance_table.xlsx", "heat_island_reduction_calculations.pdf", ...]
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph
-from deerflow.skills.leed_ss_c5_heat_island.state import HeatIslandState
+from leed_platform.skills.leed_ss_c5_heat_island.state import HeatIslandState
 
 workflow = StateGraph(HeatIslandState)
 

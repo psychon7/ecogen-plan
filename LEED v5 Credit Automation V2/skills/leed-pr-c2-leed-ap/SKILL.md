@@ -27,9 +27,9 @@ Automate the verification that at least one principal project team member holds 
 ## Inputs (Required)
 | Field | Type | Source | Validation |
 |-------|------|--------|------------|
-| project_id | str | DeerFlow context | Non-empty UUID or internal project identifier |
+| project_id | str | platform context | Non-empty UUID or internal project identifier |
 | team_roster | List[Dict] | User upload (CSV/XLSX) | Min 1 row; each row must contain `name` and `role` |
-| leed_project_type | str | DeerFlow context (LEED v5 credit selection) | Enum: `BD+C`, `ID+C`, `O+M`, `ND`, `Homes` |
+| leed_project_type | str | platform context (LEED v5 credit selection) | Enum: `BD+C`, `ID+C`, `O+M`, `ND`, `Homes` |
 
 ## Inputs (Optional)
 | Field | Type | Default | Description |
@@ -94,7 +94,7 @@ Automate the verification that at least one principal project team member holds 
 - **Type:** Human Review
 - **Automated:** No
 - **Description:**
-  1. Pause workflow; create HITL ticket in DeerFlow Review UI.
+  1. Pause workflow; create HITL ticket in platform HITL review UI.
   2. Present reviewer with:
      - Identified `primary_leed_ap` (name, credential number, specialty, expiration date, role on roster).
      - Project context (`project_id`, `leed_project_type`).
@@ -138,7 +138,7 @@ Automate the verification that at least one principal project team member holds 
 - **Type:** API Call / Persistence
 - **Automated:** Yes
 - **Description:**
-  1. POST results to DeerFlow project ledger:
+  1. POST results to platform project ledger:
      - `credit_code`: PRc2
      - `points_awarded`: 1 (if compliance_met and HITL approved) else 0
      - `compliance_status`: `COMPLIANT | NON_COMPLIANT | PENDING_HITL`
@@ -159,7 +159,7 @@ Automate the verification that at least one principal project team member holds 
 |-----|---------|----------------------|----------|------------|
 | GBCI Credential Directory (`https://www.gbci.org/api/v1/credentials/verify`) | Primary LEED AP credential verification (status, specialty, expiration) | Global | Manual credential check via GBCI web portal + uploaded PDF/screenshot | 100 req/min; burst 200 req/min for 10s |
 | USGBC Member Directory (`https://www.usgbc.org/api/v2/members/search`) | Supplemental fuzzy search by name/email when credential number unknown | Global (USGBC members) | Manual team roster review | 60 req/min |
-| DeerFlow Internal Ledger (`/api/v1/projects/{project_id}/credits`) | Persist final compliance results and document URLs | Global (project region) | Queue to local Redis; retry every 5 min | 1000 req/min |
+| Platform Internal Ledger (`/api/v1/projects/{project_id}/credits`) | Persist final compliance results and document URLs | Global (project region) | Queue to local Redis; retry every 5 min | 1000 req/min |
 
 ## Regional Availability
 | Region | Status | Notes |
@@ -207,9 +207,9 @@ python -m pytest skills/prc2/tests/test_integration.py -v
 python -m pytest skills/prc2/tests/test_e2e_workflow.py -v
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import LEEDAPSkill
+from leed_platform.skills import LEEDAPSkill
 
 skill = LEEDAPSkill(
     project_id="proj-abc-123",
@@ -237,19 +237,19 @@ result = await skill.execute()
 #       "expiration_date": "2027-06-15"
 #   },
 #   "documents": {
-#       "verification_report_pdf": "https://vault.deerflow.io/proj-abc-123/prc2/leed_ap_verification_report.pdf",
-#       "credential_confirmation_docx": "https://vault.deerflow.io/proj-abc-123/prc2/credential_confirmation.docx"
+#       "verification_report_pdf": "https://vault.ecogen.io/proj-abc-123/prc2/leed_ap_verification_report.pdf",
+#       "credential_confirmation_docx": "https://vault.ecogen.io/proj-abc-123/prc2/credential_confirmation.docx"
 #   },
 #   "hitl_checkpoint": {"step": 4, "decision": "APPROVED", "reviewer": "pm@client.com", "timestamp": "2025-01-15T09:23:00Z"},
 #   "audit_trail": [...]
 # }
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.skills.prc2.state import PRc2State
-from deerflow.skills.prc2.nodes import (
+from leed_platform.skills.prc2.state import PRc2State
+from leed_platform.skills.prc2.nodes import (
     validate_inputs,
     lookup_credentials,
     calculate_compliance,

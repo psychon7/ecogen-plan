@@ -278,9 +278,9 @@ python -m pytest skills/leed-lt-c1-sensitive-land/tests/e2e/test_clean_site.py
 python -m pytest skills/leed-lt-c1-sensitive-land/tests/e2e/test_floodplain_overlap.py
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import LEEDLTC1SensitiveLandSkill
+from leed_platform.skills import LEEDLTC1SensitiveLandSkill
 
 skill = LEEDLTC1SensitiveLandSkill(
     project_id="leed-proj-2025-8842",
@@ -323,13 +323,13 @@ result = await skill.execute()
 #   "hitl_review": {
 #     "required": True,
 #     "status": "PENDING",
-#     "review_url": "https://review.deerflow.io/hitl/ltc1/..."
+#     "review_url": "https://review.ecogen.io/hitl/ltc1/..."
 #   },
 #   "audit_trail": [...]
 # }
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
 from dataclasses import dataclass, field
@@ -366,7 +366,7 @@ class LEEDState:
 
 async def validate_inputs(state: LEEDState) -> LEEDState:
     """Step 1: Parse, validate, and reproject GeoJSON; check area consistency."""
-    from deerflow.validators import GeoJSONValidator, AreaValidator, EmailValidator
+    from leed_platform.validators import GeoJSONValidator, AreaValidator, EmailValidator
     try:
         boundary = GeoJSONValidator.validate(state.inputs["site_boundary"])
         computed_acres = AreaValidator.geojson_to_acres(boundary)
@@ -381,7 +381,7 @@ async def validate_inputs(state: LEEDState) -> LEEDState:
 
 async def fetch_fema_data(state: LEEDState) -> LEEDState:
     """Step 2: Query FEMA NFHL for 100-year floodplain intersection."""
-    from deerflow.apis import FEMANFHLClient
+    from leed_platform.apis import FEMANFHLClient
     if not state.validated:
         return state
     client = FEMANFHLClient()
@@ -401,7 +401,7 @@ async def fetch_fema_data(state: LEEDState) -> LEEDState:
 
 async def fetch_nwi_data(state: LEEDState) -> LEEDState:
     """Step 3: Query NWI for wetland intersection."""
-    from deerflow.apis import NWIClient
+    from leed_platform.apis import NWIClient
     if not state.validated:
         return state
     client = NWIClient()
@@ -420,7 +420,7 @@ async def fetch_nwi_data(state: LEEDState) -> LEEDState:
 
 async def fetch_usfws_data(state: LEEDState) -> LEEDState:
     """Step 4: Query USFWS ECOS for critical habitat intersection."""
-    from deerflow.apis import USFWSCriticalHabitatClient
+    from leed_platform.apis import USFWSCriticalHabitatClient
     if not state.validated:
         return state
     client = USFWSCriticalHabitatClient()
@@ -439,7 +439,7 @@ async def fetch_usfws_data(state: LEEDState) -> LEEDState:
 
 async def fetch_nrcs_data(state: LEEDState) -> LEEDState:
     """Step 5: Query USDA NRCS SDA for prime farmland intersection."""
-    from deerflow.apis import NRCSSoilDataClient
+    from leed_platform.apis import NRCSSoilDataClient
     if not state.validated:
         return state
     client = NRCSSoilDataClient()
@@ -457,8 +457,8 @@ async def fetch_nrcs_data(state: LEEDState) -> LEEDState:
 
 async def perform_slope_analysis(state: LEEDState) -> LEEDState:
     """Step 6: Fetch USGS DEM and calculate slope percentage."""
-    from deerflow.apis import USGSDEMClient
-    from deerflow.calculations import SlopeCalculator
+    from leed_platform.apis import USGSDEMClient
+    from leed_platform.calculations import SlopeCalculator
     if not state.validated or not state.inputs.get("include_slope_analysis", True):
         state.slope_result = {"status": "SKIPPED"}
         return state
@@ -482,7 +482,7 @@ async def perform_slope_analysis(state: LEEDState) -> LEEDState:
 
 async def fetch_parkland_data(state: LEEDState) -> LEEDState:
     """Step 7: Query PAD-US for public parkland proximity (optional)."""
-    from deerflow.apis import PADUSClient
+    from leed_platform.apis import PADUSClient
     if not state.validated or not state.inputs.get("parkland_exemption_claim", False):
         state.parkland_result = {"status": "NOT_APPLICABLE"}
         return state
@@ -502,7 +502,7 @@ async def fetch_parkland_data(state: LEEDState) -> LEEDState:
 
 async def consolidate_analysis(state: LEEDState) -> LEEDState:
     """Step 8: Union overlaps and determine credit achievability."""
-    from deerflow.calculations import SensitiveLandAnalyzer
+    from leed_platform.calculations import SensitiveLandAnalyzer
     if not state.validated:
         return state
     analyzer = SensitiveLandAnalyzer()
@@ -522,7 +522,7 @@ async def consolidate_analysis(state: LEEDState) -> LEEDState:
 
 async def human_review_checkpoint(state: LEEDState) -> LEEDState:
     """Step 9: HITL — pause and notify reviewer."""
-    from deerflow.hitl import HITLManager
+    from leed_platform.hitl import HITLManager
     if not state.validated:
         return state
     # HITL always triggered for LTc1 due to GIS interpretation complexity
@@ -547,7 +547,7 @@ async def human_review_checkpoint(state: LEEDState) -> LEEDState:
 
 async def generate_documents(state: LEEDState) -> LEEDState:
     """Step 10: Generate PDF analysis report, GIS map, and DOCX declaration."""
-    from deerflow.documents import PDFReportGenerator, GISMapGenerator, DOCXDeclarationGenerator
+    from leed_platform.documents import PDFReportGenerator, GISMapGenerator, DOCXDeclarationGenerator
     if not state.validated:
         return state
     try:
@@ -587,8 +587,8 @@ async def generate_documents(state: LEEDState) -> LEEDState:
 
 async def finalize_results(state: LEEDState) -> LEEDState:
     """Step 11: Persist, emit events, notify stakeholders."""
-    from deerflow.persistence import ProjectStore
-    from deerflow.notifications import EmailNotifier
+    from leed_platform.persistence import ProjectStore
+    from leed_platform.notifications import EmailNotifier
     if not state.validated:
         return state
     store = ProjectStore()

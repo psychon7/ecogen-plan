@@ -1,14 +1,14 @@
-# Deer-Flow LEED v5 Technical Implementation — Execution Plan
+# LEED v5 Technical Implementation — Execution Plan
 
 ## Objective
-Build a complete Deer-Flow based technical implementation package including:
+Build a complete technical implementation package including:
 1. Expanded data availability analysis (261 sources mapped to all 51 credits)
-2. 16 production-ready SKILL.md files (Tier 1 credits) in Deer-Flow format
+2. 16 production-ready SKILL.md files (Tier 1 credits) in the platform format
 3. Master Technical Implementation Document (.docx)
 
 ## Deliverables
 
-### Deliverable 1: 16 Credit Skills (Deer-Flow Compatible)
+### Deliverable 1: 16 Credit Skills (Platform Compatible)
 Saved to `/mnt/agents/output/skills/leed-[credit-code]/SKILL.md`
 
 Batch 1 — Carbon & Energy Credits (6 skills):
@@ -36,7 +36,7 @@ Batch 3 — Materials, Lighting, Credential Credits (5 skills):
 ### Deliverable 2: Master Technical Implementation Document
 - Section 1: Executive Summary & Architecture Overview
 - Section 2: Expanded Data Availability (all 261 sources per credit)
-- Section 3: Deer-Flow Platform Design
+- Section 3: Platform Design
 - Section 4: Skill System Specification
 - Section 5: API Integration Specifications
 - Section 6: HITL & Workflow Design
@@ -51,7 +51,7 @@ Stage 2 — Master Document Writing (parallel sections with synthesis)
 Stage 3 — Assembly & .docx Conversion
 
 ## Key Design Decisions
-- Deer-Flow as foundation (saves 10 weeks)
+- OpenAI Agents SDK + Restate as foundation
 - One skill per credit = 16 independent, reusable agents
 - LangGraph durable workflows with automatic checkpointing
 - Regional data filtering middleware

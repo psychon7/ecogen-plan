@@ -1,5 +1,5 @@
 # Master Technical Implementation Document
-## Deer-Flow LEED v5 Credit Automation Platform
+## LEED v5 Credit Automation Platform
 
 ---
 
@@ -7,7 +7,7 @@
 
 ## 1.1 Platform Purpose and Scope
 
-The Deer-Flow LEED v5 Credit Automation Platform is an enterprise-grade AI orchestration system designed to automate the data collection, calculation, and documentation workflows required for Leadership in Energy and Environmental Design (LEED) v5 Building Design and Construction (BD+C) certification. Built on the Deer-Flow agent orchestration framework, the platform decomposes each LEED credit into discrete, executable skills that leverage 261 verified external data sources to eliminate manual data gathering, reduce calculation errors, and compress certification timelines from months to weeks.
+The LEED v5 Credit Automation Platform is an enterprise-grade AI orchestration system designed to automate the data collection, calculation, and documentation workflows required for Leadership in Energy and Environmental Design (LEED) v5 Building Design and Construction (BD+C) certification. Built on the OpenAI Agents SDK for agent intelligence and Restate for durable workflow orchestration, the platform decomposes each LEED credit into discrete, executable skills that leverage 261 verified external data sources to eliminate manual data gathering, reduce calculation errors, and compress certification timelines from months to weeks.
 
 LEED v5 represents the most significant revision to the rating system in over a decade, introducing mandatory prerequisites across all credit categories and increasing the granularity of performance thresholds. The platform addresses the critical bottleneck in LEED certification: the project team's dependency on fragmented, manually-sourced data from government databases, commercial registries, manufacturer documentation, and proprietary energy models. By establishing machine-readable API integrations across the entire data ecosystem, the platform enables continuous compliance monitoring rather than the traditional batch-and-review model.
 
@@ -34,7 +34,7 @@ The platform implements 16 Tier 1 automation skills, each mapped directly to one
 | Heat Island Reducer | SSc5 | 2 | 95 |
 | Transit Access Analyzer | LTc3, LTc4 | 2 | 90 |
 
-Each Tier 1 skill is implemented as a Deer-Flow workflow composed of data ingestion nodes, validation gates, calculation engines, and human-in-the-loop (HITL) checkpoints. Skills are triggered by project milestones (design development, construction documents, final completion) and produce USGBC-ready documentation packages in PDF and XML formats.
+Each Tier 1 skill is implemented as a Restate durable workflow composed of data ingestion nodes, validation gates, calculation engines, and human-in-the-loop (HITL) checkpoints. Skills are triggered by project milestones (design development, construction documents, final completion) and produce USGBC-ready documentation packages in PDF and XML formats.
 
 ## 1.3 Data Source Ecosystem: 261 Verified Sources
 
@@ -51,7 +51,7 @@ Each source has been evaluated for API availability, data quality, update freque
 
 ## 1.4 Time-to-Value: 10-Week Delivery Advantage
 
-Building a LEED automation platform from scratch requires approximately 40-48 weeks of engineering effort distributed across API discovery and integration (16 weeks), calculation engine development (12 weeks), document generation (8 weeks), and testing / compliance validation (8 weeks). The Deer-Flow reference architecture reduces this to 10 weeks through:
+Building a LEED automation platform from scratch requires approximately 40-48 weeks of engineering effort distributed across API discovery and integration (16 weeks), calculation engine development (12 weeks), document generation (8 weeks), and testing / compliance validation (8 weeks). The OpenAI Agents SDK + Restate architecture reduces this to 10 weeks through:
 
 1. **Pre-built API Connectors**: 40+ API connectors with OAuth, API key, and certificate-based authentication patterns are pre-implemented. Each connector includes retry logic, rate limit management, and data transformation pipelines.
 
@@ -61,7 +61,7 @@ Building a LEED automation platform from scratch requires approximately 40-48 we
 
 4. **Compliance Validation Engine**: Automated cross-checks against LEED v5 reference guides, including threshold validation, prerequisite sequencing, and credit interdependency verification.
 
-| Milestone | From-Scratch Timeline | Deer-Flow Timeline | Savings |
+| Milestone | From-Scratch Timeline | Platform Timeline | Savings |
 |-----------|----------------------|-------------------|---------|
 | API Integration Complete | Week 16 | Week 3 | 13 weeks |
 | Calculation Engine Ready | Week 28 | Week 5 | 23 weeks |
@@ -93,7 +93,7 @@ Credits where the platform serves as a data aggregator and calculation assistant
 
 ## 2.1 Government API Catalog
 
-The following table catalogs the primary government APIs integrated into the Deer-Flow platform. Each entry includes authentication requirements, rate limits, supported credits, regional applicability, and integration complexity rating. All government APIs listed provide free public access with registration.
+The following table catalogs the primary government APIs integrated into the platform. Each entry includes authentication requirements, rate limits, supported credits, regional applicability, and integration complexity rating. All government APIs listed provide free public access with registration.
 
 | API Name | Provider | URL | Auth | Rate Limit | Credits Supported | Regional | Complexity |
 |----------|----------|-----|------|-----------|-------------------|----------|------------|

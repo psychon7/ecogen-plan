@@ -4,18 +4,18 @@
 
 ### 7.1 Phase 1: Foundation (Weeks 1–2)
 
-The Foundation Phase establishes the platform's core infrastructure on Deer-Flow, validates the end-to-end workflow, and delivers the first fully functional credit skill. The goal is not breadth but confidence in the architecture, deployment pipeline, and human-in-the-loop (HITL) channel.
+The Foundation Phase establishes the platform's core infrastructure on OpenAI Agents SDK + Restate, validates the end-to-end workflow, and delivers the first fully functional credit skill. The goal is not breadth but confidence in the architecture, deployment pipeline, and human-in-the-loop (HITL) channel.
 
-**Week 1: Deer-Flow Setup and Configuration**
+**Week 1: Platform Setup and Configuration**
 
 | Day | Task | Deliverable | Owner |
 |-----|------|-------------|-------|
-| 1 | Clone Deer-Flow repository (`bytedance/deer-flow`) and run `make setup` | Local running instance | DevOps |
+| 1 | Set up OpenAI Agents SDK + Restate infrastructure via `docker compose up` | Local running instance | DevOps |
 | 1 | Configure `config.yaml`: GPT-4o model, AioSandboxProvider, Slack channel | Validated configuration file | DevOps |
 | 2 | Build and deploy Docker Compose stack (LangGraph server, gateway, sandbox) | All containers healthy | DevOps |
 | 2 | Provision PostgreSQL metadata store and persistent volume for `/mnt/user-data` | Database schema initialized | DevOps |
 | 3 | Create `skills/leed/` directory structure for 16 Tier-1 credits | Directory tree with `__init__.py` | Backend |
-| 3 | Implement base `LEEDSkill` class extending Deer-Flow's skill contract | Base class with validation hooks | Backend |
+| 3 | Implement base `LEEDSkill` class extending the platform's skill contract | Base class with validation hooks | Backend |
 | 4–5 | Set up CI/CD pipeline: GitHub Actions → Docker build → staging deploy | Green pipeline on first push | DevOps |
 
 The configuration file (`config.yaml`) for this phase:
@@ -30,7 +30,7 @@ models:
     temperature: 0.1
 
 sandbox:
-  use: deerflow.community.aio_sandbox:AioSandboxProvider
+  use: leed_platform.sandbox:SandboxProvider
   provisioner_url: http://sandbox:8080
   timeout_seconds: 300
 
@@ -48,7 +48,7 @@ PRc2 is selected as the first skill because it has the simplest input schema (te
 
 | Step | Activity | Checkpoint |
 |------|----------|------------|
-| 1 | Write `skills/leed/pr-c2/SKILL.md` with Deer-Flow compatible frontmatter | SKILL.md passes schema validation |
+| 1 | Write `skills/leed/pr-c2/SKILL.md` with platform-compatible frontmatter | SKILL.md passes schema validation |
 | 2 | Implement `pr-c2` workflow: validate roster → query GBCI API → match credentials → flag missing | Unit tests pass (pytest) |
 | 3 | Build Jinja2 document template: `pr-c2-credential-report.html` | Template renders with sample data |
 | 4 | Configure HITL checkpoint at Step 2 (credential verification results) | Slack notification fires correctly |
@@ -107,7 +107,7 @@ Phase 2 expands from one skill to eight priority skills, integrates the core ext
 
 **Week 3: Core API Integration Layer**
 
-All eight skills share a common API integration layer. The layer is built as Deer-Flow tools (`/backend/deerflow/tools/leed/`) with standardized interfaces:
+All eight skills share a common API integration layer. The layer is built as platform tools (`/backend/leed_platform/tools/`) with standardized interfaces:
 
 | API | Tool Class | Auth Method | Rate Limit | Fallback Strategy |
 |-----|-----------|-------------|------------|-------------------|
@@ -405,8 +405,8 @@ Infrastructure cost estimates (monthly, production):
 
 | Week | Milestone | Deliverable | Owner | Dependencies |
 |------|-----------|-------------|-------|--------------|
-| 1 | Deer-Flow infrastructure live | Running Docker Compose stack; `make setup` passes | DevOps | None |
-| 1 | CI/CD pipeline green | GitHub Actions builds and deploys to staging | DevOps | Deer-Flow repo |
+| 1 | platform infrastructure live | Running Docker Compose stack; `make setup` passes | DevOps | None |
+| 1 | CI/CD pipeline green | GitHub Actions builds and deploys to staging | DevOps | platform repo |
 | 2 | First skill end-to-end | PRc2 completes full workflow: input → HITL → PDF | Backend | Week 1 infrastructure |
 | 2 | HITL channel validated | Slack approve/reject/comment actions resume workflow | Backend | PRc2 skill |
 | 3 | API integration layer | 8 tools with auth, rate limiting, caching, fallback | Backend | Week 2 baseline |

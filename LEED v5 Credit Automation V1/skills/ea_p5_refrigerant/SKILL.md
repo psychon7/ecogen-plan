@@ -187,10 +187,10 @@ python -m pytest skills/leed-ea-p5-refrigerant/tests/
 # 6. test_document_generation_end_to_end
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 
 ```python
-from deerflow.skills import RefrigerantManagementSkill
+from leed_platform.skills import RefrigerantManagementSkill
 
 skill = RefrigerantManagementSkill(
     project_id="12345",
@@ -222,11 +222,11 @@ result = await skill.execute()
 # }
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.skills.leed_ea_p5_refrigerant import states, nodes
+from leed_platform.skills.leed_ea_p5_refrigerant import states, nodes
 
 # Define the state schema
 class EAp5State(dict):

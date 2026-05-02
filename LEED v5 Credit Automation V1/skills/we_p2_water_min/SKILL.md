@@ -177,9 +177,9 @@ python -m pytest skills/leed-we-p2-water-min/tests/
 # - test_arc_upload.py: Mocked USGBC Arc OAuth and submission flows
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import LEEDWaterMinEfficiencySkill
+from leed_platform.skills import LEEDWaterMinEfficiencySkill
 
 skill = LEEDWaterMinEfficiencySkill(
     project_id="proj-12345",
@@ -231,11 +231,11 @@ result = await skill.execute()
 # - arc_submission_id: "arc-sub-98765"
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.state import LEEDState
-from deerflow.nodes import (
+from leed_platform.state import LEEDState
+from leed_platform.nodes import (
     validate_inputs,
     fetch_watersense_data,
     fetch_energystar_data,

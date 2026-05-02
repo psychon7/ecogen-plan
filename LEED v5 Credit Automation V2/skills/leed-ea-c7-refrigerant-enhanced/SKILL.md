@@ -233,9 +233,9 @@ python -m pytest skills/eac7/tests/test_full_workflow.py
 python -m pytest skills/eac7/tests/test_hitl_checkpoint.py
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import EnhancedRefrigerantManagementSkill
+from leed_platform.skills import EnhancedRefrigerantManagementSkill
 
 skill = EnhancedRefrigerantManagementSkill(
     project_id="LEED-2024-0892",
@@ -255,11 +255,11 @@ result = await skill.execute()
 print(f"Compliant: {result['compliant']}, Weighted Avg GWP: {result['weighted_avg_gwp']}")
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.state import LEEDState
-from deerflow.nodes import (
+from leed_platform.state import LEEDState
+from leed_platform.nodes import (
     validate_inputs,
     load_gwp_reference,
     calculate_weighted_gwp,

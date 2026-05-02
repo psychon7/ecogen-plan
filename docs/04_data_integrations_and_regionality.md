@@ -91,4 +91,4 @@ Every production API client must define:
 - EC3 commercial API terms and production rate limits.
 - Walk Score commercial access and regional coverage.
 - Product databases such as AHRI, CRRC, WaterSense, ENERGY STAR, EPD, HPD, GREENGUARD, and FloorScore.
-- Any Deer-Flow built-in connector claims from older research.
+- Any legacy framework built-in connector claims from older research.

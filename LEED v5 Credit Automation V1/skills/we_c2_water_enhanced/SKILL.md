@@ -220,9 +220,9 @@ python -m pytest skills/wec2/tests/integration/ --noaa-token=$NOAA_TOKEN --energ
 python -m pytest skills/wec2/tests/e2e/test_full_workflow.py -v --project-data=skills/wec2/tests/fixtures/sample_nc_project.json
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import LEEDWaterEnhancedSkill
+from leed_platform.skills import LEEDWaterEnhancedSkill
 
 # Initialize with WEp2 prerequisite data and project location
 skill = LEEDWaterEnhancedSkill(
@@ -293,11 +293,11 @@ print(f"Documents: {result.documents}")
 # ['WEc2_Calculations.pdf', 'AltWaterSource_Analysis.pdf', 'WEc2_PointsCalculator.xlsx']
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.state import LEEDWaterState
-from deerflow.nodes import (
+from leed_platform.state import LEEDWaterState
+from leed_platform.nodes import (
     validate_wep2_data,
     verify_watersense_fixtures,
     verify_energy_star_appliances,
@@ -314,7 +314,7 @@ from deerflow.nodes import (
     generate_points_xlsx,
     finalize_submission
 )
-from deerflow.checkpoints import HITLCheckpoint
+from leed_platform.checkpoints import HITLCheckpoint
 
 # Define the LangGraph workflow for this skill
 workflow = StateGraph(LEEDWaterState)

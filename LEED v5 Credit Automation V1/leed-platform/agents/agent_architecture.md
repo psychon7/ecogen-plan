@@ -2,7 +2,7 @@
 
 ## Overview
 
-The LEED AI Platform uses Deer-Flow as the agent foundation and LangGraph as the durable workflow engine for credit automation. The architecture is skill-based: one independently testable skill per LEED v5 credit or prerequisite, with explicit contracts for inputs, calculations, evidence, regional availability, and human review.
+The LEED AI Platform uses the platform as the agent foundation and LangGraph as the durable workflow engine for credit automation. The architecture is skill-based: one independently testable skill per LEED v5 credit or prerequisite, with explicit contracts for inputs, calculations, evidence, regional availability, and human review.
 
 Core stance:
 
