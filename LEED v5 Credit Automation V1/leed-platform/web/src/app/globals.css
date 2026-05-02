@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* -----------------------------------------------------------
+   EcoGen Visual DNA tokens
+   Source: leed-platform/docs/visual_dna.md
+   ----------------------------------------------------------- */
+:root {
+  --color-canvas: #ffffff;
+  --color-mist: #f7faf7;
+  --color-glass: #fffffc;
+  --color-sand: #f5eedc;
+  --color-sage: #cfe8d6;
+  --color-mint: #e6f7ed;
+  --color-primary: #1e7a3d;
+  --color-forest: #0f3d23;
+  --color-border: #e6eae6;
+
+  --glass-strong: rgba(255, 255, 252, 0.78);
+  --glass-soft: rgba(247, 250, 247, 0.64);
+  --inner-highlight: rgba(255, 255, 255, 0.76);
+  --outer-edge: rgba(15, 61, 35, 0.08);
+  --focus-ring: rgba(30, 122, 61, 0.28);
+
+  --background: var(--color-canvas);
+  --foreground: var(--color-forest);
+}
+
+@theme inline {
+  --color-canvas: var(--color-canvas);
+  --color-mist: var(--color-mist);
+  --color-glass: var(--color-glass);
+  --color-sand: var(--color-sand);
+  --color-sage: var(--color-sage);
+  --color-mint: var(--color-mint);
+  --color-primary: var(--color-primary);
+  --color-forest: var(--color-forest);
+  --color-edge: var(--color-border);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-open-sans), var(--font-geist-sans), system-ui, sans-serif;
+  --font-display: var(--font-open-sans), var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    background: var(--color-canvas);
+    color: var(--color-forest);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-canvas);
+    color: var(--color-forest);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: var(--color-mint);
+    color: var(--color-forest);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--color-forest);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Liquid-glass surfaces */
+.eg-glass-strong {
+  background: linear-gradient(180deg, rgba(255, 255, 252, 0.86), rgba(247, 250, 247, 0.74));
+  border: 1px solid var(--outer-edge);
+  box-shadow:
+    inset 0 1px 0 var(--inner-highlight),
+    0 4px 20px rgba(16, 24, 16, 0.06),
+    0 24px 60px -32px rgba(15, 61, 35, 0.18);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.eg-glass-soft {
+  background: linear-gradient(180deg, rgba(255, 255, 252, 0.72), rgba(247, 250, 247, 0.56));
+  border: 1px solid var(--outer-edge);
+  box-shadow:
+    inset 0 1px 0 var(--inner-highlight),
+    0 2px 12px rgba(16, 24, 16, 0.04);
+}
+
+.eg-glass-pill {
+  background: var(--glass-strong);
+  border: 1px solid var(--outer-edge);
+  box-shadow:
+    inset 0 1px 0 var(--inner-highlight),
+    0 8px 28px -8px rgba(15, 61, 35, 0.18);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.eg-icon-well {
+  background: radial-gradient(120% 120% at 30% 20%, #ffffff 0%, var(--color-sage) 70%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(15, 61, 35, 0.08),
+    0 6px 18px -6px rgba(15, 61, 35, 0.18);
+}
+
+.eg-mint-well {
+  background: radial-gradient(120% 120% at 30% 20%, #ffffff 0%, var(--color-mint) 70%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 6px 18px -8px rgba(15, 61, 35, 0.16);
+}
+
+.eg-mesh {
+  background-image:
+    radial-gradient(60% 60% at 12% 10%, rgba(207, 232, 214, 0.55) 0%, rgba(207, 232, 214, 0) 60%),
+    radial-gradient(50% 50% at 88% 8%, rgba(230, 247, 237, 0.7) 0%, rgba(230, 247, 237, 0) 60%),
+    radial-gradient(70% 70% at 50% 110%, rgba(245, 238, 220, 0.45) 0%, rgba(245, 238, 220, 0) 65%);
+}
+
+.eg-btn-primary {
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.eg-btn-primary:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 14px 36px -10px rgba(15,61,35,0.45); }
+.eg-btn-primary:active { transform: scale(0.985); }
+
+.eg-btn-secondary { transition: background-color 280ms cubic-bezier(0.16,1,0.3,1), transform 280ms cubic-bezier(0.16,1,0.3,1); }
+.eg-btn-secondary:hover { background-color: var(--color-sage); transform: translateY(-1px); }
+
+.eg-card-hover { transition: transform 360ms cubic-bezier(0.16,1,0.3,1), box-shadow 360ms cubic-bezier(0.16,1,0.3,1); }
+.eg-card-hover:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.78), 0 16px 48px -16px rgba(15,61,35,0.22); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
