@@ -4,5 +4,8 @@
       "Bash(Get-ChildItem -Force)",
       "Bash(Select-Object Name, PSIsContainer)"
     ]
+  },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   }
 }
