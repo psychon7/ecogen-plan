@@ -178,7 +178,7 @@ Automates the development of a 25-year operational carbon projection and decarbo
 - **Type:** Human Review
 - **Automated:** No
 - **Description:**
-  Present the following to the LEED consultant via Deer-Flow HITL UI:
+  Present the following to the LEED consultant via platform HITL review UI:
   1. Baseline annual carbon (MT CO2e/year) and intensity (kgCO2e/sf/year).
   2. 25-year projection chart (carbon vs. year, with EE measure milestones).
   3. Planned EE measures table with cost-effectiveness ranking.
@@ -348,9 +348,9 @@ python skills/ea-p1-op-carbon/tests/regression_test.py \
   --expected-tolerance 5.0
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import EAp1OperationalCarbonSkill
+from leed_platform.skills import EAp1OperationalCarbonSkill
 
 skill = EAp1OperationalCarbonSkill(
     project_id="LEED-2024-1234",
@@ -410,7 +410,7 @@ print(f"Decarbonization Plan: {result.deliverables.decarbonization_plan}")
 print(f"Spreadsheet: {result.deliverables.calculation_spreadsheet}")
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, Optional, Any
@@ -433,14 +433,14 @@ class LEEDCarbonState(TypedDict):
 
 def validate_inputs_node(state: LEEDCarbonState):
     """Step 1: Validate all input fields and energy model format."""
-    from deerflow.skills.ea_p1.validation import InputValidator
+    from leed_platform.skills.ea_p1.validation import InputValidator
     validator = InputValidator()
     validated = validator.validate(state["inputs"])
     return {**state, "validated": validated, "logs": state["logs"] + ["Step 1: Inputs validated"]}
 
 def fetch_grid_factors_node(state: LEEDCarbonState):
     """Step 2: Fetch eGRID or international grid emission factors."""
-    from deerflow.skills.ea_p1.grid_factors import GridFactorService
+    from leed_platform.skills.ea_p1.grid_factors import GridFactorService
     service = GridFactorService()
     factors = service.fetch(
         lat=state["validated"]["project_latitude"],
@@ -453,14 +453,14 @@ def fetch_grid_factors_node(state: LEEDCarbonState):
 
 def parse_energy_model_node(state: LEEDCarbonState):
     """Step 3: Parse EnergyPlus output (.eso/.sql/.csv)."""
-    from deerflow.skills.ea_p1.energy_parser import EnergyModelParser
+    from leed_platform.skills.ea_p1.energy_parser import EnergyModelParser
     parser = EnergyModelParser()
     end_use_data = parser.parse(state["validated"]["energy_model_output"])
     return {**state, "end_use_data": end_use_data, "logs": state["logs"] + ["Step 3: Energy model parsed"]}
 
 def calculate_baseline_node(state: LEEDCarbonState):
     """Step 4: Calculate baseline annual operational carbon."""
-    from deerflow.skills.ea_p1.carbon_calc import BaselineCarbonCalculator
+    from leed_platform.skills.ea_p1.carbon_calc import BaselineCarbonCalculator
     calc = BaselineCarbonCalculator()
     baseline = calc.calculate(
         end_use_data=state["end_use_data"],
@@ -473,7 +473,7 @@ def calculate_baseline_node(state: LEEDCarbonState):
 
 def project_carbon_node(state: LEEDCarbonState):
     """Step 5: Generate 25-year carbon projection."""
-    from deerflow.skills.ea_p1.projection import CarbonProjector
+    from leed_platform.skills.ea_p1.projection import CarbonProjector
     projector = CarbonProjector()
     projection = projector.project(
         baseline=state["baseline_carbon"],
@@ -486,7 +486,7 @@ def project_carbon_node(state: LEEDCarbonState):
 
 def analyze_measures_node(state: LEEDCarbonState):
     """Step 6: Analyze carbon reduction potential of planned measures."""
-    from deerflow.skills.ea_p1.measures import MeasuresAnalyzer
+    from leed_platform.skills.ea_p1.measures import MeasuresAnalyzer
     analyzer = MeasuresAnalyzer()
     measures = analyzer.analyze(
         baseline=state["baseline_carbon"],
@@ -498,7 +498,7 @@ def analyze_measures_node(state: LEEDCarbonState):
 
 def calculate_net_zero_node(state: LEEDCarbonState):
     """Step 7: Calculate net-zero pathway options."""
-    from deerflow.skills.ea_p1.netzero import NetZeroPathwayCalculator
+    from leed_platform.skills.ea_p1.netzero import NetZeroPathwayCalculator
     calc = NetZeroPathwayCalculator()
     pathway = calc.calculate(
         projection=state["projection"],
@@ -510,7 +510,7 @@ def calculate_net_zero_node(state: LEEDCarbonState):
 
 def fetch_solar_potential_node(state: LEEDCarbonState):
     """Step 8: Query NREL PVWatts for solar production potential."""
-    from deerflow.skills.ea_p1.solar import SolarPotentialService
+    from leed_platform.skills.ea_p1.solar import SolarPotentialService
     service = SolarPotentialService()
     solar = service.fetch(
         lat=state["validated"]["project_latitude"],
@@ -522,10 +522,10 @@ def fetch_solar_potential_node(state: LEEDCarbonState):
 def hitl_review_checkpoint(state: LEEDCarbonState):
     """Step 9: HITL checkpoint for LEED consultant review.
     
-    In Deer-Flow, this node triggers a human-in-the-loop task.
+    This step triggers a human-in-the-loop task.
     The workflow pauses until the consultant approves or requests revisions.
     """
-    from deerflow.hitl import create_review_task
+    from leed_platform.hitl import create_review_task
     review = create_review_task(
         skill="ea_p1_op_carbon",
         project_id=state["inputs"].get("project_id"),
@@ -543,7 +543,7 @@ def hitl_review_checkpoint(state: LEEDCarbonState):
 
 def generate_documents_node(state: LEEDCarbonState):
     """Steps 10-12: Generate PDF reports and XLSX spreadsheet."""
-    from deerflow.skills.ea_p1.documents import DocumentGenerator
+    from leed_platform.skills.ea_p1.documents import DocumentGenerator
     gen = DocumentGenerator()
     docs = gen.generate_all(
         baseline=state["baseline_carbon"],
@@ -559,7 +559,7 @@ def generate_documents_node(state: LEEDCarbonState):
 
 def finalize_deliverables_node(state: LEEDCarbonState):
     """Step 13: Package and finalize all deliverables."""
-    from deerflow.skills.ea_p1.packaging import DeliverablePackager
+    from leed_platform.skills.ea_p1.packaging import DeliverablePackager
     packager = DeliverablePackager()
     deliverables = packager.package(
         documents=state["documents"],
@@ -576,7 +576,7 @@ def finalize_deliverables_node(state: LEEDCarbonState):
 
 def error_handler_node(state: LEEDCarbonState):
     """Global error handler for workflow failures."""
-    from deerflow.errors import notify_human, log_error
+    from leed_platform.errors import notify_human, log_error
     log_error(state["error"], state["logs"])
     notify_human(state["error"], severity="high")
     return {**state, "deliverables": None}

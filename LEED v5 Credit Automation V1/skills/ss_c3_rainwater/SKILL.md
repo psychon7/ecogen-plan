@@ -303,9 +303,9 @@ python -m pytest skills/leed-ss-c3-rainwater/tests/test_hitl_checkpoint.py -v
 python -m pytest skills/leed-ss-c3-rainwater/tests/test_integration.py -v
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import SSc3RainwaterSkill
+from leed_platform.skills import SSc3RainwaterSkill
 
 skill = SSc3RainwaterSkill(
     project_id="leed-proj-2024-001",
@@ -366,11 +366,11 @@ result = await skill.execute()
 # }
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.state import LEEDState
-from deerflow.nodes import (
+from leed_platform.state import LEEDState
+from leed_platform.nodes import (
     validate_inputs,
     fetch_noaa_data,
     fetch_nrcs_data,
@@ -384,7 +384,7 @@ from deerflow.nodes import (
     generate_hydrology_pdf,
     persist_outputs
 )
-from deerflow.edges import route_after_hitl
+from leed_platform.edges import route_after_hitl
 
 # Define the state graph
 workflow = StateGraph(LEEDState)

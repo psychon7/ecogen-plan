@@ -191,9 +191,9 @@ python -m pytest skills/leed-ea-c3-energy-enhanced/tests/test_hitl_workflow.py
 python -m pytest skills/leed-ea-c3-energy-enhanced/tests/test_end_to_end.py
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import EAc3EnergyEnhancedSkill
+from leed_platform.skills import EAc3EnergyEnhancedSkill
 
 skill = EAc3EnergyEnhancedSkill(
     project_id="550e8400-e29b-41d4-a716-446655440000",
@@ -229,11 +229,11 @@ print(f"Model Summary: {result.documents.model_summary_pdf}")
 print(f"Submission Package: {result.documents.submission_zip}")
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.skills.leed_ea_c3.states import EAc3State
-from deerflow.skills.leed_ea_c3.nodes import (
+from leed_platform.skills.leed_ea_c3.states import EAc3State
+from leed_platform.skills.leed_ea_c3.nodes import (
     validate_inputs,
     parse_energy_model_outputs,
     compute_improvement_percentage,
@@ -246,7 +246,7 @@ from deerflow.skills.leed_ea_c3.nodes import (
     hitl_leed_consultant_confirmation,
     finalize_submission_package
 )
-from deerflow.skills.leed_ea_c3.conditional_edges import (
+from leed_platform.skills.leed_ea_c3.conditional_edges import (
     route_after_validation,
     route_after_parser,
     route_after_improvement,
@@ -340,7 +340,7 @@ def map_points(pct_improvement: float, building_type: str) -> int:
 ```
 
 ### HITL Integration Pattern
-HITL checkpoints use Deer-Flow's `HumanReviewNode`:
+HITL checkpoints use the platform's HITL durable promise:
 - State persists in PostgreSQL with `checkpoint_id` (UUID)
 - Email notification sent via SendGrid / AWS SES with secure review link
 - Reviewer interface renders parsed data + computed results inline

@@ -1,14 +1,14 @@
 # Decision Log
 
-## ADR-001: Use Deer-Flow as Foundation
+## ADR-001: Use OpenAI Agents SDK + Restate as Foundation
 
 **Status:** Accepted
 
 **Context:**
-We need a workflow orchestration system for credit automation. Options considered: build from scratch, use Deer-Flow, or use a general workflow engine such as Temporal.
+We need a workflow orchestration system for credit automation. Options considered: build from scratch, use OpenAI Agents SDK + Restate, or use a general workflow engine such as Temporal.
 
 **Decision:**
-Use Deer-Flow as the foundation for agent and workflow patterns.
+Use OpenAI Agents SDK + Restate as the foundation for agent and workflow patterns.
 
 **Rationale:**
 - Provides much of the needed skill, HITL, and durable workflow scaffolding.
@@ -155,7 +155,7 @@ Use S3 or cloud-equivalent object storage with versioning.
 Need background processing for uploads, parsing, external API calls, calculations, and document generation.
 
 **Decision:**
-Use Celery with RabbitMQ for worker orchestration unless Deer-Flow provides an equivalent production queue.
+Use Celery with RabbitMQ for worker orchestration for distributed task execution.
 
 **Rationale:**
 - Mature Python worker ecosystem.

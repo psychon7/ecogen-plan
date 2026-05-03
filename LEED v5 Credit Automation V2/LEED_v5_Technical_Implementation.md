@@ -1,4 +1,4 @@
-# Deer-Flow LEED v5 Credit Automation Platform
+# LEED v5 Credit Automation Platform
 # Technical Implementation Document
 
 **Version:** 1.0.0  
@@ -8,7 +8,7 @@
 ---
 
 # Master Technical Implementation Document
-## Deer-Flow LEED v5 Credit Automation Platform
+## LEED v5 Credit Automation Platform
 
 ---
 
@@ -16,7 +16,7 @@
 
 ## 1.1 Platform Purpose and Scope
 
-The Deer-Flow LEED v5 Credit Automation Platform is an enterprise-grade AI orchestration system designed to automate the data collection, calculation, and documentation workflows required for Leadership in Energy and Environmental Design (LEED) v5 Building Design and Construction (BD+C) certification. Built on the Deer-Flow agent orchestration framework, the platform decomposes each LEED credit into discrete, executable skills that leverage 261 verified external data sources to eliminate manual data gathering, reduce calculation errors, and compress certification timelines from months to weeks.
+The LEED v5 Credit Automation Platform is an enterprise-grade AI orchestration system designed to automate the data collection, calculation, and documentation workflows required for Leadership in Energy and Environmental Design (LEED) v5 Building Design and Construction (BD+C) certification. Built on the OpenAI Agents SDK for agent intelligence and Restate for durable workflow orchestration, the platform decomposes each LEED credit into discrete, executable skills that leverage 261 verified external data sources to eliminate manual data gathering, reduce calculation errors, and compress certification timelines from months to weeks.
 
 LEED v5 represents the most significant revision to the rating system in over a decade, introducing mandatory prerequisites across all credit categories and increasing the granularity of performance thresholds. The platform addresses the critical bottleneck in LEED certification: the project team's dependency on fragmented, manually-sourced data from government databases, commercial registries, manufacturer documentation, and proprietary energy models. By establishing machine-readable API integrations across the entire data ecosystem, the platform enables continuous compliance monitoring rather than the traditional batch-and-review model.
 
@@ -43,7 +43,7 @@ The platform implements 16 Tier 1 automation skills, each mapped directly to one
 | Heat Island Reducer | SSc5 | 2 | 95 |
 | Transit Access Analyzer | LTc3, LTc4 | 2 | 90 |
 
-Each Tier 1 skill is implemented as a Deer-Flow workflow composed of data ingestion nodes, validation gates, calculation engines, and human-in-the-loop (HITL) checkpoints. Skills are triggered by project milestones (design development, construction documents, final completion) and produce USGBC-ready documentation packages in PDF and XML formats.
+Each Tier 1 skill is implemented as a Restate durable workflow composed of data ingestion nodes, validation gates, calculation engines, and human-in-the-loop (HITL) checkpoints. Skills are triggered by project milestones (design development, construction documents, final completion) and produce USGBC-ready documentation packages in PDF and XML formats.
 
 ## 1.3 Data Source Ecosystem: 261 Verified Sources
 
@@ -60,7 +60,7 @@ Each source has been evaluated for API availability, data quality, update freque
 
 ## 1.4 Time-to-Value: 10-Week Delivery Advantage
 
-Building a LEED automation platform from scratch requires approximately 40-48 weeks of engineering effort distributed across API discovery and integration (16 weeks), calculation engine development (12 weeks), document generation (8 weeks), and testing / compliance validation (8 weeks). The Deer-Flow reference architecture reduces this to 10 weeks through:
+Building a LEED automation platform from scratch requires approximately 40-48 weeks of engineering effort distributed across API discovery and integration (16 weeks), calculation engine development (12 weeks), document generation (8 weeks), and testing / compliance validation (8 weeks). The OpenAI Agents SDK + Restate architecture reduces this to 10 weeks through:
 
 1. **Pre-built API Connectors**: 40+ API connectors with OAuth, API key, and certificate-based authentication patterns are pre-implemented. Each connector includes retry logic, rate limit management, and data transformation pipelines.
 
@@ -70,7 +70,7 @@ Building a LEED automation platform from scratch requires approximately 40-48 we
 
 4. **Compliance Validation Engine**: Automated cross-checks against LEED v5 reference guides, including threshold validation, prerequisite sequencing, and credit interdependency verification.
 
-| Milestone | From-Scratch Timeline | Deer-Flow Timeline | Savings |
+| Milestone | From-Scratch Timeline | Platform Timeline | Savings |
 |-----------|----------------------|-------------------|---------|
 | API Integration Complete | Week 16 | Week 3 | 13 weeks |
 | Calculation Engine Ready | Week 28 | Week 5 | 23 weeks |
@@ -102,7 +102,7 @@ Credits where the platform serves as a data aggregator and calculation assistant
 
 ## 2.1 Government API Catalog
 
-The following table catalogs the primary government APIs integrated into the Deer-Flow platform. Each entry includes authentication requirements, rate limits, supported credits, regional applicability, and integration complexity rating. All government APIs listed provide free public access with registration.
+The following table catalogs the primary government APIs integrated into the platform. Each entry includes authentication requirements, rate limits, supported credits, regional applicability, and integration complexity rating. All government APIs listed provide free public access with registration.
 
 | API Name | Provider | URL | Auth | Rate Limit | Credits Supported | Regional | Complexity |
 |----------|----------|-----|------|-----------|-------------------|----------|------------|
@@ -391,11 +391,11 @@ The platform maintains a nightly batch ingestion pipeline that updates static re
 
 # Master Technical Implementation Document
 
-## Section 3: Deer-Flow Platform Architecture
+## Section 3: Platform Architecture
 
 ### 3.1 System Overview
 
-The LEED v5 Automation Platform is built on **Deer-Flow**, ByteDance's open-source "SuperAgent Harness" (60.2k GitHub stars, v2.0). Deer-Flow provides the foundational infrastructure for skill-based agent orchestration, durable workflow execution, and human-in-the-loop (HITL) coordination. Rather than building a custom workflow engine from scratch -- an estimated 12-week engineering effort -- the platform leverages Deer-Flow's proven architecture and extends it with LEED-specific skills, API integrations, and document templates.
+The LEED v5 Automation Platform is built on **OpenAI Agents SDK + Restate**. The platform provides the foundational infrastructure for skill-based agent orchestration, durable workflow execution, and human-in-the-loop (HITL) coordination. Rather than building a custom workflow engine from scratch -- an estimated 12-week engineering effort -- the platform leverages the platform's architecture and extends it with LEED-specific skills, API integrations, and document templates.
 
 **Core Architectural Principles:**
 
@@ -407,10 +407,10 @@ The LEED v5 Automation Platform is built on **Deer-Flow**, ByteDance's open-sour
 | Memory persistence | PostgreSQL + Redis | Project state survives session termination; full audit trail |
 | Human-in-the-Loop | Slack / Email / Web UI | Consultant review at critical checkpoints with SLA enforcement |
 
-**Platform Foundation Provided by Deer-Flow:**
+**Platform Foundation (OpenAI Agents SDK + Restate):**
 
 ```
-LEED v5 Automation Platform (Built on Deer-Flow)
+LEED v5 Automation Platform (Built on OpenAI Agents SDK + Restate)
 ================================================================
 Included (70-80% of infrastructure):
   - Skill system and registry
@@ -432,7 +432,7 @@ Built on Top (LEED-specific layer):
 
 **LangGraph Durable Workflows:**
 
-Deer-Flow uses LangGraph as its workflow engine. Each skill defines a `StateGraph` where nodes represent workflow steps (validation, API calls, calculations, document generation) and edges define execution flow, including conditional routing based on HITL decisions. Checkpointing persists state to PostgreSQL after every node execution, enabling workflows to survive server restarts and resume from exact failure points.
+The platform uses Restate as its durable workflow engine. Each skill defines a `StateGraph` where nodes represent workflow steps (validation, API calls, calculations, document generation) and edges define execution flow, including conditional routing based on HITL decisions. Checkpointing persists state to PostgreSQL after every node execution, enabling workflows to survive server restarts and resume from exact failure points.
 
 ```python
 from langgraph.graph import StateGraph, END
@@ -459,15 +459,15 @@ app = workflow.compile(checkpointer=memory)
 
 **Skill-Based Architecture:**
 
-Each of the 16 LEED credits is implemented as a Deer-Flow skill -- a self-contained module with its own `SKILL.md` manifest, workflow graph, input/output schemas, templates, and test suite. Skills are mounted at `/mnt/skills/leed/` and discovered at runtime by the skill registry.
+Each of the 16 LEED credits is implemented as a platform skill -- a self-contained module with its own `SKILL.md` manifest, workflow graph, input/output schemas, templates, and test suite. Skills are mounted at `/mnt/skills/leed/` and discovered at runtime by the skill registry.
 
 **Sandbox Execution:**
 
-Each skill executes within an isolated Docker container provisioned by Deer-Flow's `AioSandboxProvider`. Energy model parsing, PDF generation, and Excel compilation occur in sandboxed environments with no access to other skills' data or the host system. Files are persisted across workflow steps at `/mnt/user-data/outputs/` and retained per the project's data retention policy (default: 24 months).
+Each skill executes within an isolated Docker container provisioned by the platform's sandbox provider. Energy model parsing, PDF generation, and Excel compilation occur in sandboxed environments with no access to other skills' data or the host system. Files are persisted across workflow steps at `/mnt/user-data/outputs/` and retained per the project's data retention policy (default: 24 months).
 
 **Memory System:**
 
-Deer-Flow's memory system stores project-specific facts and intermediate calculation results in PostgreSQL, keyed by `thread_id` (project identifier). This enables multi-session workflows where a consultant can start an energy analysis on Monday, receive a Slack HITL notification Tuesday, approve calculations Wednesday, and find the workflow resumed exactly where it left off.
+Restate's durable state system stores project-specific facts and intermediate calculation results in PostgreSQL, keyed by `thread_id` (project identifier). This enables multi-session workflows where a consultant can start an energy analysis on Monday, receive a Slack HITL notification Tuesday, approve calculations Wednesday, and find the workflow resumed exactly where it left off.
 
 ---
 
@@ -476,7 +476,7 @@ Deer-Flow's memory system stores project-specific facts and intermediate calcula
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         LEED v5 AUTOMATION PLATFORM                           │
-│                         (Built on Deer-Flow v2.0)                           │
+│                         (Built on OpenAI Agents SDK + Restate)                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  FRONTEND LAYER                                                             │
@@ -560,7 +560,7 @@ Deer-Flow's memory system stores project-specific facts and intermediate calcula
 The following describes the complete data flow for a typical project executing multiple LEED credits from intake through submission:
 
 **Step 1 — Project Intake**
-The consultant creates a project via the React dashboard, entering building type, location (lat/lon or address), target certification level, and team roster. The API Gateway validates inputs and creates a project record in PostgreSQL with a unique `thread_id`. Project metadata is saved to Deer-Flow memory.
+The consultant creates a project via the React dashboard, entering building type, location (lat/lon or address), target certification level, and team roster. The API Gateway validates inputs and creates a project record in PostgreSQL with a unique `thread_id`. Project metadata is saved to Restate durable state.
 
 **Step 2 — Credit Selection**
 The consultant selects credits to pursue from the 16-skill registry. The RegionalSkillFilter middleware evaluates each skill against project location, disabling skills whose required APIs are unavailable in that region (e.g., EPA eGRID for non-US projects triggers a warning and fallback data path).
@@ -666,7 +666,7 @@ The platform is designed to be SOC 2 Type II ready within 6 months of production
 
 ### 4.1 Skill Registry
 
-The following table catalogs all 16 LEED v5 skills implemented as Deer-Flow modules. Each skill is independently versioned, tested, and deployable.
+The following table catalogs all 16 LEED v5 skills implemented as platform modules. Each skill is independently versioned, tested, and deployable.
 
 | # | Skill Name | Credit | Points | Automation % | HITL Checkpoints | Complexity | Est. Dev Days |
 |---|-----------|--------|--------|-------------|-------------------|------------|---------------|
@@ -925,10 +925,10 @@ description: Automates LEED v5 {Credit Name} ...
 ## Testing
 {pytest commands and test coverage requirements}
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 {Python invocation example}
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 {LangGraph StateGraph definition}
 ```
 
@@ -1023,7 +1023,7 @@ Testing is organized into four test tiers with distinct coverage targets:
 | HITL Simulation | Checkpoint pausing, resumption, SLA timers | All HITL paths covered | Async test harness, < 5min | Required |
 | Regression | Compare outputs against known-good baselines | Output diff < 0.1% | Nightly CI, < 15min | Warning |
 
-The HITL simulation tier is particularly critical: it uses Deer-Flow's `MockHumanReviewNode` to simulate consultant approvals, rejections, and revision requests at each checkpoint, verifying that the workflow correctly branches to the appropriate subsequent node. Without this tier, a bug in conditional edge routing could go undetected until a real consultant encounters a hung workflow.
+The HITL simulation tier is particularly critical: it uses the platform's HITL mock handler to simulate consultant approvals, rejections, and revision requests at each checkpoint, verifying that the workflow correctly branches to the appropriate subsequent node. Without this tier, a bug in conditional edge routing could go undetected until a real consultant encounters a hung workflow.
 
 **Phase 3: Staging (Est. 1-2 days per skill)**
 
@@ -1671,7 +1671,7 @@ The following table defines refresh frequencies and cache TTLs for all data type
 
 ### 6.1 HITL Architecture
 
-The Human-in-the-Loop (HITL) system ensures that all AI-generated credit documentation receives expert review before submission to USGBC. The architecture is built on Deer-Flow's messaging channel infrastructure, extended with a custom React-based review dashboard for complex multi-document reviews.
+The Human-in-the-Loop (HITL) system ensures that all AI-generated credit documentation receives expert review before submission to USGBC. The architecture is built on OpenAI Agents SDK + Restate's messaging channel infrastructure, extended with a custom React-based review dashboard for complex multi-document reviews.
 
 #### 6.1.1 Messaging Channels
 
@@ -2229,18 +2229,18 @@ with PostgresSaver.from_conn_string(settings.DATABASE_URL) as checkpointer:
 
 ### 7.1 Phase 1: Foundation (Weeks 1–2)
 
-The Foundation Phase establishes the platform's core infrastructure on Deer-Flow, validates the end-to-end workflow, and delivers the first fully functional credit skill. The goal is not breadth but confidence in the architecture, deployment pipeline, and human-in-the-loop (HITL) channel.
+The Foundation Phase establishes the platform's core infrastructure on OpenAI Agents SDK + Restate, validates the end-to-end workflow, and delivers the first fully functional credit skill. The goal is not breadth but confidence in the architecture, deployment pipeline, and human-in-the-loop (HITL) channel.
 
-**Week 1: Deer-Flow Setup and Configuration**
+**Week 1: Platform Setup and Configuration**
 
 | Day | Task | Deliverable | Owner |
 |-----|------|-------------|-------|
-| 1 | Clone Deer-Flow repository (`bytedance/deer-flow`) and run `make setup` | Local running instance | DevOps |
+| 1 | Set up OpenAI Agents SDK + Restate infrastructure via `docker compose up` | Local running instance | DevOps |
 | 1 | Configure `config.yaml`: GPT-4o model, AioSandboxProvider, Slack channel | Validated configuration file | DevOps |
 | 2 | Build and deploy Docker Compose stack (LangGraph server, gateway, sandbox) | All containers healthy | DevOps |
 | 2 | Provision PostgreSQL metadata store and persistent volume for `/mnt/user-data` | Database schema initialized | DevOps |
 | 3 | Create `skills/leed/` directory structure for 16 Tier-1 credits | Directory tree with `__init__.py` | Backend |
-| 3 | Implement base `LEEDSkill` class extending Deer-Flow's skill contract | Base class with validation hooks | Backend |
+| 3 | Implement base `LEEDSkill` class extending the platform's skill contract | Base class with validation hooks | Backend |
 | 4–5 | Set up CI/CD pipeline: GitHub Actions → Docker build → staging deploy | Green pipeline on first push | DevOps |
 
 The configuration file (`config.yaml`) for this phase:
@@ -2255,7 +2255,7 @@ models:
     temperature: 0.1
 
 sandbox:
-  use: deerflow.community.aio_sandbox:AioSandboxProvider
+  use: leed_platform.sandbox:SandboxProvider
   provisioner_url: http://sandbox:8080
   timeout_seconds: 300
 
@@ -2273,7 +2273,7 @@ PRc2 is selected as the first skill because it has the simplest input schema (te
 
 | Step | Activity | Checkpoint |
 |------|----------|------------|
-| 1 | Write `skills/leed/pr-c2/SKILL.md` with Deer-Flow compatible frontmatter | SKILL.md passes schema validation |
+| 1 | Write `skills/leed/pr-c2/SKILL.md` with platform-compatible frontmatter | SKILL.md passes schema validation |
 | 2 | Implement `pr-c2` workflow: validate roster → query GBCI API → match credentials → flag missing | Unit tests pass (pytest) |
 | 3 | Build Jinja2 document template: `pr-c2-credential-report.html` | Template renders with sample data |
 | 4 | Configure HITL checkpoint at Step 2 (credential verification results) | Slack notification fires correctly |
@@ -2332,7 +2332,7 @@ Phase 2 expands from one skill to eight priority skills, integrates the core ext
 
 **Week 3: Core API Integration Layer**
 
-All eight skills share a common API integration layer. The layer is built as Deer-Flow tools (`/backend/deerflow/tools/leed/`) with standardized interfaces:
+All eight skills share a common API integration layer. The layer is built as platform tools (`/backend/leed_platform/tools/`) with standardized interfaces:
 
 | API | Tool Class | Auth Method | Rate Limit | Fallback Strategy |
 |-----|-----------|-------------|------------|-------------------|
@@ -2630,8 +2630,8 @@ Infrastructure cost estimates (monthly, production):
 
 | Week | Milestone | Deliverable | Owner | Dependencies |
 |------|-----------|-------------|-------|--------------|
-| 1 | Deer-Flow infrastructure live | Running Docker Compose stack; `make setup` passes | DevOps | None |
-| 1 | CI/CD pipeline green | GitHub Actions builds and deploys to staging | DevOps | Deer-Flow repo |
+| 1 | platform infrastructure live | Running Docker Compose stack; `make setup` passes | DevOps | None |
+| 1 | CI/CD pipeline green | GitHub Actions builds and deploys to staging | DevOps | platform repo |
 | 2 | First skill end-to-end | PRc2 completes full workflow: input → HITL → PDF | Backend | Week 1 infrastructure |
 | 2 | HITL channel validated | Slack approve/reject/comment actions resume workflow | Backend | PRc2 skill |
 | 3 | API integration layer | 8 tools with auth, rate limiting, caching, fallback | Backend | Week 2 baseline |

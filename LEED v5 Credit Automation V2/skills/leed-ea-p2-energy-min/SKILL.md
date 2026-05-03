@@ -405,10 +405,10 @@ python -m pytest skills/leed-ea-p2-energy-min/tests/test_end_to_end.py -v
 
 ---
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 
 ```python
-from deerflow.skills import EAp2MinimumEnergyEfficiency
+from leed_platform.skills import EAp2MinimumEnergyEfficiency
 
 skill = EAp2MinimumEnergyEfficiency(
     project_id="LEED-2024-56789",
@@ -460,7 +460,7 @@ result = await skill.execute()
 
 ---
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 
 ```python
 from typing import TypedDict, Annotated

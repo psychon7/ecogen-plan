@@ -8,16 +8,16 @@
 
 ## 1. Core Stack Decisions
 
-### 1.1 Why Deer-Flow v2.0
+### 1.1 Why OpenAI Agents SDK + Restate
 
-Deer-Flow (ByteDance open-source, 60k+ GitHub stars) provides:
+OpenAI Agents SDK + Restate provides:
 - LangGraph durable workflows with PostgreSQL checkpoint persistence out of the box
 - Skill-based modular architecture (one skill = one container)
 - Built-in HITL pause/resume hooks
 - Reduces build from 40–48 weeks (from-scratch) to 10 weeks
 - 70–80% of required infrastructure pre-built; 20–30% LEED-specific on top
 
-**Interface boundary:** Ecogen wraps Deer-Flow behind a `DurableOrchestrator` abstraction (`skills/durable_workflow.py`). Direct Deer-Flow API calls must not appear in skill code — use the orchestrator interface only.
+**Interface boundary:** Ecogen wraps the orchestration layer behind a `DurableOrchestrator` abstraction (`skills/durable_workflow.py`). Direct framework-specific API calls must not appear in skill code — use the orchestrator interface only.
 
 ### 1.2 Technology Versions
 

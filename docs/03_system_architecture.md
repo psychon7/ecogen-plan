@@ -2,11 +2,11 @@
 
 ## Architecture Summary
 
-Ecogen uses a modular web application architecture with durable credit workflows. The platform is planned around React, FastAPI, PostgreSQL/PostGIS, Redis, Celery/RabbitMQ, object storage, and a Deer-Flow/LangGraph-compatible skill orchestration layer.
+Ecogen uses a modular web application architecture with durable credit workflows. The platform is planned around React, FastAPI, PostgreSQL/PostGIS, Redis, Celery/RabbitMQ, object storage, and a OpenAI Agents SDK + Restate-based skill orchestration layer.
 
-The design should keep Deer-Flow behind an internal abstraction. Deer-Flow is the accepted foundation, but version-specific claims and API features must be verified before implementation.
+The design should keep the orchestration layer behind an internal abstraction. OpenAI Agents SDK + Restate is the accepted foundation, but version-specific claims and API features must be verified before implementation.
 
-The internal abstraction should be LangGraph-compatible even when Deer-Flow is used underneath: a typed state object, named nodes, conditional edges, checkpoint persistence, and resumable HITL pauses. This lets the platform swap orchestration details without rewriting every skill.
+The internal abstraction should be Restate-compatible: durable virtual objects, workflow handlers, conditional routing, checkpoint persistence, and resumable HITL pauses via durable promises. This lets the platform swap orchestration details without rewriting every skill.
 
 ## Target Stack
 
@@ -17,7 +17,7 @@ The internal abstraction should be LangGraph-compatible even when Deer-Flow is u
 | Database | PostgreSQL 15+ with PostGIS |
 | Cache/session/rate limit | Redis |
 | Background work | Celery + RabbitMQ |
-| Workflow orchestration | Deer-Flow conventions with LangGraph-style durable state |
+| Workflow orchestration | platform conventions with LangGraph-style durable state |
 | Document storage | S3/GCS/Azure Blob with versioning |
 | Document generation | Jinja2/HTML templates to PDF, DOCX, XLSX |
 | GIS | PostGIS plus ArcGIS/OSM/vendor integrations where needed |

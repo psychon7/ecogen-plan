@@ -44,8 +44,7 @@ Keep these files for provenance, but do not use them as product truth without th
 - `EXECUTIVE_SUMMARY.txt`
 - `LEED_v5_Implementation_Guide.txt`
 - `data_flow_architecture.md`
-- `DEER_FLOW_INTEGRATION_ANALYSIS.md`
-- `DEER_FLOW_QUICK_START.md`
+- `leed-platform-v2/docs/IMPLEMENTATION_GUIDE.md` *(New Architecture)*
 - `INTEGRATION_ANALYSIS_FINAL_REPORT.md`
 - `integration_feasibility_summary.md`
 - Root `.json`, `.txt`, `.xlsx`, `.png`, and `.docx` analysis artifacts

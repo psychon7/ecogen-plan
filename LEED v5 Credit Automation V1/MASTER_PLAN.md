@@ -118,7 +118,7 @@ The Lead Agent resolves execution order using **Kahn's topological sort** over t
 | Layer | Technology | Notes |
 |-------|-----------|-------|
 | Backend | Python 3.12, FastAPI | JWT auth, rate limiting, webhook handling |
-| Workflow engine | LangGraph + Deer-Flow v2.0 | Durable workflows, checkpoint persistence |
+| Workflow engine | OpenAI Agents SDK + Restate | Durable workflows, checkpoint persistence |
 | Database | PostgreSQL 15 + PostGIS | State, audit logs, 7-year retention |
 | Cache | Redis Cluster (6 nodes) | Token bucket rate limiting, API response cache |
 | Task queue | Celery / RabbitMQ | Async skill execution |
@@ -319,7 +319,7 @@ Every credit produces a 12-section evidence pack:
 
 | Week | Deliverables |
 |------|-------------|
-| 1 | Platform foundation (FastAPI, PostgreSQL, Redis, Deer-Flow), PRc2 pipeline proof + WEp2 wedge |
+| 1 | Platform foundation (FastAPI, PostgreSQL, Redis, OpenAI Agents SDK + Restate), PRc2 pipeline proof + WEp2 wedge |
 | 2 | EAp5/EAc7 shared workflow, one assisted workflow, HITL flow, evidence pack export |
 
 Exit criteria: schema tests pass, artifact contract satisfied, region-gating functional.
@@ -364,7 +364,7 @@ Exit criteria: schema tests pass, artifact contract satisfied, region-gating fun
 
 | ADR | Decision |
 |-----|---------|
-| 001 | Deer-Flow as workflow foundation (saves 10 weeks vs. from-scratch) |
+| 001 | OpenAI Agents SDK + Restate as workflow foundation (saves 10 weeks vs. from-scratch) |
 | 002 | PostgreSQL + PostGIS for all state and geo data |
 | 003 | FastAPI for API layer |
 | 004 | React + TypeScript frontend |
@@ -404,6 +404,6 @@ Exit criteria: schema tests pass, artifact contract satisfied, region-gating fun
 | Skill contract standard | `docs/05_skill_contracts_and_credit_catalog.md`, `skills/SKILL_TEMPLATE.md` |
 | HITL design & state machine | `docs/06_hitl_and_durable_workflows.md`, `skills/hitl_system.py` |
 | Delivery roadmap & ADRs | `docs/07_delivery_roadmap.md`, `docs/08_decisions_and_open_questions.md` |
-| Technical stack (Deer-Flow, LangGraph, APIs) | `Kimi_Agent_LEED v5 Credit Automation/tech_impl_sec01-04.md` |
+| Technical stack (OpenAI Agents SDK, Restate, APIs) | `Kimi_Agent_LEED v5 Credit Automation/tech_impl_sec01-04.md` |
 | Generated skill contract drafts | `Kimi_Agent_LEED v5 Credit Automation/skills/*/SKILL.md` |
 | Strategic analysis and suite prioritization | `Kimi_Agent_LEED v5 Credit Automation/leed_automation.agent.outline.md`, `Kimi_Agent_LEED v5 Credit Automation/leed_automation_sec00.md` |

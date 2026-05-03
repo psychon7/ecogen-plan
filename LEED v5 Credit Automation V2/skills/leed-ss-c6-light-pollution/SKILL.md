@@ -234,9 +234,9 @@ python -m pytest skills/ss-c6/tests/
 # - test_hitl_integration.py     : Tests checkpoint state persistence and resume
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import LEEDSsC6LightPollutionSkill
+from leed_platform.skills import LEEDSsC6LightPollutionSkill
 
 skill = LEEDSsC6LightPollutionSkill(
     project_id="proj-12345",
@@ -275,10 +275,10 @@ result = await skill.execute()
 # }
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.skills.leed_ss_c6.types import SSc6State
+from leed_platform.skills.leed_ss_c6.types import SSc6State
 
 # Define nodes
 workflow = StateGraph(SSc6State)

@@ -482,7 +482,7 @@ The following table defines refresh frequencies and cache TTLs for all data type
 
 ### 6.1 HITL Architecture
 
-The Human-in-the-Loop (HITL) system ensures that all AI-generated credit documentation receives expert review before submission to USGBC. The architecture is built on Deer-Flow's messaging channel infrastructure, extended with a custom React-based review dashboard for complex multi-document reviews.
+The Human-in-the-Loop (HITL) system ensures that all AI-generated credit documentation receives expert review before submission to USGBC. The architecture is built on OpenAI Agents SDK + Restate's messaging channel infrastructure, extended with a custom React-based review dashboard for complex multi-document reviews.
 
 #### 6.1.1 Messaging Channels
 

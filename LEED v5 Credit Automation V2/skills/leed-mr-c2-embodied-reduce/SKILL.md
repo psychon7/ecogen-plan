@@ -20,7 +20,7 @@ Automates the documentation, baseline comparison, and points calculation for LEE
 ## Inputs (Required)
 | Field | Type | Source | Validation |
 |-------|------|--------|------------|
-| `project_id` | string | Deer-Flow project registry | UUID format, exists in project database |
+| `project_id` | string | platform project registry | UUID format, exists in project database |
 | `baseline_embodied_carbon` | dict | MRp2 prerequisite output | Required keys: `total_kg_co2`, `structural_kg_co2`, `enclosure_kg_co2`, `building_area_m2`, `lca_tool`, `baseline_date` |
 | `design_embodied_carbon` | dict | LCA tool export (One Click LCA/Tally) | Required keys: `total_kg_co2`, `structural_kg_co2`, `enclosure_kg_co2`, `lca_tool`, `export_date` |
 | `material_changes` | list[dict] | Project team input / LCA diff | Each item: `{"material_category": "string", "original_spec": "string", "revised_spec": "string", "quantity": "number", "unit": "string", "gwp_reduction_kg_co2": "number"}` |
@@ -133,7 +133,7 @@ Automates the documentation, baseline comparison, and points calculation for LEE
 ### Step 13: Finalize and Notify
 - **Type:** API Call
 - **Automated:** Yes
-- **Description:** Sends completion notification to project team with summary: reduction percentage, points earned, documents generated, and any outstanding items requiring attention. Updates Deer-Flow project registry with MRc2 completion status, points awarded, and document paths. Logs full execution trace for audit purposes.
+- **Description:** Sends completion notification to project team with summary: reduction percentage, points earned, documents generated, and any outstanding items requiring attention. Updates platform project registry with MRc2 completion status, points awarded, and document paths. Logs full execution trace for audit purposes.
 - **Output:** `CompletionSummary` with status, points, document paths, and next steps.
 - **On Failure:** If notification fails, logs error but does not block completion. Retries notification once.
 
@@ -207,9 +207,9 @@ python -m pytest skills/leed-mr-c2-embodied-reduce/tests/integration/ -v --api-m
 # 11. LEED portal upload (mocked)
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import MRc2EmbodiedReduceSkill
+from leed_platform.skills import MRc2EmbodiedReduceSkill
 
 skill = MRc2EmbodiedReduceSkill(
     project_id="proj-12345-abcde",
@@ -295,11 +295,11 @@ result = await skill.execute()
 # }
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.skills.leed_mr_c2.states import MRc2State
-from deerflow.skills.leed_mr_c2.nodes import (
+from leed_platform.skills.leed_mr_c2.states import MRc2State
+from leed_platform.skills.leed_mr_c2.nodes import (
     validate_inputs,
     fetch_clf_baselines,
     fetch_epd_data,

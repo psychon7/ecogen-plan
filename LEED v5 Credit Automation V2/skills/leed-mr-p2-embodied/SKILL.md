@@ -20,7 +20,7 @@ Automate EPD parsing, material-to-GWP matching, baseline comparison against CLF 
 ## Inputs (Required)
 | Field | Type | Source | Validation |
 |-------|------|--------|------------|
-| `project_id` | string | DeerFlow project metadata | UUIDv4 format, non-null |
+| `project_id` | string | platform project metadata | UUIDv4 format, non-null |
 | `material_takeoff` | File (CSV/XLSX) | User upload | Required columns: `material_name`, `material_category`, `quantity`, `unit`, `location_in_building`. Non-empty file, >0 rows. |
 | `building_area` | number | User input | >0; accepts sq ft or sq m; validated against project metadata |
 | `service_life` | integer | User input or project defaults | >= 60 years (typical reference study period); range 30-100 |
@@ -265,9 +265,9 @@ pytest skills/leed-mr-p2-embodied/tests/integration/ --api-keys-env
 pytest skills/leed-mr-p2-embodied/tests/e2e/ --mock-hitl
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import MRp2EmbodiedCarbonSkill
+from leed_platform.skills import MRp2EmbodiedCarbonSkill
 
 skill = MRp2EmbodiedCarbonSkill(
     project_id="550e8400-e29b-41d4-a716-446655440000",
@@ -300,11 +300,11 @@ print(result.metrics.gwp_total)                    # e.g., 2847000.0 kg CO2e
 print(result.metrics.gwp_intensity_m2)             # e.g., 678.5 kg CO2e/m2
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.skills.leed_mr_p2.types import MRp2State, HITLAction
-from deerflow.skills.leed_mr_p2.nodes import (
+from leed_platform.skills.leed_mr_p2.types import MRp2State, HITLAction
+from leed_platform.skills.leed_mr_p2.nodes import (
     validate_inputs,
     parse_epds,
     match_materials,

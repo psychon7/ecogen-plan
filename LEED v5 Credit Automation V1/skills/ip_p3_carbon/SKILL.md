@@ -308,9 +308,9 @@ python -m pytest skills/ip-p3-carbon/tests/test_arc_submission.py
 python -m pytest skills/ip-p3-carbon/tests/test_hitl_checkpoint.py
 ```
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 ```python
-from deerflow.skills import IPp3CarbonSkill
+from leed_platform.skills import IPp3CarbonSkill
 
 skill = IPp3CarbonSkill(
     project_id="a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -364,11 +364,11 @@ result = await skill.execute()
 # }
 ```
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 ```python
 from langgraph.graph import StateGraph, END
-from deerflow.skills.ip_p3_carbon.state import IPp3State
-from deerflow.skills.ip_p3_carbon.nodes import (
+from leed_platform.skills.ip_p3_carbon.state import IPp3State
+from leed_platform.skills.ip_p3_carbon.nodes import (
     validate_inputs,
     fetch_egrid_factor,
     fetch_embodied_factors,

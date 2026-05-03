@@ -18,7 +18,7 @@ Key constraints from `EXECUTIVE_SUMMARY_REALISTIC.md`:
 **Backend:** Python 3.12, FastAPI, PostgreSQL 15+ with PostGIS, Redis, Celery/RabbitMQ  
 **Frontend:** React (TypeScript/TSX), design tokens JSON system  
 **Infrastructure:** Docker (dev), Kubernetes (prod), S3/GCS document storage  
-**Agent framework:** Deer-Flow (referenced in architecture docs) with custom `DurableOrchestrator`
+**Agent framework:** OpenAI Agents SDK + Restate (durable workflow orchestration)
 
 ## Development Commands
 

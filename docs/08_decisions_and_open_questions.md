@@ -4,7 +4,7 @@
 
 | ADR | Decision | Consolidated Interpretation |
 |-----|----------|-----------------------------|
-| ADR-001 | Use Deer-Flow as foundation | Use Deer-Flow conventions behind an internal skill runtime abstraction; verify version-specific claims before build |
+| ADR-001 | Use OpenAI Agents SDK + Restate as foundation | Use platform conventions behind an internal skill runtime abstraction; verify version-specific claims before build |
 | ADR-002 | PostgreSQL with PostGIS | Required for project data, JSONB workflow state, and GIS queries |
 | ADR-003 | FastAPI backend | Python-native async API layer for workflow and integration calls |
 | ADR-004 | React + TypeScript frontend | Standard web app stack for dashboards and review UI |

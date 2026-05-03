@@ -1,10 +1,10 @@
 # Master Technical Implementation Document
 
-## Section 3: Deer-Flow Platform Architecture
+## Section 3: Platform Architecture
 
 ### 3.1 System Overview
 
-The LEED v5 Automation Platform is built on **Deer-Flow**, ByteDance's open-source "SuperAgent Harness" (60.2k GitHub stars, v2.0). Deer-Flow provides the foundational infrastructure for skill-based agent orchestration, durable workflow execution, and human-in-the-loop (HITL) coordination. Rather than building a custom workflow engine from scratch -- an estimated 12-week engineering effort -- the platform leverages Deer-Flow's proven architecture and extends it with LEED-specific skills, API integrations, and document templates.
+The LEED v5 Automation Platform is built on **OpenAI Agents SDK + Restate**. The platform provides the foundational infrastructure for skill-based agent orchestration, durable workflow execution, and human-in-the-loop (HITL) coordination. Rather than building a custom workflow engine from scratch -- an estimated 12-week engineering effort -- the platform leverages the platform's architecture and extends it with LEED-specific skills, API integrations, and document templates.
 
 **Core Architectural Principles:**
 
@@ -16,10 +16,10 @@ The LEED v5 Automation Platform is built on **Deer-Flow**, ByteDance's open-sour
 | Memory persistence | PostgreSQL + Redis | Project state survives session termination; full audit trail |
 | Human-in-the-Loop | Slack / Email / Web UI | Consultant review at critical checkpoints with SLA enforcement |
 
-**Platform Foundation Provided by Deer-Flow:**
+**Platform Foundation (OpenAI Agents SDK + Restate):**
 
 ```
-LEED v5 Automation Platform (Built on Deer-Flow)
+LEED v5 Automation Platform (Built on OpenAI Agents SDK + Restate)
 ================================================================
 Included (70-80% of infrastructure):
   - Skill system and registry
@@ -41,7 +41,7 @@ Built on Top (LEED-specific layer):
 
 **LangGraph Durable Workflows:**
 
-Deer-Flow uses LangGraph as its workflow engine. Each skill defines a `StateGraph` where nodes represent workflow steps (validation, API calls, calculations, document generation) and edges define execution flow, including conditional routing based on HITL decisions. Checkpointing persists state to PostgreSQL after every node execution, enabling workflows to survive server restarts and resume from exact failure points.
+The platform uses Restate as its durable workflow engine. Each skill defines a `StateGraph` where nodes represent workflow steps (validation, API calls, calculations, document generation) and edges define execution flow, including conditional routing based on HITL decisions. Checkpointing persists state to PostgreSQL after every node execution, enabling workflows to survive server restarts and resume from exact failure points.
 
 ```python
 from langgraph.graph import StateGraph, END
@@ -68,15 +68,15 @@ app = workflow.compile(checkpointer=memory)
 
 **Skill-Based Architecture:**
 
-Each of the 16 LEED credits is implemented as a Deer-Flow skill -- a self-contained module with its own `SKILL.md` manifest, workflow graph, input/output schemas, templates, and test suite. Skills are mounted at `/mnt/skills/leed/` and discovered at runtime by the skill registry.
+Each of the 16 LEED credits is implemented as a platform skill -- a self-contained module with its own `SKILL.md` manifest, workflow graph, input/output schemas, templates, and test suite. Skills are mounted at `/mnt/skills/leed/` and discovered at runtime by the skill registry.
 
 **Sandbox Execution:**
 
-Each skill executes within an isolated Docker container provisioned by Deer-Flow's `AioSandboxProvider`. Energy model parsing, PDF generation, and Excel compilation occur in sandboxed environments with no access to other skills' data or the host system. Files are persisted across workflow steps at `/mnt/user-data/outputs/` and retained per the project's data retention policy (default: 24 months).
+Each skill executes within an isolated Docker container provisioned by the platform's sandbox provider. Energy model parsing, PDF generation, and Excel compilation occur in sandboxed environments with no access to other skills' data or the host system. Files are persisted across workflow steps at `/mnt/user-data/outputs/` and retained per the project's data retention policy (default: 24 months).
 
 **Memory System:**
 
-Deer-Flow's memory system stores project-specific facts and intermediate calculation results in PostgreSQL, keyed by `thread_id` (project identifier). This enables multi-session workflows where a consultant can start an energy analysis on Monday, receive a Slack HITL notification Tuesday, approve calculations Wednesday, and find the workflow resumed exactly where it left off.
+Restate's durable state system stores project-specific facts and intermediate calculation results in PostgreSQL, keyed by `thread_id` (project identifier). This enables multi-session workflows where a consultant can start an energy analysis on Monday, receive a Slack HITL notification Tuesday, approve calculations Wednesday, and find the workflow resumed exactly where it left off.
 
 ---
 
@@ -85,7 +85,7 @@ Deer-Flow's memory system stores project-specific facts and intermediate calcula
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         LEED v5 AUTOMATION PLATFORM                           │
-│                         (Built on Deer-Flow v2.0)                           │
+│                         (Built on OpenAI Agents SDK + Restate)                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  FRONTEND LAYER                                                             │
@@ -169,7 +169,7 @@ Deer-Flow's memory system stores project-specific facts and intermediate calcula
 The following describes the complete data flow for a typical project executing multiple LEED credits from intake through submission:
 
 **Step 1 — Project Intake**
-The consultant creates a project via the React dashboard, entering building type, location (lat/lon or address), target certification level, and team roster. The API Gateway validates inputs and creates a project record in PostgreSQL with a unique `thread_id`. Project metadata is saved to Deer-Flow memory.
+The consultant creates a project via the React dashboard, entering building type, location (lat/lon or address), target certification level, and team roster. The API Gateway validates inputs and creates a project record in PostgreSQL with a unique `thread_id`. Project metadata is saved to Restate durable state.
 
 **Step 2 — Credit Selection**
 The consultant selects credits to pursue from the 16-skill registry. The RegionalSkillFilter middleware evaluates each skill against project location, disabling skills whose required APIs are unavailable in that region (e.g., EPA eGRID for non-US projects triggers a warning and fallback data path).
@@ -275,7 +275,7 @@ The platform is designed to be SOC 2 Type II ready within 6 months of production
 
 ### 4.1 Skill Registry
 
-The following table catalogs all 16 LEED v5 skills implemented as Deer-Flow modules. Each skill is independently versioned, tested, and deployable.
+The following table catalogs all 16 LEED v5 skills implemented as platform modules. Each skill is independently versioned, tested, and deployable.
 
 | # | Skill Name | Credit | Points | Automation % | HITL Checkpoints | Complexity | Est. Dev Days |
 |---|-----------|--------|--------|-------------|-------------------|------------|---------------|
@@ -534,10 +534,10 @@ description: Automates LEED v5 {Credit Name} ...
 ## Testing
 {pytest commands and test coverage requirements}
 
-## Example Usage (Deer-Flow)
+## Example Usage (OpenAI Agents SDK + Restate)
 {Python invocation example}
 
-## Deer-Flow Workflow (LangGraph)
+## Platform Workflow (OpenAI Agents SDK + Restate)
 {LangGraph StateGraph definition}
 ```
 
@@ -632,7 +632,7 @@ Testing is organized into four test tiers with distinct coverage targets:
 | HITL Simulation | Checkpoint pausing, resumption, SLA timers | All HITL paths covered | Async test harness, < 5min | Required |
 | Regression | Compare outputs against known-good baselines | Output diff < 0.1% | Nightly CI, < 15min | Warning |
 
-The HITL simulation tier is particularly critical: it uses Deer-Flow's `MockHumanReviewNode` to simulate consultant approvals, rejections, and revision requests at each checkpoint, verifying that the workflow correctly branches to the appropriate subsequent node. Without this tier, a bug in conditional edge routing could go undetected until a real consultant encounters a hung workflow.
+The HITL simulation tier is particularly critical: it uses the platform's HITL mock handler to simulate consultant approvals, rejections, and revision requests at each checkpoint, verifying that the workflow correctly branches to the appropriate subsequent node. Without this tier, a bug in conditional edge routing could go undetected until a real consultant encounters a hung workflow.
 
 **Phase 3: Staging (Est. 1-2 days per skill)**
 
