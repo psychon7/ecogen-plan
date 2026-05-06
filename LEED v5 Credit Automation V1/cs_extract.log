@@ -1,0 +1,276 @@
+Processing 81 credits (0 NC + 81 CS)
+  Logging in to ARC...
+  Logged in: https://arc-app.gbci.org/home
+
+  → [1/81] CS EAc1     (ea/eac1-electrification)
+      ↓ template: LEED v5 D+C_Electrification Calculator.xlsx
+      ✓ md=4,837 bytes  templates=1
+
+  → [2/81] CS EAc2     (ea/eac2-reduce-peak-thermal-loads)
+      ↓ template: LEED v5 D+C_Reduce Peak Thermal Loads Calculator BDC.xlsx
+      ✓ md=5,443 bytes  templates=1
+
+  → [3/81] CS EAc3     (ea/eac3-enhanced-energy-efficiency)
+      ✓ md=1,558 bytes  templates=0
+
+  → [4/81] CS EAc4     (ea/eac4-renewable-energy)
+      ↓ template: LEED v5 D+C_Renewable Energy Calculator.xlsx
+      ✓ md=3,260 bytes  templates=1
+
+  → [5/81] CS EAc5     (ea/eac5-enhanced-commissioning)
+      ✓ md=5,961 bytes  templates=0
+
+  → [6/81] CS EAc6     (ea/eac6-grid-interactive)
+      ✓ md=4,263 bytes  templates=0
+
+  → [7/81] CS EAc7     (ea/eac7-enhanced-refrigerant-management)
+      ✓ md=2,891 bytes  templates=0
+
+  → [8/81] CS EAp1     (ea/eap1-operational-carbon-projection-and-decarbonization-plan)
+      ✓ md=1,496 bytes  templates=0
+
+  → [9/81] CS EAp2     (ea/eap2-minimum-energy-efficiency)
+      ✓ md=1,178 bytes  templates=0
+
+  → [10/81] CS EAp3     (ea/eap3-fundamental-commissioning)
+      ✓ md=4,062 bytes  templates=0
+
+  → [11/81] CS EAp4     (ea/eap4-energy-metering-and-reporting)
+      ✓ md=5,437 bytes  templates=0
+
+  → [12/81] CS EAp5     (ea/eap5-fundamental-refrigerant-management)
+      template 'LEED v5 D+C Refrigerant Inv...ator' failed: Timeout 20000ms exceeded while waiting for event "download"
+=========================== logs =======
+      ✓ md=2,162 bytes  templates=0
+
+  → [13/81] CS EQc1     (eq/eqc1-enhanced-air-quality)
+      ✓ md=1,647 bytes  templates=0
+
+  → [14/81] CS EQc2     (eq/eqc2-occupant-experience)
+      ✓ md=1,292 bytes  templates=0
+
+  → [15/81] CS EQc3     (eq/eqc3-accessibility-and-inclusion)
+      ✓ md=2,539 bytes  templates=0
+
+  → [16/81] CS EQc4     (eq/eqc4-resilient-spaces)
+      ✓ md=2,107 bytes  templates=0
+
+  → [17/81] CS EQp1     (eq/eqp1-construction-management)
+      template 'LEED v5 D+C Construction M...listdownloa' failed: Timeout 20000ms exceeded while waiting for event "download"
+=========================== logs =======
+      ✓ md=1,254 bytes  templates=0
+
+  → [18/81] CS EQp2     (eq/eqp2-fundamental-air-quality)
+      ✓ md=3,387 bytes  templates=0
+
+  → [19/81] CS EQp3     (eq/eqp3-no-smoking-or-vehicle-idling)
+      ✓ md=2,518 bytes  templates=0
+
+  → [20/81] CS IPc1     (ip/ipc1-integrative-design-process)
+      ✓ md=1,756 bytes  templates=0
+
+  → [21/81] CS IPp1     (ip/ipp1-climate-resilience-assessment)
+      ↓ template: LEED v5 D+C_Climate Resilience Assessment Template.xlsx
+      ✓ md=1,369 bytes  templates=1
+
+  → [22/81] CS IPp2     (ip/ipp2-human-impact-assessment)
+      ↓ template: LEED v5 D+C_Human Impact Assessment Template.xlsx
+      ✓ md=1,357 bytes  templates=1
+
+  → [23/81] CS IPp3     (ip/ipp3-carbon-assessment)
+      ↓ template: LEED v5 D+C_Carbon Assessment Calculator.xlsx
+      ✓ md=1,208 bytes  templates=1
+
+  → [24/81] CS LTc1     (lt/ltc1-sensitive-land-protection)
+      ✓ md=2,325 bytes  templates=0
+
+  → [25/81] CS LTc2     (lt/ltc2-equitable-development)
+      ✓ md=1,651 bytes  templates=0
+
+  → [26/81] CS LTc3     (lt/ltc3-compact-and-connected-development)
+      ✓ md=1,701 bytes  templates=0
+
+  → [27/81] CS LTc4     (lt/ltc4-transportation-demand-management)
+      ✓ md=1,397 bytes  templates=0
+
+  → [28/81] CS LTc5     (lt/ltc5-electric-vehicles)
+      ✓ md=2,987 bytes  templates=0
+
+  → [29/81] CS MRc1     (mr/mrc1-building-and-materials-reuse)
+      ↓ template: LEED v5 D+C_Materials Reuse Calculator.xlsx
+      ✓ md=2,229 bytes  templates=1
+
+  → [30/81] CS MRc2     (mr/mrc2-reduce-embodied-carbon)
+      ↓ template: LEED v5 D+C_Embodied Carbon Calculator BDC.xlsx
+      ✓ md=6,448 bytes  templates=1
+
+  → [31/81] CS MRc3     (mr/mrc3-low-emitting-materials)
+      template 'LEED v5 Building Products C...atordownlo' failed: Timeout 20000ms exceeded while waiting for event "download"
+=========================== logs =======
+      ✓ md=2,022 bytes  templates=0
+
+  → [32/81] CS MRc4     (mr/mrc4-building-product-selection-and-procurement)
+      ↓ template: LEED v5 D+C_Building Products Calculator.xlsx
+      ✓ md=1,921 bytes  templates=1
+
+  → [33/81] CS MRc5     (mr/mrc5-construction-and-demolition-waste-diversion)
+      ↓ template: LEED v5 D+C_Construction and Demolition Waste Diversion Calculator BDC.xlsx
+      ✓ md=2,573 bytes  templates=1
+
+  → [34/81] CS MRp1     (mr/mrp1-planning-for-zero-waste-operations)
+      ✓ md=2,031 bytes  templates=0
+
+  → [35/81] CS MRp2     (mr/mrp2-quantify-and-assess-embodied-carbon)
+      template 'LEED v5 D+C Embodied Carbon... BDC' failed: Timeout 20000ms exceeded while waiting for event "download"
+=========================== logs =======
+      ✓ md=1,953 bytes  templates=0
+
+  → [36/81] CS 770170   (other/770170-770170)
+      ✓ md=1,496 bytes  templates=0
+
+  → [37/81] CS 770171   (other/770171-770171)
+      ✓ md=1,502 bytes  templates=0
+
+  → [38/81] CS 770172   (other/770172-770172)
+      ✓ md=1,503 bytes  templates=0
+
+  → [39/81] CS 770173   (other/770173-770173)
+      ✓ md=1,496 bytes  templates=0
+
+  → [40/81] CS 770174   (other/770174-770174)
+      ✓ md=620 bytes  templates=0
+
+  → [41/81] CS 770181   (other/770181-770181)
+      ✓ md=1,496 bytes  templates=0
+
+  → [42/81] CS 770194   (other/770194-770194)
+      ✓ md=1,496 bytes  templates=0
+
+  → [43/81] CS 770208   (other/770208-770208)
+      ✓ md=1,245 bytes  templates=0
+
+  → [44/81] CS 770209   (other/770209-770209)
+      ✓ md=620 bytes  templates=0
+
+  → [45/81] CS 770210   (other/770210-770210)
+      ✓ md=620 bytes  templates=0
+
+  → [46/81] CS 770211   (other/770211-770211)
+      ✓ md=1,503 bytes  templates=0
+
+  → [47/81] CS 770212   (other/770212-770212)
+      ✓ md=1,502 bytes  templates=0
+
+  → [48/81] CS 770213   (other/770213-770213)
+      ✓ md=1,496 bytes  templates=0
+
+  → [49/81] CS 770214   (other/770214-770214)
+      ✓ md=620 bytes  templates=0
+
+  → [50/81] CS 770215   (other/770215-770215)
+      ✓ md=620 bytes  templates=0
+
+  → [51/81] CS 770217   (other/770217-770217)
+      ✓ md=620 bytes  templates=0
+
+  → [52/81] CS 770219   (other/770219-770219)
+      ✓ md=620 bytes  templates=0
+
+  → [53/81] CS 770220   (other/770220-770220)
+      ✓ md=620 bytes  templates=0
+
+  → [54/81] CS 770221   (other/770221-770221)
+      ✓ md=1,503 bytes  templates=0
+
+  → [55/81] CS 770222   (other/770222-770222)
+      ✓ md=1,496 bytes  templates=0
+
+  → [56/81] CS 770223   (other/770223-770223)
+      ✓ md=1,499 bytes  templates=0
+
+  → [57/81] CS 770224   (other/770224-770224)
+      ✓ md=1,503 bytes  templates=0
+
+  → [58/81] CS 770227   (other/770227-770227)
+      ✓ md=620 bytes  templates=0
+
+  → [59/81] CS 770233   (other/770233-770233)
+      ✓ md=1,496 bytes  templates=0
+
+  → [60/81] CS 770236   (other/770236-770236)
+      ✓ md=1,502 bytes  templates=0
+
+  → [61/81] CS 770237   (other/770237-770237)
+      ✓ md=620 bytes  templates=0
+
+  → [62/81] CS 770238   (other/770238-770238)
+      ✓ md=1,503 bytes  templates=0
+
+  → [63/81] CS 770240   (other/770240-770240)
+      ✓ md=1,503 bytes  templates=0
+
+  → [64/81] CS 770242   (other/770242-770242)
+      ✓ md=956 bytes  templates=0
+
+  → [65/81] CS 770244   (other/770244-770244)
+      ✓ md=620 bytes  templates=0
+
+  → [66/81] CS 770245   (other/770245-770245)
+      ✓ md=1,503 bytes  templates=0
+
+  → [67/81] CS 770246   (other/770246-770246)
+      ✓ md=620 bytes  templates=0
+
+  → [68/81] CS IPc2     (other/ipc2-ipc2)
+      ✓ md=1,894 bytes  templates=0
+
+  → [69/81] CS IPp4     (other/ipp4-ipp4)
+      ✓ md=1,192 bytes  templates=0
+
+  → [70/81] CS PI       (pi/pi-project-information)
+      ✓ md=2,640 bytes  templates=0
+
+  → [71/81] CS SSc1     (ss/ssc1-biodiverse-habitat)
+      ✓ md=1,768 bytes  templates=0
+
+  → [72/81] CS SSc2     (ss/ssc2-accessible-outdoor-space)
+      ✓ md=3,157 bytes  templates=0
+
+  → [73/81] CS SSc3     (ss/ssc3-rainwater-management)
+      ↓ template: LEED v5 D+C_Rainwater Management Calculator.xlsx
+      ✓ md=3,036 bytes  templates=1
+
+  → [74/81] CS SSc4     (ss/ssc4-enhanced-resilient-site-design)
+      ✓ md=3,525 bytes  templates=0
+
+  → [75/81] CS SSc5     (ss/ssc5-heat-island-reduction)
+      ✓ md=3,727 bytes  templates=0
+
+  → [76/81] CS SSc6     (ss/ssc6-light-pollution-reduction)
+      ✓ md=2,360 bytes  templates=0
+
+  → [77/81] CS SSp1     (ss/ssp1-minimized-site-disturbance)
+      ✓ md=2,214 bytes  templates=0
+
+  → [78/81] CS WEc1     (we/wec1-water-metering-and-leak-detection)
+      ✓ md=3,108 bytes  templates=0
+
+  → [79/81] CS WEc2     (we/wec2-enhanced-water-efficiency)
+      ↓ template: LEED v5 D+C_Whole Project Water Use Calculator.xlsx
+      ↓ template: LEED v5 D+C_Fixture and Fittings Water Use Calculator.xlsx
+      ✓ md=4,856 bytes  templates=2
+
+  → [80/81] CS WEp1     (we/wep1-water-metering-and-reporting)
+      ✓ md=1,574 bytes  templates=0
+
+  → [81/81] CS WEp2     (we/wep2-minimum-water-efficiency)
+      ✓ md=2,077 bytes  templates=0
+
+============================================================
+  ✅ ok       : 81
+  ⚠  no-form  : 0
+  ⚠  empty    : 0
+  ✗  error    : 0
+  ↓  templates: 13
+
+Output: /Users/mohankumarv/Desktop/Projects/Personal/Ecogen2030/Kimi_Agent_LEED AI Credit Automation/LEED v5 Credit Automation V1/leed-forms-md

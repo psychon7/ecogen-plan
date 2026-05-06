@@ -1,0 +1,76 @@
+<html lang="en"><head>
+        <meta charset="utf-8">
+        <title>Arc</title>
+        <base href="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" sizes="32x16" href="/assets/icons/svg/favicon.svg">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <style type="text/css">@font-face{font-family:'Courgette';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/courgette/v19/wEO_EBrAnc9BLjLQAUk1WPoK_kgXiYvO.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Courgette';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/courgette/v19/wEO_EBrAnc9BLjLQAUk1VvoK_kgXiQ.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Material Icons';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');}@font-face{font-family:'Material Icons Outlined';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/materialiconsoutlined/v110/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUcel5euIg.woff2) format('woff2');}@font-face{font-family:'Material Icons Round';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/materialiconsround/v109/LDItaoyNOAY6Uewc665JcIzCKsKc_M9flwmPq_HTTw.woff2) format('woff2');}@font-face{font-family:'Material Icons Sharp';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/materialiconssharp/v110/oPWQ_lt5nv4pWNJpghLP75WiFR4kLh3kvmvRImcycg.woff2) format('woff2');}@font-face{font-family:'Material Icons Two Tone';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/materialiconstwotone/v113/hESh6WRmNCxEqUmNyh3JDeGxjVVyMg4tHGctNCu0NjbrHg.woff2) format('woff2');}body{--google-font-color-materialiconstwotone:none;}.material-icons{font-family:'Material Icons';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}.material-icons-outlined{font-family:'Material Icons Outlined';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}.material-icons-round{font-family:'Material Icons Round';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}.material-icons-sharp{font-family:'Material Icons Sharp';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}.material-icons-two-tone{font-family:'Material Icons Two Tone';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}</style>
+        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/source-sans-pro">
+        <style type="text/css">@font-face{font-family:'Material Symbols Outlined';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/l/font?kit=kJF1BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzaxHMPdY43zj-jCxv3fzvRNU22ZXGJpEpjC_1v-p_4MrImHCIJIZrDCvHOelbd5zrDAt&skey=b8dc2088854b122f&v=v328) format('woff');}.material-symbols-outlined{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}</style>
+
+        <script src="https://unpkg.com/@sjmc11/tourguidejs/dist/tour.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://unpkg.com/@sjmc11/tourguidejs/dist/css/tour.min.css">
+
+        <script>
+            // Function to dynamically add GTM script
+            function loadGTM(id) {
+                // Load the external GTM script
+                let script = document.createElement('script');
+                script.async = true;
+                script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+                document.head.appendChild(script);
+
+                // Configure gtag after the script is loaded
+                script.onload = function() {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', id);
+                };
+            }
+
+            function loadGoogleMapsApi(key) {
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places&v=weekly`;
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            }
+
+            function loadBablic() {
+                const script = document.createElement('script');
+                script.src = '//d.bablic.com/snippet/6852bca98e776d8c367da2f3.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            }
+
+            function loadAccessibilityWidget(key) {
+                const script = document.createElement('script');
+                script.src = `https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility-js-widget-minify.js?colorcode=%23420083&token=${key}&position=bottom_right`;
+                script.id = "aioa-adawidget";
+                script.defer = true;
+                document.body.appendChild(script);
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const gtmId = window.env.GOOGLE_TAG_MANAGER_ID;
+                const gmapsAPiKey = window.env.GOOGLE_MAPS_API_KEY;
+                const skyNetKey = window.env.SKYNET_ACCEBILITY_WIDGET_KEY;
+
+                loadGTM(gtmId);
+                loadGoogleMapsApi(gmapsAPiKey);
+                loadAccessibilityWidget(skyNetKey);
+
+                if (window.env.ENV === 'dev') { // For now, only load in dev
+                    loadBablic();
+                }
+            });
+        </script>
+    <style>:root{--primary-usgbc-primary-1:#353535;--primary-usgbc-primary-2:#00c08b;--accent-usgbc-accent:#d3e736;--accent-usgbc-accent-light:#edf5af;--accent-usgbc-accent-dark:#98ac00;--whites-usgbc-pure-white:#fff;--whites-usgbc-white-2:#fefefe;--gray-usgbc-gray-1:#faf9f9;--gray-usgbc-gray-2:#f0f0f0;--gray-usgbc-gray-3:#e7e7e7;--gray-usgbc-gray-4:#c6c6c6;--gray-usgbc-gray-5:#949494;--gray-usgbc-gray-6:#4a4a4a;--gray-usgbc-gray-7:#232323;--graph-usgbc-graph-green-2:#40d0a8;--graph-usgbc-graph-green-3:#80dfc5;--graph-usgbc-graph-green-4:#bfefe2;--graph-usgbc-graph-blue-1:#326bfb;--graph-usgbc-graph-blue-2:#6c95fc;--graph-usgbc-graph-blue-3:#9db8fd;--graph-usgbc-graph-blue-4:#cedcfe;--graph-usgbc-graph-green-light:#ccf2e8;--graph-usgbc-graph-blue-light:#d8e3fe;--graph-tritone-usgbc-graph-tritone-1:#80ffa3;--graph-tritone-usgbc-graph-tritone-2:#72e3b5;--graph-tritone-usgbc-graph-tritone-3:#57aad8;--graph-tritone-usgbc-graph-tritone-4:#326bfb;--graph-tritone-usgbc-graph-tritone-5:#2f56ba;--graph-tritone-usgbc-graph-tritone-6:#9740c0;--graph-tritone-usgbc-graph-tritone-7:#d782ff;--graph-tritone-light-usgbc-graph-tritone-1-light:#d8ffe3;--graph-tritone-light-usgbc-graph-tritone-2-light:#d4f6e8;--graph-tritone-light-usgbc-graph-tritone-3-light:#cce5f3;--graph-tritone-light-usgbc-graph-tritone-4-light:#c4d4fd;--graph-tritone-light-usgbc-graph-tritone-5-light:#c0ccea;--graph-tritone-light-usgbc-graph-tritone-6-light:#e0c6ec;--graph-tritone-light-usgbc-graph-tritone-7-light:#f2d9ff;--others-usgbc-silver:#7896bf;--others-usgbc-silver-2:#bbcbdf;--others-usgbc-silver-3:#ebeff5;--others-usgbc-gold:#999566;--others-usgbc-gold-2:#cccab2;--others-usgbc-gold-3:#f0efe8;--others-usgbc-platinum:#8d91a5;--others-usgbc-platinum-2:#c6c8d2;--others-usgbc-platinum-3:#eeeff2;--notification-usgbc-success-1:#247f5e;--notification-usgbc-success-2:#2d9f75;--notification-usgbc-success-3:#ebfaef;--notification-usgbc-error-1:#e00000;--notification-usgbc-error-2:#ff7575;--notification-usgbc-error-3:#fff5f5;--notification-usgbc-warning-1:#8d6d16;--notification-usgbc-warning-2:#ffcd21;--notification-usgbc-warning-3:#fff9e5;--notification-usgbc-information-1:#2d69e1;--notification-usgbc-information-2:#e2eafb;--notification-usgbc-information-3:#f0f4fd;--app-shell-shell-hover:#333;--app-shell-shell-base:#232323}*{font-family:Source Sans Pro,sans-serif}html,body{height:100%}body{margin:0;color:#353535;background-color:#fefefe;overflow:hidden}@media screen and (width > 1440px){body{margin:0 auto}html{overflow-y:hidden}}</style><link rel="stylesheet" href="styles.6ef3c341a3bd7357.css" media="all" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.6ef3c341a3bd7357.css"></noscript><style type="text/css"></style><style>.app-container[_ngcontent-qvc-c72]{height:100%}</style><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-6L2V8G813K"></script><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf8O8Fynjck7QHCRSgDy2yPYSPWTOuQGg&amp;libraries=places&amp;v=weekly" async="" defer=""></script><link crossorigin="anonymous" rel="preconnect" href="https://www.skynettechnologies.com/"><link rel="preload" href="https://www.skynettechnologies.com/accessibility/fonts/rubik-v28-arabic_cyrillic_cyrillic-ext_hebrew_latin_latin-ext-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous"><script type="text/javascript" charset="utf-8" data-webpack="usgbcHubMfProject:chunk-908" src="https://arc-app.gbci.org/mf-project/908.0b8754f4ccdd378d.js"></script><script defer="" type="module" src="https://www.skynettechnologies.com/accessibility/js/accessibility-loader.js?colorcode=%23420083&amp;token=ADAAIOA-D6C6580FF43BBBF11D3C5E326F8862FC&amp;t=0.19340676169343674&amp;position=bottom_right&amp;icontype=aioa-icon-type-1&amp;iconsize=aioa-medium-icon" id="adajs"></script></head>
+    <body>
+        <usgbc-hub-root _nghost-qvc-c72="" ng-version="15.2.10"><div _ngcontent-qvc-c72="" class="app-container"><router-outlet _ngcontent-qvc-c72=""></router-outlet><!----></div></usgbc-hub-root>
+    <script src="polyfills.35fee9a1952328fd.js" type="module"></script><script src="main.779c019e86624225.js" type="module"></script>
+
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;9d3198df4944491192bce1ff4e8222bf&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+<script src="/mf-project/usgbcHubMfProject.js"></script><script src="https://www.skynettechnologies.com/accessibility/js/all-in-one-accessibility-js-widget-minify.js?colorcode=%23420083&amp;token=ADAAIOA-D6C6580FF43BBBF11D3C5E326F8862FC&amp;position=bottom_right" id="aioa-adawidget" defer=""></script></body></html>
